@@ -188,11 +188,50 @@ const main = async () => {
   }
 
   if (data.screening_knowledge) {
-    const variants = Object.entries(data.screening_knowledge).map(([level, body]) => ({
-      id: level,
-      body,
-      transforms: { tone: level },
-    }));
+    const variants = Object.entries(data.screening_knowledge).map(([level, value]) => {
+      let bodyText = '';
+      if (typeof value === 'string') {
+        bodyText = value;
+      } else if (Array.isArray(value)) {
+        const lines = value
+          .map((entry) => {
+            if (!entry || typeof entry !== 'object') return null;
+            const parts = [];
+            if (entry.title) {
+              parts.push(`**${entry.title}.**`);
+            }
+            if (entry.body) {
+              parts.push(entry.body);
+            }
+            if (Array.isArray(entry.citations) && entry.citations.length) {
+              const labels = entry.citations
+                .map((c) => {
+                  const sourceId = ensureSource(c.label, c.url);
+                  return sourceId ? c.label : null;
+                })
+                .filter(Boolean);
+              if (labels.length) {
+                parts.push(`(Sources: ${labels.join(', ')})`);
+              }
+            }
+            if (!parts.length) return null;
+            return `- ${parts.join(' ')}`;
+          })
+          .filter(Boolean);
+        bodyText = lines.join('\n');
+      } else if (value && typeof value === 'object') {
+        bodyText = Object.values(value)
+          .filter((segment) => typeof segment === 'string')
+          .join('\n');
+      } else if (value !== undefined && value !== null) {
+        bodyText = String(value);
+      }
+      return {
+        id: level,
+        body: bodyText,
+        transforms: { tone: level },
+      };
+    });
     addNode({
       id: 'policy_screening_knowledge',
       type: 'policy_statement',

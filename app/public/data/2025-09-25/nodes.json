@@ -689,38 +689,7 @@
         },
         {
           "id": "points",
-          "body": [
-            {
-              "title": "Identify business model fragility",
-              "body": "Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human‑rights litigation.",
-              "citations": [
-                {
-                  "label": "AFSC Investigate",
-                  "url": "https://investigate.afsc.org/"
-                }
-              ]
-            },
-            {
-              "title": "Knowledge compounds",
-              "body": "Each exclusion deepens understanding of your opportunity set—linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson.",
-              "citations": [
-                {
-                  "label": "Ethical Capital: Investment Screening Policy",
-                  "url": "https://ethicic.com/content/process/screening-policy"
-                }
-              ]
-            },
-            {
-              "title": "Integration cadence as practice standard",
-              "body": "Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale.",
-              "citations": [
-                {
-                  "label": "AFSC Investigate",
-                  "url": "https://investigate.afsc.org/"
-                }
-              ]
-            }
-          ],
+          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human‑rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set—linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
           "transforms": {
             "tone": "points"
           }
