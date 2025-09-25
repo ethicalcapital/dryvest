@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import type { BriefContext, Node } from '../lib/schema';
+import { GitHubFeedback } from './GitHubFeedback';
 
 interface PreviewPaneProps {
   context: BriefContext;
@@ -89,6 +90,7 @@ export function PreviewPane({
       {opener ? (
         <Section title="Opening angle" anchor="opener">
           <p>{opener.text}</p>
+          <GitHubFeedback node={opener} />
         </Section>
       ) : null}
 
@@ -112,6 +114,7 @@ export function PreviewPane({
               <p className="text-sm text-slate-700">{guide.sections.risk}</p>
             </div>
           </div>
+          <GitHubFeedback node={guide} />
         </Section>
       ) : null}
 
@@ -131,6 +134,7 @@ export function PreviewPane({
               <ReactMarkdown>{screeningNode.body}</ReactMarkdown>
             </div>
           ) : null}
+          <GitHubFeedback node={screeningNode} />
         </Section>
       ) : null}
 
@@ -142,6 +146,7 @@ export function PreviewPane({
                 <h3 className="text-sm font-semibold text-slate-900">{point.title}</h3>
                 <p className="mt-2 text-sm text-slate-700">{point.body}</p>
                 {renderCitations(point.citations, sourceLookup)}
+                <GitHubFeedback node={point} size="sm" />
               </li>
             ))}
           </ol>
@@ -230,6 +235,7 @@ export function PreviewPane({
                     ))}
                   </ul>
                 ) : null}
+                <GitHubFeedback node={snippet} size="sm" />
               </div>
             ))}
           </div>
