@@ -118,7 +118,7 @@
     {
       "id": "opener_central_bank_base",
       "type": "opener",
-      "text": "Official institutions can clarify mandate limits, apply best‑efforts exclusions, and provide transparent rationales and constraints.",
+      "text": "Official institutions can clarify mandate limits, apply best-efforts exclusions, and provide transparent rationales and constraints.",
       "targets": {
         "identity": [
           "central_bank"
@@ -141,7 +141,7 @@
     {
       "id": "opener_government_base",
       "type": "opener",
-      "text": "Government investors (city/county/state) can apply issuer screens/approved lists for bonds, observe procurement/governance limits, and report with best‑efforts language.",
+      "text": "Government investors (city/county/state) can apply issuer screens/approved lists for bonds, observe procurement/governance limits, and report with best-efforts language.",
       "targets": {
         "identity": [
           "government"
@@ -168,9 +168,9 @@
       "type": "guide",
       "sections": {
         "ask": "Adopt conduct-based exclusions with a formal ethics/oversight process and public rationales.",
-        "implementation": "Multi‑manager mandates with optimization constraints; preserve factor/sector neutrality; staged rebalances.",
+        "implementation": "Multi-manager mandates with optimization constraints; preserve factor/sector neutrality; staged rebalances.",
         "reporting": "Publish exclusion list and rationale; periodic reviews and appeals mechanism; transparent methodology.",
-        "risk": "Explicit tracking‑error budget (e.g., 15–30 bps) and central risk model governance."
+        "risk": "Explicit tracking-error budget (e.g., 15–30 bps) and central risk model governance."
       },
       "targets": {
         "identity": [
@@ -183,9 +183,9 @@
       "type": "guide",
       "sections": {
         "ask": "Consultant memo and manager mandates for conduct-based exclusions; define guardrails.",
-        "implementation": "Passive screened index or benchmark‑aware constraints; phased divestment to minimize costs; maintain diversification.",
-        "reporting": "Quarterly one‑page dashboard; publish criteria and exclusion list.",
-        "risk": "Tracking‑error limit (e.g., ≤30 bps) and factor neutrality by vendor."
+        "implementation": "Passive screened index or benchmark-aware constraints; phased divestment to minimize costs; maintain diversification.",
+        "reporting": "Quarterly one-page dashboard; publish criteria and exclusion list.",
+        "risk": "Tracking-error limit (e.g., ≤30 bps) and factor neutrality by vendor."
       },
       "targets": {
         "identity": [
@@ -198,9 +198,9 @@
       "type": "guide",
       "sections": {
         "ask": "Update IPS to reflect exclusions consistent with sponsor objectives.",
-        "implementation": "Low‑overhead screened index; use vendor methodologies; minimize turnover and costs.",
+        "implementation": "Low-overhead screened index; use vendor methodologies; minimize turnover and costs.",
         "reporting": "Periodic sponsor reporting; document rationales and methods.",
-        "risk": "Maintain glidepath/de‑risking; narrow scope to avoid mandate conflicts."
+        "risk": "Maintain glidepath/de-risking; narrow scope to avoid mandate conflicts."
       },
       "targets": {
         "identity": [
@@ -212,7 +212,7 @@
       "id": "guide_endowment",
       "type": "guide",
       "sections": {
-        "ask": "Mission‑aligned exclusion framework with committee governance and stakeholder transparency.",
+        "ask": "Mission-aligned exclusion framework with committee governance and stakeholder transparency.",
         "implementation": "Manager constraints or screened indexes; publish rationales; staged implementation.",
         "reporting": "Public rationale per issuer; annual reviews with community communication.",
         "risk": "Maintain diversification and factor integrity; narrow scope to grave conduct."
@@ -227,7 +227,7 @@
       "id": "guide_foundation",
       "type": "guide",
       "sections": {
-        "ask": "Program‑aligned exclusions that reduce reputational risk while preserving portfolio discipline.",
+        "ask": "Program-aligned exclusions that reduce reputational risk while preserving portfolio discipline.",
         "implementation": "Simplified screened index or manager constraints; phased timeline.",
         "reporting": "Public list and brief rationales; annual update.",
         "risk": "Emphasize conduct screens to mitigate drawdowns from controversies."
@@ -243,9 +243,9 @@
       "type": "guide",
       "sections": {
         "ask": "Adopt narrow conduct screens consistent with ALM and capital/rating requirements.",
-        "implementation": "Best‑efforts exclusions; vendor screen overlays; maintain liquidity ladder.",
-        "reporting": "Regulatory‑aware disclosures; internal risk memos.",
-        "risk": "Tight tracking‑error; preserve liability matching and capital buffers."
+        "implementation": "Best-efforts exclusions; vendor screen overlays; maintain liquidity ladder.",
+        "reporting": "Regulatory-aware disclosures; internal risk memos.",
+        "risk": "Tight tracking-error; preserve liability matching and capital buffers."
       },
       "targets": {
         "identity": [
@@ -257,10 +257,10 @@
       "id": "guide_central_bank",
       "type": "guide",
       "sections": {
-        "ask": "Clarify mandate limits and adopt best‑efforts exclusions with transparent rationale.",
+        "ask": "Clarify mandate limits and adopt best-efforts exclusions with transparent rationale.",
         "implementation": "Constraints consistent with reserve management; avoid market disruption.",
         "reporting": "Public statement of limits and methods; periodic review.",
-        "risk": "Mandate‑consistent risk posture with minimal deviation from reserve benchmarks."
+        "risk": "Mandate-consistent risk posture with minimal deviation from reserve benchmarks."
       },
       "targets": {
         "identity": [
@@ -273,7 +273,7 @@
       "type": "guide",
       "sections": {
         "ask": "Define issuer screens/approved issuer lists consistent with procurement and governance rules.",
-        "implementation": "Apply issuer criteria to government bond portfolios; best‑efforts approach with legal review; transparent exceptions process.",
+        "implementation": "Apply issuer criteria to government bond portfolios; best-efforts approach with legal review; transparent exceptions process.",
         "reporting": "Publish issuer criteria, approved lists, and update cadence.",
         "risk": "Avoid undue concentration; maintain liquidity and policy compliance."
       },
@@ -689,7 +689,7 @@
         },
         {
           "id": "points",
-          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human‑rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set—linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
+          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human-rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set—linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
           "transforms": {
             "tone": "points"
           }
@@ -757,8 +757,8 @@
       "type": "template_snippet",
       "title": "Venue cues",
       "lines": [
-        "Time‑limited: focus on 2–3 key points and one specific ask.",
-        "Bring printed one‑pagers; avoid acronyms; cite one authoritative source."
+        "Time-limited: focus on 2–3 key points and one specific ask.",
+        "Bring printed one-pagers; avoid acronyms; cite one authoritative source."
       ],
       "targets": {
         "venue": [
@@ -1220,7 +1220,7 @@
       "id": "ctr_exclusions-reduce-diversification-too-much",
       "type": "counter",
       "claim": "Exclusions reduce diversification too much.",
-      "response": "Well-designed policies are narrow and conduct‑based. Managers maintain diversification across sectors and factors while removing a limited set of issuers that breach defined standards.",
+      "response": "Well-designed policies are narrow and conduct-based. Managers maintain diversification across sectors and factors while removing a limited set of issuers that breach defined standards.",
       "citations": [
         "src_msci-portfolio-construction"
       ]
@@ -1310,7 +1310,7 @@
       "id": "tmpl_government_policy",
       "type": "template_snippet",
       "title": "Government Policy Template",
-      "markdown": "Approved Issuers Policy (template)\\n\\nPurpose: Maintain an Approved Issuers List for fixed‑income investing that aligns treasury practices with ethical standards and risk controls while complying with law and procurement rules.\\n\\nCriteria: Exclude issuers with credible, public evidence of severe human rights violations (including complicity in violations under international humanitarian law). Consider authoritative sources (sanctions lists, court decisions, official investigations) and reputable human‑rights reporting.\\n\\nPortfolio Constraints: Preserve target duration, credit quality, liquidity, and diversification consistent with the investment policy and statutes.\\n\\nProcess: Treasurer (or designee) maintains Approved and Prohibited Issuer lists; legal/procurement review; annual review and event‑driven updates; exceptions require written rationale, legal review, time limits, and notification to the governing body.\\n\\nTransparency & Reporting: Publish criteria and current lists subject to prudent trading and confidentiality; report changes and rationales at least annually.\\n\\nCompliance: This policy operates subject to state law, investment statutes, and procurement rules; in case of conflict, legal requirements prevail.",
+      "markdown": "Approved Issuers Policy (template)\\n\\nPurpose: Maintain an Approved Issuers List for fixed-income investing that aligns treasury practices with ethical standards and risk controls while complying with law and procurement rules.\\n\\nCriteria: Exclude issuers with credible, public evidence of severe human rights violations (including complicity in violations under international humanitarian law). Consider authoritative sources (sanctions lists, court decisions, official investigations) and reputable human-rights reporting.\\n\\nPortfolio Constraints: Preserve target duration, credit quality, liquidity, and diversification consistent with the investment policy and statutes.\\n\\nProcess: Treasurer (or designee) maintains Approved and Prohibited Issuer lists; legal/procurement review; annual review and event-driven updates; exceptions require written rationale, legal review, time limits, and notification to the governing body.\\n\\nTransparency & Reporting: Publish criteria and current lists subject to prudent trading and confidentiality; report changes and rationales at least annually.\\n\\nCompliance: This policy operates subject to state law, investment statutes, and procurement rules; in case of conflict, legal requirements prevail.",
       "targets": {
         "identity": [
           "government"
@@ -1321,7 +1321,7 @@
       "id": "note_cio",
       "type": "template_snippet",
       "title": "CIO Implementation Note",
-      "markdown": "Implementation focuses on preserving benchmark alignment: specify a tracking‑error budget, maintain factor neutrality, use vendor screened indexes or optimization constraints, and phase trades to avoid divestment shocks.",
+      "markdown": "Implementation focuses on preserving benchmark alignment: specify a tracking-error budget, maintain factor neutrality, use vendor screened indexes or optimization constraints, and phase trades to avoid divestment shocks.",
       "targets": {
         "audience": [
           "fiduciary"
@@ -1434,11 +1434,11 @@
       "title": "Policy alignment criteria",
       "bullets": [
         "Documented, explainable criteria with public rationales (no black boxes)",
-        "Conduct‑first screening for risk mitigation; product screens for categorical harms when aligned with mission",
-        "Evidence‑based decisions using primary and reputable sources with citations",
-        "Regular review cadence (at least annually) and event‑driven updates",
+        "Conduct-first screening for risk mitigation; product screens for categorical harms when aligned with mission",
+        "Evidence-based decisions using primary and reputable sources with citations",
+        "Regular review cadence (at least annually) and event-driven updates",
         "Escalation path from engagement to exclusion; documented exceptions with time limits",
-        "Implementation discipline: tracking‑error guardrails, diversification, factor neutrality, phased trading",
+        "Implementation discipline: tracking-error guardrails, diversification, factor neutrality, phased trading",
         "Transparency: publish criteria and lists subject to prudent trading and confidentiality"
       ],
       "citations": [
