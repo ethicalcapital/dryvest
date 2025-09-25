@@ -66,7 +66,7 @@ export function PDFExportButton({
         ) : (
           <Download size={20} />
         )}
-        {isExporting ? 'Creating your PDF...' : 'Download as PDF'}
+        {isExporting ? 'Preparing to email your PDF...' : 'Email as PDF'}
       </button>
 
       {showDisclaimer && (
@@ -100,7 +100,7 @@ export function PDFExportButton({
                 onClick={acceptDisclaimer}
                 className="px-6 py-3 text-base font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                I Understand, Download PDF
+                I Understand, Email PDF
               </button>
             </div>
           </div>
