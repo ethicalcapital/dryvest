@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import { useDataset } from './hooks/useDataset';
 import { useBriefParams } from './hooks/useBriefParams';
@@ -7,6 +7,9 @@ import type { BriefContext, Node } from './lib/schema';
 import { FiltersPanel } from './components/FiltersPanel';
 import { PreviewPane } from './components/PreviewPane';
 import { ActionsPanel } from './components/ActionsPanel';
+import { ModeSelector, type BriefMode } from './components/ModeSelector';
+import { CustomBriefBuilder } from './components/CustomBriefBuilder';
+import { ToneToggle, type BriefTone } from './components/ToneToggle';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import { initAnalytics, trackEvent } from './lib/analytics';
@@ -52,6 +55,13 @@ const toSourceNodes = (nodes: Node[]) =>
 
 function App() {
   const { dataset, error, loading } = useDataset(DATASET_VERSION);
+
+  // New state for dual-mode interface
+  const [briefMode, setBriefMode] = useState<BriefMode>('quick');
+  const [briefTone, setBriefTone] = useState<BriefTone>('plain');
+  const [showSideBySide, setShowSideBySide] = useState(false);
+  const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
+  const [customContext, setCustomContext] = useState<BriefContext>({});
 
   const defaults = useMemo<BriefParams>(() => {
     if (!dataset?.schema?.taxonomies) {
@@ -128,14 +138,18 @@ function App() {
     }
   }, [dataset, params, setParams]);
 
+  // Context depends on mode - quick uses params, custom uses customContext
   const context = useMemo<BriefContext>(
-    () => ({
+    () => briefMode === 'quick' ? {
       identity: params.identity,
       audience: params.audience,
       venue: params.venue,
-      level: params.level,
-    }),
-    [params.identity, params.audience, params.venue, params.level]
+      level: briefTone, // Use briefTone instead of params.level
+    } : {
+      ...customContext,
+      level: briefTone, // Always use briefTone for level
+    },
+    [briefMode, params.identity, params.audience, params.venue, briefTone, customContext]
   );
 
   const onePagers = useMemo(
@@ -182,9 +196,21 @@ function App() {
   }, [dataset, params.playlist, context]);
 
   const keyPointNodes = useMemo(() => {
-    if (!dataset || !keyPointPlaylist) return [];
-    return toKeyPointNodes(resolvePlaylistNodes(dataset, keyPointPlaylist, context));
-  }, [dataset, keyPointPlaylist, context]);
+    if (!dataset) return [];
+
+    if (briefMode === 'custom') {
+      // In custom mode, use selected key points
+      return customKeyPoints
+        .map(id => dataset.nodeIndex[id])
+        .filter((node): node is Extract<Node, { type: 'key_point' }> =>
+          node && node.type === 'key_point'
+        );
+    } else {
+      // In quick mode, use playlist-based selection
+      if (!keyPointPlaylist) return [];
+      return toKeyPointNodes(resolvePlaylistNodes(dataset, keyPointPlaylist, context));
+    }
+  }, [dataset, briefMode, customKeyPoints, keyPointPlaylist, context]);
 
   const counterNodes = useMemo(() => {
     if (!dataset) return [];
@@ -325,23 +351,63 @@ function App() {
       <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
         <header className="mb-8">
           <p className="text-xs uppercase tracking-wide text-slate-500">Dryvestment</p>
-          <h1 className="text-3xl font-semibold text-slate-900">Schema-driven brief builder</h1>
-          <p className="mt-2 max-w-3xl text-slate-600">
-            Dataset version <span className="font-mono text-xs">{dataset.version}</span>. Adjust the filters to update the URL
-            and regenerate the brief.
-          </p>
+          <h1 className="text-3xl font-semibold text-slate-900">Educational Investment Brief Builder</h1>
+          <div className="mt-3 max-w-4xl space-y-2">
+            <p className="text-slate-600">
+              <strong>For educational purposes only.</strong> This tool helps you explore investment
+              screening approaches and build educational materials. It does not provide investment advice.
+            </p>
+            <p className="text-sm text-slate-500">
+              Dataset version <span className="font-mono">{dataset.version}</span> •
+              Questions? <a href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
+              target="_blank" rel="noopener noreferrer"
+              className="text-indigo-600 hover:text-indigo-700 underline">Ask for clarification</a>
+            </p>
+          </div>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]">
-          <FiltersPanel
+        {/* Mode Selector */}
+        <ModeSelector
+          mode={briefMode}
+          onModeChange={setBriefMode}
+        />
+
+        {/* Custom Brief Builder (only in custom mode) */}
+        {briefMode === 'custom' && dataset && (
+          <CustomBriefBuilder
             dataset={dataset}
-            params={params}
-            setParams={setParams}
-            playlistsForKeyPoints={playlistOptions}
-            selectedDocs={selectedDocs}
-            toggleDoc={toggleDoc}
-            onePagers={onePagers}
+            context={customContext}
+            onContextChange={setCustomContext}
+            selectedKeyPoints={customKeyPoints}
+            onKeyPointsChange={setCustomKeyPoints}
           />
+        )}
+
+        {/* Tone Toggle */}
+        <ToneToggle
+          tone={briefTone}
+          onToneChange={setBriefTone}
+          showSideBySide={showSideBySide}
+          onSideBySideToggle={setShowSideBySide}
+        />
+
+        <div className={`grid gap-6 ${briefMode === 'quick'
+          ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
+          : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
+        }`}>
+
+          {/* Filters Panel - only show in quick mode */}
+          {briefMode === 'quick' && (
+            <FiltersPanel
+              dataset={dataset}
+              params={params}
+              setParams={setParams}
+              playlistsForKeyPoints={playlistOptions}
+              selectedDocs={selectedDocs}
+              toggleDoc={toggleDoc}
+              onePagers={onePagers}
+            />
+          )}
 
           <PreviewPane
             context={context}
