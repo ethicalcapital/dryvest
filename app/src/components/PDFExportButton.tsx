@@ -59,7 +59,11 @@ export function PDFExportButton({
       <button
         onClick={handleExport}
         disabled={disabled || isExporting}
-        className="w-full inline-flex items-center justify-center gap-3 rounded-lg bg-indigo-600 px-6 py-4 text-base font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="w-full inline-flex items-center justify-center gap-3 rounded-lg px-6 py-4 text-base font-semibold text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2"
+        style={{
+          backgroundColor: 'var(--ecic-purple)',
+          ['--tw-ring-color' as any]: 'var(--ecic-purple)',
+        }}
       >
         {isExporting ? (
           <Loader2 size={20} className="animate-spin" />
@@ -72,7 +76,7 @@ export function PDFExportButton({
       {showDisclaimer && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
           <div className="max-w-lg rounded-lg bg-white p-8 shadow-xl">
-            <h3 className="mb-6 text-xl font-semibold text-gray-900">
+            <h3 className="mb-6 text-xl font-heading font-semibold text-gray-900">
               Important Information
             </h3>
             <div className="mb-6 space-y-4 text-base text-gray-700">
@@ -98,7 +102,11 @@ export function PDFExportButton({
               </button>
               <button
                 onClick={acceptDisclaimer}
-                className="px-6 py-3 text-base font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="px-6 py-3 text-base font-medium text-white rounded-lg hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2"
+                style={{
+                  backgroundColor: 'var(--ecic-purple)',
+                  ['--tw-ring-color' as any]: 'var(--ecic-purple)',
+                }}
               >
                 I Understand, Email PDF
               </button>

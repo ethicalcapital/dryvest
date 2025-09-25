@@ -31,18 +31,34 @@ const ActionButton = ({
     disabled={disabled}
     onClick={onClick}
     className={clsx(
-      'w-full rounded-lg border px-4 py-3 text-left text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
+      'w-full rounded-lg border px-4 py-3 text-left text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
       disabled
         ? 'cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400'
-        : 'border-slate-200 bg-white hover:border-indigo-300 hover:bg-indigo-50'
+        : 'border-slate-200 bg-white hover:bg-indigo-50'
     )}
+    style={{
+      ['--tw-ring-color' as any]: 'var(--ecic-purple)',
+    }}
+    onMouseEnter={(e) => {
+      if (!disabled) {
+        e.currentTarget.style.borderColor = 'var(--ecic-purple)';
+      }
+    }}
+    onMouseLeave={(e) => {
+      if (!disabled) {
+        e.currentTarget.style.borderColor = 'var(--border-gray)';
+      }
+    }}
   >
     <div className="flex items-start gap-3">
-      <span className="mt-0.5 rounded-md bg-indigo-100 p-1 text-indigo-600">
+      <span
+        className="mt-0.5 rounded-md p-1 text-white"
+        style={{ backgroundColor: 'var(--ecic-purple)' }}
+      >
         <Icon className="h-4 w-4" aria-hidden="true" />
       </span>
       <span>
-        <span className="block text-sm font-semibold text-slate-900">{label}</span>
+        <span className="block text-sm font-heading font-semibold text-slate-900">{label}</span>
         <span className="mt-1 block text-xs text-slate-500">{description}</span>
       </span>
     </div>

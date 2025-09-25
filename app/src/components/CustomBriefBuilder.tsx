@@ -49,8 +49,8 @@ export function CustomBriefBuilder({
     <div className="space-y-6">
 
       {/* Context Selection */}
-      <div className="rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Your Context</h3>
+      <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
+        <h3 className="text-lg font-heading font-semibold text-slate-900 mb-4">Your Context</h3>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {/* Identity */}
@@ -59,7 +59,18 @@ export function CustomBriefBuilder({
             <select
               value={context.identity || ''}
               onChange={(e) => onContextChange({ ...context, identity: e.target.value || undefined })}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
+              style={{
+                borderColor: 'var(--border-gray)',
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = 'var(--ecic-purple)';
+                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = 'var(--border-gray)';
+                e.target.style.boxShadow = 'none';
+              }}
             >
               <option value="">Select...</option>
               <option value="individual">Individual</option>
@@ -80,7 +91,18 @@ export function CustomBriefBuilder({
             <select
               value={context.audience || ''}
               onChange={(e) => onContextChange({ ...context, audience: e.target.value || undefined })}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
+              style={{
+                borderColor: 'var(--border-gray)',
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = 'var(--ecic-purple)';
+                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = 'var(--border-gray)';
+                e.target.style.boxShadow = 'none';
+              }}
             >
               <option value="">Select...</option>
               <option value="fiduciary">Fiduciary</option>
@@ -96,7 +118,18 @@ export function CustomBriefBuilder({
             <select
               value={context.venue || ''}
               onChange={(e) => onContextChange({ ...context, venue: e.target.value || undefined })}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
+              style={{
+                borderColor: 'var(--border-gray)',
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = 'var(--ecic-purple)';
+                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = 'var(--border-gray)';
+                e.target.style.boxShadow = 'none';
+              }}
             >
               <option value="">Select...</option>
               <option value="one_on_one">One-on-One</option>
@@ -113,7 +146,18 @@ export function CustomBriefBuilder({
             <select
               value={context.level || ''}
               onChange={(e) => onContextChange({ ...context, level: e.target.value || undefined })}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
+              style={{
+                borderColor: 'var(--border-gray)',
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = 'var(--ecic-purple)';
+                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = 'var(--border-gray)';
+                e.target.style.boxShadow = 'none';
+              }}
             >
               <option value="">Select...</option>
               <option value="plain">Plain Language</option>
@@ -124,15 +168,18 @@ export function CustomBriefBuilder({
       </div>
 
       {/* Key Points Selection */}
-      <div className="rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+      <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-slate-900">
+          <h3 className="text-lg font-heading font-semibold text-slate-900">
             Choose Key Points ({selectedKeyPoints.length} of {availableKeyPoints.length})
           </h3>
           <div className="flex gap-2">
             <button
               onClick={selectAll}
-              className="text-sm px-3 py-1 rounded-md bg-indigo-100 text-indigo-700 hover:bg-indigo-200 transition-colors"
+              className="text-sm px-3 py-1 rounded-md text-white hover:opacity-90 transition-opacity"
+              style={{
+                backgroundColor: 'var(--ecic-purple)',
+              }}
             >
               Select All
             </button>
@@ -158,19 +205,29 @@ export function CustomBriefBuilder({
                   key={keyPoint.id}
                   className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all ${
                     isSelected
-                      ? 'border-indigo-600 bg-indigo-50'
-                      : 'border-slate-200 bg-white hover:border-indigo-300 hover:bg-indigo-50'
+                      ? 'bg-indigo-50'
+                      : 'border-slate-200 bg-white hover:bg-indigo-50'
                   }`}
+                  style={{
+                    borderColor: isSelected ? 'var(--ecic-purple)' : 'var(--border-gray)',
+                    backgroundColor: isSelected ? 'rgba(88, 28, 135, 0.05)' : undefined,
+                  }}
                 >
-                  <div className={`mt-1 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
-                    isSelected
-                      ? 'border-indigo-600 bg-indigo-600 text-white'
-                      : 'border-slate-300'
-                  }`}>
+                  <div
+                    className={`mt-1 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
+                      isSelected
+                        ? 'text-white'
+                        : 'border-slate-300'
+                    }`}
+                    style={{
+                      borderColor: isSelected ? 'var(--ecic-purple)' : 'var(--border-gray)',
+                      backgroundColor: isSelected ? 'var(--ecic-purple)' : undefined,
+                    }}
+                  >
                     {isSelected && <Check size={14} />}
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-900">{keyPoint.title}</h4>
+                    <h4 className="font-heading font-medium text-slate-900">{keyPoint.title}</h4>
                     <p className="text-sm text-slate-600 mt-1">{keyPoint.body}</p>
                   </div>
                   <input

@@ -82,11 +82,16 @@ function OptionButton({
       type="button"
       onClick={onClick}
       className={clsx(
-        'flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
+        'flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
         active
-          ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-sm'
+          ? 'text-white shadow-sm'
           : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-200'
       )}
+      style={{
+        borderColor: active ? 'var(--ecic-purple)' : 'var(--border-gray)',
+        backgroundColor: active ? 'var(--ecic-purple)' : undefined,
+        ['--tw-ring-color' as any]: 'var(--ecic-purple)',
+      }}
     >
       {Icon ? <Icon className="h-4 w-4" aria-hidden="true" /> : null}
       <span>{label}</span>
@@ -111,7 +116,7 @@ export function FiltersPanel({
   return (
     <aside className="space-y-8">
       <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Investor identity</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Investor identity</p>
         <div className="flex flex-wrap gap-2">
           {identities.map((value) => {
             const meta = IDENTITY_LABELS[value] ?? { label: formatLabel(value, {}), icon: Users };
@@ -129,7 +134,7 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Audience</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Audience</p>
         <div className="flex flex-wrap gap-2">
           {audiences.map((value) => {
             const meta = AUDIENCE_LABELS[value] ?? { label: formatLabel(value, {}), icon: Users };
@@ -147,7 +152,7 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Venue</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Venue</p>
         <div className="grid grid-cols-1 gap-2">
           {venues.map((value) => (
             <OptionButton
@@ -161,7 +166,7 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Knowledge level</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Knowledge level</p>
         <div className="flex gap-2">
           {levels.map((value) => (
             <OptionButton
@@ -175,12 +180,23 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-2">
-        <label className="text-xs font-semibold uppercase tracking-wide text-slate-500" htmlFor="playlist-select">
+        <label className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500" htmlFor="playlist-select">
           Key point playlist
         </label>
         <select
           id="playlist-select"
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-1"
+          style={{
+            borderColor: 'var(--border-gray)',
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = 'var(--ecic-purple)';
+            e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'var(--border-gray)';
+            e.target.style.boxShadow = 'none';
+          }}
           value={params.playlist}
           onChange={(event) => setParams({ playlist: event.target.value })}
         >
@@ -193,7 +209,7 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">One-pagers</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">One-pagers</p>
         <div className="space-y-2">
           {onePagers.map((doc) => {
             const checked = selectedDocs.includes(doc.id);
@@ -203,9 +219,13 @@ export function FiltersPanel({
                 className={clsx(
                   'flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2 text-sm shadow-sm transition',
                   checked
-                    ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+                    ? 'text-slate-900'
                     : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300'
                 )}
+                style={{
+                  borderColor: checked ? 'var(--ecic-purple)' : 'var(--border-gray)',
+                  backgroundColor: checked ? 'rgba(88, 28, 135, 0.05)' : undefined,
+                }}
               >
                 <input
                   className="mt-1 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
