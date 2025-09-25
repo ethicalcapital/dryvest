@@ -1,7 +1,8 @@
-# Dryvestment Content Pack
+# Dryvestment
 
-This repository packages the Dryvestment brief generator’s reference material as a
-self-contained data set. It lets us evolve copy, citations, and playlists in a
+
+
+This repository manages the copy, citations, and playlists in a
 content-focused workflow before the app consumes a compiled bundle.
 
 ## Contents
