@@ -1,0 +1,19 @@
+# Node artifacts
+app/node_modules/
+app/dist/
+
+# Logs and cache
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Editor junk
+.DS_Store
+.idea/
+.vscode/
+
+# Local env
+app/.env
+app/.env.*

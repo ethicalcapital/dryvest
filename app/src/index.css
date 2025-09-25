@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply min-h-screen bg-[#f5f7fb] text-slate-900 antialiased;
+}
+
+a {
+  @apply text-indigo-600 underline-offset-4 hover:underline;
+}

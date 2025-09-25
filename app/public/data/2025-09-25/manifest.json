@@ -1,0 +1,7 @@
+{
+  "version": "2025-09-25",
+  "schema": "schema.json",
+  "nodes": "nodes.json",
+  "playlists": "playlists.json",
+  "source": "content/bds_pack.json"
+}

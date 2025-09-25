@@ -1,0 +1,573 @@
+{
+  "version": "2025-09-25",
+  "playlists": [
+    {
+      "id": "brief_key_points_default",
+      "kind": "key_points",
+      "title": "Key points",
+      "items": [
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance"
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality"
+        },
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_individual_start-with-your-own-accounts"
+        },
+        {
+          "ref": "kp_individual_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_individual_use-the-screened-options-your-custodian-already-offers"
+        },
+        {
+          "ref": "kp_public_pension_consultants-can-document-explicit-guardrails"
+        },
+        {
+          "ref": "kp_public_pension_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_public_pension_peer-funds-already-run-conduct-screens"
+        },
+        {
+          "ref": "kp_government_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_government_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_government_link-divestment-to-credit-and-liquidity-management"
+        },
+        {
+          "ref": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_central_bank_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_central_bank_link-divestment-to-credit-and-liquidity-management"
+        }
+      ]
+    },
+    {
+      "id": "counters_family_friends",
+      "kind": "counters",
+      "title": "Counters: family_friends",
+      "items": [
+        {
+          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
+        },
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
+        },
+        {
+          "ref": "ctr_this-will-damage-our-relationship-with-jewish-donors-stakeholders"
+        },
+        {
+          "ref": "ctr_what-about-china-saudi-arabia-other-countries"
+        },
+        {
+          "ref": "ctr_this-politicizes-our-investment-process"
+        },
+        {
+          "ref": "ctr_esg-has-underperformed-we-re-moving-away-from-values-investing"
+        },
+        {
+          "ref": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start"
+        },
+        {
+          "ref": "ctr_how-do-you-know-these-activist-lists-aren-t-biased"
+        },
+        {
+          "ref": "ctr_apartheid-divestment-was-chaos-why-repeat-it"
+        }
+      ],
+      "targets": {
+        "audience": [
+          "family_friends"
+        ]
+      }
+    },
+    {
+      "id": "counters_fiduciary",
+      "kind": "counters",
+      "title": "Counters: fiduciary",
+      "items": [
+        {
+          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
+        },
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_the-board-doesn-t-have-authority-to-make-investment-decisions"
+        },
+        {
+          "ref": "ctr_our-investment-consultant-manager-won-t-implement-this"
+        },
+        {
+          "ref": "ctr_esg-has-underperformed-we-re-moving-away-from-values-investing"
+        },
+        {
+          "ref": "ctr_how-do-you-know-these-activist-lists-aren-t-biased"
+        },
+        {
+          "ref": "ctr_apartheid-divestment-was-chaos-why-repeat-it"
+        }
+      ],
+      "targets": {
+        "audience": [
+          "fiduciary"
+        ]
+      }
+    },
+    {
+      "id": "counters_regulated",
+      "kind": "counters",
+      "title": "Counters: regulated",
+      "items": [
+        {
+          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
+        },
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_the-board-doesn-t-have-authority-to-make-investment-decisions"
+        },
+        {
+          "ref": "ctr_this-politicizes-our-investment-process"
+        },
+        {
+          "ref": "ctr_settlement-products-are-a-tiny-portion-of-these-companies-revenues"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        },
+        {
+          "ref": "ctr_how-do-you-know-these-activist-lists-aren-t-biased"
+        },
+        {
+          "ref": "ctr_apartheid-divestment-was-chaos-why-repeat-it"
+        },
+        {
+          "ref": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start"
+        }
+      ],
+      "targets": {
+        "audience": [
+          "regulated"
+        ]
+      }
+    },
+    {
+      "id": "next_steps_general",
+      "kind": "next_steps",
+      "title": "Next steps (general)",
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_adopt-written-conduct-criteria-and-escalation-pr"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_individual",
+      "kind": "next_steps",
+      "title": "Next steps: individual",
+      "items": [
+        {
+          "ref": "step_individual_list-your-current-retirement-and-brokerage-h"
+        },
+        {
+          "ref": "step_individual_shift-savings-into-screened-etfs-or-managed-"
+        },
+        {
+          "ref": "step_individual_set-a-reminder-to-review-allocations-annuall"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "individual"
+        ]
+      }
+    },
+    {
+      "id": "next_steps_family_friends",
+      "kind": "next_steps",
+      "title": "Next steps: family_friends",
+      "items": [
+        {
+          "ref": "step_family_friends_share-your-own-experience-reviewing-accounts"
+        },
+        {
+          "ref": "step_family_friends_offer-to-walk-through-their-brokerage-or-ret"
+        },
+        {
+          "ref": "step_family_friends_encourage-them-to-revisit-the-conversation-a"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "family_friends"
+        ]
+      }
+    },
+    {
+      "id": "sources_family_friends",
+      "kind": "sources",
+      "title": "Sources: family_friends",
+      "items": [
+        {
+          "ref": "src_us-dol-esg-factors-fact-sheet"
+        },
+        {
+          "ref": "src_jerusalem-declaration-on-antisemitism"
+        },
+        {
+          "ref": "src_pew-research-jewish-americans-in-2020"
+        },
+        {
+          "ref": "src_un-guiding-principles-on-business-human-rights"
+        },
+        {
+          "ref": "src_nyu-stern-esg-and-financial-performance"
+        },
+        {
+          "ref": "src_baldassi-v-france-echr"
+        },
+        {
+          "ref": "src_ethical-capital-investment-screening-policy"
+        },
+        {
+          "ref": "src_nbim-responsible-investment"
+        }
+      ],
+      "targets": {
+        "audience": [
+          "family_friends"
+        ]
+      }
+    },
+    {
+      "id": "sources_fiduciary",
+      "kind": "sources",
+      "title": "Sources: fiduciary",
+      "items": [
+        {
+          "ref": "src_ethical-capital-investment-screening-policy"
+        },
+        {
+          "ref": "src_msci-esg-indexes-methodology"
+        },
+        {
+          "ref": "src_ftse-russell-squaring-the-circle-on-carbon-track"
+        },
+        {
+          "ref": "src_church-of-england-pensions-board-divestment"
+        },
+        {
+          "ref": "src_un-pri-fiduciary-duty-in-the-21st-century"
+        },
+        {
+          "ref": "src_us-dol-esg-factors-fact-sheet"
+        },
+        {
+          "ref": "src_oxford-sustainable-finance-divestment-research"
+        },
+        {
+          "ref": "src_klp-divests-settlement-companies"
+        },
+        {
+          "ref": "src_akademikerpension-statement"
+        },
+        {
+          "ref": "src_pfzw-exclusion-decision"
+        },
+        {
+          "ref": "src_ssrn-esg-ratings-divergence"
+        },
+        {
+          "ref": "src_nbim-responsible-investment"
+        }
+      ],
+      "targets": {
+        "audience": [
+          "fiduciary"
+        ]
+      }
+    },
+    {
+      "id": "sources_regulated",
+      "kind": "sources",
+      "title": "Sources: regulated",
+      "items": [
+        {
+          "ref": "src_ethical-capital-investment-screening-policy"
+        },
+        {
+          "ref": "src_un-guiding-principles-on-business-human-rights"
+        },
+        {
+          "ref": "src_koontz-v-watson-opinion"
+        },
+        {
+          "ref": "src_amawi-v-pflugerville-isd-opinion"
+        },
+        {
+          "ref": "src_jordahl-v-brnovich-opinion"
+        },
+        {
+          "ref": "src_moody-s-downgrades-israel"
+        },
+        {
+          "ref": "src_cuyahoga-county-israel-bond-freeze"
+        },
+        {
+          "ref": "src_msci-esg-indexes-methodology"
+        },
+        {
+          "ref": "src_ftse-russell-squaring-the-circle-on-carbon-track"
+        },
+        {
+          "ref": "src_ssrn-esg-ratings-divergence"
+        },
+        {
+          "ref": "src_nbim-responsible-investment"
+        },
+        {
+          "ref": "src_nbim-exclusion-of-companies"
+        }
+      ],
+      "targets": {
+        "audience": [
+          "regulated"
+        ]
+      }
+    },
+    {
+      "id": "sources_global",
+      "kind": "sources",
+      "title": "Sources (global)",
+      "items": [
+        {
+          "ref": "src_afsc-investigate"
+        },
+        {
+          "ref": "src_un-database-on-settlements"
+        },
+        {
+          "ref": "src_ssrn-esg-ratings-divergence"
+        },
+        {
+          "ref": "src_nbim-responsible-investment"
+        },
+        {
+          "ref": "src_nbim-exclusion-of-companies"
+        },
+        {
+          "ref": "src_msci-esg-indexes-methodology"
+        },
+        {
+          "ref": "src_ftse-russell-squaring-the-circle-on-carbon-track"
+        },
+        {
+          "ref": "src_un-pri-fiduciary-duty-in-the-21st-century"
+        },
+        {
+          "ref": "src_us-dol-esg-factors-fact-sheet"
+        },
+        {
+          "ref": "src_us-dol-esg-guidance"
+        },
+        {
+          "ref": "src_nyu-stern-esg-and-financial-performance"
+        },
+        {
+          "ref": "src_msci-esg-indexes-factsheet"
+        },
+        {
+          "ref": "src_church-of-england-pensions-board-divestment"
+        },
+        {
+          "ref": "src_klp-divests-settlement-companies"
+        },
+        {
+          "ref": "src_akademikerpension-statement"
+        },
+        {
+          "ref": "src_pfzw-exclusion-decision"
+        },
+        {
+          "ref": "src_ethical-capital-investment-screening-policy"
+        },
+        {
+          "ref": "src_un-guiding-principles-on-business-human-rights"
+        },
+        {
+          "ref": "src_koontz-v-watson-opinion"
+        },
+        {
+          "ref": "src_moody-s-downgrades-israel"
+        },
+        {
+          "ref": "src_cuyahoga-county-israel-bond-freeze"
+        },
+        {
+          "ref": "src_jerusalem-declaration-on-antisemitism"
+        },
+        {
+          "ref": "src_baldassi-v-france-echr"
+        },
+        {
+          "ref": "src_naacp-v-claiborne-hardware-458-u-s-886"
+        },
+        {
+          "ref": "src_amnesty-israel-s-system-of-apartheid"
+        },
+        {
+          "ref": "src_amawi-v-pflugerville-isd-opinion"
+        },
+        {
+          "ref": "src_jordahl-v-brnovich-opinion"
+        },
+        {
+          "ref": "src_msci-esg-focus-methodology"
+        },
+        {
+          "ref": "src_pew-research-jewish-americans-in-2020"
+        },
+        {
+          "ref": "src_jewish-electorate-institute-2021-poll"
+        },
+        {
+          "ref": "src_jewish-voice-for-peace-about"
+        },
+        {
+          "ref": "src_ifnotnow-mission"
+        },
+        {
+          "ref": "src_what-i-d-tell-your-cio-about-divestment"
+        },
+        {
+          "ref": "src_mdpi-esg-scores-and-stock-returns"
+        },
+        {
+          "ref": "src_nbim-exclusion-decisions"
+        },
+        {
+          "ref": "src_uc-regents-investment-policy"
+        },
+        {
+          "ref": "src_jury-awards-miller-vs-caterpillar"
+        },
+        {
+          "ref": "src_caterpillar-stock-reaction-to-nbim-exclusion"
+        },
+        {
+          "ref": "src_evergreen-state-agreement"
+        },
+        {
+          "ref": "src_ssrn-trustworthy-esg-ratings"
+        },
+        {
+          "ref": "src_union-theological-seminary-divestment"
+        },
+        {
+          "ref": "src_sfsu-foundation-policy-update"
+        },
+        {
+          "ref": "src_free-money-podcast-divestment-without-dissonance"
+        },
+        {
+          "ref": "src_msci-esg-index-construction"
+        },
+        {
+          "ref": "src_un-pri-fiduciary-duty"
+        },
+        {
+          "ref": "src_oxford-ssee-research"
+        },
+        {
+          "ref": "src_msci-portfolio-construction"
+        },
+        {
+          "ref": "src_ssrn-impact-of-esg-rating-changes"
+        },
+        {
+          "ref": "src_cio-letter-ethical-capital"
+        },
+        {
+          "ref": "src_ethical-capital-screening-policy"
+        },
+        {
+          "ref": "src_oxford-sustainable-finance-divestment-research"
+        },
+        {
+          "ref": "src_blackrock-portfolio-construction"
+        },
+        {
+          "ref": "src_afsc-investigate-database"
+        },
+        {
+          "ref": "src_texas-government-code-chapter-808"
+        },
+        {
+          "ref": "src_ssrn-investor-identity-4324537"
+        },
+        {
+          "ref": "src_cfa-institute-seven-kinds-of-asset-owner-institu"
+        },
+        {
+          "ref": "src_what-i-d-tell-your-cio-about-divestment"
+        }
+      ]
+    },
+    {
+      "id": "further_reading",
+      "kind": "sources",
+      "title": "Further reading",
+      "items": [
+        {
+          "ref": "src_ssrn-investor-identity-4324537"
+        },
+        {
+          "ref": "src_cfa-institute-seven-kinds-of-asset-owner-institu"
+        },
+        {
+          "ref": "src_what-i-d-tell-your-cio-about-divestment"
+        }
+      ]
+    }
+  ]
+}

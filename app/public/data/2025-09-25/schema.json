@@ -1,0 +1,37 @@
+{
+  "version": "2025-09-25",
+  "createdAt": "2025-09-25T19:44:09.525Z",
+  "taxonomies": {
+    "identity": [
+      "individual",
+      "swf",
+      "public_pension",
+      "corporate_pension",
+      "endowment",
+      "foundation",
+      "insurance",
+      "central_bank",
+      "government"
+    ],
+    "audience": [
+      "family_friends",
+      "fiduciary",
+      "regulated"
+    ],
+    "venue": [
+      "one_on_one",
+      "town_meeting",
+      "school_board",
+      "city_council",
+      "small_group",
+      "committee_hearing",
+      "full_board_meeting",
+      "public_testimony",
+      "written_memo"
+    ],
+    "level": [
+      "plain",
+      "technical"
+    ]
+  }
+}
