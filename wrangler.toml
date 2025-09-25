@@ -5,7 +5,7 @@ compatibility_date = "2024-11-12"
 directory = "app/dist"
 
 [build]
-command = "npm --prefix app run build"
+command = "npm --prefix app install && npm --prefix app run build"
 
 [observability.logs]
 enabled = true
