@@ -5,6 +5,7 @@ import type { BriefParams } from '../hooks/useBriefParams';
 import type { BriefExportData, BriefTone } from '../lib/exporters';
 import { buildMarkdown } from '../lib/exporters';
 import { trackEvent } from '../lib/analytics';
+import { PDFExportButton } from './PDFExportButton';
 
 interface ActionsPanelProps {
   params: BriefParams;
@@ -137,6 +138,20 @@ export function ActionsPanel({ params, selectedDocs, exportData }: ActionsPanelP
               trackEvent('print_clicked');
             }}
           />
+
+          {/* PDF Export */}
+          <div className="pt-2 border-t border-slate-200">
+            <PDFExportButton
+              context={{
+                identity: params.identity,
+                audience: params.audience,
+                venue: params.venue,
+                level: params.level
+              }}
+              venue={params.venue?.replace('_', ' ') || 'Investment Committee'}
+              decisionMaker="Board of Trustees"
+            />
+          </div>
         </div>
       </div>
       <div className="rounded-xl border border-indigo-200 bg-indigo-50/60 p-5 text-sm text-indigo-900">

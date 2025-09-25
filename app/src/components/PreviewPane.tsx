@@ -86,7 +86,7 @@ export function PreviewPane({
   sourceLookup,
 }: PreviewPaneProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-preview-content>
       {opener ? (
         <Section title="Opening angle" anchor="opener">
           <p>{opener.text}</p>
