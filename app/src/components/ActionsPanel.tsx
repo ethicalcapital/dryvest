@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { ClipboardCopy, Download, Printer } from 'lucide-react';
+import { ClipboardCopy, Download } from 'lucide-react';
 import type { BriefParams } from '../hooks/useBriefParams';
 import type { BriefExportData, BriefTone } from '../lib/exporters';
 import { buildMarkdown } from '../lib/exporters';
@@ -129,18 +129,8 @@ export function ActionsPanel({ params, selectedDocs, exportData }: ActionsPanelP
               trackEvent('download_clicked', { tone: 'technical' });
             }}
           />
-          <ActionButton
-            icon={Printer}
-            label="Print"
-            description="Opens the browser print dialog for the current layout."
-            onClick={() => {
-              window.print();
-              trackEvent('print_clicked');
-            }}
-          />
-
           {/* PDF Export */}
-          <div className="pt-2 border-t border-slate-200">
+          <div className="pt-3 border-t border-slate-200">
             <PDFExportButton
               context={{
                 identity: params.identity,
