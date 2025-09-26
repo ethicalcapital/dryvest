@@ -143,6 +143,7 @@ export function ActionsPanel({
               venue: params.venue,
               level: params.level,
             }}
+            exportData={exportData}
             venue={params.venue?.replace('_', ' ') || 'Investment Committee'}
             decisionMaker="Board of Trustees"
           />

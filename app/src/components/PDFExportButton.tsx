@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 import {
   exportToPDF,
-  getPreviewContent,
   generateTitle,
 } from '../lib/pdf-export';
+import { buildMarkdown, type BriefExportData } from '../lib/exporters';
 import type { BriefContext } from '../lib/schema';
 
 interface PDFExportButtonProps {
   context: BriefContext;
+  exportData: BriefExportData;
   venue?: string;
   decisionMaker?: string;
   disabled?: boolean;
@@ -16,6 +17,7 @@ interface PDFExportButtonProps {
 
 export function PDFExportButton({
   context,
+  exportData,
   venue = 'Investment Committee',
   decisionMaker = 'Board of Trustees',
   disabled = false,
@@ -33,7 +35,7 @@ export function PDFExportButton({
     setIsExporting(true);
 
     try {
-      const content = getPreviewContent();
+      const content = buildMarkdown(exportData, 'plain');
       const title = generateTitle(context);
 
       await exportToPDF({
