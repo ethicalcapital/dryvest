@@ -68,7 +68,6 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
     opener,
     guide,
     keyPoints,
-    counters,
     nextSteps,
     screeningNode,
     policyAlignment,
