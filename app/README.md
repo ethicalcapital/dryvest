@@ -102,10 +102,25 @@ npm run a11y:lighthouse # Comprehensive audit
 - `npm run type-check` - TypeScript compilation check
 
 ## 📚 **Content Architecture**
-- **350+ Content Nodes**: Key points, counters, policy statements, guides
-- **Structured Targeting**: Content tagged by identity, venue, audience, and level
+- **157 Content Nodes**: Key points, counters, policy statements, guides, sources, templates
+- **Structured Targeting**: Content tagged by identity, audience, and level
 - **Citation Network**: Every claim supported by primary sources
 - **Version Control**: Git-based content management with edit suggestions
+
+### Database Versioning
+- **Current Version**: `2025-09-25` (157 nodes)
+- **Patch (.0.0.X)** - Content updates within existing structure:
+  - +25 nodes (roughly 15% growth)
+  - Significant content updates to existing nodes
+  - Bug fixes in targeting/tagging
+- **Minor (.0.X.0)** - Structural enhancements:
+  - New content types beyond the current 9
+  - Major taxonomy changes (new audience types, etc.)
+  - New mode functionality
+- **Major (.X.0.0)** - Fundamental architecture changes:
+  - Complete targeting schema overhaul
+  - New core functionality (beyond 3 decoder modes)
+  - Breaking changes to data structure
 
 ## 🎯 **Use Cases**
 1. **Campaign Preparation**: Understand your target institution before making demands

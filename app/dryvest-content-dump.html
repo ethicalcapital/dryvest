@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dryvest Content Dump</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Raleway:wght@300;400;500;600&display=swap');
+
+        :root {
+            --ecic-purple: #581c87;
+            --ecic-teal: #14b8a6;
+            --ecic-amber: #f59e0b;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.4;
+            margin: 0;
+            padding: 20px;
+            font-size: 10pt;
+            background: white;
+        }
+
+        .page {
+            width: 8.5in;
+            margin: 0 auto 30px;
+            padding: 0.5in;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        h1, h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: var(--ecic-purple);
+            margin: 15px 0 10px 0;
+        }
+
+        h1 { font-size: 20pt; }
+        h2 { font-size: 14pt; }
+        h3 { font-size: 12pt; font-weight: 600; color: var(--ecic-teal); margin: 10px 0 5px 0; }
+        h4 { font-size: 11pt; font-weight: 600; margin: 8px 0 4px 0; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .content-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fafafa;
+        }
+
+        .content-type {
+            background: var(--ecic-purple);
+            color: white;
+            padding: 4px 8px;
+            font-size: 9pt;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .node-id {
+            font-family: monospace;
+            font-size: 8pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .node-text {
+            font-size: 10pt;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .targets {
+            font-size: 9pt;
+            color: #666;
+            background: #f0f0f0;
+            padding: 4px 6px;
+            margin-top: 5px;
+        }
+
+        pre, code {
+            font-family: 'SF Mono', monospace;
+            font-size: 8pt;
+            background: #f5f5f5;
+            padding: 8px;
+            border-left: 3px solid var(--ecic-teal);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--ecic-teal);
+        }
+
+        .stat-number {
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--ecic-purple);
+        }
+
+        .stat-label {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 9pt;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: 600;
+        }
+
+        @media print {
+            body { font-size: 9pt; }
+            .page { box-shadow: none; margin: 0; page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover -->
+    <div class="page">
+        <h1>Dryvest Content Dump</h1>
+        <p><strong>Generated:</strong> September 26, 2025<br>
+        <strong>Version:</strong> 2025-09-25<br>
+        <strong>Total Nodes:</strong> 157</p>
+
+        <h2>Summary Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">157</div>
+                <div class="stat-label">Total Nodes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Content Types</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Identity Types</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Audience Types</div>
+            </div>
+        </div>
+
+        <h2>Content Type Distribution</h2>
+        <table>
+            <tr><th>Type</th><th>Count</th><th>%</th><th>Description</th></tr>
+            <tr><td>source</td><td>57</td><td>36%</td><td>Citations and references</td></tr>
+            <tr><td>counter</td><td>33</td><td>21%</td><td>Response arguments</td></tr>
+            <tr><td>key_point</td><td>16</td><td>10%</td><td>Core arguments</td></tr>
+            <tr><td>opener</td><td>14</td><td>9%</td><td>Context openers</td></tr>
+            <tr><td>next_step</td><td>11</td><td>7%</td><td>Action items</td></tr>
+            <tr><td>template_snippet</td><td>9</td><td>6%</td><td>Communication templates</td></tr>
+            <tr><td>guide</td><td>9</td><td>6%</td><td>Process frameworks</td></tr>
+            <tr><td>one_pager</td><td>6</td><td>4%</td><td>Quick summaries</td></tr>
+            <tr><td>policy_statement</td><td>2</td><td>1%</td><td>Formal statements</td></tr>
+        </table>
+
+        <h2>Taxonomies</h2>
+        <div class="three-col">
+            <div>
+                <h3>Identity (9)</h3>
+                <ul style="font-size: 9pt; margin: 0; padding-left: 15px;">
+                    <li>individual</li>
+                    <li>swf</li>
+                    <li>public_pension</li>
+                    <li>corporate_pension</li>
+                    <li>endowment</li>
+                    <li>foundation</li>
+                    <li>insurance</li>
+                    <li>central_bank</li>
+                    <li>government</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Audience (4)</h3>
+                <ul style="font-size: 9pt; margin: 0; padding-left: 15px;">
+                    <li>individuals</li>
+                    <li>staff</li>
+                    <li>consultants</li>
+                    <li>boards</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Level (2)</h3>
+                <ul style="font-size: 9pt; margin: 0; padding-left: 15px;">
+                    <li>plain</li>
+                    <li>technical</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Openers -->
+    <div class="page">
+        <h1>OPENER NODES (14)</h1>
+        <div class="content-grid">
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_generic</div>
+                <div class="node-text">We can align investments with basic human rights using professional, benchmark-aware implementation. Large institutions already use narrowly scoped exclusions while maintaining diversification and risk controls.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_individual_one_on_one</div>
+                <div class="node-text">For friends or family, emphasize aligning personal savings with shared values and keep the steps concrete and jargon-free.</div>
+                <div class="targets">identity: individual | venue: one_on_one</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_individual_base</div>
+                <div class="node-text">Individual investors can align personal or household savings with their values using low-cost screened funds while keeping diversification and emergency reserves intact.</div>
+                <div class="targets">identity: individual</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_swf_base</div>
+                <div class="node-text">A sovereign fund can implement conduct-based exclusions via a formal ethics process, public rationales, and factor-neutral optimization with explicit tracking-error budgets.</div>
+                <div class="targets">identity: swf</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_public_pension_town_meeting</div>
+                <div class="node-text">Public pensions can adopt a clear exclusion policy with consultant support, preserve diversification, and report progress without sacrificing fiduciary discipline.</div>
+                <div class="targets">identity: public_pension | venue: town_meeting</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_public_pension_base</div>
+                <div class="node-text">Public plans can use consultant/manager mandates, set a tracking-error guardrail, and phase implementation while keeping beneficiaries' risk/return in focus.</div>
+                <div class="targets">identity: public_pension</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_corporate_pension_base</div>
+                <div class="node-text">Corporate plans can update the IPS, adopt a screened index or constraints with minimal overhead, and maintain de-risking alignment.</div>
+                <div class="targets">identity: corporate_pension</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_endowment_school_board</div>
+                <div class="node-text">An endowment can reflect mission and educational values with transparent criteria and periodic reviews.</div>
+                <div class="targets">identity: endowment | venue: school_board</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_endowment_base</div>
+                <div class="node-text">Endowments can align with mission through a committee process, publish rationales, and maintain prudent risk controls.</div>
+                <div class="targets">identity: endowment</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_foundation_base</div>
+                <div class="node-text">Foundations can align programs and portfolios, reduce reputational risk through clear criteria, and use simplified implementation paths.</div>
+                <div class="targets">identity: foundation</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_insurance_base</div>
+                <div class="node-text">Insurance portfolios can adopt narrow conduct screens consistent with ALM and capital/rating constraints, emphasizing best-efforts and risk integrity.</div>
+                <div class="targets">identity: insurance</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_central_bank_base</div>
+                <div class="node-text">Official institutions can clarify mandate limits, apply best-efforts exclusions, and provide transparent rationales and constraints.</div>
+                <div class="targets">identity: central_bank</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_government_city_council</div>
+                <div class="node-text">For government bond portfolios, define approved issuer lists and issuer screens consistent with procurement rules and transparency.</div>
+                <div class="targets">identity: government | venue: city_council</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">OPENER</div>
+                <div class="node-id">opener_government_base</div>
+                <div class="node-text">Government investors (city/county/state) can apply issuer screens/approved lists for bonds, observe procurement/governance limits, and report with best-efforts language.</div>
+                <div class="targets">identity: government</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Points -->
+    <div class="page">
+        <h1>KEY POINT NODES (16)</h1>
+        <div class="content-grid">
+            <div class="content-box">
+                <div class="content-type">KEY_POINT</div>
+                <div class="node-id">kp_specialized-intelligence-catches-what-esg-ratings-miss</div>
+                <div class="node-text"><strong>Specialized intelligence catches what ESG ratings miss</strong><br>
+                On-the-ground researchers (AFSC, UN) surface settlement and occupation ties long before generalized ESG vendors adjust their scores. Pair activist data for precision with MSCI/FTSE tools for delivery, so implementation stays repeatable.</div>
+                <div class="targets">Citations: src_afsc-investigate, src_un-database-on-settlements, src_ssrn-esg-ratings-divergence</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">KEY_POINT</div>
+                <div class="node-id">kp_professional-exclusions-maintain-benchmark-like-performance</div>
+                <div class="node-text"><strong>Professional exclusions maintain benchmark-like performance</strong><br>
+                Large public funds implement conduct-based exclusions and continue to deliver returns close to their benchmarks by rebalancing and preserving factor exposures.</div>
+                <div class="targets">Citations: src_nbim-responsible-investment, src_nbim-exclusion-of-companies</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">KEY_POINT</div>
+                <div class="node-id">kp_tracking-error-and-factor-neutrality</div>
+                <div class="node-text"><strong>Tracking error and factor neutrality</strong><br>
+                Professional implementation uses tracking-error budgets and factor-neutral rebalancing to maintain benchmark-like performance while excluding problematic holdings.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">KEY_POINT</div>
+                <div class="node-id">kp_fiduciary-duty-and-values-alignment</div>
+                <div class="node-text"><strong>Fiduciary duty and values alignment</strong><br>
+                Modern fiduciary duty includes considering material ESG risks and stakeholder values, especially for mission-driven institutions like endowments and foundations.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">KEY_POINT</div>
+                <div class="node-id">kp_individual_start-with-your-own-accounts</div>
+                <div class="node-text"><strong>Start with your own accounts</strong><br>
+                Individual investors can begin values alignment immediately with their personal retirement and investment accounts using screened funds available through major brokerages.</div>
+                <div class="targets">identity: individual</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">KEY_POINT</div>
+                <div class="node-id">kp_individual_use-the-screened-options-your-custodian-already-offers</div>
+                <div class="node-text"><strong>Use the screened options your custodian already offers</strong><br>
+                Major brokerages like Vanguard, Fidelity, and Schwab offer screened index funds and ESG options that eliminate controversial holdings while maintaining diversification.</div>
+                <div class="targets">identity: individual</div>
+            </div>
+        </div>
+        <p style="text-align: center; font-style: italic; color: #666;">[Continuing with remaining 10 key points...]</p>
+    </div>
+
+    <!-- Sample Sources -->
+    <div class="page">
+        <h1>SOURCE NODES (57 total - showing first 12)</h1>
+        <div class="content-grid">
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_afsc-investigate</div>
+                <div class="node-text">AFSC Investigate. Available at: https://investigate.afsc.org/</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_un-database-on-settlements</div>
+                <div class="node-text">UN Database on Israeli Settlements in Occupied Palestinian Territory. Available at: https://www.ohchr.org/en/hr-bodies/hrc/regular-sessions/session43/list-of-all-business-enterprises</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_ssrn-esg-ratings-divergence</div>
+                <div class="node-text">Berg, F., Koelbel, J.F. and Rigobon, R., 2022. Aggregate confusion: The divergence of ESG ratings. Review of Finance, 26(6), pp.1315-1344. Available at: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3438533</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_nbim-responsible-investment</div>
+                <div class="node-text">NBIM. (2023). Responsible Investment. Available at: https://www.nbim.no/en/the-fund/responsible-investment/</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_nbim-exclusion-of-companies</div>
+                <div class="node-text">NBIM. (2023). Exclusion of companies from the investment universe. Available at: https://www.nbim.no/en/the-fund/responsible-investment/exclusion-of-companies/</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_msci-esg-indexes-methodology</div>
+                <div class="node-text">MSCI. (2023). MSCI ESG Indexes Methodology. Available at: https://www.msci.com/esg-indexes</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_ftse-esg-data-and-indexes</div>
+                <div class="node-text">FTSE Russell. (2023). ESG Data and Indexes. Available at: https://www.ftserussell.com/data/sustainability-and-esg-data</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_as-you-sow-fossil-free-funds</div>
+                <div class="node-text">As You Sow. (2023). Fossil Free Funds. Available at: https://www.fossilfreefunds.org/</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_divest-invest-individual</div>
+                <div class="node-text">DivestInvest. (2023). Individual Divestment Guide. Available at: https://divestinvest.org/how-to-divest-your-money/</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_vanguard-esg-funds</div>
+                <div class="node-text">Vanguard. (2023). ESG Funds. Available at: https://investor.vanguard.com/investment-products/esg</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_fidelity-sustainable-investing</div>
+                <div class="node-text">Fidelity. (2023). Sustainable Investing. Available at: https://www.fidelity.com/mutual-funds/investing-ideas/sustainable-investing</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">SOURCE</div>
+                <div class="node-id">src_schwab-esg-investing</div>
+                <div class="node-text">Charles Schwab. (2023). ESG Investing. Available at: https://www.schwab.com/esg-investing</div>
+            </div>
+        </div>
+        <p style="text-align: center; font-style: italic; color: #666;">[45 additional source nodes continue...]</p>
+    </div>
+
+    <!-- Counter Arguments Sample -->
+    <div class="page">
+        <h1>COUNTER NODES (33 total - showing first 8)</h1>
+        <div class="content-grid">
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_fiduciary-duty-requires-profit-maximization</div>
+                <div class="node-text"><strong>"Fiduciary duty requires profit maximization"</strong><br>
+                Modern fiduciary duty requires considering all material factors that affect risk and return, including ESG factors. The duty is to beneficiaries' best interests, not narrow profit maximization.</div>
+                <div class="targets">Citations: src_ceres-fiduciary-duty, src_pensions-and-investments-esg-fiduciary</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_esg-investing-reduces-returns</div>
+                <div class="node-text"><strong>"ESG investing reduces returns"</strong><br>
+                Academic meta-analyses show neutral to positive performance impact from ESG integration. Many exclusionary screens have minimal impact on diversification when implemented professionally.</div>
+                <div class="targets">Citations: src_morgan-stanley-sustainable-reality, src_nber-esg-performance</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_exclusions-reduce-diversification</div>
+                <div class="node-text"><strong>"Exclusions reduce diversification"</strong><br>
+                Targeted exclusions of specific conduct (not entire sectors) maintain diversification. Factor-neutral rebalancing preserves exposure to size, value, growth, and quality factors.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_divestment-has-no-impact</div>
+                <div class="node-text"><strong>"Divestment has no impact"</strong><br>
+                Divestment creates reputational pressure and raises capital costs for excluded companies. Combined with engagement, it signals market expectations for better corporate behavior.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_individual_too-small-to-matter</div>
+                <div class="node-text"><strong>"Individual investments are too small to matter"</strong><br>
+                Collective individual action creates market signals. Personal alignment also provides credibility and moral authority in advocating for institutional change.</div>
+                <div class="targets">identity: individual</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_individual_screened-funds-are-expensive</div>
+                <div class="node-text"><strong>"Screened funds are expensive"</strong><br>
+                Many major providers offer screened index funds with expense ratios comparable to conventional funds. Vanguard ESG funds often have expense ratios under 0.20%.</div>
+                <div class="targets">identity: individual</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_public_pension_legally-prohibited-from-considering-esg</div>
+                <div class="node-text"><strong>"Public pensions are legally prohibited from considering ESG"</strong><br>
+                Most state laws require considering all material factors affecting risk and return. ESG factors are increasingly recognized as material to long-term performance.</div>
+                <div class="targets">identity: public_pension</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">COUNTER</div>
+                <div class="node-id">counter_public_pension_taxpayers-oppose-esg</div>
+                <div class="node-text"><strong>"Taxpayers oppose ESG considerations"</strong><br>
+                Public opinion polls consistently show majority support for considering environmental and social factors in investment decisions. Implementation focuses on material risk management.</div>
+                <div class="targets">identity: public_pension</div>
+            </div>
+        </div>
+        <p style="text-align: center; font-style: italic; color: #666;">[25 additional counter nodes continue...]</p>
+    </div>
+
+    <!-- Template Snippets -->
+    <div class="page">
+        <h1>TEMPLATE SNIPPET NODES (9)</h1>
+        <div class="content-grid">
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_venue_one_on_one</div>
+                <div class="node-text"><strong>Venue cues</strong><br>
+                • Open with shared goals; invite concerns before proposing solutions.<br>
+                • Offer the brief and one or two sources relevant to their role.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_venue_small_group</div>
+                <div class="node-text"><strong>Venue cues</strong><br>
+                • Clarify decision rights and next steps.<br>
+                • Use the Identity Guide to align constraints and responsibilities.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_venue_committee_hearing</div>
+                <div class="node-text"><strong>Venue cues</strong><br>
+                • Keep to concrete asks; cite Policy Alignment and criteria.<br>
+                • Respect time limits; reference the full brief for details.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_venue_full_board_meeting</div>
+                <div class="node-text"><strong>Venue cues</strong><br>
+                • Present executive summary; provide detailed brief as appendix.<br>
+                • Focus on fiduciary alignment and risk management.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_venue_public_testimony</div>
+                <div class="node-text"><strong>Venue cues</strong><br>
+                • Lead with shared values; emphasize beneficiary alignment.<br>
+                • Provide written submission with sources and implementation steps.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_venue_written_memo</div>
+                <div class="node-text"><strong>Venue cues</strong><br>
+                • Include executive summary, detailed analysis, and appendices.<br>
+                • Provide clear action items with timelines and responsibilities.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_level_plain</div>
+                <div class="node-text"><strong>Level: Plain</strong><br>
+                • Use everyday language; avoid jargon.<br>
+                • Focus on concrete steps and clear outcomes.<br>
+                • Emphasize shared values and common ground.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_level_technical</div>
+                <div class="node-text"><strong>Level: Technical</strong><br>
+                • Use precise investment terminology.<br>
+                • Include specific metrics, benchmarks, and implementation details.<br>
+                • Reference academic research and industry best practices.</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">TEMPLATE_SNIPPET</div>
+                <div class="node-id">ts_email_template_basic</div>
+                <div class="node-text"><strong>Email Template</strong><br>
+                Subject: [Institution] Investment Policy Alignment<br>
+                <br>
+                Dear [Name],<br>
+                <br>
+                I'm writing to discuss how [Institution] can better align investment practices with [values/mission]. I've prepared a brief that outlines specific approaches used by peer institutions.<br>
+                <br>
+                The key points include:<br>
+                • [Point 1]<br>
+                • [Point 2]<br>
+                • [Point 3]<br>
+                <br>
+                I'd welcome the opportunity to discuss this further.<br>
+                <br>
+                Best regards,<br>
+                [Your name]</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps & Policy -->
+    <div class="page">
+        <h1>NEXT STEP NODES (11) & POLICY STATEMENTS (2)</h1>
+
+        <h2>Next Steps</h2>
+        <div class="content-grid">
+            <div class="content-box">
+                <div class="content-type">NEXT_STEP</div>
+                <div class="node-id">ns_research_existing_policies</div>
+                <div class="node-text">Research existing investment policies and identify alignment opportunities</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">NEXT_STEP</div>
+                <div class="node-id">ns_identify_decision_makers</div>
+                <div class="node-text">Identify key decision-makers and their roles in investment policy</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">NEXT_STEP</div>
+                <div class="node-id">ns_prepare_implementation_timeline</div>
+                <div class="node-text">Prepare phased implementation timeline with milestones and responsibilities</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">NEXT_STEP</div>
+                <div class="node-id">ns_engage_consultants</div>
+                <div class="node-text">Engage investment consultants to develop implementation recommendations</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">NEXT_STEP</div>
+                <div class="node-id">ns_establish_monitoring</div>
+                <div class="node-text">Establish monitoring and reporting procedures for ongoing compliance</div>
+            </div>
+
+            <div class="content-box">
+                <div class="content-type">NEXT_STEP</div>
+                <div class="node-id">ns_individual_review_current_holdings</div>
+                <div class="node-text">Review current investment holdings for alignment with personal values</div>
+                <div class="targets">identity: individual</div>
+            </div>
+        </div>
+
+        <h2>Policy Statements</h2>
+        <div class="content-box" style="margin-top: 15px;">
+            <div class="content-type">POLICY_STATEMENT</div>
+            <div class="node-id">policy_screening_intelligence</div>
+            <div class="node-text"><strong>Screening Intelligence</strong><br>
+            Variants:<br>
+            • Title: "Screening as Cumulative Knowledge"<br>
+            • Body: "We employ rigorous exclusionary screens for product-based violations (controversial weapons, tobacco) and conduct-based violations (forced labor, UN Global Compact breaches). Our screening process involves both negative screens and positive tilts toward companies demonstrating strong ESG performance."</div>
+        </div>
+
+        <div class="content-box" style="margin-top: 10px;">
+            <div class="content-type">POLICY_STATEMENT</div>
+            <div class="node-id">policy_alignment_criteria</div>
+            <div class="node-text"><strong>Policy Alignment Criteria</strong><br>
+            • Documented, explainable criteria with public rationales (no black boxes)<br>
+            • Conduct-first screening for risk mitigation; product screens for categorical harms when aligned with mission<br>
+            • Evidence-based decisions using primary and reputable sources with citations<br>
+            • Regular review and updating of criteria based on new information<br>
+            • Clear governance structure with defined roles and responsibilities</div>
+        </div>
+    </div>
+
+    <!-- Three Modes Analysis -->
+    <div class="page">
+        <h1>THREE DECODER MODES: CURRENT STATE</h1>
+
+        <h2>Mode 1: Quick Decoder</h2>
+        <div class="content-box">
+            <h3>Description</h3>
+            <p>Curated intelligence based on institutional type and audience. Get the essential talking points activists need most.</p>
+
+            <h3>Current Support: STRONG</h3>
+            <ul>
+                <li>14 opener nodes targeted by identity type</li>
+                <li>16 key_point nodes with evidence-based arguments</li>
+                <li>9 template_snippet nodes for practical guidance</li>
+                <li>57 source nodes for credibility</li>
+            </ul>
+
+            <h3>Data Gap</h3>
+            <p>Need audience-specific variants (individuals vs staff vs consultants vs boards)</p>
+        </div>
+
+        <h2>Mode 2: Custom Decoder</h2>
+        <div class="content-box">
+            <h3>Description</h3>
+            <p>Build your own intelligence brief. Mix and match arguments, counterpoints, and insider knowledge for your specific situation.</p>
+
+            <h3>Current Support: EXCELLENT</h3>
+            <ul>
+                <li>All 157 nodes available as building blocks</li>
+                <li>Strong variety: openers, key points, counters, sources, templates</li>
+                <li>33 counter nodes for response strategies</li>
+                <li>11 next_step nodes for implementation</li>
+            </ul>
+
+            <h3>Enhancement Opportunity</h3>
+            <p>Better tagging/categorization for easy selection</p>
+        </div>
+
+        <h2>Mode 3: Compare Mode</h2>
+        <div class="content-box">
+            <h3>Description</h3>
+            <p>See how institutional approaches differ. Compare pension fund language vs endowment priorities vs foundation constraints.</p>
+
+            <h3>Current Support: MODERATE</h3>
+            <ul>
+                <li>14 opener nodes show different approaches by identity type</li>
+                <li>Key points could show institutional variations</li>
+                <li>Sources provide institutional examples</li>
+            </ul>
+
+            <h3>Data Gap</h3>
+            <p>Need explicit comparative structure, side-by-side content</p>
+        </div>
+    </div>
+</body>
+</html>
