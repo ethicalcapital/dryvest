@@ -206,19 +206,6 @@ function App() {
     [dataset, selectedDocs]
   );
 
-  const playlistOptions = useMemo((): string[] => {
-    const source = dataset?.playlistsByKind['key_points'];
-    if (!source || source.length === 0) {
-      return [DEFAULT_PLAYLIST_ID];
-    }
-    const ids: string[] = [];
-    for (const playlist of source) {
-      if (playlist.id) {
-        ids.push(playlist.id);
-      }
-    }
-    return ids.length ? ids : [DEFAULT_PLAYLIST_ID];
-  }, [dataset]);
 
   const keyPointPlaylist = useMemo(() => {
     if (!dataset) return undefined;
