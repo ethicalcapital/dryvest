@@ -14,20 +14,10 @@
       "government"
     ],
     "audience": [
-      "family_friends",
-      "fiduciary",
-      "regulated"
-    ],
-    "venue": [
-      "one_on_one",
-      "town_meeting",
-      "school_board",
-      "city_council",
-      "small_group",
-      "committee_hearing",
-      "full_board_meeting",
-      "public_testimony",
-      "written_memo"
+      "individuals",
+      "staff",
+      "consultants",
+      "boards"
     ],
     "level": [
       "plain",

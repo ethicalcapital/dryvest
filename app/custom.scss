@@ -1,0 +1,130 @@
+/*-- scss:defaults --*/
+
+// Import ECIC brand fonts
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+// ECIC Brand Colors
+$ecic-purple: #581c87;
+$ecic-purple-light: #6b46c1;
+$ecic-teal: #14b8a6;
+$ecic-teal-dark: #008577;
+$ecic-teal-light: #2dd4bf;
+$ecic-amber: #f59e0b;
+$ecic-amber-dark: #b46100;
+$ecic-red: #ef4444;
+
+// Override Bootstrap variables
+$primary: $ecic-purple;
+$secondary: $ecic-teal;
+$success: $ecic-teal;
+$warning: $ecic-amber;
+$danger: $ecic-red;
+$info: $ecic-teal-light;
+
+// Typography
+$font-family-sans-serif: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+$headings-font-family: 'Outfit', sans-serif;
+
+// Custom brand gradient
+$brand-gradient: linear-gradient(135deg, #{$ecic-purple} 0%, #{$ecic-purple-light} 50%, #{$ecic-teal} 100%);
+
+/*-- scss:rules --*/
+
+// Brand gradient backgrounds
+.bg-brand-gradient {
+  background: $brand-gradient;
+}
+
+.bg-brand-secondary {
+  background: linear-gradient(135deg, #{$ecic-purple} 0%, #{$ecic-purple-light} 100%);
+}
+
+.bg-brand-light {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+// Custom navbar styling
+.navbar {
+  background: $brand-gradient !important;
+
+  .navbar-brand, .nav-link {
+    color: white !important;
+    font-family: $headings-font-family;
+    font-weight: 600;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Custom button styling
+.btn-primary {
+  background: $ecic-purple;
+  border-color: $ecic-purple;
+  font-family: $headings-font-family;
+  font-weight: 600;
+
+  &:hover {
+    background: $ecic-purple-light;
+    border-color: $ecic-purple-light;
+  }
+}
+
+.btn-secondary {
+  background: $ecic-teal;
+  border-color: $ecic-teal;
+
+  &:hover {
+    background: $ecic-teal-dark;
+    border-color: $ecic-teal-dark;
+  }
+}
+
+// Heading styles
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headings-font-family;
+  color: $ecic-purple;
+}
+
+// Sidebar and table of contents
+.sidebar {
+  background: rgba($ecic-purple, 0.05);
+  border-left: 3px solid $ecic-teal;
+}
+
+// Link styling
+a {
+  color: $ecic-teal-dark;
+
+  &:hover {
+    color: $ecic-purple;
+  }
+}
+
+// Code block styling
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+// Custom classes for the app
+.font-heading {
+  font-family: $headings-font-family;
+}
+
+.text-ecic-purple {
+  color: $ecic-purple;
+}
+
+.text-ecic-teal {
+  color: $ecic-teal;
+}
+
+.border-ecic-purple {
+  border-color: $ecic-purple;
+}
+
+.border-ecic-teal {
+  border-color: $ecic-teal;
+}

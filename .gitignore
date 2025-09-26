@@ -18,3 +18,7 @@ yarn-error.log*
 # Local env
 app/.env
 app/.env.*
+
+# Typst project outputs
+typst-project/output/
+typst-project/*.pdf

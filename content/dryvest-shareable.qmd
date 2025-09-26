@@ -1,0 +1,638 @@
+---
+title: "Footnotes For Fiduciaries"
+subtitle: "Stockpicking is Still Legal"
+author: "Sloane Ortel, CIO at Ethical Capital"
+date: today
+format:
+  revealjs:
+    theme: default
+    transition: slide
+    incremental: true
+    logo: "../ecic-logo.svg"
+    footer: "Ethical Capital • Dryvestment Labs"
+    slide-number: true
+    chalkboard: true
+    css: |
+      :root {
+        --r-background-color: #1a1a1a;
+        --r-main-color: #f0f0f0;
+        --r-heading-color: #f0f0f0;
+        --r-link-color: #b57edc;
+        --r-selection-color: #b57edc;
+        --r-link-color-hover: #d1a3f0;
+      }
+      .reveal .slides section .fragment.highlight-current-red.current-fragment {
+        color: #ff6b6b;
+      }
+      .reveal .slides section .fragment.highlight-current-green.current-fragment {
+        color: #51cf66;
+      }
+      .reveal table {
+        font-size: 0.8em;
+      }
+      .reveal .progress {
+        color: #b57edc;
+      }
+      .insight-box {
+        background: linear-gradient(45deg, #2c2c54, #40407a);
+        border-left: 4px solid #b57edc;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+---
+
+## Does Divestment Destroy Portfolios?
+
+Will BDS-related divestment materially harm endowment returns?
+
+::: {.fragment}
+- Recent JLens/ADL study claims **$33.2 billion** in foregone returns
+- Huge, if true...
+:::
+
+::: {.fragment}
+**Today's Goal:** Separate fiduciary fact from advocacy fiction
+:::
+
+## What This Presentation Covers
+
+::: {.incremental}
+1. **The JLens Claims** - What they found, why it's methodologically invalid
+2. **The Croquet Problem** - Why their methodology is like letting kids move the ball
+3. **Point-in-Time Reality** - Using future information to judge past decisions
+4. **The Spectrum Truth** - Why heterogeneity is freedom, not a bug
+5. **Performance Reality** - What actually happens (it's not just Norway)
+6. **Signal Analysis** - What operating in Gaza tells us about business value
+7. **The Hidden Costs** - What NOT divesting actually costs institutions
+8. **Implementation Guide** - Concrete steps using the Norway Model
+:::
+
+---
+
+# Part 1: The JLens Study Problems
+
+::: {.fragment}
+*Note: These aren't minor methodological quibbles - they're the difference between croquet and golf*
+:::
+
+## Problem 0: Selection Bias
+
+::: {.fragment}
+- **Method:** "Focused and conservative" approach excluded 38 companies
+- **Finding:** 1.8% annual underperformance (11.1% vs 12.9% returns)
+- **Projection:** $33.2 billion foregone over 10 years
+:::
+
+::: {.fragment .fade-in}
+**The Selection Issue:** 38 company sample represented 32% of the S&P 500
+
+*[Research note: Total companies on underlying lists >> 38, many small/private excluded from sample]*
+:::
+
+## The Croquet Problem
+
+::: {.fragment}
+My parents used to play a special version of croquet when I was a kid where **I got to pick up the ball and put it wherever I wanted**.
+:::
+
+::: {.fragment}
+**That kind of BDS is what JLens is testing.**
+:::
+
+::: {.incremental}
+- Pick your 38 favorite companies from hundreds of possibilities
+- Apply 2024 knowledge to 2014 decisions
+- Make "no other adjustments" to simulate incompetence
+- Claim this proves something about professional divestment
+:::
+
+## Problem 1: Point-in-Time Data Failure
+
+::: {.fragment}
+Applied 2024 exclusion list to entire 2014-2024 period
+:::
+
+::: {.fragment}
+**The Organizations Cited Didn't Exist:**
+- Don't Buy into Occupation Coalition: Formed January 2021
+- OHCHR Database: First published February 2020
+- AFSC Investigate: Launched 2019
+:::
+
+::: {.insight-box}
+**The Point-in-Time Problem:** Real investors make decisions with information available **at the time**, not with perfect hindsight. This isn't a small detail - it's the difference between research and fantasy.
+:::
+
+## Problem 2: Statistical Malpractice
+
+::: {.fragment}
+- "38 companies excluded and **no other adjustments made**"
+- Tracking error of 1.64% - essentially equals claimed underperformance
+- No rebalancing, optimization, or professional management
+:::
+
+```{python}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Set dark theme
+plt.style.use('dark_background')
+
+# Data for the chart
+categories = ['JLens Study\n(Malpractice)', 'Norway GPFG\n(Professional)', 'Industry Best\nPractice Target']
+tracking_error = [1.64, 0.4, 0.3]  # Annual tracking error in %
+claimed_impact = [1.8, -0.044, 0.0]  # Claimed/actual performance impact in %
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+fig.patch.set_facecolor('#1a1a1a')
+
+# Tracking Error Chart
+bars1 = ax1.bar(categories, tracking_error,
+                color=['#ff6b6b', '#51cf66', '#b57edc'], alpha=0.8, edgecolor='white', linewidth=0.5)
+ax1.set_ylabel('Annual Tracking Error (%)', color='#f0f0f0')
+ax1.set_title('Tracking Error: JLens vs Professional Implementation', color='#f0f0f0')
+ax1.set_ylim(0, 2.0)
+ax1.tick_params(colors='#f0f0f0')
+
+# Add value labels on bars
+for bar, value in zip(bars1, tracking_error):
+    height = bar.get_height()
+    ax1.text(bar.get_x() + bar.get_width()/2., height + 0.05,
+             f'{value}%', ha='center', va='bottom', fontweight='bold', color='#f0f0f0')
+
+# Performance Impact Chart
+bars2 = ax2.bar(categories, claimed_impact,
+                color=['#ff6b6b', '#51cf66', '#b57edc'], alpha=0.8, edgecolor='white', linewidth=0.5)
+ax2.set_ylabel('Performance Impact (%)', color='#f0f0f0')
+ax2.set_title('Performance Impact: Claimed vs Actual', color='#f0f0f0')
+ax2.axhline(y=0, color='#f0f0f0', linestyle='-', linewidth=0.5, alpha=0.3)
+ax2.set_ylim(-0.2, 2.0)
+ax2.tick_params(colors='#f0f0f0')
+
+# Add value labels on bars
+for bar, value in zip(bars2, claimed_impact):
+    height = bar.get_height()
+    y_pos = height + 0.05 if height >= 0 else height - 0.15
+    ax2.text(bar.get_x() + bar.get_width()/2., y_pos,
+             f'{value}%', ha='center', va='bottom' if height >= 0 else 'top',
+             fontweight='bold', color='#f0f0f0')
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.insight-box}
+**Key Insight:** JLens's tracking error (1.64%) explains 91% of their claimed underperformance - proving they modeled incompetent execution, not divestment impact.
+:::
+
+## The Study Cannot Be Replicated
+
+::: {.fragment}
+JLens won't disclose:
+- Data sources
+- Rebalancing methodology
+- What "no other adjustments" means
+- How they weighted remaining holdings
+:::
+
+::: {.fragment}
+**Non-replicable results are invalid** in both academic and investment contexts.
+:::
+
+---
+
+# Part 2: The Spectrum Truth
+
+::: {.fragment}
+*Institutional heterogeneity isn't a problem - it's free will. They fought a whole war in heaven over it.*
+:::
+
+## The Wide World of Active Management
+
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 8
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.style.use('dark_background')
+
+# Data showing range of outcomes in active management
+categories = ['U.S. Large-Cap\nEquity', 'U.S. Mid/Small-Cap\nEquity', 'International &\nForeign Stock', 'Global Fixed\nIncome/Bonds', 'Real Estate\nFunds']
+outperform_pct = [6.9, 27.9, 25, 26.0, 25]  # Percentage outperforming passive
+underperform_pct = [93.1, 72.1, 75, 74.0, 75]  # Percentage underperforming
+
+# Create stacked bar chart
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+fig.patch.set_facecolor('#1a1a1a')
+
+# Top chart: Outperformance rates
+bars1 = ax1.bar(categories, outperform_pct, color='#51cf66', alpha=0.8, label='Outperform Passive', edgecolor='white', linewidth=0.5)
+bars2 = ax1.bar(categories, underperform_pct, bottom=outperform_pct, color='#ff6b6b', alpha=0.8, label='Underperform Passive', edgecolor='white', linewidth=0.5)
+
+ax1.set_ylabel('Percentage of Active Funds', color='#f0f0f0')
+ax1.set_title('Active Management Success Rates Across Asset Classes\n(Shows Wide Range of Possible Outcomes)', color='#f0f0f0')
+ax1.set_ylim(0, 100)
+ax1.legend()
+ax1.tick_params(colors='#f0f0f0')
+
+# Add percentage labels
+for i, (cat, out, under) in enumerate(zip(categories, outperform_pct, underperform_pct)):
+    ax1.text(i, out/2, f'{out}%', ha='center', va='center', fontweight='bold', color='white')
+    ax1.text(i, out + under/2, f'{under}%', ha='center', va='center', fontweight='bold', color='white')
+
+# Bottom chart: JLens vs Reality spectrum
+approaches = ['JLens Study\n"No Adjustments"', 'Naive Screening\n(Cash Drag)', 'Basic Rebalancing\n(Equal Weight)', 'Factor Optimization\n(Professional)', 'Active Selection\n(Concentrated)']
+typical_outcomes = [-1.8, -0.5, -0.1, 0.0, 2.0]  # Typical performance impact range
+outcome_ranges_low = [-3.0, -1.5, -0.8, -0.3, -5.0]  # Worst case
+outcome_ranges_high = [-0.5, 0.2, 0.5, 0.3, 15.0]  # Best case
+
+x_pos = np.arange(len(approaches))
+colors = ['#ff6b6b', '#ff8787', '#ffd43b', '#51cf66', '#b57edc']
+bars = ax2.bar(x_pos, typical_outcomes, color=colors, alpha=0.8, edgecolor='white', linewidth=0.5)
+
+# Add error bars to show range
+errors_low = [typical - low for typical, low in zip(typical_outcomes, outcome_ranges_low)]
+errors_high = [high - typical for typical, high in zip(typical_outcomes, outcome_ranges_high)]
+ax2.errorbar(x_pos, typical_outcomes, yerr=[errors_low, errors_high], fmt='none', color='white', capsize=5, alpha=0.8)
+
+ax2.set_ylabel('Annual Performance Impact (%)', color='#f0f0f0')
+ax2.set_xlabel('Portfolio Management Approach', color='#f0f0f0')
+ax2.set_title('Range of Outcomes: From Malpractice to Professional Management', color='#f0f0f0')
+ax2.set_xticks(x_pos)
+ax2.set_xticklabels(approaches, rotation=45, ha='right')
+ax2.axhline(y=0, color='#f0f0f0', linestyle='-', linewidth=0.5, alpha=0.3)
+ax2.set_ylim(-6, 18)
+ax2.tick_params(colors='#f0f0f0')
+
+# Add value labels
+for bar, value in zip(bars, typical_outcomes):
+    height = bar.get_height()
+    y_pos = height + 0.3 if height >= 0 else height - 0.5
+    ax2.text(bar.get_x() + bar.get_width()/2., y_pos,
+             f'{value}%', ha='center', va='bottom' if height >= 0 else 'top',
+             fontweight='bold', color='#f0f0f0')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Why Institutional Heterogeneity is a Feature
+
+::: {.incremental}
+- **Active stock-picking:** Concentrated portfolios, embrace tracking error, skill-based returns
+- **Optimized indexing:** Factor-neutral rebalancing, minimal tracking error
+- **Screened benchmarks:** Purpose-built indexes with exclusions built-in
+- **Overlay strategies:** Third-party optimization on top of existing managers
+:::
+
+::: {.fragment}
+**The beauty:** Institutions can choose approaches that match their mission, risk tolerance, and stakeholder expectations. This isn't a bug - it's freedom.
+:::
+
+## The Active Management Reality
+
+::: {.fragment}
+**Fiduciaries are clutching their pearls about tracking error with divestment...**
+:::
+
+::: {.fragment}
+**...while happily signing up for much worse outcomes with traditional active management**
+:::
+
+::: {.incremental}
+- 70-93% of active equity managers underperform their benchmarks
+- Yet boards routinely approve active management with higher fees and worse outcomes
+- Active management = making conscious choices about what to own AND what not to own
+- **I'm an active manager when I pick good stocks AND when I pick not to own bad ones**
+:::
+
+::: {.fragment}
+![](https://en.meming.world/images/en/6/62/Always_has_been_%28without_Earth%29.jpg){width="60%" fig-align="center"}
+
+**"Wait, divestment is just active management?"**
+**"Always has been."** 🔫
+:::
+
+## The Control Difference
+
+::: {.fragment}
+**With divestment, you can actually exercise control over externalities:**
+:::
+
+::: {.incremental}
+- Geopolitical risk management through exclusions
+- Stakeholder alignment through values-based screening
+- Long-term risk mitigation through conduct criteria
+:::
+
+::: {.fragment}
+**By contrast, commodity trend analysis is astrology for men**
+:::
+
+::: {.insight-box}
+**The Point:** Both divestment and traditional active management are forms of active portfolio management. The difference? Divestment lets you manage risks you can actually identify and control.
+:::
+
+::: {.fragment}
+**As I often tell prospects:** The choice really is whether they want to keep their brains smooth or engage with the things that are troubling them.
+:::
+
+---
+
+# Part 3: Performance Reality Check
+
+## It's Not Just Norway
+
+::: {.fragment}
+**A significant percentage of NACUBO institutions already use ethical screening**
+:::
+
+::: {.fragment}
+Professionally managed exclusions track benchmarks within **basis points**, not percentage points.
+:::
+
+## Institutional Scorecard
+
+| Institution | Assets | Scope | Return Impact | Risk Controls |
+|-------------|--------|-------|---------------|---------------|
+| **NBIM (Norway)** | $1.4T | 180+ exclusions | +0.44% cumulative | Tracking error 0.3–0.5% |
+| **UC Regents** | $126B | Fossil fuel divestment | "Financial risk management" | Consultant oversight + phased exit |
+| **PFZW / KLP** | $200B+ | Settlement exclusions | Neutral-to-positive | Vendor optimization + quarterly reviews |
+| **Many NACUBO Members** | $XXX | Various screens | Ongoing success | Professional implementation |
+
+## Academic Evidence
+
+::: {.incremental}
+- **Trinks & Scholtens (2018):** 90 years of data - divestment "does not significantly impair financial performance"
+- **EDHEC (2023):** Professional optimization reduces tracking error by 80-90%
+- **Plantinga & Scholtens (2021):** 40-year study finds differences of "a few basis points"
+:::
+
+## Why Naïve Studies Fail
+
+::: {.incremental}
+- **Static lists applied retroactively** ignore point-in-time information sets
+- **"No other adjustments"** = fiduciary malpractice (cash drag, sector concentration)
+- **Tracking error parity** with claimed losses proves the model was incompetent
+:::
+
+---
+
+# Part 4: Signal Analysis
+
+## Specialist vs Commercial Sources
+
+::: {.fragment}
+**Two Types of Information Sources:**
+:::
+
+::: {.incremental}
+- **Commercial/Academic:** Broad market analysis, backward-looking, profit-motivated
+- **Specialist/Activist:** Deep sector expertise, forward-looking, mission-driven
+:::
+
+::: {.fragment}
+**The Question:** Which source better identifies emerging risks and opportunities in complex geopolitical situations?
+:::
+
+## The Gaza Signal
+
+::: {.fragment}
+**The Business Value Question:** If operating in Gaza is worth it to a company despite:
+:::
+
+::: {.incremental}
+- Massive reputational risks
+- Stakeholder backlash
+- Operational complexity
+- Regulatory scrutiny
+:::
+
+::: {.fragment}
+**Then how much is their business really worth?**
+:::
+
+::: {.insight-box}
+**The Signal:** Companies that continue high-risk operations may be signaling that their business model depends on activities that create long-term stakeholder conflict.
+:::
+
+---
+
+# Part 5: The Hidden Costs
+
+## What NOT Divesting Actually Costs
+
+::: {.fragment}
+**The JLens study ignores the costs of maintaining controversial holdings:**
+:::
+
+::: {.incremental}
+- **Eroded stakeholder relationships** - students, faculty, donors, alumni
+- **Reduced ability to act truly long-term** - constant crisis management
+- **Ignoring institutional intuition** - what happens when leadership knows something is wrong but can't act?
+- **Opportunity costs** - resources spent on controversy instead of mission
+:::
+
+## The Stakeholder Reality
+
+::: {.fragment}
+**For many institutions, the real question isn't:**
+"Will divestment hurt returns by X basis points?"
+:::
+
+::: {.fragment}
+**It's:**
+"Can we maintain our mission and stakeholder relationships while holding these positions?"
+:::
+
+::: {.insight-box}
+**The Fiduciary Reality:** Sometimes the biggest risk is not acting when your stakeholders are telling you to act.
+:::
+
+---
+
+# Part 6: The Norway Model Framework
+
+*How boards can implement exclusions without breaching fiduciary duty*
+
+## Why Boards Need This Framework
+
+::: {.incremental}
+- Turns "divest" into a governance motion with tracking-error discipline
+- Shows trustees how to deliver exclusions without breaching prudence
+- Mirrors how NBIM, PFZW, and UC Regents structure conduct screens
+:::
+
+## Core Decision Framework
+
+### 1. Mandate & Guardrails {.fragment}
+
+::: {.incremental}
+- Adopt written conduct criteria referencing international law + credible evidence sources
+- Set **tracking-error budget (≤30 bps)** and require factor/sector neutrality
+- Delegate execution to CIO/consultants while retaining policy oversight
+:::
+
+### 2. Phased Implementation {.fragment}
+
+::: {.incremental}
+- **Immediate:** Stop new purchases, log current exposure
+- **30-60 days:** Exit via orderly trading schedule (avoid divestment shock)
+- **Quarterly:** Certify reinvestment into benchmark-aligned replacements
+:::
+
+### 3. Reporting & Transparency {.fragment}
+
+::: {.incremental}
+- Publish exclusion rationale, evidence citations, and guardrails
+- Require quarterly one-page dashboards (tracking error, factor exposure, progress)
+- Create appeals/exception process with time limits and public log
+:::
+
+## Implementation Practices that Preserve Returns
+
+::: {.incremental}
+- Set explicit tracking-error guardrail (≤30 bps) and require factor/sector neutrality
+- Reinvest promptly to avoid cash drag; use screened indexes or optimization overlays
+- Phase trades (30–60 days) with compliance sign-off to avoid market impact
+- Monitor via quarterly analytics (tracking error, factor deltas, contribution to return)
+:::
+
+---
+
+# Part 7: Implementation Checklist
+
+## For Board Members & Trustees
+
+### Evidence You Can Cite
+
+::: {.incremental}
+- **NBIM (Norway) 2024 Report** – 0.3–0.5% tracking error; exclusions added +0.44% cumulative return
+- **UC Regents 2020 Fossil Fuel Divestment** – expressly labeled "financial risk management"
+- **EDHEC 2023 Optimization Study** – professional rebalancing cuts tracking error by 80–90%
+- **NACUBO Experience** – significant percentage already using ethical screens successfully
+:::
+
+### Fiduciary Considerations
+
+::: {.incremental}
+1. **Risk Management:** Can exclusions be implemented within acceptable tracking error limits?
+2. **Professional Implementation:** Will portfolio management employ optimization techniques?
+3. **Stakeholder Alignment:** How do exclusions align with institutional mission?
+4. **Performance Monitoring:** What governance ensures ongoing assessment of impact?
+5. **Hidden Cost Assessment:** What are the costs of NOT acting?
+:::
+
+## For Staff Implementation
+
+::: {.incremental}
+- Update IPS / investment policy statement with conduct language + tracking error budget
+- Instruct index/active managers to load exclusion list + optimization constraints
+- Coordinate consultant to run pre/post analytics (tracking error, factor tilts, liquidity)
+- Document phased trade plan and compliance attestations
+- Schedule annual policy review plus event-driven updates
+:::
+
+## Minimum Standards for Future Studies
+
+::: {.fragment}
+Any credible analysis of divestment impacts should include:
+:::
+
+::: {.incremental}
+- **Point-in-time exclusion lists** reflecting realistic investor experience
+- **Full methodological transparency** enabling independent replication
+- **Multiple implementation scenarios** from naive to professionally optimized
+- **Multi-period analysis** avoiding cherry-picked market regimes
+- **Total cost analysis** including stakeholder relationship impacts
+:::
+
+---
+
+# Conclusion
+
+## The JLens Study is Invalid Because
+
+::: {.incremental}
+1. **The Croquet Problem** - they got to move the ball wherever they wanted
+2. **Point-in-time failure** - used future information to judge past decisions
+3. **Implementation malpractice** - approach would expose fiduciaries to legal liability
+4. **Non-replicable methodology** - cannot be verified by third parties
+5. **Ignores hidden costs** - doesn't account for stakeholder relationship damage
+:::
+
+## What We Know from Real Evidence
+
+::: {.incremental}
+- **Norway ($1.4T):** +0.44% from exclusions with 0.3-0.5% tracking error
+- **UC System ($126B):** Successful divestment as "risk management"
+- **NACUBO Members:** Many already using screens successfully
+- **Academic consensus:** Impact measured in basis points, not percentage points
+- **Professional management:** Wide spectrum of approaches, most successful
+:::
+
+## For Fiduciaries: The Path Forward
+
+::: {.fragment}
+Use the Norway Model framework to implement exclusions professionally:
+:::
+
+::: {.incremental}
+- Set tracking error guardrails (≤30 bps)
+- Require factor-neutral optimization
+- Phase implementation over 30-60 days
+- Publish transparent reporting
+- Monitor quarterly with professional analytics
+- **Consider total costs** - not just hypothetical performance impacts
+:::
+
+::: {.fragment}
+**Bottom Line:** Any trustee considering the JLens study should demand complete methodology disclosure and comparison with actual institutional implementations.
+:::
+
+---
+
+# About This Analysis
+
+## About Ethical Capital
+
+::: {.incremental}
+- Utah registered investment adviser
+- Specializes in concentrated ethical portfolios (we embrace tracking error)
+- Contact: hello@ethicic.com • +1 (347) 625 9000
+- Screening policy: https://ethicic.com/content/process/screening-policy
+:::
+
+## About Dryvestment
+
+::: {.incremental}
+- Ethical Capital's Labs experiment
+- "Google translate" for activists and fiduciaries
+- Produces educational briefs only—no individual investment advice
+- All outputs versioned and updated as research evolves
+:::
+
+::: {.fragment}
+*This analysis is provided to support evidence-based policy discussion. We welcome transparency from any party to enable replication and verification.*
+:::
+
+## Thank You
+
+::: {.fragment}
+**Questions?**
+:::
+
+::: {.fragment}
+**For more resources:**
+- Full technical analysis available
+- Implementation templates for boards
+- Contact: hello@ethicic.com
+:::

@@ -11,7 +11,7 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
     <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm mb-6">
       <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">
-        Choose Your Approach
+        Choose Your Decoder Mode
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Quick Brief */}
@@ -42,13 +42,13 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               <Zap size={20} />
             </div>
             <div>
-              <h3 className="font-heading font-semibold mb-1">Quick Brief</h3>
+              <h3 className="font-heading font-semibold mb-1">Quick Decoder</h3>
               <p className="text-sm text-slate-600">
-                Schema-driven approach. Select your identity, audience, and
-                venue to generate a focused brief with pre-selected content.
+                Curated intelligence based on institutional type and audience.
+                Get the essential talking points activists need most.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Fastest setup • ✓ Proven structure • ✓ Expert curation
+                ✓ Fastest intel • ✓ Curated content • ✓ Ready-to-use language
               </div>
             </div>
           </div>
@@ -82,13 +82,13 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               <Wrench size={20} />
             </div>
             <div>
-              <h3 className="font-heading font-semibold mb-1">Custom Brief</h3>
+              <h3 className="font-heading font-semibold mb-1">Custom Decoder</h3>
               <p className="text-sm text-slate-600">
-                Identity-first builder. Choose your context, then handpick
-                specific key points, counterarguments, and resources.
+                Build your own intelligence brief. Mix and match arguments,
+                counterpoints, and insider knowledge for your specific situation.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Full control • ✓ Modular selection • ✓ Tailored content
+                ✓ Full control • ✓ Custom mix • ✓ Situation-specific intel
               </div>
             </div>
           </div>
@@ -125,15 +125,14 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
             </div>
             <div>
               <h3 className="font-heading font-semibold mb-1">
-                Compare Entities
+                Compare Mode
               </h3>
               <p className="text-sm text-slate-600">
-                See how content differs across entity types. Compare how
-                approaches vary for endowments, pensions, foundations, etc.
+                See how institutional approaches differ. Compare pension fund
+                language vs endowment priorities vs foundation constraints.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Side-by-side view • ✓ Entity-specific content • ✓ Educational
-                insights
+                ✓ Side-by-side intel • ✓ Institution patterns • ✓ Strategic contrasts
               </div>
             </div>
           </div>
@@ -149,9 +148,9 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
         }}
       >
         <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
-          <strong>For activists:</strong> All modes help you decode how institutional
-          investors work. Use these insights to craft more effective campaigns,
-          not as investment advice.
+          <strong>This intelligence is curated, not proven.</strong> These insights
+          help activists understand institutional investor language and decision-making
+          patterns. Use for campaign strategy, not investment advice.
         </p>
       </div>
     </div>

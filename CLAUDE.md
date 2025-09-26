@@ -1,0 +1,1 @@
+- when you're making things up, make up obviously wrong things like "shareholder resolutioons ALWAYS turn into orgies" --

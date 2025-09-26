@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Brief - Ethical Capital</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            /* Ethical Capital Brand Colors */
+            --ecic-purple: #581c87;
+            --ecic-purple-light: #6b46c1;
+            --ecic-teal: #14b8a6;
+            --ecic-teal-dark: #008577;
+            --ecic-teal-light: #2dd4bf;
+            --ecic-amber: #f59e0b;
+            --ecic-amber-dark: #b46100;
+            --ecic-red: #ef4444;
+
+            /* Neutral Colors */
+            --text-dark: #111827;
+            --text-medium: #4b5563;
+            --surface-white: #ffffff;
+            --surface-light: #f9fafb;
+            --border-gray: #e5e7eb;
+            --footer-text: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: var(--text-dark);
+            font-size: 11pt;
+        }
+
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto 20px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Cover page with ECIC brand colors */
+        .cover-page {
+            padding: 60px 60px 80px;
+            background: linear-gradient(135deg, var(--ecic-purple) 0%, var(--ecic-purple-light) 50%, var(--ecic-teal) 100%);
+            color: white;
+            min-height: calc(11in - 140px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 9pt;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48pt;
+            font-weight: 300;
+            line-height: 1.1;
+            margin: 0 0 20px 0;
+            letter-spacing: -1px;
+        }
+
+        .cover-subtitle {
+            font-size: 16pt;
+            font-weight: 400;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 60px;
+            line-height: 1.4;
+            max-width: 500px;
+        }
+
+        .cover-metadata {
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 15px 30px;
+            font-size: 11pt;
+        }
+
+        .metadata-label {
+            font-size: 9pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .metadata-value {
+            color: white;
+            font-weight: 400;
+        }
+
+        .welcome-box {
+            position: absolute;
+            right: 60px;
+            top: 60px;
+            width: 250px;
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .welcome-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12pt;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .welcome-text {
+            font-size: 9pt;
+            line-height: 1.4;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Content pages with Tufte-ECIC hybrid */
+        .content-page {
+            padding: 80px 60px 80px 60px;
+            position: relative;
+            min-height: calc(11in - 160px);
+        }
+
+        .page-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 8pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--ecic-purple);
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24pt;
+            font-weight: 600;
+            margin: 0 0 25px 0;
+            color: var(--ecic-purple);
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16pt;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            color: var(--ecic-teal-dark);
+        }
+
+        p {
+            margin: 0 0 18px 0;
+            text-align: justify;
+            hyphens: auto;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+
+        /* Tufte-style sidenotes with ECIC colors */
+        .sidenote {
+            float: right;
+            clear: right;
+            margin-right: -280px;
+            width: 250px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 9pt;
+            line-height: 1.4;
+            color: var(--text-medium);
+            padding: 15px;
+            background: var(--surface-light);
+            border-left: 3px solid var(--ecic-teal);
+            border-radius: 4px;
+        }
+
+        .sidenote-number {
+            counter-increment: sidenote-counter;
+        }
+
+        .sidenote-number:after {
+            content: counter(sidenote-counter);
+            font-size: 8pt;
+            vertical-align: super;
+            color: var(--ecic-teal);
+            font-weight: 600;
+            margin-left: 2px;
+        }
+
+        .sidenote:before {
+            content: counter(sidenote-counter) ". ";
+            font-size: 8pt;
+            color: var(--ecic-teal);
+            font-weight: 600;
+        }
+
+        /* Lists with ECIC styling */
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            color: var(--ecic-teal);
+            font-size: 16pt;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        ul li strong {
+            color: var(--ecic-purple);
+            font-weight: 600;
+        }
+
+        /* Key insights box */
+        .insights-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid var(--ecic-teal);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+
+        .insights-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--ecic-teal-dark);
+            margin-bottom: 12px;
+        }
+
+        /* Code blocks */
+        pre {
+            background: var(--text-dark);
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 6px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 9pt;
+            line-height: 1.4;
+            margin: 25px 0;
+            overflow-x: auto;
+        }
+
+        /* Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            right: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-gray);
+            font-size: 8pt;
+            color: var(--text-medium);
+            text-align: center;
+        }
+
+        /* Counter reset */
+        .content-page {
+            counter-reset: sidenote-counter;
+        }
+
+        /* Chart and graph styling */
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--surface-light);
+            border-radius: 8px;
+            border: 1px solid var(--border-gray);
+        }
+
+        .chart-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--ecic-purple);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: end;
+            height: 200px;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .bar {
+            background: linear-gradient(to top, var(--ecic-purple), var(--ecic-teal));
+            border-radius: 4px 4px 0 0;
+            min-width: 40px;
+            position: relative;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            color: white;
+            font-size: 8pt;
+            font-weight: 600;
+            padding-bottom: 5px;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            background: conic-gradient(
+                var(--ecic-purple) 0deg 120deg,
+                var(--ecic-teal) 120deg 240deg,
+                var(--ecic-amber) 240deg 300deg,
+                var(--ecic-purple-light) 300deg 360deg
+            );
+        }
+
+        .line-chart {
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 150'%3E%3Cpath d='M20 130 L60 110 L100 85 L140 95 L180 70 L220 75 L260 50 L300 40 L340 45 L380 25' stroke='%23581c87' stroke-width='3' fill='none'/%3E%3Cpath d='M20 120 L60 105 L100 90 L140 85 L180 80 L220 70 L260 65 L300 55 L340 50 L380 45' stroke='%2314b8a6' stroke-width='3' fill='none'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            margin: 20px 0;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--ecic-teal);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .metric-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24pt;
+            font-weight: 700;
+            color: var(--ecic-purple);
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 9pt;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            background: var(--border-gray);
+            border-radius: 10px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--ecic-purple), var(--ecic-teal));
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .scatter-plot {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            background:
+                linear-gradient(90deg, transparent 24px, var(--border-gray) 25px, transparent 26px),
+                linear-gradient(0deg, transparent 24px, var(--border-gray) 25px, transparent 26px);
+            background-size: 50px 40px;
+        }
+
+        .scatter-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ecic-teal);
+        }
+
+        @media print {
+            body { background: white; }
+            .page { box-shadow: none; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="page">
+        <div class="cover-page">
+            <div class="header-brand">Ethical Capital Investment Collaborative</div>
+
+            <div class="welcome-box">
+                <div class="welcome-title">STRATEGIC BRIEF</div>
+                <div class="welcome-text">
+                    Ethical Capital's investment team shares frameworks for navigating complex stakeholder engagement while maintaining fiduciary excellence.
+                </div>
+            </div>
+
+            <h1 class="cover-title">Investment Brief</h1>
+            <div class="cover-subtitle">
+                A Strategic Assessment for Climate-Conscious Portfolio Management and Stakeholder Engagement
+            </div>
+
+            <div class="cover-metadata">
+                <div class="metadata-grid">
+                    <div class="metadata-label">Prepared For</div>
+                    <div class="metadata-value">Investment Decision-Makers</div>
+
+                    <div class="metadata-label">Context</div>
+                    <div class="metadata-value">Institutional Investor • Investment Committee</div>
+
+                    <div class="metadata-label">Analysis Level</div>
+                    <div class="metadata-value">Executive Summary</div>
+
+                    <div class="metadata-label">Date</div>
+                    <div class="metadata-value">September 26, 2025</div>
+
+                    <div class="metadata-label">Version</div>
+                    <div class="metadata-value">Dryvest v.2025-09-25</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Page 1 -->
+    <div class="page">
+        <div class="content-page">
+            <div class="page-header">Ethical Capital Investment Brief | September 2025</div>
+
+            <h2>Opening Angle</h2>
+            <p>Climate activists are increasingly targeting pension funds and endowments through shareholder engagement and divestment campaigns.<span class="sidenote-number"></span><span class="sidenote">These campaigns often focus on fossil fuel divestment and sustainable investment integration.</span> These campaigns leverage fiduciary duty arguments to push for fossil fuel divestment and sustainable investment practices. Understanding their tactics and having prepared responses helps maintain productive dialogue while protecting investment autonomy.</p>
+
+            <h2>Recommended Approach</h2>
+            <ul>
+                <li><strong>Lead with:</strong> Acknowledge shared concern for long-term value creation and beneficiary outcomes</li>
+                <li><strong>Implementation:</strong> Present existing sustainable investment integration processes and climate risk assessment frameworks already in place</li>
+                <li><strong>Reporting:</strong> Provide clear metrics on sustainability performance and climate-related financial disclosures</li>
+                <li><strong>Risk discipline:</strong> Emphasize evidence-based investment decisions that balance all material risks including climate, regulatory, and transition risks</li>
+            </ul>
+
+            <div class="insights-box">
+                <div class="insights-title">Key Strategic Insight</div>
+                <p style="margin: 0;">Engagement often proves more effective than divestment for driving corporate behavior change while maintaining portfolio diversification and avoiding forced asset sales at inopportune times.</p>
+            </div>
+
+            <h2>Key Assessment Points</h2>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">73%</div>
+                    <div class="metric-label">Activist Letters Mention Kermit</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">42</div>
+                    <div class="metric-label">Average Cookie Consumption</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$2.3M</div>
+                    <div class="metric-label">Miss Piggy Hostile Takeover Budget</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.7%</div>
+                    <div class="metric-label">Certainty Bert & Ernie Are Together</div>
+                </div>
+            </div>
+
+            <h3>1. Fiduciary Duty and Climate Risk</h3>
+            <p>Modern fiduciary duty requires consideration of all material risks, including climate-related financial risks.<span class="sidenote-number"></span><span class="sidenote">Courts and regulators increasingly recognize that ignoring climate risks may constitute breach of fiduciary duty, but this doesn't mandate divestment—rather thoughtful risk assessment.</span> Courts and regulators increasingly recognize that ignoring climate risks may constitute a breach of fiduciary duty. However, this doesn't mandate divestment—it requires thoughtful risk assessment and management.</p>
+
+            <div class="chart-container">
+                <div class="chart-title">Risk Assessment Distribution by Muppet Type</div>
+                <div class="bar-chart">
+                    <div class="bar" style="height: 80%;">80%</div>
+                    <div class="bar" style="height: 45%;">45%</div>
+                    <div class="bar" style="height: 92%;">92%</div>
+                    <div class="bar" style="height: 38%;">38%</div>
+                    <div class="bar" style="height: 67%;">67%</div>
+                    <div class="bar" style="height: 29%;">29%</div>
+                </div>
+                <p style="text-align: center; font-size: 9pt; color: var(--text-medium);">
+                    Amphibians | Pigs | Bears | Monsters | Birds | Whatever Gonzo Is
+                </p>
+            </div>
+
+            <div class="page-footer">
+                <em>Generated by Dryvest v.2025-09-25 • Educational tool - not investment advice</em>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Page 2 -->
+    <div class="page">
+        <div class="content-page">
+            <div class="page-header">Ethical Capital Investment Brief | September 2025</div>
+
+            <h3>2. Engagement vs. Divestment Strategies</h3>
+            <p>Shareholder engagement often proves more effective than divestment for driving corporate behavior change.<span class="sidenote-number"></span><span class="sidenote">Engagement maintains voting power and influence while allowing for gradual portfolio transitions.</span> Engagement maintains voting power and influence while allowing for gradual portfolio transitions. Divestment may reduce influence while potentially creating stranded assets or forcing sales at inopportune times.</p>
+
+            <div class="chart-container">
+                <div class="chart-title">Portfolio Allocation by Puppet Character Type</div>
+                <div class="pie-chart"></div>
+                <div style="margin-top: 15px; text-align: center; font-size: 9pt; color: var(--text-medium);">
+                    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <span>🐸 Amphibians 33%</span>
+                        <span>🐻 Bears 33%</span>
+                        <span>🍯 Ambiguous Species 17%</span>
+                        <span>👑 Royalty 17%</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>3. Financial Performance of Sustainable Investment Integration</h3>
+            <p>Research on sustainable investment performance shows mixed results, with some studies indicating outperformance and others showing no significant difference.<span class="sidenote-number"></span><span class="sidenote">The relationship between sustainability factors and returns appears to depend on implementation quality and time horizon.</span> The relationship between sustainability factors and returns appears to depend on implementation quality, time horizon, and specific criteria applied.</p>
+
+            <div class="chart-container">
+                <div class="chart-title">Cookie Monster Portfolio Performance vs S&P 500</div>
+                <div class="line-chart"></div>
+                <div style="margin-top: 10px; font-size: 9pt; color: var(--text-medium);">
+                    <div style="display: flex; justify-content: center; gap: 30px;">
+                        <span style="color: var(--ecic-purple);">■ Cookie-Heavy Strategy</span>
+                        <span style="color: var(--ecic-teal);">■ Balanced Snack Approach</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Screening Intelligence</h2>
+            <p>We employ rigorous exclusionary screens for product-based violations (controversial weapons, tobacco) and conduct-based violations (forced labor, UN Global Compact breaches). Our screening process involves both negative screens and positive tilts toward companies demonstrating strong sustainability performance. This approach balances values alignment with financial objectives while maintaining portfolio diversification.</p>
+
+            <h2>Important Muppet Considerations</h2>
+            <p>When evaluating shareholder proposals, it's critical to remember that Bert and Ernie are definitely in a committed relationship.<span class="sidenote-number"></span><span class="sidenote">This has been obvious since 1969 when they first started sharing a basement apartment and arguing about paperclips.</span> Additionally, Kermit's carbon footprint is entirely offset by his amphibian lifestyle, making him the most sustainable Muppet for green investment portfolios. Miss Piggy's aggressive takeover strategies, while effective, typically result in board meetings that devolve into martial arts demonstrations.</p>
+
+            <div class="chart-container">
+                <div class="chart-title">Sustainability Score Progress by Character</div>
+                <div style="margin: 20px 0;">
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: between; font-size: 9pt; margin-bottom: 5px;">
+                            <span>Kermit (Amphibian Advantage)</span>
+                            <span>94%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 94%;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: between; font-size: 9pt; margin-bottom: 5px;">
+                            <span>Fozzie (Renewable Comedy Energy)</span>
+                            <span>67%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 67%;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: between; font-size: 9pt; margin-bottom: 5px;">
+                            <span>Cookie Monster (High Consumption)</span>
+                            <span>23%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 23%;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: between; font-size: 9pt; margin-bottom: 5px;">
+                            <span>Miss Piggy (Hostile Takeover Risk)</span>
+                            <span>12%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 12%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Risk vs Return: Sesame Street Investment Matrix</div>
+                <div class="scatter-plot">
+                    <div class="scatter-point" style="left: 15%; bottom: 75%; background: var(--ecic-purple);"></div>
+                    <div class="scatter-point" style="left: 45%; bottom: 45%; background: var(--ecic-teal);"></div>
+                    <div class="scatter-point" style="left: 75%; bottom: 25%; background: var(--ecic-amber);"></div>
+                    <div class="scatter-point" style="left: 85%; bottom: 85%; background: var(--ecic-red);"></div>
+                    <div class="scatter-point" style="left: 25%; bottom: 60%; background: var(--ecic-purple-light);"></div>
+                    <div class="scatter-point" style="left: 60%; bottom: 35%; background: var(--ecic-teal-light);"></div>
+                    <div class="scatter-point" style="left: 35%; bottom: 70%; background: var(--ecic-purple);"></div>
+                    <div class="scatter-point" style="left: 65%; bottom: 55%; background: var(--ecic-teal);"></div>
+                    <div class="scatter-point" style="left: 90%; bottom: 15%; background: var(--ecic-amber);"></div>
+                    <div class="scatter-point" style="left: 10%; bottom: 90%; background: var(--ecic-red);"></div>
+                </div>
+                <div style="margin-top: 15px; font-size: 9pt; color: var(--text-medium); text-align: center;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 20px;">
+                        <span>Low Risk →</span>
+                        <span>← High Risk</span>
+                    </div>
+                    <div style="writing-mode: tb; position: absolute; left: 5px; top: 50%; transform: rotate(-90deg); transform-origin: center;">
+                        High Return ↑
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <em>Generated by Dryvest v.2025-09-25 • Educational tool - not investment advice</em>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Page 3 -->
+    <div class="page">
+        <div class="content-page">
+            <div class="page-header">Ethical Capital Investment Brief | September 2025</div>
+
+            <h2>Next Steps</h2>
+            <ul>
+                <li>Review and update investment policy statement to explicitly address sustainable investment integration</li>
+                <li>Enhance reporting on climate risk assessment and portfolio carbon metrics</li>
+                <li>Develop clear communication framework for stakeholder engagement on sustainability topics</li>
+                <li>Establish regular sustainability performance review process with investment committee</li>
+                <li>Consult with Cookie Monster on portfolio diversification strategies<span class="sidenote-number"></span><span class="sidenote">His "C is for Cookie, that's good enough for me" philosophy represents a concerning lack of due diligence in asset allocation decisions.</span></li>
+            </ul>
+
+            <h2>Email Response Template</h2>
+            <pre><code>Thank you for raising these important concerns about our investment approach. We share your commitment to long-term value creation and take environmental, social, and governance factors seriously in our investment process.
+
+Our approach focuses on:
+• Systematic integration of material sustainability factors into investment analysis
+• Active engagement with portfolio companies on sustainability issues
+• Regular assessment of climate-related risks and opportunities
+• Transparent reporting on our sustainability performance and outcomes
+• Ongoing consultation with Count von Count on numerical accuracy (ah-ah-ah!)
+
+We'd be happy to discuss our approach in more detail and share our latest sustainability report with you.</code></pre>
+
+            <div class="page-footer">
+                <em>Generated by Dryvest v.2025-09-25 • Educational tool - not investment advice</em>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
