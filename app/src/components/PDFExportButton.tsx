@@ -38,13 +38,16 @@ export function PDFExportButton({
       const content = buildMarkdown(exportData, 'plain');
       const title = generateTitle(context);
 
-      await exportToPDF({
-        title,
-        content,
-        venue,
-        decisionMaker,
-        context,
-      });
+      // Temporary: Download as markdown until PDF endpoint is ready
+      const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}.md`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch (error) {
       console.error('PDF export failed:', error);
       alert(
@@ -79,7 +82,7 @@ export function PDFExportButton({
         ) : (
           <Download size={20} />
         )}
-        {isExporting ? 'Generating PDF...' : 'Download PDF'}
+{isExporting ? 'Generating...' : 'Download Brief'}
       </button>
 
       {showDisclaimer && (
@@ -119,7 +122,7 @@ export function PDFExportButton({
                   ['--tw-ring-color' as any]: 'var(--ecic-purple)',
                 }}
               >
-                I Understand, Download PDF
+I Understand, Download Brief
               </button>
             </div>
           </div>
