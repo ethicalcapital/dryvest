@@ -95,4 +95,4 @@ Real-world evidence from Norway ($1.4T), UC ($126B), and others demonstrates tha
 - Evidence the approach meets professional standards
 - Comparison with actual institutional implementations
 
-Until then, the study should be disregarded as non-credible advocacy rather than research.
+Until then, the study should be viewed as rhetoric rather than research.
