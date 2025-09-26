@@ -52,11 +52,6 @@ const toKeyPointNodes = (nodes: Node[]) =>
       node.type === 'key_point'
   );
 
-const toCounterNodes = (nodes: Node[]) =>
-  nodes.filter(
-    (node): node is Extract<Node, { type: 'counter' }> =>
-      node.type === 'counter'
-  );
 
 const toNextStepNodes = (nodes: Node[]) =>
   nodes.filter(
@@ -254,11 +249,6 @@ function App() {
     }
   }, [dataset, briefMode, customKeyPoints, keyPointPlaylist, context]);
 
-  const counterNodes = useMemo(() => {
-    if (!dataset) return [];
-    const { nodes } = resolveByKind(dataset, 'counters', context);
-    return toCounterNodes(nodes);
-  }, [dataset, context]);
 
   const nextStepNodes = useMemo(() => {
     if (!dataset) return [];
@@ -353,7 +343,6 @@ function App() {
       opener,
       guide,
       keyPoints: keyPointNodes,
-      counters: counterNodes,
       nextSteps: nextStepNodes,
       screeningNode,
       policyAlignment,
@@ -367,7 +356,6 @@ function App() {
       opener,
       guide,
       keyPointNodes,
-      counterNodes,
       nextStepNodes,
       screeningNode,
       policyAlignment,
@@ -389,7 +377,6 @@ function App() {
     trackEvent('brief_built', {
       version: dataset.version,
       key_points: keyPointNodes.length,
-      counters: counterNodes.length,
       next_steps: nextStepNodes.length,
       attachments: selectedOnePagers.length,
       sources: sourceNodes.length,
@@ -397,7 +384,6 @@ function App() {
   }, [
     dataset,
     keyPointNodes.length,
-    counterNodes.length,
     nextStepNodes.length,
     selectedOnePagers.length,
     sourceNodes.length,
@@ -521,7 +507,6 @@ function App() {
                 opener={opener}
                 guide={guide}
                 keyPoints={keyPointNodes}
-                counters={counterNodes}
                 nextSteps={nextStepNodes}
                 sources={sourceNodes}
                 screeningNode={screeningNode}

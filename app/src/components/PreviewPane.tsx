@@ -7,7 +7,6 @@ interface PreviewPaneProps {
   opener?: Extract<Node, { type: 'opener' }>;
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Extract<Node, { type: 'key_point' }>[];
-  counters: Extract<Node, { type: 'counter' }>[];
   nextSteps: Extract<Node, { type: 'next_step' }>[];
   sources: Extract<Node, { type: 'source' }>[];
   screeningNode?: Extract<Node, { type: 'policy_statement' }>;
@@ -88,7 +87,6 @@ export function PreviewPane({
   opener,
   guide,
   keyPoints,
-  counters,
   nextSteps,
   sources,
   screeningNode,
@@ -182,52 +180,6 @@ export function PreviewPane({
         </Section>
       ) : null}
 
-      {counters.length ? (
-        <Section title="Likely pushback & responses" anchor="counters">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200 text-sm">
-              <thead className="bg-slate-100">
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 text-left font-semibold text-slate-600"
-                  >
-                    Claim
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 text-left font-semibold text-slate-600"
-                  >
-                    Response
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 text-left font-semibold text-slate-600"
-                  >
-                    Sources
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200">
-                {counters.map(item => (
-                  <tr key={item.id} className="align-top">
-                    <td className="px-4 py-3 font-medium text-slate-900">
-                      {item.claim}
-                      <GitHubFeedback node={item} size="sm" />
-                    </td>
-                    <td className="px-4 py-3 text-slate-700">
-                      {item.response}
-                    </td>
-                    <td className="px-4 py-3">
-                      {renderCitations(item.citations, sourceLookup)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Section>
-      ) : null}
 
       {nextSteps.length ? (
         <Section title="Next steps" anchor="next-steps">

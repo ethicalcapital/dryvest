@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { ClipboardCopy, Download } from 'lucide-react';
+import { ClipboardCopy } from 'lucide-react';
 import type { BriefParams } from '../hooks/useBriefParams';
 import type { BriefExportData, BriefTone } from '../lib/exporters';
 import { buildMarkdown } from '../lib/exporters';
@@ -67,18 +67,6 @@ const ActionButton = ({
   </button>
 );
 
-const downloadMarkdown = (data: BriefExportData, tone: BriefTone) => {
-  const markdown = buildMarkdown(data, tone);
-  const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `dryvestment-${tone}-${data.meta.playlistId}.md`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-};
 
 export function ActionsPanel({
   params,

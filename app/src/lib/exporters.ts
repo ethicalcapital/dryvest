@@ -17,7 +17,6 @@ export interface BriefExportData {
   opener?: Extract<Node, { type: 'opener' }>;
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Array<Extract<Node, { type: 'key_point' }>>;
-  counters: Array<Extract<Node, { type: 'counter' }>>;
   nextSteps: Array<Extract<Node, { type: 'next_step' }>>;
   screeningNode?: Extract<Node, { type: 'policy_statement' }>;
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
