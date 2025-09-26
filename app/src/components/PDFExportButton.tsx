@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 import {
-  exportToPDF,
   generateTitle,
 } from '../lib/pdf-export';
 import { buildMarkdown, type BriefExportData } from '../lib/exporters';
@@ -10,16 +9,12 @@ import type { BriefContext } from '../lib/schema';
 interface PDFExportButtonProps {
   context: BriefContext;
   exportData: BriefExportData;
-  venue?: string;
-  decisionMaker?: string;
   disabled?: boolean;
 }
 
 export function PDFExportButton({
   context,
   exportData,
-  venue = 'Investment Committee',
-  decisionMaker = 'Board of Trustees',
   disabled = false,
 }: PDFExportButtonProps) {
   const [isExporting, setIsExporting] = useState(false);
