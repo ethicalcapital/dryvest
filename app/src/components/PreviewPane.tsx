@@ -173,7 +173,10 @@ export function PreviewPane({
               <tbody className="divide-y divide-slate-200">
                 {counters.map((item) => (
                   <tr key={item.id} className="align-top">
-                    <td className="px-4 py-3 font-medium text-slate-900">{item.claim}</td>
+                    <td className="px-4 py-3 font-medium text-slate-900">
+                      {item.claim}
+                      <GitHubFeedback node={item} size="sm" />
+                    </td>
                     <td className="px-4 py-3 text-slate-700">{item.response}</td>
                     <td className="px-4 py-3">{renderCitations(item.citations, sourceLookup)}</td>
                   </tr>
@@ -188,7 +191,10 @@ export function PreviewPane({
         <Section title="Next steps" anchor="next-steps">
           <ul className="list-disc space-y-2 pl-5 text-sm text-slate-700">
             {nextSteps.map((step) => (
-              <li key={step.id}>{step.text}</li>
+              <li key={step.id}>
+                {step.text}
+                <GitHubFeedback node={step} size="sm" />
+              </li>
             ))}
           </ul>
         </Section>
@@ -204,6 +210,7 @@ export function PreviewPane({
             </ul>
           ) : null}
           {renderCitations(policyAlignment.citations, sourceLookup)}
+          <GitHubFeedback node={policyAlignment} />
         </Section>
       ) : null}
 

@@ -12,7 +12,9 @@ import {
   Scroll,
   Globe,
 } from 'lucide-react';
+import { OnePagerGallery } from './OnePagerGallery';
 import clsx from 'clsx';
+import { useState } from 'react';
 import type { Dataset } from '../lib/schema';
 import type { BriefParams } from '../hooks/useBriefParams';
 import type { Node } from '../lib/schema';
@@ -108,17 +110,26 @@ export function FiltersPanel({
   toggleDoc,
   onePagers,
 }: FiltersPanelProps) {
+  const [showAllIdentities, setShowAllIdentities] = useState(false);
+  const [showAllVenues, setShowAllVenues] = useState(false);
+
   const identities = dataset.schema.taxonomies?.identity ?? Object.keys(IDENTITY_LABELS);
   const audiences = dataset.schema.taxonomies?.audience ?? Object.keys(AUDIENCE_LABELS);
   const venues = dataset.schema.taxonomies?.venue ?? Object.keys(VENUE_LABELS);
   const levels = dataset.schema.taxonomies?.level ?? Object.keys(LEVEL_LABELS);
+
+  // Limit options to reduce overwhelm
+  const displayedIdentities = showAllIdentities ? identities : identities.slice(0, 4);
+  const displayedVenues = showAllVenues ? venues : venues.slice(0, 4);
+  const hiddenIdentitiesCount = identities.length - displayedIdentities.length;
+  const hiddenVenuesCount = venues.length - displayedVenues.length;
 
   return (
     <aside className="space-y-8">
       <section className="space-y-3">
         <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Investor identity</p>
         <div className="flex flex-wrap gap-2">
-          {identities.map((value) => {
+          {displayedIdentities.map((value) => {
             const meta = IDENTITY_LABELS[value] ?? { label: formatLabel(value, {}), icon: Users };
             return (
               <OptionButton
@@ -131,6 +142,14 @@ export function FiltersPanel({
             );
           })}
         </div>
+        {!showAllIdentities && hiddenIdentitiesCount > 0 && (
+          <button
+            onClick={() => setShowAllIdentities(true)}
+            className="text-xs text-slate-500 hover:text-slate-700 underline"
+          >
+            Show {hiddenIdentitiesCount} more identity options
+          </button>
+        )}
       </section>
 
       <section className="space-y-3">
@@ -154,7 +173,7 @@ export function FiltersPanel({
       <section className="space-y-3">
         <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Venue</p>
         <div className="grid grid-cols-1 gap-2">
-          {venues.map((value) => (
+          {displayedVenues.map((value) => (
             <OptionButton
               key={value}
               label={formatLabel(value, VENUE_LABELS)}
@@ -163,6 +182,14 @@ export function FiltersPanel({
             />
           ))}
         </div>
+        {!showAllVenues && hiddenVenuesCount > 0 && (
+          <button
+            onClick={() => setShowAllVenues(true)}
+            className="text-xs text-slate-500 hover:text-slate-700 underline"
+          >
+            Show {hiddenVenuesCount} more venue options
+          </button>
+        )}
       </section>
 
       <section className="space-y-3">
@@ -208,40 +235,11 @@ export function FiltersPanel({
         </select>
       </section>
 
-      <section className="space-y-3">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">One-pagers</p>
-        <div className="space-y-2">
-          {onePagers.map((doc) => {
-            const checked = selectedDocs.includes(doc.id);
-            return (
-              <label
-                key={doc.id}
-                className={clsx(
-                  'flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2 text-sm shadow-sm transition',
-                  checked
-                    ? 'text-slate-900'
-                    : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300'
-                )}
-                style={{
-                  borderColor: checked ? 'var(--ecic-purple)' : 'var(--border-gray)',
-                  backgroundColor: checked ? 'rgba(88, 28, 135, 0.05)' : undefined,
-                }}
-              >
-                <input
-                  className="mt-1 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-                  type="checkbox"
-                  checked={checked}
-                  onChange={(event) => toggleDoc(doc.id, event.target.checked)}
-                />
-                <span>
-                  <span className="font-semibold text-slate-900">{doc.title}</span>
-                  <span className="mt-1 block text-xs text-slate-500">{doc.description}</span>
-                </span>
-              </label>
-            );
-          })}
-        </div>
-      </section>
+      <OnePagerGallery
+        onePagers={onePagers}
+        selectedDocs={selectedDocs}
+        toggleDoc={toggleDoc}
+      />
     </aside>
   );
 }

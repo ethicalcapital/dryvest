@@ -10,6 +10,9 @@ import { ActionsPanel } from './components/ActionsPanel';
 import { ModeSelector, type BriefMode } from './components/ModeSelector';
 import { CustomBriefBuilder } from './components/CustomBriefBuilder';
 import { ToneToggle, type BriefTone } from './components/ToneToggle';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { BetaDisclaimer } from './components/BetaDisclaimer';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import { initAnalytics, trackEvent } from './lib/analytics';
@@ -347,29 +350,28 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-light text-slate-900">
-      <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
-        <header className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="text-white bg-brand-secondary px-4 py-2 rounded-lg text-sm font-medium">
-              🇵🇸 We stand with Palestine
+    <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
+      <Header />
+      <BetaDisclaimer />
+
+      <main className="flex-1">
+        <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
+          <div className="mb-8">
+            <p className="text-xs uppercase tracking-wide font-heading font-medium" style={{color: 'var(--ecic-purple)'}}>Dryvest</p>
+            <h1 className="text-4xl font-heading font-bold text-slate-900 mb-2">Educational Investment Brief Builder</h1>
+            <div className="mt-3 max-w-4xl space-y-2">
+              <p className="text-slate-600 text-lg">
+                <strong>For educational purposes only.</strong> This tool helps you explore investment
+                screening approaches and build educational materials. It does not provide investment advice.
+              </p>
+              <p className="text-sm text-slate-500">
+                Dataset version <span className="font-mono">{dataset.version}</span> •
+                Questions? <a href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
+                target="_blank" rel="noopener noreferrer"
+                className="hover:underline" style={{color: 'var(--ecic-teal)'}}>Ask for clarification</a>
+              </p>
             </div>
           </div>
-          <p className="text-xs uppercase tracking-wide font-heading font-medium" style={{color: 'var(--ecic-purple)'}}>Ethical Capital</p>
-          <h1 className="text-4xl font-heading font-bold text-slate-900 mb-2">Educational Investment Brief Builder</h1>
-          <div className="mt-3 max-w-4xl space-y-2">
-            <p className="text-slate-600 text-lg">
-              <strong>For educational purposes only.</strong> This tool helps you explore investment
-              screening approaches and build educational materials. It does not provide investment advice.
-            </p>
-            <p className="text-sm text-slate-500">
-              Dataset version <span className="font-mono">{dataset.version}</span> •
-              Questions? <a href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
-              target="_blank" rel="noopener noreferrer"
-              className="hover:underline" style={{color: 'var(--ecic-teal)'}}>Ask for clarification</a>
-            </p>
-          </div>
-        </header>
 
         {/* Mode Selector */}
         <ModeSelector
@@ -432,7 +434,10 @@ function App() {
 
           <ActionsPanel params={params} selectedDocs={selectedDocs} exportData={exportData} />
         </div>
-      </div>
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

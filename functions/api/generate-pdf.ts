@@ -85,14 +85,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     // Prepare PDF generation payload
     const pdfPayload = {
       title: body.title.slice(0, 200), // Limit title length
-      content: sanitizedContent,
-      metadata: {
-        venue: body.venue || 'Investment Committee',
-        decisionMaker: body.decisionMaker || 'Board of Trustees',
-        context: body.context || {},
-        generatedAt: new Date().toISOString(),
-        source: 'Dryvest - Ethical Capital'
-      }
+      markdown: sanitizedContent,
     };
 
     // Call PDF generation service
@@ -101,7 +94,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${env.TYPST_EXPORT_TOKEN}`,
-        'User-Agent': 'Dryvest-PDF-Generator/1.0'
+        'User-Agent': 'dryvestment-app/1.0',
+        'X-Request-Source': 'dryvestment-app'
       },
       body: JSON.stringify(pdfPayload)
     });

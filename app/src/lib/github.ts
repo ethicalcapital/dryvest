@@ -41,23 +41,51 @@ function mapNodeToSourceFile(nodeId: string): string | null {
     return null;
   }
 
-  // Map content-based nodes to content files
+  // Map one-pager nodes to their markdown files
+  if (nodeId.startsWith('one_pager_')) {
+    const fileName = nodeId.replace('one_pager_', '') + '.md';
+    return `content/${fileName}`;
+  }
+
+  // Map encyclopedia entries to encyclopedia content
+  if (nodeId.startsWith('encyclopedia_')) {
+    return 'content/encyclopedia.json';
+  }
+
+  // Map specific content nodes more precisely
   const contentMappings: Record<string, string> = {
-    'policy_screening_knowledge': 'content/bds_pack.json',
-    'policy_alignment': 'content/bds_pack.json',
-    // Map guide/opener/etc based on patterns
+    'policy_screening_knowledge': 'content/policy_statements.json',
+    'policy_alignment': 'content/policy_statements.json',
+    // Map guides and openers
+    ...Object.fromEntries(
+      ['guide', 'opener'].flatMap(type =>
+        ['individual', 'swf', 'public_pension', 'corporate_pension', 'endowment', 'foundation', 'insurance', 'central_bank', 'government'].map(identity =>
+          [`${type}_${identity}`, `content/${type}s.json`]
+        )
+      )
+    )
   };
 
   if (contentMappings[nodeId]) {
     return contentMappings[nodeId];
   }
 
-  // For most content nodes, they likely come from bds_pack.json
-  if (['policy_statement', 'key_point', 'counter', 'template_snippet', 'guide', 'opener'].includes(nodeId.split('_')[0])) {
-    return 'content/bds_pack.json';
+  // Map by content type patterns
+  if (nodeId.startsWith('kp_')) {
+    return 'content/key_points.json';
+  }
+  if (nodeId.startsWith('counter_')) {
+    return 'content/counters.json';
+  }
+  if (nodeId.startsWith('next_step_')) {
+    return 'content/next_steps.json';
+  }
+  if (nodeId.startsWith('tmpl_')) {
+    return 'content/templates.json';
   }
 
-  return null;
+  // Fallback - only for truly unknown patterns
+  return 'content/index.json';
 }
 
 /**
