@@ -442,11 +442,11 @@ function App() {
               v.0.0.1
             </p>
             <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
-              Dryvest: Empowering Divestment Dialogue
+              Dryvest: A Decoder Ring for the World of Finance
             </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                Engagements between activists and fiduciaries are often constrained by a fundamental lack of shared language, which often leads to each party taking the other literally but not seriously.
+                <strong>For activists who need to speak finance.</strong> This tool decodes how institutional investors actually work, what they care about, and how to translate your demands into their language.
               </p>
               <p className="text-sm text-slate-500">
                 Dataset version{' '}

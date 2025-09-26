@@ -1,8 +1,8 @@
 # Dryvest v.0.0.1
 
-**Empowering Divestment Dialogue**
+**A Decoder Ring for the World of Finance**
 
-Dryvest bridges the language gap between activist demands and fiduciary requirements, helping translate values-aligned demands into fiduciary-ready language.
+For activists who need to speak finance. Dryvest decodes how institutional investors actually work, what they care about, and how to translate your demands into their language.
 
 ## 🌟 Features
 
@@ -64,13 +64,14 @@ Dryvest bridges the language gap between activist demands and fiduciary requirem
 - **Zod** for runtime schema validation
 - **Cloudflare Pages** deployment with Functions for PDF generation
 
-## 🧠 **Educational Focus**
-> "Engagements between activists and fiduciaries are often constrained by a fundamental lack of shared language, which often leads to each party taking the other literally but not seriously."
+## 🧠 **Why This Matters**
+> "When activists don't speak finance, institutional investors dismiss them as naive. When institutions don't explain their constraints, activists assume they're just greedy."
 
-Dryvest helps both sides:
-- **Activists**: Understand fiduciary constraints and speak the language of stewardship
-- **Fiduciaries**: Evaluate values-aligned demands within their legal and practical frameworks
-- **Advisors**: Bridge the gap with evidence-based, institutionally-appropriate guidance
+**Dryvest decodes the finance world for activists:**
+- **Understand the players**: Why pension trustees think differently than endowment boards
+- **Learn the language**: Fiduciary duty, risk management, asset allocation - what do they actually mean?
+- **Crack the code**: How to frame divestment demands so they land with institutional decision-makers
+- **Know the pressure points**: What really motivates different types of investors
 
 ## 🚧 **Development Status**
 - **Current Version**: v.0.0.1 (Beta)
@@ -107,11 +108,11 @@ npm run a11y:lighthouse # Comprehensive audit
 - **Version Control**: Git-based content management with edit suggestions
 
 ## 🎯 **Use Cases**
-1. **Board Presentations**: Generate professional briefs for trustee meetings
-2. **Investment Committee Materials**: Technical analysis for investment professionals
-3. **Activist Training**: Educational content for campaign organizers
-4. **Academic Research**: Citable, versioned content for scholars
-5. **Consultant Resources**: Evidence-based materials for advisory work
+1. **Campaign Preparation**: Understand your target institution before making demands
+2. **Shareholder Proposals**: Frame proposals in language that resonates with fiduciaries
+3. **Activist Training**: Teach organizers how institutional investors actually work
+4. **Media Strategy**: Explain complex institutional dynamics to journalists
+5. **Coalition Building**: Help diverse groups understand shared financial interests
 
 ---
 
