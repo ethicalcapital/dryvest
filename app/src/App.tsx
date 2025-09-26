@@ -9,6 +9,7 @@ import { PreviewPane } from './components/PreviewPane';
 import { ActionsPanel } from './components/ActionsPanel';
 import { ModeSelector, type BriefMode } from './components/ModeSelector';
 import { CustomBriefBuilder } from './components/CustomBriefBuilder';
+import { ComparisonView } from './components/ComparisonView';
 import { ToneToggle, type BriefTone } from './components/ToneToggle';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -390,18 +391,27 @@ function App() {
           />
         )}
 
-        {/* Tone Toggle */}
-        <ToneToggle
-          tone={briefTone}
-          onToneChange={setBriefTone}
-          showSideBySide={showSideBySide}
-          onSideBySideToggle={setShowSideBySide}
-        />
+        {/* Comparison View (only in compare mode) */}
+        {briefMode === 'compare' && dataset && (
+          <ComparisonView dataset={dataset} />
+        )}
 
-        <div className={`grid gap-6 ${briefMode === 'quick'
-          ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
-          : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
-        }`}>
+        {/* Tone Toggle - only show for quick and custom modes */}
+        {briefMode !== 'compare' && (
+          <ToneToggle
+            tone={briefTone}
+            onToneChange={setBriefTone}
+            showSideBySide={showSideBySide}
+            onSideBySideToggle={setShowSideBySide}
+          />
+        )}
+
+        {/* Main content grid - hide in compare mode */}
+        {briefMode !== 'compare' && (
+          <div className={`grid gap-6 ${briefMode === 'quick'
+            ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
+            : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
+          }`}>
 
           {/* Filters Panel - only show in quick mode */}
           {briefMode === 'quick' && (
@@ -433,7 +443,8 @@ function App() {
           />
 
           <ActionsPanel params={params} selectedDocs={selectedDocs} exportData={exportData} />
-        </div>
+          </div>
+        )}
         </div>
       </main>
 

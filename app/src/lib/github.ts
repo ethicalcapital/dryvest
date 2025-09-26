@@ -54,8 +54,8 @@ function mapNodeToSourceFile(nodeId: string): string | null {
 
   // Map specific content nodes more precisely
   const contentMappings: Record<string, string> = {
-    'policy_screening_knowledge': 'content/policy_statements.json',
-    'policy_alignment': 'content/policy_statements.json',
+    'policy_screening_knowledge': 'content/bds_pack.json',
+    'policy_alignment': 'content/bds_pack.json',
     // Map guides and openers
     ...Object.fromEntries(
       ['guide', 'opener'].flatMap(type =>
