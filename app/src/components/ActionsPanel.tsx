@@ -140,43 +140,24 @@ export function ActionsPanel({
                 ? 'Copied!'
                 : copyState === 'error'
                   ? 'Copy failed'
-                  : 'Copy markdown (plain)'
+                  : 'Copy text'
             }
-            description="Copies the plain-language brief for quick sharing."
+            description="Copy the brief text for quick sharing in emails or documents."
             disabled={copyState === 'error'}
             onClick={() => handleCopy('plain')}
           />
-          <ActionButton
-            icon={Download}
-            label="Download markdown (plain)"
-            description="Saves the brief in standard markdown for distribution."
-            onClick={() => {
-              downloadMarkdown(exportData, 'plain');
-              trackEvent('download_clicked', { tone: 'plain' });
+
+          {/* PDF Export - Primary download option */}
+          <PDFExportButton
+            context={{
+              identity: params.identity,
+              audience: params.audience,
+              venue: params.venue,
+              level: params.level,
             }}
+            venue={params.venue?.replace('_', ' ') || 'Investment Committee'}
+            decisionMaker="Board of Trustees"
           />
-          <ActionButton
-            icon={Download}
-            label="Download markdown (technical)"
-            description="Emphasises governance, implementation, and quantitative framing."
-            onClick={() => {
-              downloadMarkdown(exportData, 'technical');
-              trackEvent('download_clicked', { tone: 'technical' });
-            }}
-          />
-          {/* PDF Export */}
-          <div className="pt-3 border-t border-slate-200">
-            <PDFExportButton
-              context={{
-                identity: params.identity,
-                audience: params.audience,
-                venue: params.venue,
-                level: params.level,
-              }}
-              venue={params.venue?.replace('_', ' ') || 'Investment Committee'}
-              decisionMaker="Board of Trustees"
-            />
-          </div>
         </div>
       </div>
       <div className="rounded-xl border border-indigo-200 bg-indigo-50/60 p-5 text-sm text-indigo-900">

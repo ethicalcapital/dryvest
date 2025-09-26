@@ -77,7 +77,7 @@ export function PDFExportButton({
         ) : (
           <Download size={20} />
         )}
-        {isExporting ? 'Preparing to email your PDF...' : 'Email as PDF'}
+        {isExporting ? 'Generating PDF...' : 'Download PDF'}
       </button>
 
       {showDisclaimer && (
