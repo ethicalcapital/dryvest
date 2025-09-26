@@ -431,7 +431,7 @@ function App() {
             </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                <strong>The revolution will be risk-adjusted.</strong> Get the technical language that turns moral demands into routine investment policies, because bureaucratic beats dramatic.
+                The revolution will be footnoted. Get the technical language that turns moral demands into routine investment policies, because bureaucratic beats dramatic.
               </p>
               <p className="text-sm text-slate-500">
                 Dataset version{' '}
