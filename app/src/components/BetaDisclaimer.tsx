@@ -20,13 +20,13 @@ export function BetaDisclaimer() {
                   BETA
                 </span>
                 <span className="text-sm font-medium text-amber-800">
-                  Educational Tool in Development
+                  Activist Finance Decoder in Development
                 </span>
               </div>
               <p className="text-sm text-amber-700 leading-relaxed">
-                <strong>This is an educational prototype</strong> for exploring
-                investment screening approaches. Content is for learning
-                purposes only and does not constitute investment advice.
+                <strong>This is a prototype decoder ring</strong> for activists
+                who need to understand how institutional investors work. Use it to
+                inform your campaigns, not as investment advice.
                 <a
                   href="https://github.com/ethicalcapital/dryvest/issues/new?labels=feedback"
                   target="_blank"

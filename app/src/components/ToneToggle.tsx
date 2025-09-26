@@ -85,8 +85,8 @@ export function ToneToggle({
       {/* Description */}
       <p className="mt-2 text-xs text-slate-500">
         {tone === 'plain'
-          ? 'Clear, accessible language for broader audiences'
-          : 'Detailed governance and quantitative framing for fiduciaries'}
+          ? 'Clear, accessible language for community organizing'
+          : 'Technical governance language for institutional presentations'}
         {showSideBySide && ' • Showing both versions side-by-side'}
       </p>
     </div>

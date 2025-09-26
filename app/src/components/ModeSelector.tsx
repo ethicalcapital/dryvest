@@ -149,9 +149,9 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
         }}
       >
         <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
-          <strong>Remember:</strong> Both modes are for educational exploration
-          only. Use these materials to understand investment screening
-          approaches, not as investment advice.
+          <strong>For activists:</strong> All modes help you decode how institutional
+          investors work. Use these insights to craft more effective campaigns,
+          not as investment advice.
         </p>
       </div>
     </div>
