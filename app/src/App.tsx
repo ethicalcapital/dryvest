@@ -70,7 +70,6 @@ function App() {
   // New state for dual-mode interface
   const [briefMode, setBriefMode] = useState<BriefMode>('quick');
   const [briefTone, setBriefTone] = useState<BriefTone>('plain');
-  const [showSideBySide, setShowSideBySide] = useState(false);
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
   const [customContext, setCustomContext] = useState<BriefContext>({});
 
@@ -475,8 +474,6 @@ function App() {
             <ToneToggle
               tone={briefTone}
               onToneChange={setBriefTone}
-              showSideBySide={showSideBySide}
-              onSideBySideToggle={setShowSideBySide}
             />
           )}
 

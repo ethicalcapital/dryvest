@@ -117,7 +117,7 @@ export function PDFExportButton({
                   ['--tw-ring-color' as any]: 'var(--ecic-purple)',
                 }}
               >
-                I Understand, Email PDF
+                I Understand, Download PDF
               </button>
             </div>
           </div>
