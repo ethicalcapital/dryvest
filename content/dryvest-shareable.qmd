@@ -1,5 +1,5 @@
 ---
-title: "Footnotes For Fiduciaries"
+title: "S"
 subtitle: "Stockpicking is Still Legal"
 author: "Sloane Ortel, CIO at Ethical Capital"
 date: today
@@ -20,6 +20,11 @@ format:
         --r-link-color: #b57edc;
         --r-selection-color: #b57edc;
         --r-link-color-hover: #d1a3f0;
+      }
+      .reveal .slides > section > h1,
+      .reveal .slides > section > h2,
+      .reveal h1, .reveal h2, .reveal h3 {
+        color: #f0f0f0 !important;
       }
       .reveal .slides section .fragment.highlight-current-red.current-fragment {
         color: #ff6b6b;

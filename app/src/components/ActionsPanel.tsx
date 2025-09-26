@@ -155,9 +155,7 @@ export function ActionsPanel({
         </p>
         <a
           className="mt-3 inline-flex items-center rounded-md border border-indigo-600 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-white"
-          href="https://github.com/ethicalcapital/dryvest/issues/new?labels=feedback"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:feedback@ethicic.com?subject=Dryvest Feedback"
         >
           Share feedback
         </a>

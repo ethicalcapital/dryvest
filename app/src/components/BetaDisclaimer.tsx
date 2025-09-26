@@ -20,26 +20,22 @@ export function BetaDisclaimer() {
                   BETA
                 </span>
                 <span className="text-sm font-medium text-amber-800">
-                  Activist Finance Decoder in Development
+                  Institutional Intelligence Tool in Development
                 </span>
               </div>
               <p className="text-sm text-amber-700 leading-relaxed">
-                <strong>This is a prototype decoder ring</strong> for activists
-                who need to understand how institutional investors work. Use it to
-                inform your campaigns, not as investment advice.
+                <strong>The revolution will be risk-adjusted.</strong> This tool helps
+                activists turn moral demands into boring bureaucratic processes that
+                institutions can actually implement. Use for strategy, not investment advice.
                 <a
-                  href="https://github.com/ethicalcapital/dryvest/issues/new?labels=feedback"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:feedback@ethicic.com?subject=Dryvest Feedback"
                   className="underline hover:no-underline font-medium"
                 >
                   Share feedback
                 </a>{' '}
                 or{' '}
                 <a
-                  href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:hello@ethicic.com?subject=Dryvest Question"
                   className="underline hover:no-underline font-medium"
                 >
                   ask questions

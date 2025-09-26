@@ -27,7 +27,7 @@ export function getGitHubFeedbackLink(node: Node): string {
 <!-- Please describe your suggestion here -->
 
 ---
-*This feedback was submitted from the Dryvest knowledge platform.*`);
+*This feedback was submitted from the Dryvest strategic intelligence platform.*`);
 
   return `${ISSUES_URL}?title=${title}&body=${body}&labels=content-feedback`;
 }

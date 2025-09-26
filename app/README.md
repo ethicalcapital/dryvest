@@ -1,8 +1,8 @@
 # Dryvest v.0.0.1
 
-**A Decoder Ring for the World of Finance**
+**Make divestment boring enough to actually happen**
 
-For activists who need to speak finance. Dryvest decodes how institutional investors actually work, what they care about, and how to translate your demands into their language.
+The revolution will be footnoted. Get the technical language that turns moral demands into routine investment policies, because bureaucratic beats dramatic.
 
 ## 🌟 Features
 
@@ -119,7 +119,7 @@ npm run a11y:lighthouse # Comprehensive audit
   - New mode functionality
 - **Major (.X.0.0)** - Fundamental architecture changes:
   - Complete targeting schema overhaul
-  - New core functionality (beyond 3 decoder modes)
+  - New core functionality (beyond 3 engagement modes)
   - Breaking changes to data structure
 
 ## 🎯 **Use Cases**
@@ -131,4 +131,4 @@ npm run a11y:lighthouse # Comprehensive audit
 
 ---
 
-**Built by [Ethical Capital](https://ethicic.com) • Educational Tool • Not Investment Advice**
+**Built by [Ethical Capital](https://ethicic.com) • Strategic Intelligence • Not Investment Advice**

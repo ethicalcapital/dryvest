@@ -391,7 +391,7 @@ function App() {
   if (loading && !dataset) {
     return (
       <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
-        <p className="text-lg font-medium">Loading Dryvestment data…</p>
+        <p className="text-lg font-medium">Loading institutional intelligence…</p>
       </div>
     );
   }
@@ -427,11 +427,11 @@ function App() {
               v.0.0.1
             </p>
             <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
-              Dryvest: A Decoder Ring for the World of Finance
+              Dryvest: Make divestment boring enough to actually happen
             </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                <strong>For activists who need to speak finance.</strong> This tool decodes how institutional investors actually work, what they care about, and how to translate your demands into their language.
+                <strong>The revolution will be risk-adjusted.</strong> Get the technical language that turns moral demands into routine investment policies, because bureaucratic beats dramatic.
               </p>
               <p className="text-sm text-slate-500">
                 Dataset version{' '}
@@ -492,7 +492,6 @@ function App() {
                   dataset={dataset}
                   params={params}
                   setParams={setParams}
-                  playlistsForKeyPoints={playlistOptions}
                   selectedDocs={selectedDocs}
                   toggleDoc={toggleDoc}
                   onePagers={onePagers}

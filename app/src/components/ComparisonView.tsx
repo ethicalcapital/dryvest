@@ -550,7 +550,14 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                                   >;
                                   const sections = guide.sections;
                                   if (sections) {
-                                    return `${sections.ask} ${sections.implementation} ${sections.reporting} ${sections.risk}`;
+                                    return (
+                                      <div className="space-y-2">
+                                        <div><strong>Ask:</strong> {sections.ask}</div>
+                                        <div><strong>Implementation:</strong> {sections.implementation}</div>
+                                        <div><strong>Reporting:</strong> {sections.reporting}</div>
+                                        <div><strong>Risk:</strong> {sections.risk}</div>
+                                      </div>
+                                    );
                                   }
                                   return 'No guidance content available';
                                 })()}

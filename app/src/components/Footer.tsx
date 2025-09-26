@@ -80,8 +80,8 @@ export function Footer() {
                 Schedule Consultation
               </a>
               <p className="text-xs text-white/60 leading-relaxed">
-                This website is for informational purposes only and does not
-                constitute investment advice.
+                This website provides strategic intelligence for activist campaigns
+                and does not constitute investment advice.
               </p>
             </div>
           </div>

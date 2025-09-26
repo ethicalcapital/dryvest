@@ -11,7 +11,7 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
     <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm mb-6">
       <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">
-        Choose Your Decoder Mode
+        Choose Your Approach
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Quick Brief */}
@@ -42,13 +42,13 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               <Zap size={20} />
             </div>
             <div>
-              <h3 className="font-heading font-semibold mb-1">Quick Decoder</h3>
+              <h3 className="font-heading font-semibold mb-1">Quick Brief</h3>
               <p className="text-sm text-slate-600">
-                Curated intelligence based on institutional type and audience.
-                Get the essential talking points activists need most.
+                Understand where your proposal will land with your specific institution type.
+                Get the context that makes the difference between yes and no.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Fastest intel • ✓ Curated content • ✓ Ready-to-use language
+                ✓ Institution-specific • ✓ Context-aware • ✓ Ready to use
               </div>
             </div>
           </div>
@@ -82,13 +82,13 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               <Wrench size={20} />
             </div>
             <div>
-              <h3 className="font-heading font-semibold mb-1">Custom Decoder</h3>
+              <h3 className="font-heading font-semibold mb-1">Custom Brief</h3>
               <p className="text-sm text-slate-600">
-                Build your own intelligence brief. Mix and match arguments,
-                counterpoints, and insider knowledge for your specific situation.
+                Build technical compliance documentation for your specific situation.
+                Mix policy language that makes change feel inevitable, not optional.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Full control • ✓ Custom mix • ✓ Situation-specific intel
+                ✓ Technical language • ✓ Custom mix • ✓ Compliance-focused
               </div>
             </div>
           </div>
@@ -125,14 +125,14 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
             </div>
             <div>
               <h3 className="font-heading font-semibold mb-1">
-                Compare Mode
+                Compare Institutions
               </h3>
               <p className="text-sm text-slate-600">
-                See how institutional approaches differ. Compare pension fund
-                language vs endowment priorities vs foundation constraints.
+                See how different institutions routinely handle these policies.
+                Learn which bureaucratic processes work where.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Side-by-side intel • ✓ Institution patterns • ✓ Strategic contrasts
+                ✓ Standard procedures • ✓ Institution patterns • ✓ Proven processes
               </div>
             </div>
           </div>
@@ -148,9 +148,9 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
         }}
       >
         <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
-          <strong>This intelligence is curated, not proven.</strong> These insights
-          help activists understand institutional investor language and decision-making
-          patterns. Use for campaign strategy, not investment advice.
+          <strong>Bureaucratic beats dramatic.</strong> This intelligence helps you
+          frame moral demands as routine policy implementation.
+          Use for campaign strategy, not investment advice.
         </p>
       </div>
     </div>
