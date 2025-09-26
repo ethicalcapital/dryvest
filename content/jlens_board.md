@@ -9,13 +9,6 @@ target_audience: ["board_members", "trustees", "institutional_investors"]
 tags: ["jlens", "board_presentation", "balanced_analysis", "divestment"]
 author: "Sloane Ortel"
 ---
-
-# Divestment Financial Impact: A Balanced Assessment
-
-## The Question Before Us
-
-Will BDS-related divestment materially harm endowment returns?
-
 ## What the Research Shows
 
 ### The JLens/ADL Analysis

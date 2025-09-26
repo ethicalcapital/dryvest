@@ -1,5 +1,5 @@
 ---
-title: "Technical Review: JLens/ADL Divestment Impact Study"
+title: "JLens/ADL Divestment Impact Study in Review
 status: "draft"
 version: "1.0"
 last_updated: "2025-09-25"
@@ -9,9 +9,6 @@ target_audience: ["institutional_investors", "academic_researchers", "consultant
 tags: ["jlens", "adl", "technical_review", "methodology", "divestment"]
 author: "Sloane Ortel"
 ---
-
-# Technical Review: JLens/ADL Divestment Impact Study
-
 ## Executive Summary
 
 The JLens study estimates $33.2 billion in foregone returns from BDS-related divestment. While this analysis raises important questions about fiduciary duty, several methodological limitations significantly affect the reliability of its conclusions.
