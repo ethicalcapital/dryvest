@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, AlertTriangle, BookOpen } from 'lucide-react';
+import { X, AlertTriangle } from 'lucide-react';
 
 export function BetaDisclaimer() {
   const [isDismissed, setIsDismissed] = useState(false);
@@ -49,25 +49,8 @@ export function BetaDisclaimer() {
             </div>
           </div>
 
-          {/* Professional Consultation CTA */}
+          {/* Dismiss button */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href="https://calendly.com/ethical-capital/consultation"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-              style={{ backgroundColor: 'var(--ecic-amber-dark)' }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.opacity = '0.9';
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.opacity = '1';
-              }}
-            >
-              <BookOpen size={14} />
-              Get Real Advice
-            </a>
-
             <button
               onClick={() => setIsDismissed(true)}
               className="p-1 rounded text-amber-600 hover:bg-amber-100 transition-colors"
@@ -89,18 +72,6 @@ export function BetaDisclaimer() {
           </div>
         </div>
 
-        {/* Mobile CTA */}
-        <div className="md:hidden mt-3 pt-3 border-t border-amber-200">
-          <a
-            href="https://calendly.com/ethical-capital/consultation"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors"
-          >
-            <BookOpen size={14} />
-            Schedule Professional Consultation
-          </a>
-        </div>
       </div>
     </div>
   );

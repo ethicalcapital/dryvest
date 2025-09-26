@@ -17,17 +17,13 @@ export function Header() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 hover:opacity-90 transition-opacity"
             >
-              {/* Logo SVG - matching ethicic.com */}
-              <div className="flex items-center gap-2">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                  style={{ backgroundColor: 'var(--ecic-teal-dark)' }}
-                >
-                  E
-                </div>
-                <span className="text-xl font-heading font-bold text-white">
-                  Ethical Capital
-                </span>
+              {/* Logo SVG */}
+              <div className="flex items-center gap-3">
+                <img
+                  src="/ecic-logo.svg"
+                  alt="Ethical Capital Logo"
+                  className="h-8 w-auto"
+                />
               </div>
             </a>
           </div>
