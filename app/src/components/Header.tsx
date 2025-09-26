@@ -59,21 +59,21 @@ export function Header() {
           {/* CTA Buttons */}
           <div className="flex items-center space-x-4">
             <a
-              href="https://ethicic.com/contact"
+              href="https://forms.lessannoyingcrm.com/view/4052147773342280568097228809934"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex text-sm font-heading font-medium text-white hover:opacity-90 transition-opacity"
             >
-              Contact
+              Request Speaking
             </a>
             <a
-              href="https://calendly.com/ethical-capital/consultation"
+              href="https://ethicic.com/content/pages/consultation"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-lg text-sm font-heading font-medium text-white hover:opacity-90 transition-opacity"
               style={{ backgroundColor: 'var(--ecic-teal-dark)' }}
             >
-              Schedule Consultation
+              Schedule
             </a>
           </div>
         </div>

@@ -19,9 +19,10 @@ Will BDS-related divestment materially harm endowment returns?
 ## What This Presentation Covers
 
 1. **The JLens Charges** - What they found, why it's invalid
-2. **Performance Reality** - What actually happens with professional divestment
-3. **Fiduciary Framework** - How to implement exclusions properly
-4. **Implementation Guide** - Concrete steps for boards and trustees
+2.
+3. **Performance Reality** - What actually happens with professional divestment
+4. **Fiduciary Framework** - How to implement exclusions properly
+5. **Implementation Guide** - Concrete steps for boards and trustees
 
 ---
 
@@ -104,7 +105,7 @@ plt.show()
 
 **Key Insight:** Jlens' benchmark (Vettafi 500) had annual tracking error vs the S&P 500 that explains 91% of their claimed underperformance.
 
-## Their Study Cannot Be Replicated
+## Many Things Could Have Happened
 
 JLens won't disclose:
 
@@ -114,11 +115,73 @@ JLens won't disclose:
 
 **Non-replicable results are invalid** in both academic and investment contexts.
 
-**It's OK To Criticize Active Managers**
+**It's OK To Criticize Active Management**
 
-On average, we underperform.
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 8
 
-27 percent of respondents adhere to environmental, social, and governance (ESG) investing strategies; 14 percent use negative screening, a process that avoids investments in certain stocks or industries; and 8 percent reported impact investing,
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data showing range of outcomes in active management
+categories = ['U.S. Large-Cap\nEquity', 'U.S. Mid/Small-Cap\nEquity', 'International &\nForeign Stock', 'Global Fixed\nIncome/Bonds', 'Real Estate\nFunds']
+outperform_pct = [6.9, 27.9, 25, 26.0, 25]  # Percentage outperforming passive
+underperform_pct = [93.1, 72.1, 75, 74.0, 75]  # Percentage underperforming
+
+# Create stacked bar chart
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+
+# Top chart: Outperformance rates
+bars1 = ax1.bar(categories, outperform_pct, color='#2ca02c', alpha=0.7, label='Outperform Passive')
+bars2 = ax1.bar(categories, underperform_pct, bottom=outperform_pct, color='#d62728', alpha=0.7, label='Underperform Passive')
+
+ax1.set_ylabel('Percentage of Active Funds')
+ax1.set_title('Active Management Success Rates Across Asset Classes\n(Shows Wide Range of Possible Outcomes)')
+ax1.set_ylim(0, 100)
+ax1.legend()
+
+# Add percentage labels
+for i, (cat, out, under) in enumerate(zip(categories, outperform_pct, underperform_pct)):
+    ax1.text(i, out/2, f'{out}%', ha='center', va='center', fontweight='bold', color='white')
+    ax1.text(i, out + under/2, f'{under}%', ha='center', va='center', fontweight='bold', color='white')
+
+# Bottom chart: JLens vs Reality spectrum
+approaches = ['JLens Study\n"No Adjustments"', 'Naive Screening\n(Cash Drag)', 'Basic Rebalancing\n(Equal Weight)', 'Factor Optimization\n(Professional)', 'Active Selection\n(Concentrated)']
+typical_outcomes = [-1.8, -0.5, -0.1, 0.0, 2.0]  # Typical performance impact range
+outcome_ranges_low = [-3.0, -1.5, -0.8, -0.3, -5.0]  # Worst case
+outcome_ranges_high = [-0.5, 0.2, 0.5, 0.3, 15.0]  # Best case
+
+x_pos = np.arange(len(approaches))
+bars = ax2.bar(x_pos, typical_outcomes, color=['#d62728', '#ff7f0e', '#ffbb78', '#2ca02c', '#1f77b4'], alpha=0.7)
+
+# Add error bars to show range
+errors_low = [typical - low for typical, low in zip(typical_outcomes, outcome_ranges_low)]
+errors_high = [high - typical for typical, high in zip(typical_outcomes, outcome_ranges_high)]
+ax2.errorbar(x_pos, typical_outcomes, yerr=[errors_low, errors_high], fmt='none', color='black', capsize=5, alpha=0.6)
+
+ax2.set_ylabel('Annual Performance Impact (%)')
+ax2.set_xlabel('Portfolio Management Approach')
+ax2.set_title('Range of Outcomes: From Malpractice to Professional Management')
+ax2.set_xticks(x_pos)
+ax2.set_xticklabels(approaches, rotation=45, ha='right')
+ax2.axhline(y=0, color='black', linestyle='-', linewidth=0.5, alpha=0.5)
+ax2.set_ylim(-6, 18)
+
+# Add value labels
+for bar, value in zip(bars, typical_outcomes):
+    height = bar.get_height()
+    y_pos = height + 0.3 if height >= 0 else height - 0.5
+    ax2.text(bar.get_x() + bar.get_width()/2., y_pos,
+             f'{value}%', ha='center', va='bottom' if height >= 0 else 'top',
+             fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+```
+
+**The Point:** Professional portfolio management offers a wide spectrum of outcomes. Even if JLens tested a credible approach (they didn't), it would only show one data point on a vast spectrum of possibilities.
 
 - **Active stock-picking:** Concentrated portfolios, active management, embrace tracking error
 - **Optimized indexing:** Factor-neutral rebalancing, minimal tracking error

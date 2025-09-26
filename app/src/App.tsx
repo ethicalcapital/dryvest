@@ -439,16 +439,14 @@ function App() {
               className="text-xs uppercase tracking-wide font-heading font-medium"
               style={{ color: 'var(--ecic-purple)' }}
             >
-              Dryvest
+              v.0.0.1
             </p>
-            <h1 className="text-4xl font-heading font-bold text-slate-900 mb-2">
-              Educational Investment Brief Builder
+            <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
+              Dryvest: Empowering Divestment Dialogue
             </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                <strong>For educational purposes only.</strong> This tool helps
-                you explore investment screening approaches and build
-                educational materials. It does not provide investment advice.
+                Engagements between activists and fiduciaries are often constrained by a fundamental lack of shared language, which often leads to each party taking the other literally but not seriously.
               </p>
               <p className="text-sm text-slate-500">
                 Dataset version{' '}
