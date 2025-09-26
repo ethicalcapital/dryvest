@@ -1,0 +1,1 @@
+- Great, what about the underlying research items? It's ok for you to connect dots, but we need to objectively and transparently aggregate and retain research
