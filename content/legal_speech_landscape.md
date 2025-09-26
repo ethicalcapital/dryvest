@@ -1,3 +1,15 @@
+---
+title: "Legal & Speech Landscape: Protected, Compliant, Defensible"
+status: "draft"
+version: "1.0"
+last_updated: "2025-09-25"
+target_completion: "2025-10-01"
+completeness: "complete"
+target_audience: ["board_members", "legal_counsel", "activists", "institutional_investors"]
+tags: ["legal", "first_amendment", "bds", "constitutional_law", "fiduciary"]
+author: "Sloane Ortel"
+---
+
 # Legal & Speech Landscape: Protected, Compliant, Defensible
 
 ## Core Message

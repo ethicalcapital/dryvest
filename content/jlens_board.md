@@ -1,3 +1,15 @@
+---
+title: "Divestment Financial Impact: A Balanced Assessment"
+status: "draft"
+version: "1.0"
+last_updated: "2025-09-25"
+target_completion: "2025-10-01"
+completeness: "complete"
+target_audience: ["board_members", "trustees", "institutional_investors"]
+tags: ["jlens", "board_presentation", "balanced_analysis", "divestment"]
+author: "Sloane Ortel"
+---
+
 # Divestment Financial Impact: A Balanced Assessment
 
 ## The Question Before Us

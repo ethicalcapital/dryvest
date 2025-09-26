@@ -1,3 +1,15 @@
+---
+title: "About Ethical Capital & Dryvestment"
+status: "draft"
+version: "1.0"
+last_updated: "2025-09-25"
+target_completion: "2025-10-01"
+completeness: "partial"
+target_audience: ["general", "institutional_investors", "activists"]
+tags: ["about", "company_info", "methodology"]
+author: "Sloane Ortel"
+---
+
 # About Ethical Capital & Dryvestment
 
 ## About the Author

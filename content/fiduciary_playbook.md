@@ -1,3 +1,15 @@
+---
+title: "Fiduciary Playbook: Norway Model in a Box"
+status: "draft"
+version: "1.0"
+last_updated: "2025-09-25"
+target_completion: "2025-10-01"
+completeness: "complete"
+target_audience: ["board_members", "trustees", "fiduciaries", "cio"]
+tags: ["fiduciary", "governance", "implementation", "norway_model", "best_practices"]
+author: "Sloane Ortel"
+---
+
 # Fiduciary Playbook: Norway Model in a Box
 
 ## Why Boards Need This
