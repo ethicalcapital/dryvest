@@ -14,6 +14,7 @@ import { ToneToggle, type BriefTone } from './components/ToneToggle';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BetaDisclaimer } from './components/BetaDisclaimer';
+import { PalestineStatement } from './components/PalestineStatement';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import { initAnalytics, trackEvent } from './lib/analytics';
@@ -46,16 +47,27 @@ function ensureAllowed(value: string | undefined, allowed?: string[]) {
 }
 
 const toKeyPointNodes = (nodes: Node[]) =>
-  nodes.filter((node): node is Extract<Node, { type: 'key_point' }> => node.type === 'key_point');
+  nodes.filter(
+    (node): node is Extract<Node, { type: 'key_point' }> =>
+      node.type === 'key_point'
+  );
 
 const toCounterNodes = (nodes: Node[]) =>
-  nodes.filter((node): node is Extract<Node, { type: 'counter' }> => node.type === 'counter');
+  nodes.filter(
+    (node): node is Extract<Node, { type: 'counter' }> =>
+      node.type === 'counter'
+  );
 
 const toNextStepNodes = (nodes: Node[]) =>
-  nodes.filter((node): node is Extract<Node, { type: 'next_step' }> => node.type === 'next_step');
+  nodes.filter(
+    (node): node is Extract<Node, { type: 'next_step' }> =>
+      node.type === 'next_step'
+  );
 
 const toSourceNodes = (nodes: Node[]) =>
-  nodes.filter((node): node is Extract<Node, { type: 'source' }> => node.type === 'source');
+  nodes.filter(
+    (node): node is Extract<Node, { type: 'source' }> => node.type === 'source'
+  );
 
 function App() {
   const { dataset, error, loading } = useDataset(DATASET_VERSION);
@@ -113,7 +125,14 @@ function App() {
       level: params.level,
       playlist: params.playlist,
     });
-  }, [dataset, params.identity, params.audience, params.level, params.venue, params.playlist]);
+  }, [
+    dataset,
+    params.identity,
+    params.audience,
+    params.level,
+    params.venue,
+    params.playlist,
+  ]);
 
   useEffect(() => {
     if (!dataset) return;
@@ -144,25 +163,38 @@ function App() {
 
   // Context depends on mode - quick uses params, custom uses customContext
   const context = useMemo<BriefContext>(
-    () => briefMode === 'quick' ? {
-      identity: params.identity,
-      audience: params.audience,
-      venue: params.venue,
-      level: briefTone, // Use briefTone instead of params.level
-    } : {
-      ...customContext,
-      level: briefTone, // Always use briefTone for level
-    },
-    [briefMode, params.identity, params.audience, params.venue, briefTone, customContext]
+    () =>
+      briefMode === 'quick'
+        ? {
+            identity: params.identity,
+            audience: params.audience,
+            venue: params.venue,
+            level: briefTone, // Use briefTone instead of params.level
+          }
+        : {
+            ...customContext,
+            level: briefTone, // Always use briefTone for level
+          },
+    [
+      briefMode,
+      params.identity,
+      params.audience,
+      params.venue,
+      briefTone,
+      customContext,
+    ]
   );
 
   const onePagers = useMemo(
     () =>
-      dataset?.nodes.filter((node): node is Extract<Node, { type: 'one_pager' }> => node.type === 'one_pager') ?? [],
+      dataset?.nodes.filter(
+        (node): node is Extract<Node, { type: 'one_pager' }> =>
+          node.type === 'one_pager'
+      ) ?? [],
     [dataset]
   );
 
-  const onePagerIds = useMemo(() => onePagers.map((doc) => doc.id), [onePagers]);
+  const onePagerIds = useMemo(() => onePagers.map(doc => doc.id), [onePagers]);
 
   const [selectedDocs, toggleDoc] = useSelectionParam('docs', {
     allowed: onePagerIds,
@@ -172,8 +204,11 @@ function App() {
   const selectedOnePagers = useMemo(
     () =>
       selectedDocs
-        .map((id) => dataset?.nodeIndex[id])
-        .filter((node): node is Extract<Node, { type: 'one_pager' }> => !!node && node.type === 'one_pager'),
+        .map(id => dataset?.nodeIndex[id])
+        .filter(
+          (node): node is Extract<Node, { type: 'one_pager' }> =>
+            !!node && node.type === 'one_pager'
+        ),
     [dataset, selectedDocs]
   );
 
@@ -206,13 +241,16 @@ function App() {
       // In custom mode, use selected key points
       return customKeyPoints
         .map(id => dataset.nodeIndex[id])
-        .filter((node): node is Extract<Node, { type: 'key_point' }> =>
-          node && node.type === 'key_point'
+        .filter(
+          (node): node is Extract<Node, { type: 'key_point' }> =>
+            node && node.type === 'key_point'
         );
     } else {
       // In quick mode, use playlist-based selection
       if (!keyPointPlaylist) return [];
-      return toKeyPointNodes(resolvePlaylistNodes(dataset, keyPointPlaylist, context));
+      return toKeyPointNodes(
+        resolvePlaylistNodes(dataset, keyPointPlaylist, context)
+      );
     }
   }, [dataset, briefMode, customKeyPoints, keyPointPlaylist, context]);
 
@@ -235,25 +273,44 @@ function App() {
   }, [dataset, context]);
 
   const allSourceNodes = useMemo(
-    () => dataset?.nodes.filter((node): node is Extract<Node, { type: 'source' }> => node.type === 'source') ?? [],
+    () =>
+      dataset?.nodes.filter(
+        (node): node is Extract<Node, { type: 'source' }> =>
+          node.type === 'source'
+      ) ?? [],
     [dataset]
   );
 
   const sourceLookup = useMemo(
-    () => Object.fromEntries(allSourceNodes.map((node) => [node.id, node])),
+    () => Object.fromEntries(allSourceNodes.map(node => [node.id, node])),
     [allSourceNodes]
   );
 
-  const opener = useMemo(() => (dataset ? resolveOpener(dataset, context) : undefined), [dataset, context]);
-  const guide = useMemo(() => (dataset ? resolveGuide(dataset, context) : undefined), [dataset, context]);
+  const opener = useMemo(
+    () => (dataset ? resolveOpener(dataset, context) : undefined),
+    [dataset, context]
+  );
+  const guide = useMemo(
+    () => (dataset ? resolveGuide(dataset, context) : undefined),
+    [dataset, context]
+  );
 
   const templateSnippets = useMemo(
     () =>
-      dataset?.nodes.filter((node): node is Extract<Node, { type: 'template_snippet' }> => {
-        if (node.type !== 'template_snippet') return false;
-        if (!['tmpl_model_resolution', 'tmpl_government_policy', 'note_cio'].includes(node.id)) return false;
-        return matchesTargets(node.targets, context);
-      }) ?? [],
+      dataset?.nodes.filter(
+        (node): node is Extract<Node, { type: 'template_snippet' }> => {
+          if (node.type !== 'template_snippet') return false;
+          if (
+            ![
+              'tmpl_model_resolution',
+              'tmpl_government_policy',
+              'note_cio',
+            ].includes(node.id)
+          )
+            return false;
+          return matchesTargets(node.targets, context);
+        }
+      ) ?? [],
     [dataset, context]
   );
 
@@ -265,55 +322,67 @@ function App() {
       Boolean(node.lines?.length)
   );
 
-  const screeningNode = dataset?.nodeIndex['policy_screening_knowledge']?.type === 'policy_statement'
-    ? (dataset.nodeIndex['policy_screening_knowledge'] as Extract<Node, { type: 'policy_statement' }>)
-    : undefined;
+  const screeningNode =
+    dataset?.nodeIndex['policy_screening_knowledge']?.type ===
+    'policy_statement'
+      ? (dataset.nodeIndex['policy_screening_knowledge'] as Extract<
+          Node,
+          { type: 'policy_statement' }
+        >)
+      : undefined;
 
-  const policyAlignment = dataset?.nodeIndex['policy_alignment']?.type === 'policy_statement'
-    ? (dataset.nodeIndex['policy_alignment'] as Extract<Node, { type: 'policy_statement' }>)
-    : undefined;
+  const policyAlignment =
+    dataset?.nodeIndex['policy_alignment']?.type === 'policy_statement'
+      ? (dataset.nodeIndex['policy_alignment'] as Extract<
+          Node,
+          { type: 'policy_statement' }
+        >)
+      : undefined;
 
-  const exportData = useMemo<BriefExportData>(() => ({
-    meta: {
-      identity: params.identity,
-      audience: params.audience,
-      venue: params.venue,
-      level: params.level,
-      playlistId: keyPointPlaylist?.id ?? DEFAULT_PLAYLIST_ID,
-      datasetVersion: dataset?.version ?? DATASET_VERSION,
-    },
-    context,
-    opener,
-    guide,
-    keyPoints: keyPointNodes,
-    counters: counterNodes,
-    nextSteps: nextStepNodes,
-    screeningNode,
-    policyAlignment,
-    templates: templateSnippets,
-    selectedOnePagers,
-    sources: sourceNodes,
-    sourceLookup,
-  }), [
-    context,
-    opener,
-    guide,
-    keyPointNodes,
-    counterNodes,
-    nextStepNodes,
-    screeningNode,
-    policyAlignment,
-    templateSnippets,
-    selectedOnePagers,
-    sourceNodes,
-    sourceLookup,
-    params.identity,
-    params.audience,
-    params.venue,
-    params.level,
-    dataset?.version,
-    keyPointPlaylist?.id,
-  ]);
+  const exportData = useMemo<BriefExportData>(
+    () => ({
+      meta: {
+        identity: params.identity,
+        audience: params.audience,
+        venue: params.venue,
+        level: params.level,
+        playlistId: keyPointPlaylist?.id ?? DEFAULT_PLAYLIST_ID,
+        datasetVersion: dataset?.version ?? DATASET_VERSION,
+      },
+      context,
+      opener,
+      guide,
+      keyPoints: keyPointNodes,
+      counters: counterNodes,
+      nextSteps: nextStepNodes,
+      screeningNode,
+      policyAlignment,
+      templates: templateSnippets,
+      selectedOnePagers,
+      sources: sourceNodes,
+      sourceLookup,
+    }),
+    [
+      context,
+      opener,
+      guide,
+      keyPointNodes,
+      counterNodes,
+      nextStepNodes,
+      screeningNode,
+      policyAlignment,
+      templateSnippets,
+      selectedOnePagers,
+      sourceNodes,
+      sourceLookup,
+      params.identity,
+      params.audience,
+      params.venue,
+      params.level,
+      dataset?.version,
+      keyPointPlaylist?.id,
+    ]
+  );
 
   useEffect(() => {
     if (!dataset) return;
@@ -325,7 +394,14 @@ function App() {
       attachments: selectedOnePagers.length,
       sources: sourceNodes.length,
     });
-  }, [dataset, keyPointNodes.length, counterNodes.length, nextStepNodes.length, selectedOnePagers.length, sourceNodes.length]);
+  }, [
+    dataset,
+    keyPointNodes.length,
+    counterNodes.length,
+    nextStepNodes.length,
+    selectedOnePagers.length,
+    sourceNodes.length,
+  ]);
 
   if (loading && !dataset) {
     return (
@@ -353,98 +429,118 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
       <Header />
+      <PalestineStatement />
       <BetaDisclaimer />
 
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
           <div className="mb-8">
-            <p className="text-xs uppercase tracking-wide font-heading font-medium" style={{color: 'var(--ecic-purple)'}}>Dryvest</p>
-            <h1 className="text-4xl font-heading font-bold text-slate-900 mb-2">Educational Investment Brief Builder</h1>
+            <p
+              className="text-xs uppercase tracking-wide font-heading font-medium"
+              style={{ color: 'var(--ecic-purple)' }}
+            >
+              Dryvest
+            </p>
+            <h1 className="text-4xl font-heading font-bold text-slate-900 mb-2">
+              Educational Investment Brief Builder
+            </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                <strong>For educational purposes only.</strong> This tool helps you explore investment
-                screening approaches and build educational materials. It does not provide investment advice.
+                <strong>For educational purposes only.</strong> This tool helps
+                you explore investment screening approaches and build
+                educational materials. It does not provide investment advice.
               </p>
               <p className="text-sm text-slate-500">
-                Dataset version <span className="font-mono">{dataset.version}</span> •
-                Questions? <a href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
-                target="_blank" rel="noopener noreferrer"
-                className="hover:underline" style={{color: 'var(--ecic-teal)'}}>Ask for clarification</a>
+                Dataset version{' '}
+                <span className="font-mono">{dataset.version}</span> •
+                Questions?{' '}
+                <a
+                  href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                  style={{ color: 'var(--ecic-teal)' }}
+                >
+                  Ask for clarification
+                </a>
               </p>
             </div>
           </div>
 
-        {/* Mode Selector */}
-        <ModeSelector
-          mode={briefMode}
-          onModeChange={setBriefMode}
-        />
+          {/* Mode Selector */}
+          <ModeSelector mode={briefMode} onModeChange={setBriefMode} />
 
-        {/* Custom Brief Builder (only in custom mode) */}
-        {briefMode === 'custom' && dataset && (
-          <CustomBriefBuilder
-            dataset={dataset}
-            context={customContext}
-            onContextChange={setCustomContext}
-            selectedKeyPoints={customKeyPoints}
-            onKeyPointsChange={setCustomKeyPoints}
-          />
-        )}
-
-        {/* Comparison View (only in compare mode) */}
-        {briefMode === 'compare' && dataset && (
-          <ComparisonView dataset={dataset} />
-        )}
-
-        {/* Tone Toggle - only show for quick and custom modes */}
-        {briefMode !== 'compare' && (
-          <ToneToggle
-            tone={briefTone}
-            onToneChange={setBriefTone}
-            showSideBySide={showSideBySide}
-            onSideBySideToggle={setShowSideBySide}
-          />
-        )}
-
-        {/* Main content grid - hide in compare mode */}
-        {briefMode !== 'compare' && (
-          <div className={`grid gap-6 ${briefMode === 'quick'
-            ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
-            : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
-          }`}>
-
-          {/* Filters Panel - only show in quick mode */}
-          {briefMode === 'quick' && (
-            <FiltersPanel
+          {/* Custom Brief Builder (only in custom mode) */}
+          {briefMode === 'custom' && dataset && (
+            <CustomBriefBuilder
               dataset={dataset}
-              params={params}
-              setParams={setParams}
-              playlistsForKeyPoints={playlistOptions}
-              selectedDocs={selectedDocs}
-              toggleDoc={toggleDoc}
-              onePagers={onePagers}
+              context={customContext}
+              onContextChange={setCustomContext}
+              selectedKeyPoints={customKeyPoints}
+              onKeyPointsChange={setCustomKeyPoints}
             />
           )}
 
-          <PreviewPane
-            context={context}
-            opener={opener}
-            guide={guide}
-            keyPoints={keyPointNodes}
-            counters={counterNodes}
-            nextSteps={nextStepNodes}
-            sources={sourceNodes}
-            screeningNode={screeningNode}
-            policyAlignment={policyAlignment}
-            venueSnippet={venueSnippet}
-            templates={templateSnippets}
-            selectedOnePagers={selectedOnePagers}
-            sourceLookup={sourceLookup}
-          />
+          {/* Comparison View (only in compare mode) */}
+          {briefMode === 'compare' && dataset && (
+            <ComparisonView dataset={dataset} />
+          )}
 
-          <ActionsPanel params={params} selectedDocs={selectedDocs} exportData={exportData} />
-          </div>
-        )}
+          {/* Tone Toggle - only show for quick and custom modes */}
+          {briefMode !== 'compare' && (
+            <ToneToggle
+              tone={briefTone}
+              onToneChange={setBriefTone}
+              showSideBySide={showSideBySide}
+              onSideBySideToggle={setShowSideBySide}
+            />
+          )}
+
+          {/* Main content grid - hide in compare mode */}
+          {briefMode !== 'compare' && (
+            <div
+              className={`grid gap-6 ${
+                briefMode === 'quick'
+                  ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
+                  : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
+              }`}
+            >
+              {/* Filters Panel - only show in quick mode */}
+              {briefMode === 'quick' && (
+                <FiltersPanel
+                  dataset={dataset}
+                  params={params}
+                  setParams={setParams}
+                  playlistsForKeyPoints={playlistOptions}
+                  selectedDocs={selectedDocs}
+                  toggleDoc={toggleDoc}
+                  onePagers={onePagers}
+                />
+              )}
+
+              <PreviewPane
+                context={context}
+                opener={opener}
+                guide={guide}
+                keyPoints={keyPointNodes}
+                counters={counterNodes}
+                nextSteps={nextStepNodes}
+                sources={sourceNodes}
+                screeningNode={screeningNode}
+                policyAlignment={policyAlignment}
+                venueSnippet={venueSnippet}
+                templates={templateSnippets}
+                selectedOnePagers={selectedOnePagers}
+                sourceLookup={sourceLookup}
+              />
+
+              <ActionsPanel
+                params={params}
+                selectedDocs={selectedDocs}
+                exportData={exportData}
+              />
+            </div>
+          )}
         </div>
       </main>
 

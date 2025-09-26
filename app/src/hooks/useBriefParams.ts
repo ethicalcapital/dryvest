@@ -6,17 +6,27 @@ export interface BriefParams extends BriefContext {
   playlist?: string;
 }
 
-const PARAM_KEYS: (keyof BriefParams)[] = ['identity', 'audience', 'venue', 'level', 'playlist'];
+const PARAM_KEYS: (keyof BriefParams)[] = [
+  'identity',
+  'audience',
+  'venue',
+  'level',
+  'playlist',
+];
 
 const normalizeValue = (value: string | null | undefined) =>
-  value === null || value === undefined || value.trim() === '' ? undefined : value.trim();
+  value === null || value === undefined || value.trim() === ''
+    ? undefined
+    : value.trim();
 
-export function useBriefParams(defaults: BriefParams): [BriefParams, (next: Partial<BriefParams>) => void] {
+export function useBriefParams(
+  defaults: BriefParams
+): [BriefParams, (next: Partial<BriefParams>) => void] {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const current = useMemo<BriefParams>(() => {
     const result: BriefParams = { ...defaults };
-    PARAM_KEYS.forEach((key) => {
+    PARAM_KEYS.forEach(key => {
       const raw = searchParams.get(key);
       const normalized = normalizeValue(raw);
       if (normalized) {
@@ -30,7 +40,7 @@ export function useBriefParams(defaults: BriefParams): [BriefParams, (next: Part
     (next: Partial<BriefParams>) => {
       const merged: BriefParams = { ...current, ...next };
       const newParams = new URLSearchParams();
-      PARAM_KEYS.forEach((key) => {
+      PARAM_KEYS.forEach(key => {
         const value = merged[key];
         if (value === undefined || value === null || value === '') {
           return;

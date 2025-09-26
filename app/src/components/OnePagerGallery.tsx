@@ -8,7 +8,11 @@ interface OnePagerGalleryProps {
   toggleDoc: (id: string, include?: boolean) => void;
 }
 
-export function OnePagerGallery({ onePagers, selectedDocs, toggleDoc }: OnePagerGalleryProps) {
+export function OnePagerGallery({
+  onePagers,
+  selectedDocs,
+  toggleDoc,
+}: OnePagerGalleryProps) {
   const [showAll, setShowAll] = useState(false);
   const [requestedMore, setRequestedMore] = useState(false);
 
@@ -34,7 +38,7 @@ export function OnePagerGallery({ onePagers, selectedDocs, toggleDoc }: OnePager
       </div>
 
       <div className="space-y-3">
-        {displayedPagers.map((doc) => (
+        {displayedPagers.map(doc => (
           <OnePagerCard
             key={doc.id}
             doc={doc}
@@ -98,7 +102,7 @@ export function OnePagerGallery({ onePagers, selectedDocs, toggleDoc }: OnePager
 function OnePagerCard({
   doc,
   isSelected,
-  onToggle
+  onToggle,
 }: {
   doc: Extract<Node, { type: 'one_pager' }>;
   isSelected: boolean;

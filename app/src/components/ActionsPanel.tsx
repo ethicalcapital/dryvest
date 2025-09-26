@@ -39,12 +39,12 @@ const ActionButton = ({
     style={{
       ['--tw-ring-color' as any]: 'var(--ecic-purple)',
     }}
-    onMouseEnter={(e) => {
+    onMouseEnter={e => {
       if (!disabled) {
         e.currentTarget.style.borderColor = 'var(--ecic-purple)';
       }
     }}
-    onMouseLeave={(e) => {
+    onMouseLeave={e => {
       if (!disabled) {
         e.currentTarget.style.borderColor = 'var(--border-gray)';
       }
@@ -58,7 +58,9 @@ const ActionButton = ({
         <Icon className="h-4 w-4" aria-hidden="true" />
       </span>
       <span>
-        <span className="block text-sm font-heading font-semibold text-slate-900">{label}</span>
+        <span className="block text-sm font-heading font-semibold text-slate-900">
+          {label}
+        </span>
         <span className="mt-1 block text-xs text-slate-500">{description}</span>
       </span>
     </div>
@@ -78,8 +80,14 @@ const downloadMarkdown = (data: BriefExportData, tone: BriefTone) => {
   URL.revokeObjectURL(url);
 };
 
-export function ActionsPanel({ params, selectedDocs, exportData }: ActionsPanelProps) {
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
+export function ActionsPanel({
+  params,
+  selectedDocs,
+  exportData,
+}: ActionsPanelProps) {
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>(
+    'idle'
+  );
 
   const handleCopy = async (tone: BriefTone) => {
     try {
@@ -111,18 +119,29 @@ export function ActionsPanel({ params, selectedDocs, exportData }: ActionsPanelP
       <div className="rounded-xl border border-slate-200 bg-white/80 p-5 shadow-sm">
         <h2 className="text-sm font-semibold text-slate-900">Actions</h2>
         <p className="mt-1 text-xs text-slate-500">
-          URL reflects the current configuration. Copy, download, and print workflows render deterministic markdown
-          snapshots.
+          URL reflects the current configuration. Copy, download, and print
+          workflows render deterministic markdown snapshots.
         </p>
         <p className="mt-3 text-xs text-slate-400">
-          Identity: <span className="font-medium text-slate-600">{params.identity}</span> · Audience:{' '}
-          <span className="font-medium text-slate-600">{params.audience}</span> · Attachments:{' '}
-          <span className="font-medium text-slate-600">{selectedDocs.length}</span>
+          Identity:{' '}
+          <span className="font-medium text-slate-600">{params.identity}</span>{' '}
+          · Audience:{' '}
+          <span className="font-medium text-slate-600">{params.audience}</span>{' '}
+          · Attachments:{' '}
+          <span className="font-medium text-slate-600">
+            {selectedDocs.length}
+          </span>
         </p>
         <div className="mt-4 space-y-3">
           <ActionButton
             icon={ClipboardCopy}
-            label={copyState === 'copied' ? 'Copied!' : copyState === 'error' ? 'Copy failed' : 'Copy markdown (plain)'}
+            label={
+              copyState === 'copied'
+                ? 'Copied!'
+                : copyState === 'error'
+                  ? 'Copy failed'
+                  : 'Copy markdown (plain)'
+            }
             description="Copies the plain-language brief for quick sharing."
             disabled={copyState === 'error'}
             onClick={() => handleCopy('plain')}
@@ -152,7 +171,7 @@ export function ActionsPanel({ params, selectedDocs, exportData }: ActionsPanelP
                 identity: params.identity,
                 audience: params.audience,
                 venue: params.venue,
-                level: params.level
+                level: params.level,
               }}
               venue={params.venue?.replace('_', ' ') || 'Investment Committee'}
               decisionMaker="Board of Trustees"
@@ -163,8 +182,8 @@ export function ActionsPanel({ params, selectedDocs, exportData }: ActionsPanelP
       <div className="rounded-xl border border-indigo-200 bg-indigo-50/60 p-5 text-sm text-indigo-900">
         <h3 className="text-sm font-semibold">Feedback</h3>
         <p className="mt-1 text-xs text-indigo-800">
-          Tell us how this session landed. We’ll use aggregated, anonymised feedback to improve counter matrices and
-          implementation guidance.
+          Tell us how this session landed. We’ll use aggregated, anonymised
+          feedback to improve counter matrices and implementation guidance.
         </p>
         <a
           className="mt-3 inline-flex items-center rounded-md border border-indigo-600 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-white"

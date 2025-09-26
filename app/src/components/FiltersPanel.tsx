@@ -64,8 +64,14 @@ const LEVEL_LABELS: Record<string, string> = {
   technical: 'Technical',
 };
 
-function formatLabel(value: string, dictionary: Record<string, string>): string {
-  return dictionary[value] ?? value.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
+function formatLabel(
+  value: string,
+  dictionary: Record<string, string>
+): string {
+  return (
+    dictionary[value] ??
+    value.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
+  );
 }
 
 function OptionButton({
@@ -113,13 +119,17 @@ export function FiltersPanel({
   const [showAllIdentities, setShowAllIdentities] = useState(false);
   const [showAllVenues, setShowAllVenues] = useState(false);
 
-  const identities = dataset.schema.taxonomies?.identity ?? Object.keys(IDENTITY_LABELS);
-  const audiences = dataset.schema.taxonomies?.audience ?? Object.keys(AUDIENCE_LABELS);
+  const identities =
+    dataset.schema.taxonomies?.identity ?? Object.keys(IDENTITY_LABELS);
+  const audiences =
+    dataset.schema.taxonomies?.audience ?? Object.keys(AUDIENCE_LABELS);
   const venues = dataset.schema.taxonomies?.venue ?? Object.keys(VENUE_LABELS);
   const levels = dataset.schema.taxonomies?.level ?? Object.keys(LEVEL_LABELS);
 
   // Limit options to reduce overwhelm
-  const displayedIdentities = showAllIdentities ? identities : identities.slice(0, 4);
+  const displayedIdentities = showAllIdentities
+    ? identities
+    : identities.slice(0, 4);
   const displayedVenues = showAllVenues ? venues : venues.slice(0, 4);
   const hiddenIdentitiesCount = identities.length - displayedIdentities.length;
   const hiddenVenuesCount = venues.length - displayedVenues.length;
@@ -127,10 +137,15 @@ export function FiltersPanel({
   return (
     <aside className="space-y-8">
       <section className="space-y-3">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Investor identity</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">
+          Investor identity
+        </p>
         <div className="flex flex-wrap gap-2">
-          {displayedIdentities.map((value) => {
-            const meta = IDENTITY_LABELS[value] ?? { label: formatLabel(value, {}), icon: Users };
+          {displayedIdentities.map(value => {
+            const meta = IDENTITY_LABELS[value] ?? {
+              label: formatLabel(value, {}),
+              icon: Users,
+            };
             return (
               <OptionButton
                 key={value}
@@ -153,10 +168,15 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Audience</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">
+          Audience
+        </p>
         <div className="flex flex-wrap gap-2">
-          {audiences.map((value) => {
-            const meta = AUDIENCE_LABELS[value] ?? { label: formatLabel(value, {}), icon: Users };
+          {audiences.map(value => {
+            const meta = AUDIENCE_LABELS[value] ?? {
+              label: formatLabel(value, {}),
+              icon: Users,
+            };
             return (
               <OptionButton
                 key={value}
@@ -171,9 +191,11 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Venue</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">
+          Venue
+        </p>
         <div className="grid grid-cols-1 gap-2">
-          {displayedVenues.map((value) => (
+          {displayedVenues.map(value => (
             <OptionButton
               key={value}
               label={formatLabel(value, VENUE_LABELS)}
@@ -193,9 +215,11 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-3">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">Knowledge level</p>
+        <p className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500">
+          Knowledge level
+        </p>
         <div className="flex gap-2">
-          {levels.map((value) => (
+          {levels.map(value => (
             <OptionButton
               key={value}
               label={formatLabel(value, LEVEL_LABELS)}
@@ -207,7 +231,10 @@ export function FiltersPanel({
       </section>
 
       <section className="space-y-2">
-        <label className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500" htmlFor="playlist-select">
+        <label
+          className="text-xs font-heading font-semibold uppercase tracking-wide text-slate-500"
+          htmlFor="playlist-select"
+        >
           Key point playlist
         </label>
         <select
@@ -216,18 +243,18 @@ export function FiltersPanel({
           style={{
             borderColor: 'var(--border-gray)',
           }}
-          onFocus={(e) => {
+          onFocus={e => {
             e.target.style.borderColor = 'var(--ecic-purple)';
             e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
           }}
-          onBlur={(e) => {
+          onBlur={e => {
             e.target.style.borderColor = 'var(--border-gray)';
             e.target.style.boxShadow = 'none';
           }}
           value={params.playlist}
-          onChange={(event) => setParams({ playlist: event.target.value })}
+          onChange={event => setParams({ playlist: event.target.value })}
         >
-          {playlistsForKeyPoints.map((playlistId) => (
+          {playlistsForKeyPoints.map(playlistId => (
             <option key={playlistId} value={playlistId}>
               {formatLabel(playlistId, {})}
             </option>

@@ -24,8 +24,9 @@ export function BetaDisclaimer() {
                 </span>
               </div>
               <p className="text-sm text-amber-700 leading-relaxed">
-                <strong>This is an educational prototype</strong> for exploring investment screening approaches.
-                Content is for learning purposes only and does not constitute investment advice.
+                <strong>This is an educational prototype</strong> for exploring
+                investment screening approaches. Content is for learning
+                purposes only and does not constitute investment advice.
                 <a
                   href="https://github.com/ethicalcapital/dryvest/issues/new?labels=feedback"
                   target="_blank"
@@ -33,7 +34,8 @@ export function BetaDisclaimer() {
                   className="underline hover:no-underline font-medium"
                 >
                   Share feedback
-                </a> or{' '}
+                </a>{' '}
+                or{' '}
                 <a
                   href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
                   target="_blank"
@@ -41,7 +43,8 @@ export function BetaDisclaimer() {
                   className="underline hover:no-underline font-medium"
                 >
                   ask questions
-                </a> to help us improve.
+                </a>{' '}
+                to help us improve.
               </p>
             </div>
           </div>
@@ -52,7 +55,14 @@ export function BetaDisclaimer() {
               href="https://calendly.com/ethical-capital/consultation"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors"
+              className="inline-flex items-center gap-2 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              style={{ backgroundColor: 'var(--ecic-amber-dark)' }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLElement).style.opacity = '0.9';
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLElement).style.opacity = '1';
+              }}
             >
               <BookOpen size={14} />
               Get Real Advice

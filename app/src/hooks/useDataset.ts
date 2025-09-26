@@ -8,7 +8,10 @@ interface UseDatasetResult {
   loading: boolean;
 }
 
-export function useDataset(version: string, options?: { basePath?: string }): UseDatasetResult {
+export function useDataset(
+  version: string,
+  options?: { basePath?: string }
+): UseDatasetResult {
   const [dataset, setDataset] = useState<Dataset>();
   const [error, setError] = useState<DatasetError | Error>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -20,7 +23,10 @@ export function useDataset(version: string, options?: { basePath?: string }): Us
       setLoading(true);
       setError(undefined);
       try {
-        const result = await loadDataset(version, basePath ? { basePath } : undefined);
+        const result = await loadDataset(
+          version,
+          basePath ? { basePath } : undefined
+        );
         if (!isMounted) return;
         setDataset(result);
       } catch (err) {

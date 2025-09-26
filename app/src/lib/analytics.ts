@@ -17,10 +17,15 @@ export interface AnalyticsInitOptions {
 
 let initialized = false;
 
-export function initAnalytics({ token, spa = true }: AnalyticsInitOptions): void {
+export function initAnalytics({
+  token,
+  spa = true,
+}: AnalyticsInitOptions): void {
   if (!token || initialized) return;
 
-  const existing = document.querySelector<HTMLScriptElement>('script[data-cf-beacon]');
+  const existing = document.querySelector<HTMLScriptElement>(
+    'script[data-cf-beacon]'
+  );
   if (existing) {
     initialized = true;
     return;
@@ -29,10 +34,7 @@ export function initAnalytics({ token, spa = true }: AnalyticsInitOptions): void
   const script = document.createElement('script');
   script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
   script.defer = true;
-  script.setAttribute(
-    'data-cf-beacon',
-    JSON.stringify({ token, spa })
-  );
+  script.setAttribute('data-cf-beacon', JSON.stringify({ token, spa }));
   document.head.appendChild(script);
   initialized = true;
 }
@@ -45,7 +47,10 @@ export type AnalyticsEventName =
   | 'download_clicked'
   | 'print_clicked';
 
-export function trackEvent(name: AnalyticsEventName, props?: Record<string, unknown>): void {
+export function trackEvent(
+  name: AnalyticsEventName,
+  props?: Record<string, unknown>
+): void {
   if (typeof window === 'undefined') return;
   if (!window._cfq) {
     window._cfq = [];

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Download, Loader2 } from 'lucide-react';
-import { exportToPDF, getPreviewContent, generateTitle } from '../lib/pdf-export';
+import {
+  exportToPDF,
+  getPreviewContent,
+  generateTitle,
+} from '../lib/pdf-export';
 import type { BriefContext } from '../lib/schema';
 
 interface PDFExportButtonProps {
@@ -14,7 +18,7 @@ export function PDFExportButton({
   context,
   venue = 'Investment Committee',
   decisionMaker = 'Board of Trustees',
-  disabled = false
+  disabled = false,
 }: PDFExportButtonProps) {
   const [isExporting, setIsExporting] = useState(false);
   const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
@@ -39,10 +43,13 @@ export function PDFExportButton({
         decisionMaker,
         context,
       });
-
     } catch (error) {
       console.error('PDF export failed:', error);
-      alert(error instanceof Error ? error.message : 'PDF export failed. Please try again.');
+      alert(
+        error instanceof Error
+          ? error.message
+          : 'PDF export failed. Please try again.'
+      );
     } finally {
       setIsExporting(false);
     }
@@ -85,12 +92,14 @@ export function PDFExportButton({
                 Ethical Capital for educational and research purposes.
               </p>
               <p>
-                <strong>Important:</strong> This content does not constitute investment advice.
-                Please consult with qualified professionals before making investment decisions.
+                <strong>Important:</strong> This content does not constitute
+                investment advice. Please consult with qualified professionals
+                before making investment decisions.
               </p>
               <p>
-                By proceeding, you acknowledge that this content is for informational
-                purposes only and should not be relied upon for investment decisions.
+                By proceeding, you acknowledge that this content is for
+                informational purposes only and should not be relied upon for
+                investment decisions.
               </p>
             </div>
             <div className="flex gap-4 justify-end">

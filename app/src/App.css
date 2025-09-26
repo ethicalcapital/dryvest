@@ -5,8 +5,10 @@
   --ecic-purple: #581c87;
   --ecic-purple-light: #6b46c1;
   --ecic-teal: #14b8a6;
+  --ecic-teal-dark: #008577; /* WCAG AA compliant for white text */
   --ecic-teal-light: #2dd4bf;
   --ecic-amber: #f59e0b;
+  --ecic-amber-dark: #b46100; /* WCAG AA compliant for white text */
   --ecic-red: #ef4444;
 
   /* Neutral Colors */

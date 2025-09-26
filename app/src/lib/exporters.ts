@@ -35,9 +35,11 @@ const formatCitations = (
 ): string | undefined => {
   if (!ids?.length) return undefined;
   const parts = ids
-    .map((id) => lookup[id])
-    .filter((source): source is Extract<Node, { type: 'source' }> => Boolean(source))
-    .map((source) => `- [${source.label}](${source.url})`);
+    .map(id => lookup[id])
+    .filter((source): source is Extract<Node, { type: 'source' }> =>
+      Boolean(source)
+    )
+    .map(source => `- [${source.label}](${source.url})`);
   return parts.length ? parts.join('\n') : undefined;
 };
 
@@ -47,14 +49,29 @@ const pickScreeningBody = (
 ): string | undefined => {
   if (!node) return undefined;
   if (node.variants?.length) {
-    const variant = node.variants.find((item) => item.transforms?.tone === tone) ?? node.variants[0];
+    const variant =
+      node.variants.find(item => item.transforms?.tone === tone) ??
+      node.variants[0];
     return variant.body;
   }
   return node.body ?? undefined;
 };
 
 export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
-  const { meta, opener, guide, keyPoints, counters, nextSteps, screeningNode, policyAlignment, templates, selectedOnePagers, sources, sourceLookup } = data;
+  const {
+    meta,
+    opener,
+    guide,
+    keyPoints,
+    counters,
+    nextSteps,
+    screeningNode,
+    policyAlignment,
+    templates,
+    selectedOnePagers,
+    sources,
+    sourceLookup,
+  } = data;
   const lines: string[] = [];
 
   lines.push('# Dryvestment Brief');
@@ -102,21 +119,26 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
       const references = formatCitations(counter.citations, sourceLookup);
       if (references) {
         lines.push('   **Sources:**');
-        lines.push(references.split('\n').map((line) => `   ${line}`).join('\n'));
+        lines.push(
+          references
+            .split('\n')
+            .map(line => `   ${line}`)
+            .join('\n')
+        );
       }
     });
   }
 
   if (nextSteps.length) {
     lines.push(divider('Next Steps'));
-    nextSteps.forEach((step) => {
+    nextSteps.forEach(step => {
       lines.push(`- ${step.text}`);
     });
   }
 
   if (policyAlignment?.bullets?.length) {
     lines.push(divider('Policy Alignment'));
-    policyAlignment.bullets.forEach((item) => lines.push(`- ${item}`));
+    policyAlignment.bullets.forEach(item => lines.push(`- ${item}`));
     const references = formatCitations(policyAlignment.citations, sourceLookup);
     if (references) {
       lines.push(references);
@@ -125,7 +147,7 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
 
   if (templates.length) {
     lines.push(divider('Templates'));
-    templates.forEach((snippet) => {
+    templates.forEach(snippet => {
       lines.push(`### ${snippet.title}`);
       if (snippet.markdown) {
         lines.push('```');
@@ -133,21 +155,21 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
         lines.push('```');
       }
       if (snippet.lines?.length) {
-        snippet.lines.forEach((line) => lines.push(`- ${line}`));
+        snippet.lines.forEach(line => lines.push(`- ${line}`));
       }
     });
   }
 
   if (selectedOnePagers.length) {
     lines.push(divider('Attachments'));
-    selectedOnePagers.forEach((doc) => {
+    selectedOnePagers.forEach(doc => {
       lines.push(`- ${doc.title} (${doc.markdownPath})`);
     });
   }
 
   if (sources.length) {
     lines.push(divider('Sources'));
-    sources.forEach((source) => {
+    sources.forEach(source => {
       lines.push(`- [${source.label}](${source.url})`);
     });
   }

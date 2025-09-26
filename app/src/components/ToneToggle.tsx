@@ -13,12 +13,14 @@ export function ToneToggle({
   tone,
   onToneChange,
   showSideBySide = false,
-  onSideBySideToggle
+  onSideBySideToggle,
 }: ToneToggleProps) {
   return (
     <div className="rounded-xl border border-gray-200 bg-white/80 p-4 shadow-sm">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-heading font-semibold text-slate-900">Presentation</h3>
+        <h3 className="text-sm font-heading font-semibold text-slate-900">
+          Presentation
+        </h3>
 
         <div className="flex items-center gap-2">
           {/* Tone Selector */}
@@ -31,7 +33,8 @@ export function ToneToggle({
                   : 'text-slate-600 hover:text-slate-900'
               }`}
               style={{
-                backgroundColor: tone === 'plain' ? 'var(--ecic-purple)' : undefined,
+                backgroundColor:
+                  tone === 'plain' ? 'var(--ecic-purple)' : undefined,
               }}
             >
               <BookOpen size={14} />
@@ -45,7 +48,8 @@ export function ToneToggle({
                   : 'text-slate-600 hover:text-slate-900'
               }`}
               style={{
-                backgroundColor: tone === 'technical' ? 'var(--ecic-teal)' : undefined,
+                backgroundColor:
+                  tone === 'technical' ? 'var(--ecic-teal)' : undefined,
               }}
             >
               <Wrench size={14} />
@@ -59,16 +63,16 @@ export function ToneToggle({
               <input
                 type="checkbox"
                 checked={showSideBySide}
-                onChange={(e) => onSideBySideToggle(e.target.checked)}
+                onChange={e => onSideBySideToggle(e.target.checked)}
                 className="rounded focus:outline-none focus:ring-1"
                 style={{
                   borderColor: 'var(--border-gray)',
                   accentColor: 'var(--ecic-purple)',
                 }}
-                onFocus={(e) => {
+                onFocus={e => {
                   e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
                 }}
-                onBlur={(e) => {
+                onBlur={e => {
                   e.target.style.boxShadow = 'none';
                 }}
               />
@@ -82,8 +86,7 @@ export function ToneToggle({
       <p className="mt-2 text-xs text-slate-500">
         {tone === 'plain'
           ? 'Clear, accessible language for broader audiences'
-          : 'Detailed governance and quantitative framing for fiduciaries'
-        }
+          : 'Detailed governance and quantitative framing for fiduciaries'}
         {showSideBySide && ' • Showing both versions side-by-side'}
       </p>
     </div>

@@ -1,10 +1,18 @@
 import type { Dataset, Playlist, Targets, BriefContext, Node } from './schema';
 
-const targetKeys: (keyof BriefContext)[] = ['identity', 'audience', 'venue', 'level'];
+const targetKeys: (keyof BriefContext)[] = [
+  'identity',
+  'audience',
+  'venue',
+  'level',
+];
 
-export function matchesTargets(targets: Targets | undefined, context: BriefContext): boolean {
+export function matchesTargets(
+  targets: Targets | undefined,
+  context: BriefContext
+): boolean {
   if (!targets) return true;
-  return targetKeys.every((key) => {
+  return targetKeys.every(key => {
     const targetValues = targets[key as keyof typeof targets];
     if (!targetValues) return true;
     const contextValue = context[key];
@@ -21,7 +29,9 @@ export function selectPlaylistByKind(
   const candidates = playlistsByKind[kind] ?? [];
   if (!candidates.length) return undefined;
 
-  const exactMatches = candidates.filter((playlist) => matchesTargets(playlist.targets, context));
+  const exactMatches = candidates.filter(playlist =>
+    matchesTargets(playlist.targets, context)
+  );
   if (exactMatches.length) {
     return exactMatches[0];
   }
@@ -29,21 +39,27 @@ export function selectPlaylistByKind(
   return candidates[0];
 }
 
-export function filterNodesForContext<T extends Node>(nodes: T[], context: BriefContext): T[] {
-  return nodes.filter((node) => matchesTargets(node.targets, context));
+export function filterNodesForContext<T extends Node>(
+  nodes: T[],
+  context: BriefContext
+): T[] {
+  return nodes.filter(node => matchesTargets(node.targets, context));
 }
 
 export function uniqueNodes<T extends Node>(nodes: T[]): T[] {
   const seen = new Set<string>();
-  return nodes.filter((node) => {
+  return nodes.filter(node => {
     if (seen.has(node.id)) return false;
     seen.add(node.id);
     return true;
   });
 }
 
-
-export function resolvePlaylistNodes(dataset: Dataset, playlist: Playlist, context: BriefContext): Node[] {
+export function resolvePlaylistNodes(
+  dataset: Dataset,
+  playlist: Playlist,
+  context: BriefContext
+): Node[] {
   const nodes: Node[] = [];
   for (const item of playlist.items) {
     if (item.conditions && !matchesTargets(item.conditions, context)) {
@@ -70,22 +86,24 @@ export function resolveByKind(
   return { playlist, nodes };
 }
 
-
 export function resolveOpener(dataset: Dataset, context: BriefContext) {
   const openers = dataset.nodes.filter(
     (node): node is Extract<Node, { type: 'opener' }> => node.type === 'opener'
   );
-  let best: typeof openers[number] | undefined;
+  let best: (typeof openers)[number] | undefined;
   let bestScore = -1;
   for (const opener of openers) {
     let score = 0;
-    if (context.identity && opener.targets?.identity?.includes(context.identity)) {
+    if (
+      context.identity &&
+      opener.targets?.identity?.includes(context.identity)
+    ) {
       score += 2;
     }
     if (context.venue && opener.targets?.venue?.includes(context.venue)) {
       score += 1;
     }
-        if (score > bestScore) {
+    if (score > bestScore) {
       best = opener;
       bestScore = score;
     }
@@ -99,7 +117,10 @@ export function resolveGuide(dataset: Dataset, context: BriefContext) {
   );
   let fallback = guides[0];
   for (const guide of guides) {
-    if (context.identity && guide.targets?.identity?.includes(context.identity)) {
+    if (
+      context.identity &&
+      guide.targets?.identity?.includes(context.identity)
+    ) {
       return guide;
     }
     if (!guide.targets && !fallback) {

@@ -33,7 +33,9 @@ export async function exportToPDF(data: PDFExportData): Promise<void> {
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => 'Unknown error');
-      const error = new Error(`PDF generation failed: ${errorText}`) as PDFGenerationError;
+      const error = new Error(
+        `PDF generation failed: ${errorText}`
+      ) as PDFGenerationError;
       error.status = response.status;
       throw error;
     }
@@ -48,7 +50,6 @@ export async function exportToPDF(data: PDFExportData): Promise<void> {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-
   } catch (error) {
     console.error('PDF export failed:', error);
 
@@ -60,7 +61,9 @@ export async function exportToPDF(data: PDFExportData): Promise<void> {
         case 413:
           throw new Error('Content too large for PDF generation (max 50KB)');
         case 429:
-          throw new Error('Too many PDF requests. Please wait before trying again.');
+          throw new Error(
+            'Too many PDF requests. Please wait before trying again.'
+          );
         case 503:
           throw new Error('PDF generation service temporarily unavailable');
         default:
@@ -152,7 +155,9 @@ export function generateTitle(context: BriefContext): string {
   const parts = [];
 
   if (context.identity) {
-    parts.push(context.identity.charAt(0).toUpperCase() + context.identity.slice(1));
+    parts.push(
+      context.identity.charAt(0).toUpperCase() + context.identity.slice(1)
+    );
   }
 
   if (context.venue) {

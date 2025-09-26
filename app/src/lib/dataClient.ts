@@ -22,7 +22,9 @@ class DatasetError extends Error {
 async function fetchJson<T>(url: string, schema: z.ZodSchema<T>): Promise<T> {
   const response = await fetch(url, { cache: 'no-store' });
   if (!response.ok) {
-    throw new DatasetError(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
+    throw new DatasetError(
+      `Failed to fetch ${url}: ${response.status} ${response.statusText}`
+    );
   }
   let raw: unknown;
   try {
@@ -32,12 +34,18 @@ async function fetchJson<T>(url: string, schema: z.ZodSchema<T>): Promise<T> {
   }
   const parsed = schema.safeParse(raw);
   if (!parsed.success) {
-    throw new DatasetError(`Validation failed for ${url}: ${parsed.error.message}`);
+    throw new DatasetError(
+      `Validation failed for ${url}: ${parsed.error.message}`
+    );
   }
   return parsed.data;
 }
 
-function indexPlaylists(datasetVersion: string, manifestVersion: string, data: SchemaDocument): void {
+function indexPlaylists(
+  datasetVersion: string,
+  manifestVersion: string,
+  data: SchemaDocument
+): void {
   if (data.version && data.version !== datasetVersion) {
     console.warn(
       `Schema document version ${data.version} does not match dataset version ${datasetVersion} (manifest ${manifestVersion}).`
@@ -53,18 +61,21 @@ function buildDataset(
 ): Dataset {
   indexPlaylists(nodesDoc.version, manifest.version, schemaDoc);
 
-  const nodeIndex = Object.fromEntries(nodesDoc.nodes.map((node) => [node.id, node]));
-  const playlistById = Object.fromEntries(playlistsDoc.playlists.map((playlist) => [playlist.id, playlist]));
-  const playlistsByKind = playlistsDoc.playlists.reduce<Record<string, typeof playlistsDoc.playlists>>(
-    (acc, playlist) => {
-      if (!acc[playlist.kind]) {
-        acc[playlist.kind] = [];
-      }
-      acc[playlist.kind].push(playlist);
-      return acc;
-    },
-    {}
+  const nodeIndex = Object.fromEntries(
+    nodesDoc.nodes.map(node => [node.id, node])
   );
+  const playlistById = Object.fromEntries(
+    playlistsDoc.playlists.map(playlist => [playlist.id, playlist])
+  );
+  const playlistsByKind = playlistsDoc.playlists.reduce<
+    Record<string, typeof playlistsDoc.playlists>
+  >((acc, playlist) => {
+    if (!acc[playlist.kind]) {
+      acc[playlist.kind] = [];
+    }
+    acc[playlist.kind].push(playlist);
+    return acc;
+  }, {});
 
   return {
     version: manifest.version,

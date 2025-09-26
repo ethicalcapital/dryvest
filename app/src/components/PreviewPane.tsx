@@ -8,19 +8,28 @@ interface PreviewPaneProps {
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Extract<Node, { type: 'key_point' }>[];
   counters: Extract<Node, { type: 'counter' }>[];
-  nextSteps: Extract<Node, { type: 'next_step' }> [];
-  sources: Extract<Node, { type: 'source' }> [];
+  nextSteps: Extract<Node, { type: 'next_step' }>[];
+  sources: Extract<Node, { type: 'source' }>[];
   screeningNode?: Extract<Node, { type: 'policy_statement' }>;
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
   venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
-  templates: Extract<Node, { type: 'template_snippet' }> [];
+  templates: Extract<Node, { type: 'template_snippet' }>[];
   selectedOnePagers: Extract<Node, { type: 'one_pager' }>[];
   sourceLookup: Record<string, Extract<Node, { type: 'source' }>>;
 }
 
-const sectionClass = 'rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm';
+const sectionClass =
+  'rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm';
 
-function Section({ title, children, anchor }: { title: string; children: React.ReactNode; anchor?: string }) {
+function Section({
+  title,
+  children,
+  anchor,
+}: {
+  title: string;
+  children: React.ReactNode;
+  anchor?: string;
+}) {
   return (
     <section id={anchor} className={sectionClass}>
       <div className="mb-4 flex items-center justify-between">
@@ -29,16 +38,20 @@ function Section({ title, children, anchor }: { title: string; children: React.R
           <a
             className="text-xs font-medium text-indigo-600 hover:text-indigo-700"
             href={`#${anchor}`}
-            onClick={(event) => {
+            onClick={event => {
               event.preventDefault();
-              document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              document
+                .getElementById(anchor)
+                ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }}
           >
             Jump to section
           </a>
         ) : null}
       </div>
-      <div className="space-y-3 text-sm leading-relaxed text-slate-700">{children}</div>
+      <div className="space-y-3 text-sm leading-relaxed text-slate-700">
+        {children}
+      </div>
     </section>
   );
 }
@@ -50,7 +63,7 @@ function renderCitations(
   if (!ids?.length) return null;
   return (
     <ul className="mt-3 space-y-1 text-xs text-slate-500">
-      {ids.map((id) => {
+      {ids.map(id => {
         const source = sourceLookup[id];
         if (!source) return null;
         return (
@@ -98,19 +111,31 @@ export function PreviewPane({
         <Section title="Recommended approach" anchor="approach">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <h3 className="text-sm font-semibold text-slate-900">Lead with</h3>
+              <h3 className="text-sm font-semibold text-slate-900">
+                Lead with
+              </h3>
               <p className="text-sm text-slate-700">{guide.sections.ask}</p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-slate-900">Implementation</h3>
-              <p className="text-sm text-slate-700">{guide.sections.implementation}</p>
+              <h3 className="text-sm font-semibold text-slate-900">
+                Implementation
+              </h3>
+              <p className="text-sm text-slate-700">
+                {guide.sections.implementation}
+              </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-slate-900">Reporting cadence</h3>
-              <p className="text-sm text-slate-700">{guide.sections.reporting}</p>
+              <h3 className="text-sm font-semibold text-slate-900">
+                Reporting cadence
+              </h3>
+              <p className="text-sm text-slate-700">
+                {guide.sections.reporting}
+              </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-slate-900">Risk discipline</h3>
+              <h3 className="text-sm font-semibold text-slate-900">
+                Risk discipline
+              </h3>
               <p className="text-sm text-slate-700">{guide.sections.risk}</p>
             </div>
           </div>
@@ -123,10 +148,9 @@ export function PreviewPane({
           {screeningNode.variants?.length ? (
             <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
               <ReactMarkdown>
-                {
-                  screeningNode.variants.find((variant) => variant.transforms?.tone === context.level)?.body ??
-                  screeningNode.variants[0].body
-                }
+                {screeningNode.variants.find(
+                  variant => variant.transforms?.tone === context.level
+                )?.body ?? screeningNode.variants[0].body}
               </ReactMarkdown>
             </div>
           ) : screeningNode.body ? (
@@ -141,9 +165,14 @@ export function PreviewPane({
       {keyPoints.length ? (
         <Section title="Key points" anchor="key-points">
           <ol className="space-y-4">
-            {keyPoints.map((point) => (
-              <li key={point.id} className="rounded-lg border border-slate-200 bg-white/70 p-4">
-                <h3 className="text-sm font-semibold text-slate-900">{point.title}</h3>
+            {keyPoints.map(point => (
+              <li
+                key={point.id}
+                className="rounded-lg border border-slate-200 bg-white/70 p-4"
+              >
+                <h3 className="text-sm font-semibold text-slate-900">
+                  {point.title}
+                </h3>
                 <p className="mt-2 text-sm text-slate-700">{point.body}</p>
                 {renderCitations(point.citations, sourceLookup)}
                 <GitHubFeedback node={point} size="sm" />
@@ -159,26 +188,39 @@ export function PreviewPane({
             <table className="min-w-full divide-y divide-slate-200 text-sm">
               <thead className="bg-slate-100">
                 <tr>
-                  <th scope="col" className="px-4 py-2 text-left font-semibold text-slate-600">
+                  <th
+                    scope="col"
+                    className="px-4 py-2 text-left font-semibold text-slate-600"
+                  >
                     Claim
                   </th>
-                  <th scope="col" className="px-4 py-2 text-left font-semibold text-slate-600">
+                  <th
+                    scope="col"
+                    className="px-4 py-2 text-left font-semibold text-slate-600"
+                  >
                     Response
                   </th>
-                  <th scope="col" className="px-4 py-2 text-left font-semibold text-slate-600">
+                  <th
+                    scope="col"
+                    className="px-4 py-2 text-left font-semibold text-slate-600"
+                  >
                     Sources
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
-                {counters.map((item) => (
+                {counters.map(item => (
                   <tr key={item.id} className="align-top">
                     <td className="px-4 py-3 font-medium text-slate-900">
                       {item.claim}
                       <GitHubFeedback node={item} size="sm" />
                     </td>
-                    <td className="px-4 py-3 text-slate-700">{item.response}</td>
-                    <td className="px-4 py-3">{renderCitations(item.citations, sourceLookup)}</td>
+                    <td className="px-4 py-3 text-slate-700">
+                      {item.response}
+                    </td>
+                    <td className="px-4 py-3">
+                      {renderCitations(item.citations, sourceLookup)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -190,7 +232,7 @@ export function PreviewPane({
       {nextSteps.length ? (
         <Section title="Next steps" anchor="next-steps">
           <ul className="list-disc space-y-2 pl-5 text-sm text-slate-700">
-            {nextSteps.map((step) => (
+            {nextSteps.map(step => (
               <li key={step.id}>
                 {step.text}
                 <GitHubFeedback node={step} size="sm" />
@@ -227,9 +269,14 @@ export function PreviewPane({
       {templates.length ? (
         <Section title="Templates" anchor="templates">
           <div className="space-y-4">
-            {templates.map((snippet) => (
-              <div key={snippet.id} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-sm font-semibold text-slate-900">{snippet.title}</h3>
+            {templates.map(snippet => (
+              <div
+                key={snippet.id}
+                className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+              >
+                <h3 className="text-sm font-semibold text-slate-900">
+                  {snippet.title}
+                </h3>
                 {snippet.markdown ? (
                   <div className="prose prose-sm max-w-none text-slate-700 prose-pre:overflow-x-auto">
                     <ReactMarkdown>{snippet.markdown}</ReactMarkdown>
@@ -252,9 +299,14 @@ export function PreviewPane({
       {selectedOnePagers.length ? (
         <Section title="Attachments" anchor="attachments">
           <div className="space-y-3">
-            {selectedOnePagers.map((doc) => (
-              <article key={doc.id} className="rounded-lg border border-slate-200 bg-white p-4">
-                <h3 className="text-sm font-semibold text-slate-900">{doc.title}</h3>
+            {selectedOnePagers.map(doc => (
+              <article
+                key={doc.id}
+                className="rounded-lg border border-slate-200 bg-white p-4"
+              >
+                <h3 className="text-sm font-semibold text-slate-900">
+                  {doc.title}
+                </h3>
                 <p className="mt-1 text-sm text-slate-600">{doc.description}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <a
@@ -275,7 +327,7 @@ export function PreviewPane({
       {sources.length ? (
         <Section title="Sources" anchor="sources">
           <ul className="space-y-2 text-sm">
-            {sources.map((source) => (
+            {sources.map(source => (
               <li key={source.id}>
                 <a
                   className="font-medium text-indigo-600 hover:text-indigo-700"

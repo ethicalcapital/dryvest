@@ -10,9 +10,10 @@ interface ModeSelectorProps {
 export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
     <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm mb-6">
-      <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">Choose Your Approach</h2>
+      <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">
+        Choose Your Approach
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
         {/* Quick Brief */}
         <button
           onClick={() => onModeChange('quick')}
@@ -22,8 +23,10 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               : 'border-slate-200 bg-white hover:bg-indigo-50'
           }`}
           style={{
-            borderColor: mode === 'quick' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor: mode === 'quick' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+            borderColor:
+              mode === 'quick' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'quick' ? 'rgba(88, 28, 135, 0.05)' : undefined,
           }}
         >
           <div className="flex items-start gap-3">
@@ -32,7 +35,8 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
                 mode === 'quick' ? 'text-white' : 'bg-slate-100 text-slate-600'
               }`}
               style={{
-                backgroundColor: mode === 'quick' ? 'var(--ecic-purple)' : undefined,
+                backgroundColor:
+                  mode === 'quick' ? 'var(--ecic-purple)' : undefined,
               }}
             >
               <Zap size={20} />
@@ -40,8 +44,8 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
             <div>
               <h3 className="font-heading font-semibold mb-1">Quick Brief</h3>
               <p className="text-sm text-slate-600">
-                Schema-driven approach. Select your identity, audience, and venue
-                to generate a focused brief with pre-selected content.
+                Schema-driven approach. Select your identity, audience, and
+                venue to generate a focused brief with pre-selected content.
               </p>
               <div className="mt-2 text-xs text-slate-500">
                 ✓ Fastest setup • ✓ Proven structure • ✓ Expert curation
@@ -59,8 +63,10 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               : 'border-slate-200 bg-white hover:bg-indigo-50'
           }`}
           style={{
-            borderColor: mode === 'custom' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor: mode === 'custom' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+            borderColor:
+              mode === 'custom' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'custom' ? 'rgba(88, 28, 135, 0.05)' : undefined,
           }}
         >
           <div className="flex items-start gap-3">
@@ -69,7 +75,8 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
                 mode === 'custom' ? 'text-white' : 'bg-slate-100 text-slate-600'
               }`}
               style={{
-                backgroundColor: mode === 'custom' ? 'var(--ecic-purple)' : undefined,
+                backgroundColor:
+                  mode === 'custom' ? 'var(--ecic-purple)' : undefined,
               }}
             >
               <Wrench size={20} />
@@ -96,44 +103,55 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               : 'border-slate-200 bg-white hover:bg-indigo-50'
           }`}
           style={{
-            borderColor: mode === 'compare' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor: mode === 'compare' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+            borderColor:
+              mode === 'compare' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'compare' ? 'rgba(88, 28, 135, 0.05)' : undefined,
           }}
         >
           <div className="flex items-start gap-3">
             <div
               className={`p-2 rounded-lg ${
-                mode === 'compare' ? 'text-white' : 'bg-slate-100 text-slate-600'
+                mode === 'compare'
+                  ? 'text-white'
+                  : 'bg-slate-100 text-slate-600'
               }`}
               style={{
-                backgroundColor: mode === 'compare' ? 'var(--ecic-purple)' : undefined,
+                backgroundColor:
+                  mode === 'compare' ? 'var(--ecic-purple)' : undefined,
               }}
             >
               <BarChart3 size={20} />
             </div>
             <div>
-              <h3 className="font-heading font-semibold mb-1">Compare Entities</h3>
+              <h3 className="font-heading font-semibold mb-1">
+                Compare Entities
+              </h3>
               <p className="text-sm text-slate-600">
-                See how content differs across entity types. Compare how approaches
-                vary for endowments, pensions, foundations, etc.
+                See how content differs across entity types. Compare how
+                approaches vary for endowments, pensions, foundations, etc.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Side-by-side view • ✓ Entity-specific content • ✓ Educational insights
+                ✓ Side-by-side view • ✓ Entity-specific content • ✓ Educational
+                insights
               </div>
             </div>
           </div>
         </button>
-
       </div>
 
       {/* Educational reminder */}
-      <div className="mt-4 p-3 rounded-lg border" style={{
-        backgroundColor: 'rgba(245, 158, 11, 0.05)',
-        borderColor: 'var(--ecic-amber)',
-      }}>
-        <p className="text-sm" style={{color: 'var(--text-dark)'}}>
-          <strong>Remember:</strong> Both modes are for educational exploration only.
-          Use these materials to understand investment screening approaches, not as investment advice.
+      <div
+        className="mt-4 p-3 rounded-lg border"
+        style={{
+          backgroundColor: 'rgba(245, 158, 11, 0.05)',
+          borderColor: 'var(--ecic-amber)',
+        }}
+      >
+        <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
+          <strong>Remember:</strong> Both modes are for educational exploration
+          only. Use these materials to understand investment screening
+          approaches, not as investment advice.
         </p>
       </div>
     </div>

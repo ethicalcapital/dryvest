@@ -1,0 +1,15 @@
+{
+  "standard": "WCAG2AA",
+  "reporter": "cli",
+  "level": "error",
+  "threshold": 0,
+  "includeNotices": false,
+  "includeWarnings": true,
+  "wait": 1000,
+  "chromeLaunchConfig": {
+    "ignoreHTTPSErrors": false
+  },
+  "actions": [
+    "wait for element .App to be visible"
+  ]
+}

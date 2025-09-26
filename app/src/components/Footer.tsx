@@ -5,10 +5,11 @@ export function Footer() {
     <footer className="w-full bg-brand-secondary text-white">
       <div className="mx-auto w-full max-w-[1400px] px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-4">Ethical Capital</h3>
+            <h3 className="text-lg font-heading font-semibold mb-4">
+              Ethical Capital
+            </h3>
             <p className="text-sm text-white/80 mb-4">
               Invest Vegan LLC DBA Ethical Capital
             </p>
@@ -66,7 +67,9 @@ export function Footer() {
 
           {/* Actions */}
           <div>
-            <h4 className="text-md font-heading font-semibold mb-4">Get Started</h4>
+            <h4 className="text-md font-heading font-semibold mb-4">
+              Get Started
+            </h4>
             <div className="space-y-3">
               <a
                 href="https://calendly.com/ethical-capital/consultation"
@@ -77,17 +80,18 @@ export function Footer() {
                 Schedule Consultation
               </a>
               <p className="text-xs text-white/60 leading-relaxed">
-                This website is for informational purposes only and does not constitute investment advice.
+                This website is for informational purposes only and does not
+                constitute investment advice.
               </p>
             </div>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-white/20 mt-8 pt-8 text-center">
           <p className="text-sm font-heading text-white/60">
-            © {new Date().getFullYear()} Invest Vegan LLC DBA Ethical Capital. All rights reserved.
+            © {new Date().getFullYear()} Invest Vegan LLC DBA Ethical Capital.
+            All rights reserved.
           </p>
         </div>
       </div>

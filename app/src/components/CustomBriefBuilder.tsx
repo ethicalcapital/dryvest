@@ -17,14 +17,14 @@ export function CustomBriefBuilder({
   context,
   onContextChange,
   selectedKeyPoints,
-  onKeyPointsChange
+  onKeyPointsChange,
 }: CustomBriefBuilderProps) {
-
   // Get all available key points for current context
   const availableKeyPoints = useMemo(() => {
     return dataset.nodes
-      .filter((node): node is Extract<Node, { type: 'key_point' }> =>
-        node.type === 'key_point' && matchesTargets(node.targets, context)
+      .filter(
+        (node): node is Extract<Node, { type: 'key_point' }> =>
+          node.type === 'key_point' && matchesTargets(node.targets, context)
       )
       .sort((a, b) => a.title.localeCompare(b.title));
   }, [dataset, context]);
@@ -47,27 +47,35 @@ export function CustomBriefBuilder({
 
   return (
     <div className="space-y-6">
-
       {/* Context Selection */}
       <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
-        <h3 className="text-lg font-heading font-semibold text-slate-900 mb-4">Your Context</h3>
+        <h3 className="text-lg font-heading font-semibold text-slate-900 mb-4">
+          Your Context
+        </h3>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {/* Identity */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Identity</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Identity
+            </label>
             <select
               value={context.identity || ''}
-              onChange={(e) => onContextChange({ ...context, identity: e.target.value || undefined })}
+              onChange={e =>
+                onContextChange({
+                  ...context,
+                  identity: e.target.value || undefined,
+                })
+              }
               className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
               style={{
                 borderColor: 'var(--border-gray)',
               }}
-              onFocus={(e) => {
+              onFocus={e => {
                 e.target.style.borderColor = 'var(--ecic-purple)';
                 e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
               }}
-              onBlur={(e) => {
+              onBlur={e => {
                 e.target.style.borderColor = 'var(--border-gray)';
                 e.target.style.boxShadow = 'none';
               }}
@@ -87,19 +95,26 @@ export function CustomBriefBuilder({
 
           {/* Audience */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Audience</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Audience
+            </label>
             <select
               value={context.audience || ''}
-              onChange={(e) => onContextChange({ ...context, audience: e.target.value || undefined })}
+              onChange={e =>
+                onContextChange({
+                  ...context,
+                  audience: e.target.value || undefined,
+                })
+              }
               className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
               style={{
                 borderColor: 'var(--border-gray)',
               }}
-              onFocus={(e) => {
+              onFocus={e => {
                 e.target.style.borderColor = 'var(--ecic-purple)';
                 e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
               }}
-              onBlur={(e) => {
+              onBlur={e => {
                 e.target.style.borderColor = 'var(--border-gray)';
                 e.target.style.boxShadow = 'none';
               }}
@@ -114,19 +129,26 @@ export function CustomBriefBuilder({
 
           {/* Venue */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Venue</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Venue
+            </label>
             <select
               value={context.venue || ''}
-              onChange={(e) => onContextChange({ ...context, venue: e.target.value || undefined })}
+              onChange={e =>
+                onContextChange({
+                  ...context,
+                  venue: e.target.value || undefined,
+                })
+              }
               className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
               style={{
                 borderColor: 'var(--border-gray)',
               }}
-              onFocus={(e) => {
+              onFocus={e => {
                 e.target.style.borderColor = 'var(--ecic-purple)';
                 e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
               }}
-              onBlur={(e) => {
+              onBlur={e => {
                 e.target.style.borderColor = 'var(--border-gray)';
                 e.target.style.boxShadow = 'none';
               }}
@@ -142,19 +164,26 @@ export function CustomBriefBuilder({
 
           {/* Level */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Level</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Level
+            </label>
             <select
               value={context.level || ''}
-              onChange={(e) => onContextChange({ ...context, level: e.target.value || undefined })}
+              onChange={e =>
+                onContextChange({
+                  ...context,
+                  level: e.target.value || undefined,
+                })
+              }
               className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
               style={{
                 borderColor: 'var(--border-gray)',
               }}
-              onFocus={(e) => {
+              onFocus={e => {
                 e.target.style.borderColor = 'var(--ecic-purple)';
                 e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
               }}
-              onBlur={(e) => {
+              onBlur={e => {
                 e.target.style.borderColor = 'var(--border-gray)';
                 e.target.style.boxShadow = 'none';
               }}
@@ -171,7 +200,8 @@ export function CustomBriefBuilder({
       <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-heading font-semibold text-slate-900">
-            Choose Key Points ({selectedKeyPoints.length} of {availableKeyPoints.length})
+            Choose Key Points ({selectedKeyPoints.length} of{' '}
+            {availableKeyPoints.length})
           </h3>
           <div className="flex gap-2">
             <button
@@ -198,7 +228,7 @@ export function CustomBriefBuilder({
           </p>
         ) : (
           <div className="grid gap-3">
-            {availableKeyPoints.map((keyPoint) => {
+            {availableKeyPoints.map(keyPoint => {
               const isSelected = selectedKeyPoints.includes(keyPoint.id);
               return (
                 <label
@@ -209,26 +239,36 @@ export function CustomBriefBuilder({
                       : 'border-slate-200 bg-white hover:bg-indigo-50'
                   }`}
                   style={{
-                    borderColor: isSelected ? 'var(--ecic-purple)' : 'var(--border-gray)',
-                    backgroundColor: isSelected ? 'rgba(88, 28, 135, 0.05)' : undefined,
+                    borderColor: isSelected
+                      ? 'var(--ecic-purple)'
+                      : 'var(--border-gray)',
+                    backgroundColor: isSelected
+                      ? 'rgba(88, 28, 135, 0.05)'
+                      : undefined,
                   }}
                 >
                   <div
                     className={`mt-1 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
-                      isSelected
-                        ? 'text-white'
-                        : 'border-slate-300'
+                      isSelected ? 'text-white' : 'border-slate-300'
                     }`}
                     style={{
-                      borderColor: isSelected ? 'var(--ecic-purple)' : 'var(--border-gray)',
-                      backgroundColor: isSelected ? 'var(--ecic-purple)' : undefined,
+                      borderColor: isSelected
+                        ? 'var(--ecic-purple)'
+                        : 'var(--border-gray)',
+                      backgroundColor: isSelected
+                        ? 'var(--ecic-purple)'
+                        : undefined,
                     }}
                   >
                     {isSelected && <Check size={14} />}
                   </div>
                   <div>
-                    <h4 className="font-heading font-medium text-slate-900">{keyPoint.title}</h4>
-                    <p className="text-sm text-slate-600 mt-1">{keyPoint.body}</p>
+                    <h4 className="font-heading font-medium text-slate-900">
+                      {keyPoint.title}
+                    </h4>
+                    <p className="text-sm text-slate-600 mt-1">
+                      {keyPoint.body}
+                    </p>
                   </div>
                   <input
                     type="checkbox"

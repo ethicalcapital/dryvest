@@ -13,7 +13,7 @@ export function GitHubFeedback({
   node,
   size = 'sm',
   showEdit = true,
-  showFeedback = true
+  showFeedback = true,
 }: GitHubFeedbackProps) {
   const editLink = showEdit ? getGitHubEditLink(node) : null;
   const feedbackLink = showFeedback ? getGitHubFeedbackLink(node) : null;
@@ -22,9 +22,10 @@ export function GitHubFeedback({
     return null;
   }
 
-  const linkClass = size === 'sm'
-    ? 'inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-700 transition-colors'
-    : 'inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-800 transition-colors';
+  const linkClass =
+    size === 'sm'
+      ? 'inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-700 transition-colors'
+      : 'inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-800 transition-colors';
 
   const iconSize = size === 'sm' ? 12 : 16;
 
