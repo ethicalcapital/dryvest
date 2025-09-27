@@ -328,6 +328,8 @@ function App() {
         >)
       : undefined;
 
+  const activeVenueSnippet = venueSnippet;
+
   const exportData = useMemo<BriefExportData>(
     () => ({
       meta: {
@@ -346,7 +348,7 @@ function App() {
       screeningNode,
       policyAlignment,
       templates: templateSnippets,
-      venueSnippet,
+      venueSnippet: activeVenueSnippet,
       selectedOnePagers,
       sources: sourceNodes,
       sourceLookup,
@@ -360,6 +362,7 @@ function App() {
       screeningNode,
       policyAlignment,
       templateSnippets,
+      activeVenueSnippet,
       selectedOnePagers,
       sourceNodes,
       sourceLookup,

@@ -40,7 +40,6 @@ export function FactCheckView({ exportData }: FactCheckViewProps) {
       setCopyState('copied');
       window.setTimeout(() => setCopyState('idle'), 2000);
     } catch (error) {
-      console.error('Fact check copy failed', error);
       setErrorMessage(
         error instanceof Error
           ? error.message
@@ -75,7 +74,6 @@ export function FactCheckView({ exportData }: FactCheckViewProps) {
       setDownloadState('success');
       window.setTimeout(() => setDownloadState('idle'), 2000);
     } catch (error) {
-      console.error('Fact check download failed', error);
       setErrorMessage(
         error instanceof Error
           ? error.message
@@ -125,7 +123,6 @@ export function FactCheckView({ exportData }: FactCheckViewProps) {
               type="button"
               onClick={handleCopy}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-indigo-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{ ['--tw-ring-color' as any]: 'var(--ecic-purple)' }}
             >
               <ClipboardCopy size={16} />
               {copyState === 'copied'
@@ -138,7 +135,6 @@ export function FactCheckView({ exportData }: FactCheckViewProps) {
               type="button"
               onClick={handleDownload}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-indigo-600 px-4 py-2 text-sm font-semibold text-indigo-600 transition hover:bg-indigo-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{ ['--tw-ring-color' as any]: 'var(--ecic-purple)' }}
             >
               <Download size={16} />
               {downloadState === 'success'

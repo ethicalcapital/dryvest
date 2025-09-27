@@ -9,3 +9,9 @@ command = "npm --prefix app install && npm --prefix app run build"
 
 [observability.logs]
 enabled = true
+
+[[kv_namespaces]]
+binding = "HOOKS"
+# HOOKS KV namespace (production + preview). Update preview ID if needed.
+id = "caf4e19f1388423fade84340c27a929c"
+preview_id = "caf4e19f1388423fade84340c27a929c"

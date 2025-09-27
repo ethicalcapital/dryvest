@@ -11,6 +11,7 @@ import {
   INSTITUTIONAL_FLASHCARDS,
   buildAnkiTsv,
 } from '../data/institutionalFlashcards';
+import { ContactForm } from './ContactForm';
 
 interface ActionsPanelProps {
   params: BriefParams;
@@ -35,7 +36,9 @@ export function ActionsPanel({
     'idle' | 'success' | 'error'
   >('idle');
   const [downloadError, setDownloadError] = useState<string | null>(null);
-  const focusRingStyles: CSSProperties = { ['--tw-ring-color' as any]: 'var(--ecic-purple)' };
+  const focusRingStyles: CSSProperties & { '--tw-ring-color': string } = {
+    '--tw-ring-color': 'var(--ecic-purple)',
+  };
 
   const handleCopy = async (tone: BriefTone) => {
     try {
@@ -220,6 +223,12 @@ export function ActionsPanel({
           Share feedback
         </a>
       </div>
+      <ContactForm
+        params={params}
+        tone={tone}
+        datasetVersion={exportData.meta.datasetVersion}
+        attachmentCount={selectedDocs.length}
+      />
     </aside>
   );
 }

@@ -20,9 +20,9 @@ export function PDFExportButton({
 }: PDFExportButtonProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const primaryButtonStyles: CSSProperties = {
+  const primaryButtonStyles: CSSProperties & { '--tw-ring-color': string } = {
     backgroundColor: 'var(--ecic-purple)',
-    ['--tw-ring-color' as any]: 'var(--ecic-purple)',
+    '--tw-ring-color': 'var(--ecic-purple)',
   };
 
   const handleExport = async () => {

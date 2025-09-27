@@ -45,7 +45,8 @@ export type AnalyticsEventName =
   | 'brief_built'
   | 'copy_clicked'
   | 'download_clicked'
-  | 'print_clicked';
+  | 'print_clicked'
+  | 'contact_submitted';
 
 export function trackEvent(
   name: AnalyticsEventName,
