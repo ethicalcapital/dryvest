@@ -1,6 +1,6 @@
-import { Zap, Wrench, BarChart3 } from 'lucide-react';
+import { Zap, Wrench, BarChart3, ClipboardList } from 'lucide-react';
 
-export type BriefMode = 'quick' | 'custom' | 'compare';
+export type BriefMode = 'quick' | 'custom' | 'compare' | 'fact_check';
 
 interface ModeSelectorProps {
   mode: BriefMode;
@@ -13,7 +13,7 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
       <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">
         Choose Your Approach
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Quick Brief */}
         <button
           onClick={() => onModeChange('quick')}
@@ -133,6 +133,48 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               </p>
               <div className="mt-2 text-xs text-slate-500">
                 ✓ Standard procedures • ✓ Institution patterns • ✓ Proven processes
+              </div>
+            </div>
+          </div>
+        </button>
+
+        {/* Fact Check */}
+        <button
+          onClick={() => onModeChange('fact_check')}
+          className={`p-4 rounded-lg border-2 text-left transition-all ${
+            mode === 'fact_check'
+              ? 'bg-indigo-50 text-indigo-900'
+              : 'border-slate-200 bg-white hover:bg-indigo-50'
+          }`}
+          style={{
+            borderColor:
+              mode === 'fact_check' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'fact_check' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+          }}
+        >
+          <div className="flex items-start gap-3">
+            <div
+              className={`p-2 rounded-lg ${
+                mode === 'fact_check'
+                  ? 'text-white'
+                  : 'bg-slate-100 text-slate-600'
+              }`}
+              style={{
+                backgroundColor:
+                  mode === 'fact_check' ? 'var(--ecic-purple)' : undefined,
+              }}
+            >
+              <ClipboardList size={20} />
+            </div>
+            <div>
+              <h3 className="font-heading font-semibold mb-1">Fact Check</h3>
+              <p className="text-sm text-slate-600">
+                Export a fully-attributed briefing digest. Audit every claim,
+                citation, template, and attachment before you circulate material.
+              </p>
+              <div className="mt-2 text-xs text-slate-500">
+                ✓ Exhaustive references • ✓ QA checklist • ✓ Parser-friendly syntax
               </div>
             </div>
           </div>

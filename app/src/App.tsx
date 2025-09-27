@@ -10,6 +10,7 @@ import { ActionsPanel } from './components/ActionsPanel';
 import { ModeSelector, type BriefMode } from './components/ModeSelector';
 import { CustomBriefBuilder } from './components/CustomBriefBuilder';
 import { ComparisonView } from './components/ComparisonView';
+import { FactCheckView } from './components/FactCheckView';
 import { ToneToggle, type BriefTone } from './components/ToneToggle';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -345,6 +346,7 @@ function App() {
       screeningNode,
       policyAlignment,
       templates: templateSnippets,
+      venueSnippet,
       selectedOnePagers,
       sources: sourceNodes,
       sourceLookup,
@@ -532,6 +534,10 @@ function App() {
             />
           )}
 
+          {briefMode === 'fact_check' && (
+            <FactCheckView exportData={exportData} />
+          )}
+
           {/* Scenario selection - full width */}
           {briefMode === 'quick' && !selectedScenario && (
               <div className="max-w-4xl mx-auto">
@@ -540,7 +546,8 @@ function App() {
             )}
 
             {/* Main content grid - only show when scenario is selected or not in quick mode */}
-            {(briefMode !== 'quick' || selectedScenario) && (
+            {briefMode !== 'fact_check' &&
+              (briefMode !== 'quick' || selectedScenario) && (
               <div
                 ref={briefMode === 'quick' ? quickStartRef : undefined}
                 className={`grid gap-6 ${

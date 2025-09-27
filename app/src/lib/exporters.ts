@@ -21,6 +21,7 @@ export interface BriefExportData {
   screeningNode?: Extract<Node, { type: 'policy_statement' }>;
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
   templates: Array<Extract<Node, { type: 'template_snippet' }>>;
+  venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
   selectedOnePagers: Array<Extract<Node, { type: 'one_pager' }>>;
   sources: Array<Extract<Node, { type: 'source' }>>;
   sourceLookup: Record<string, Extract<Node, { type: 'source' }>>;
