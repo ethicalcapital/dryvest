@@ -604,6 +604,7 @@ function App() {
                   params={params}
                   selectedDocs={selectedDocs}
                   exportData={exportData}
+                  tone={briefTone}
                 />
               )}
             </div>

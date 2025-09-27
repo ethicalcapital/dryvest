@@ -1,72 +1,93 @@
 import { useState, type CSSProperties } from 'react';
-import { Download } from 'lucide-react';
-import type { BriefExportData } from '../lib/exporters';
+import { Download, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { buildMarkdown, type BriefExportData, type BriefTone } from '../lib/exporters';
+import { exportToPDF, generateTitle } from '../lib/pdf-export';
+import { trackEvent } from '../lib/analytics';
 import type { BriefContext } from '../lib/schema';
 
 interface PDFExportButtonProps {
   context: BriefContext;
   exportData: BriefExportData;
+  tone: BriefTone;
   disabled?: boolean;
 }
 
 export function PDFExportButton({
-  context: _context,
-  exportData: _exportData,
+  context,
+  exportData,
+  tone,
   disabled = false,
 }: PDFExportButtonProps) {
-  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const primaryButtonStyles: CSSProperties = {
     backgroundColor: 'var(--ecic-purple)',
     ['--tw-ring-color' as any]: 'var(--ecic-purple)',
   };
 
-  const handleExport = () => {
-    setShowComingSoon(true);
+  const handleExport = async () => {
+    if (disabled || status === 'loading') return;
+    setErrorMessage(null);
+    setStatus('loading');
+
+    try {
+      const markdown = buildMarkdown(exportData, tone);
+      const title = generateTitle(context);
+      await exportToPDF({
+        title,
+        content: markdown,
+        venue: context.venue ?? 'Strategic Briefing',
+        decisionMaker: context.audience ?? 'Decision Makers',
+        context,
+      });
+      trackEvent('download_clicked', {
+        format: 'pdf',
+        tone,
+        datasetVersion: exportData.meta.datasetVersion,
+      });
+      setStatus('success');
+      window.setTimeout(() => setStatus('idle'), 2000);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'PDF export failed. Please try again.';
+      setErrorMessage(message);
+      setStatus('idle');
+    }
   };
 
   return (
-    <>
+    <div className="space-y-2">
       <button
         onClick={handleExport}
-        disabled={disabled}
+        disabled={disabled || status === 'loading'}
         className="w-full inline-flex items-center justify-center gap-3 rounded-lg px-6 py-4 text-base font-semibold text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2"
         style={primaryButtonStyles}
       >
-        <Download size={20} />
-        Download strategy brief (PDF)
+        {status === 'loading' ? (
+          <Loader2 size={20} className="animate-spin" />
+        ) : (
+          <Download size={20} />
+        )}
+        {status === 'loading'
+          ? 'Generating PDF…'
+          : status === 'success'
+            ? 'PDF ready!'
+            : 'Download strategy brief (PDF)'}
       </button>
 
-      {showComingSoon && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="max-w-lg rounded-lg bg-white p-8 shadow-xl">
-            <h3 className="mb-4 text-xl font-heading font-semibold text-gray-900">
-              PDF export is almost ready
-            </h3>
-            <div className="mb-6 space-y-3 text-base text-gray-700">
-              <p>Thanks for pushing Dryvest forward. The polished PDF handoff is in final QA.</p>
-              <p>
-                We’re sorry it isn’t live today. We&apos;ll email you as soon as the export is ready—very soon.
-                In the meantime, use the copy button to grab the briefing text.
-              </p>
-            </div>
-            <div className="flex gap-4 justify-end">
-              <button
-                onClick={() => setShowComingSoon(false)}
-                className="px-6 py-3 text-base font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => setShowComingSoon(false)}
-                className="px-6 py-3 text-base font-medium text-white rounded-lg hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2"
-                style={primaryButtonStyles}
-              >
-                Awesome, keep me posted
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+      {status === 'success' && !errorMessage ? (
+        <p className="flex items-center gap-2 text-xs font-medium text-green-700">
+          <CheckCircle2 size={14} /> PDF downloaded with Dryvest formatting.
+        </p>
+      ) : null}
+
+      {errorMessage ? (
+        <p className="flex items-center gap-2 text-xs font-medium text-amber-700">
+          <AlertTriangle size={14} /> {errorMessage}
+        </p>
+      ) : null}
+    </div>
   );
 }

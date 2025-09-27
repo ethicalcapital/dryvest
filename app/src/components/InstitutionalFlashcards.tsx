@@ -5,132 +5,30 @@ import {
   ChevronRight,
   CheckCircle,
 } from 'lucide-react';
-
-interface Flashcard {
-  id: string;
-  type: 'definition' | 'comparison' | 'scenario';
-  question: string;
-  answer: string;
-  hint?: string;
-  entities?: string[];
-}
-
-const FLASHCARD_DECK: Flashcard[] = [
-  {
-    id: 'pension_vs_endowment_time',
-    type: 'comparison',
-    question:
-      'What is the key difference in time horizon between a pension fund and an endowment?',
-    answer:
-      'Pensions have defined obligations (20-30 years to beneficiaries), while endowments are perpetual (designed to last forever).',
-    hint: 'Think about when the money needs to be paid out',
-    entities: ['corporate_pension', 'endowment'],
-  },
-  {
-    id: 'endowment_withdrawal',
-    type: 'definition',
-    question:
-      'What is the typical annual withdrawal rate for university endowments?',
-    answer:
-      '4-5% annual spending rate, designed to preserve principal in perpetuity while funding operations.',
-    hint: 'This rate balances current needs with future sustainability',
-  },
-  {
-    id: 'foundation_vs_endowment',
-    type: 'comparison',
-    question:
-      'How do the stakeholders differ between a foundation and an endowment?',
-    answer:
-      'Foundations serve beneficiary communities and social causes, while endowments primarily serve students, faculty, and the academic mission.',
-    hint: "Consider who benefits from each institution's activities",
-    entities: ['foundation', 'endowment'],
-  },
-  {
-    id: 'pension_erisa',
-    type: 'scenario',
-    question:
-      'Why might a corporate pension fund be more conservative about exclusionary screening than an endowment?',
-    answer:
-      'Corporate pensions are bound by ERISA fiduciary duties that require serving participant interests above all else, while endowments have more flexibility for mission alignment.',
-    hint: "Think about legal constraints and who they're legally required to serve",
-    entities: ['corporate_pension'],
-  },
-  {
-    id: 'sovereign_wealth_variety',
-    type: 'definition',
-    question:
-      'What are the three main types of sovereign wealth funds and their different purposes?',
-    answer:
-      'Stabilization funds (counter-cyclical economic support), Savings funds (intergenerational wealth preservation), and Development funds (economic growth and diversification).',
-    hint: 'Think about when and why governments create these funds',
-  },
-  {
-    id: 'public_vs_corporate_pension',
-    type: 'comparison',
-    question:
-      'How does political oversight differ between public and corporate pension funds?',
-    answer:
-      'Public pensions face direct political oversight and public transparency requirements, while corporate pensions are primarily overseen by trustees serving participant interests.',
-    hint: 'Consider who has ultimate authority over decisions',
-    entities: ['public_pension', 'corporate_pension'],
-  },
-  {
-    id: 'insurance_liability_matching',
-    type: 'scenario',
-    question:
-      "Why would an insurance company's investment approach be more constrained than an endowment's?",
-    answer:
-      'Insurance companies must match their investments to policy obligations and claims patterns, while endowments can take a long-term growth approach.',
-    hint: 'Think about predictable vs. unpredictable cash flows',
-    entities: ['insurance', 'endowment'],
-  },
-  {
-    id: 'foundation_distribution',
-    type: 'definition',
-    question:
-      'What is the minimum annual distribution requirement for private foundations?',
-    answer:
-      '5% of assets must be distributed annually for charitable purposes, as required by IRS regulations.',
-    hint: 'This is a legal requirement, not a guideline',
-  },
-  {
-    id: 'central_bank_independence',
-    type: 'scenario',
-    question:
-      'Why might a central bank approach ethical screening differently than a sovereign wealth fund?',
-    answer:
-      'Central banks prioritize monetary policy independence and political neutrality, while sovereign wealth funds can align with national development goals.',
-    hint: 'Consider the importance of perceived political independence',
-    entities: ['central_bank', 'government'],
-  },
-  {
-    id: 'stakeholder_complexity',
-    type: 'comparison',
-    question:
-      'Which institution type typically has the most complex stakeholder environment: endowment, foundation, or public pension?',
-    answer:
-      'Public pensions, because they must balance participants, retirees, taxpayers, legislative bodies, and citizens - all with potential conflicts.',
-    hint: 'Think about who can influence decisions and create pressure',
-    entities: ['public_pension', 'endowment', 'foundation'],
-  },
-];
+import {
+  INSTITUTIONAL_FLASHCARDS,
+  type InstitutionalFlashcard,
+} from '../data/institutionalFlashcards';
 
 export function InstitutionalFlashcards() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [completedCards, setCompletedCards] = useState<Set<string>>(new Set());
 
-  const currentCard = FLASHCARD_DECK[currentCardIndex];
-  const progress = ((currentCardIndex + 1) / FLASHCARD_DECK.length) * 100;
+  const currentCard = INSTITUTIONAL_FLASHCARDS[currentCardIndex];
+  const progress =
+    ((currentCardIndex + 1) / INSTITUTIONAL_FLASHCARDS.length) * 100;
 
   const nextCard = () => {
-    setCurrentCardIndex(prev => (prev + 1) % FLASHCARD_DECK.length);
+    setCurrentCardIndex(prev => (prev + 1) % INSTITUTIONAL_FLASHCARDS.length);
     setShowAnswer(false);
   };
 
   const prevCard = () => {
     setCurrentCardIndex(
-      prev => (prev - 1 + FLASHCARD_DECK.length) % FLASHCARD_DECK.length
+      prev =>
+        (prev - 1 + INSTITUTIONAL_FLASHCARDS.length) %
+        INSTITUTIONAL_FLASHCARDS.length
     );
     setShowAnswer(false);
   };
@@ -146,7 +44,7 @@ export function InstitutionalFlashcards() {
     setCompletedCards(new Set());
   };
 
-  const getCardTypeColor = (type: string) => {
+  const getCardTypeColor = (type: InstitutionalFlashcard['type']) => {
     switch (type) {
       case 'definition':
         return 'bg-blue-100 text-blue-800 border-blue-200';
@@ -187,7 +85,7 @@ export function InstitutionalFlashcards() {
             Review assessment rubric
           </button>
           <span className="text-sm text-slate-600">
-            {currentCardIndex + 1} of {FLASHCARD_DECK.length}
+            {currentCardIndex + 1} of {INSTITUTIONAL_FLASHCARDS.length}
           </span>
           <button
             onClick={resetDeck}
@@ -299,10 +197,12 @@ export function InstitutionalFlashcards() {
       {/* Completion status */}
       <div className="mt-4 flex items-center justify-between text-sm text-slate-600">
         <span>
-          {completedCards.size} of {FLASHCARD_DECK.length} completed
+          {completedCards.size} of {INSTITUTIONAL_FLASHCARDS.length} completed
         </span>
         <span>
-          {Math.round((completedCards.size / FLASHCARD_DECK.length) * 100)}%
+          {Math.round(
+            (completedCards.size / INSTITUTIONAL_FLASHCARDS.length) * 100
+          )}%
           mastery
         </span>
       </div>
