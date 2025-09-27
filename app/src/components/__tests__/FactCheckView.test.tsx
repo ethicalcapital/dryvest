@@ -21,6 +21,15 @@ const baseSource = buildNode({
   citationText: 'Doe, J. (2024). Institutional literacy matters. Journal of Change.',
 });
 
+const assertionRecord = {
+  id: 'assert_benchmark_grade_exclusions',
+  title: 'Benchmark grade exclusions maintain performance',
+  statement:
+    'NBIM maintains benchmark-like performance after exclusions by rebalancing and controlling factor exposures.',
+  evidence: ['src_primary'],
+  confidence: 'high' as const,
+};
+
 const exportData: BriefExportData = {
   meta: {
     identity: 'endowment',
@@ -103,6 +112,8 @@ const exportData: BriefExportData = {
   ],
   sources: [baseSource],
   sourceLookup: { src_primary: baseSource },
+  assertions: [assertionRecord],
+  assertionLookup: { assert_benchmark_grade_exclusions: assertionRecord },
 };
 
 let originalClipboard: Clipboard | undefined;
@@ -143,6 +154,7 @@ describe('FactCheckView', () => {
     expect(screen.getByText(/key points/i).nextSibling).toHaveTextContent('1');
     expect(screen.getByText(/next steps/i).nextSibling).toHaveTextContent('1');
     expect(screen.getByText(/unique sources/i).nextSibling).toHaveTextContent('1');
+    expect(screen.getByText(/assertions linked/i).nextSibling).toHaveTextContent('1');
     expect(screen.getByText(/fact check package/i)).toBeInTheDocument();
   });
 

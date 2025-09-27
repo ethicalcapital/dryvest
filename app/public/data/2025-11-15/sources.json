@@ -1,0 +1,359 @@
+{
+  "version": "2025-11-15",
+  "sources": [
+    {
+      "id": "src_afsc-investigate",
+      "label": "AFSC Investigate",
+      "url": "https://investigate.afsc.org/",
+      "citationText": "American Friends Service Committee. (n.d.). Investigate. https://investigate.afsc.org/"
+    },
+    {
+      "id": "src_un-database-on-settlements",
+      "label": "UN Database on Settlements",
+      "url": "https://digitallibrary.un.org/record/3858277",
+      "citationText": "United Nations Human Rights Office. (n.d.). Database on settlements. https://digitallibrary.un.org/record/3858277"
+    },
+    {
+      "id": "src_ssrn-esg-ratings-divergence",
+      "label": "SSRN: ESG Ratings Divergence",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3438533",
+      "citationText": "Berg, F., Kolbel, J. F., & Rigobon, R. (2020). Aggregate confusion: The divergence of ESG ratings. SSRN. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3438533"
+    },
+    {
+      "id": "src_nbim-responsible-investment",
+      "label": "NBIM Responsible Investment",
+      "url": "https://www.nbim.no/en/responsibility/",
+      "citationText": "Norges Bank Investment Management. (n.d.). Responsible investment. https://www.nbim.no/en/responsibility/"
+    },
+    {
+      "id": "src_nbim-exclusion-of-companies",
+      "label": "NBIM Exclusion of Companies",
+      "url": "https://www.nbim.no/en/responsibility/exclusion-of-companies/",
+      "citationText": "Norges Bank Investment Management. (n.d.). Exclusion of companies. https://www.nbim.no/en/responsibility/exclusion-of-companies/"
+    },
+    {
+      "id": "src_msci-esg-indexes-methodology",
+      "label": "MSCI: ESG Indexes & Methodology",
+      "url": "https://www.msci.com/our-solutions/indexes/esg-indexes",
+      "citationText": "MSCI. (n.d.). ESG indexes & methodology. https://www.msci.com/our-solutions/indexes/esg-indexes"
+    },
+    {
+      "id": "src_ftse-russell-squaring-the-circle-on-carbon-track",
+      "label": "FTSE Russell: Squaring the Circle on Carbon & Tracking Error",
+      "url": "https://www.lseg.com/en/ftse-russell/research/squaring-the-circle-on-carbon",
+      "citationText": "FTSE Russell. (n.d.). Squaring the circle on carbon & tracking error. https://www.lseg.com/en/ftse-russell/research/squaring-the-circle-on-carbon"
+    },
+    {
+      "id": "src_un-pri-fiduciary-duty-in-the-21st-century",
+      "label": "UN PRI: Fiduciary Duty in the 21st Century",
+      "url": "https://www.unpri.org/fiduciary-duty",
+      "citationText": "Principles for Responsible Investment. (2019). Fiduciary duty in the 21st century. https://www.unpri.org/fiduciary-duty"
+    },
+    {
+      "id": "src_us-dol-esg-factors-fact-sheet",
+      "label": "US DOL: ESG Factors Fact Sheet",
+      "url": "https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/retirement-investments-using-esg-factors",
+      "citationText": "U.S. Department of Labor, Employee Benefits Security Administration. (n.d.). Retirement investments using ESG factors: Fact sheet. https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/retirement-investments-using-esg-factors"
+    },
+    {
+      "id": "src_us-dol-esg-guidance",
+      "label": "US DOL ESG Guidance",
+      "url": "https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/retirement-investments-using-esg-factors",
+      "citationText": "U.S. Department of Labor, Employee Benefits Security Administration. (n.d.). Retirement investments using ESG factors: Fact sheet. https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/retirement-investments-using-esg-factors"
+    },
+    {
+      "id": "src_nyu-stern-esg-and-financial-performance",
+      "label": "NYU Stern: ESG and Financial Performance",
+      "url": "https://www.stern.nyu.edu/sites/default/files/assets/documents/NYU-RAM_ESG-Paper_2021%20Rev_0.pdf",
+      "citationText": "Whelan, T., Atz, U., Clark, C., & Van Holt, T. (2021). ESG and financial performance: Uncovering the relationship by aggregating evidence from 1,000-plus studies. NYU Stern Center for Sustainable Business. https://www.stern.nyu.edu/sites/default/files/assets/documents/NYU-RAM_ESG-Paper_2021%20Rev_0.pdf"
+    },
+    {
+      "id": "src_msci-esg-indexes-factsheet",
+      "label": "MSCI ESG Indexes Factsheet",
+      "url": "https://www.msci.com/documents/1296102/17835852/MSCI-ESG-Indexes-Factsheet.pdf",
+      "citationText": "MSCI. (n.d.). MSCI ESG indexes factsheet. https://www.msci.com/documents/1296102/17835852/MSCI-ESG-Indexes-Factsheet.pdf"
+    },
+    {
+      "id": "src_church-of-england-pensions-board-divestment",
+      "label": "Church of England Pensions Board Divestment",
+      "url": "https://www.churchofengland.org/media-and-news/press-releases/church-england-pensions-board-will-disinvest-some-oil-and-gas",
+      "citationText": "Church of England. (2023, June 22). Pensions Board will disinvest some oil and gas. https://www.churchofengland.org/media-and-news/press-releases/church-england-pensions-board-will-disinvest-some-oil-and-gas"
+    },
+    {
+      "id": "src_klp-divests-settlement-companies",
+      "label": "KLP Divests Settlement Companies",
+      "url": "https://www.reuters.com/world/middle-east/norways-klp-divests-16-companies-over-west-bank-settlement-links-2021-07-05/",
+      "citationText": "Reuters. (2021, July 5). Norway's KLP divests 16 companies over West Bank settlement links. https://www.reuters.com/world/middle-east/norways-klp-divests-16-companies-over-west-bank-settlement-links-2021-07-05/"
+    },
+    {
+      "id": "src_akademikerpension-statement",
+      "label": "AkademikerPension Statement",
+      "url": "https://www.akademikerpension.dk/en/news/2023/pension-fund-divests-from-israel",
+      "citationText": "AkademikerPension. (2023). Pension fund divests from Israel. https://www.akademikerpension.dk/en/news/2023/pension-fund-divests-from-israel"
+    },
+    {
+      "id": "src_pfzw-exclusion-decision",
+      "label": "PFZW Exclusion Decision",
+      "url": "https://www.pfzw.nl/english/asset-management/exclusions.html",
+      "citationText": "PFZW. (n.d.). Exclusions. https://www.pfzw.nl/english/asset-management/exclusions.html"
+    },
+    {
+      "id": "src_ethical-capital-investment-screening-policy",
+      "label": "Ethical Capital: Investment Screening Policy",
+      "url": "https://ethicic.com/content/process/screening-policy",
+      "citationText": "Ethical Capital. (n.d.). Investment screening policy. https://ethicic.com/content/process/screening-policy"
+    },
+    {
+      "id": "src_un-guiding-principles-on-business-human-rights",
+      "label": "UN Guiding Principles on Business & Human Rights",
+      "url": "https://www.ohchr.org/en/business-and-human-rights",
+      "citationText": "United Nations. (2011). Guiding principles on business and human rights. https://www.ohchr.org/en/business-and-human-rights"
+    },
+    {
+      "id": "src_koontz-v-watson-opinion",
+      "label": "Koontz v. Watson Opinion",
+      "url": "https://law.justia.com/cases/federal/district-courts/kansas/ksdce/5:2017cv04054/117098/32/",
+      "citationText": "Koontz v. Watson, 283 F. Supp. 3d 1007 (D. Kan. 2018). https://law.justia.com/cases/federal/district-courts/kansas/ksdce/5:2017cv04054/117098/32/"
+    },
+    {
+      "id": "src_moody-s-downgrades-israel",
+      "label": "Moody's Downgrades Israel",
+      "url": "https://www.moodys.com/research/MOODYS-Changes-Israels-outlook-to-negative-affirms-A1-ratings--PR_477284",
+      "citationText": "Moody's Investors Service. (2024, January 6). Moody's changes Israel's outlook to negative, affirms A1 ratings. https://www.moodys.com/research/MOODYS-Changes-Israels-outlook-to-negative-affirms-A1-ratings--PR_477284"
+    },
+    {
+      "id": "src_cuyahoga-county-israel-bond-freeze",
+      "label": "Cuyahoga County Israel Bond Freeze",
+      "url": "https://www.cleveland.com/news/2024/08/cuyahoga-county-treasurer-wont-reinvest-in-israel-bonds.html",
+      "citationText": "Cleveland.com. (2024, August). Cuyahoga County treasurer won't reinvest in Israel bonds. https://www.cleveland.com/news/2024/08/cuyahoga-county-treasurer-wont-reinvest-in-israel-bonds.html"
+    },
+    {
+      "id": "src_jerusalem-declaration-on-antisemitism",
+      "label": "Jerusalem Declaration on Antisemitism",
+      "url": "https://jerusalemdeclaration.org/",
+      "citationText": "Jerusalem Declaration on Antisemitism. (2021). Jerusalem Declaration on Antisemitism. https://jerusalemdeclaration.org/"
+    },
+    {
+      "id": "src_baldassi-v-france-echr",
+      "label": "Baldassi v. France (ECHR)",
+      "url": "https://hudoc.echr.coe.int/eng?i=001-202195",
+      "citationText": "Baldassi and Others v. France, App. No. 15271/16, Eur. Ct. H.R. (2020). https://hudoc.echr.coe.int/eng?i=001-202195"
+    },
+    {
+      "id": "src_naacp-v-claiborne-hardware-458-u-s-886",
+      "label": "NAACP v. Claiborne Hardware (458 U.S. 886)",
+      "url": "https://supreme.justia.com/cases/federal/us/458/886/",
+      "citationText": "NAACP v. Claiborne Hardware Co., 458 U.S. 886 (1982). https://supreme.justia.com/cases/federal/us/458/886/"
+    },
+    {
+      "id": "src_amnesty-israel-s-system-of-apartheid",
+      "label": "Amnesty: Israel's System of Apartheid",
+      "url": "https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/",
+      "citationText": "Amnesty International. (2022). Israel's apartheid against Palestinians: Cruel system of domination and crime against humanity. https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/"
+    },
+    {
+      "id": "src_amawi-v-pflugerville-isd-opinion",
+      "label": "Amawi v. Pflugerville ISD Opinion",
+      "url": "https://www.ca5.uscourts.gov/opinions/pub/19/19-50384-CV0.pdf",
+      "citationText": "Amawi v. Pflugerville Independent School District, 373 F. Supp. 3d 717 (W.D. Tex. 2019). https://www.ca5.uscourts.gov/opinions/pub/19/19-50384-CV0.pdf"
+    },
+    {
+      "id": "src_jordahl-v-brnovich-opinion",
+      "label": "Jordahl v. Brnovich Opinion",
+      "url": "https://cdn.ca9.uscourts.gov/datastore/opinions/2020/01/06/18-16896.pdf",
+      "citationText": "Jordahl v. Brnovich, 779 F. App'x 453 (9th Cir. 2020). https://cdn.ca9.uscourts.gov/datastore/opinions/2020/01/06/18-16896.pdf"
+    },
+    {
+      "id": "src_msci-esg-focus-methodology",
+      "label": "MSCI ESG Focus Methodology",
+      "url": "https://www.msci.com/documents/10199/91d79741-973c-559b-fc60-c47c4085b715",
+      "citationText": "MSCI. (n.d.). ESG Focus indexes methodology. https://www.msci.com/documents/10199/91d79741-973c-559b-fc60-c47c4085b715"
+    },
+    {
+      "id": "src_pew-research-jewish-americans-in-2020",
+      "label": "Pew Research: Jewish Americans in 2020",
+      "url": "https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/",
+      "citationText": "Pew Research Center. (2021). Jewish Americans in 2020. https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/"
+    },
+    {
+      "id": "src_jewish-electorate-institute-2021-poll",
+      "label": "Jewish Electorate Institute 2021 Poll",
+      "url": "https://www.jewishelectorateinstitute.org/2021-national-survey",
+      "citationText": "Jewish Electorate Institute. (2021). National survey of Jewish voters. https://www.jewishelectorateinstitute.org/2021-national-survey"
+    },
+    {
+      "id": "src_jewish-voice-for-peace-about",
+      "label": "Jewish Voice for Peace: About",
+      "url": "https://www.jewishvoiceforpeace.org/about/",
+      "citationText": "Jewish Voice for Peace. (n.d.). About Jewish Voice for Peace. https://www.jewishvoiceforpeace.org/about/"
+    },
+    {
+      "id": "src_ifnotnow-mission",
+      "label": "IfNotNow Mission",
+      "url": "https://www.ifnotnowmovement.org/mission",
+      "citationText": "IfNotNow. (n.d.). Mission. https://www.ifnotnowmovement.org/mission"
+    },
+    {
+      "id": "src_what-i-d-tell-your-cio-about-divestment",
+      "label": "What I'd Tell Your CIO about Divestment",
+      "url": "https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
+      "citationText": "Ethical Capital. (2023). What I'd tell your CIO about divestment. https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment"
+    },
+    {
+      "id": "src_mdpi-esg-scores-and-stock-returns",
+      "label": "MDPI: ESG Scores and Stock Returns",
+      "url": "https://www.mdpi.com/1911-8074/18/7/367",
+      "citationText": "Escobar-Saldivar, L. J., Villarreal-Samaniego, D., & Santillan-Salgado, R. J. (2025). The effects of ESG scores and ESG momentum on stock returns and volatility: Evidence from U.S. markets. Journal of Risk and Financial Management, 18(7), Article 367. https://www.mdpi.com/1911-8074/18/7/367"
+    },
+    {
+      "id": "src_nbim-exclusion-decisions",
+      "label": "NBIM Exclusion Decisions",
+      "url": "https://www.nbim.no/en/responsibility/exclusion-of-companies/",
+      "citationText": "Norges Bank Investment Management. (n.d.). Exclusion decisions. https://www.nbim.no/en/responsibility/exclusion-of-companies/"
+    },
+    {
+      "id": "src_uc-regents-investment-policy",
+      "label": "UC Regents Investment Policy",
+      "url": "https://regents.universityofcalifornia.edu/governance/policies/6106.html",
+      "citationText": "University of California Regents. (2023). Policy 6106: Policy on sustainable investing. https://regents.universityofcalifornia.edu/governance/policies/6106.html"
+    },
+    {
+      "id": "src_jury-awards-miller-vs-caterpillar",
+      "label": "Jury Awards Miller vs. Caterpillar",
+      "url": "https://natlawreview.com/article/jury-awards-miller-over-74-million-caterpillar-s-misappropriation-and-misuse",
+      "citationText": "The National Law Review. (2015, July 2). Jury awards Miller over $74 million in Caterpillar's misappropriation and misuse case. https://natlawreview.com/article/jury-awards-miller-over-74-million-caterpillar-s-misappropriation-and-misuse"
+    },
+    {
+      "id": "src_caterpillar-stock-reaction-to-nbim-exclusion",
+      "label": "Caterpillar Stock Reaction to NBIM Exclusion",
+      "url": "https://stocktwits.com/news-articles/markets/equity/caterpillar-stock-slips-premarket-after-norway-s-2-trillion-sovereign-fund-excludes-firm-over-gaza-war-concerns/chsHqQlRdj5",
+      "citationText": "Stocktwits News. (2024, May). Caterpillar stock slips premarket after Norway's sovereign fund excludes firm over Gaza war concerns. https://stocktwits.com/news-articles/markets/equity/caterpillar-stock-slips-premarket-after-norway-s-2-trillion-sovereign-fund-excludes-firm-over-gaza-war-concerns/chsHqQlRdj5"
+    },
+    {
+      "id": "src_evergreen-state-agreement",
+      "label": "Evergreen State Agreement",
+      "url": "https://www.seattlemet.com/news-and-city-life/2024/05/evergreen-state-college-protest-encampment-divestment",
+      "citationText": "Seattle Met. (2024, May 10). Evergreen State College protest encampment reaches divestment agreement. https://www.seattlemet.com/news-and-city-life/2024/05/evergreen-state-college-protest-encampment-divestment"
+    },
+    {
+      "id": "src_ssrn-trustworthy-esg-ratings",
+      "label": "SSRN: Trustworthy ESG Ratings",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3380835",
+      "citationText": "Christensen, D. M., Serafeim, G., & Sikochi, A. (2020). Why is corporate virtue in the eye of the beholder? The case of ESG ratings. SSRN. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3380835"
+    },
+    {
+      "id": "src_union-theological-seminary-divestment",
+      "label": "Union Theological Seminary Divestment",
+      "url": "https://utsnyc.edu/union-divests-war-in-palestine/",
+      "citationText": "Union Theological Seminary. (2023). Union divests for war in Palestine. https://utsnyc.edu/union-divests-war-in-palestine/"
+    },
+    {
+      "id": "src_sfsu-foundation-policy-update",
+      "label": "SFSU Foundation Policy Update",
+      "url": "https://www.sfchronicle.com/education/article/SFSU-Israel-divestment-19478780.php",
+      "citationText": "San Francisco Chronicle. (2024). SFSU foundation policy update allows divestment. https://www.sfchronicle.com/education/article/SFSU-Israel-divestment-19478780.php"
+    },
+    {
+      "id": "src_free-money-podcast-divestment-without-dissonance",
+      "label": "Free Money Podcast: Divestment Without Dissonance",
+      "url": "https://freemoneypodcast.com/p/divestment-without-dissonance",
+      "citationText": "Free Money Podcast. (2023, May 19). Divestment without dissonance [Audio podcast]. https://freemoneypodcast.com/p/divestment-without-dissonance"
+    },
+    {
+      "id": "src_msci-esg-index-construction",
+      "label": "MSCI ESG Index Construction",
+      "url": "https://www.msci.com/our-solutions/indexes/esg-indexes",
+      "citationText": "MSCI. (n.d.). ESG index construction methodology. https://www.msci.com/our-solutions/indexes/esg-indexes"
+    },
+    {
+      "id": "src_un-pri-fiduciary-duty",
+      "label": "UN PRI: Fiduciary Duty",
+      "url": "https://www.unpri.org/fiduciary-duty",
+      "citationText": "Principles for Responsible Investment. (2019). Fiduciary duty in the 21st century. https://www.unpri.org/fiduciary-duty"
+    },
+    {
+      "id": "src_oxford-ssee-research",
+      "label": "Oxford SSEE Research",
+      "url": "https://www.smithschool.ox.ac.uk/research/sustainable-finance",
+      "citationText": "University of Oxford, Smith School of Enterprise and the Environment. (n.d.). Sustainable finance research. https://www.smithschool.ox.ac.uk/research/sustainable-finance"
+    },
+    {
+      "id": "src_msci-portfolio-construction",
+      "label": "MSCI Portfolio Construction",
+      "url": "https://www.msci.com/our-solutions/indexes/esg-indexes",
+      "citationText": "MSCI. (n.d.). Portfolio construction solutions. https://www.msci.com/our-solutions/indexes/esg-indexes"
+    },
+    {
+      "id": "src_ssrn-impact-of-esg-rating-changes",
+      "label": "SSRN: Impact of ESG Rating Changes",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3722087",
+      "citationText": "Luo, R., & Balvers, R. (2021). Socially responsible investing with ESG rating dynamics. SSRN. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3722087"
+    },
+    {
+      "id": "src_cio-letter-ethical-capital",
+      "label": "CIO Letter (Ethical Capital)",
+      "url": "https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
+      "citationText": "Ethical Capital. (2023). CIO letter: What I'd tell your CIO about divestment. https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
+      "tags": [
+        "cio"
+      ]
+    },
+    {
+      "id": "src_ethical-capital-screening-policy",
+      "label": "Ethical Capital — Screening Policy",
+      "url": "https://ethicic.com/content/process/screening-policy",
+      "citationText": "Ethical Capital. (n.d.). Investment screening policy. https://ethicic.com/content/process/screening-policy"
+    },
+    {
+      "id": "src_oxford-sustainable-finance-divestment-research",
+      "label": "Oxford Sustainable Finance: Divestment Research",
+      "url": "https://www.smithschool.ox.ac.uk/research/sustainable-finance",
+      "citationText": "University of Oxford, Smith School of Enterprise and the Environment. (n.d.). Sustainable finance research. https://www.smithschool.ox.ac.uk/research/sustainable-finance"
+    },
+    {
+      "id": "src_blackrock-portfolio-construction",
+      "label": "BlackRock: Portfolio Construction",
+      "url": "https://www.blackrock.com/institutions/en-us/insights/portfolio-design",
+      "citationText": "BlackRock. (n.d.). Portfolio construction for sustainable investing. https://www.blackrock.com/institutions/en-us/insights/portfolio-design"
+    },
+    {
+      "id": "src_afsc-investigate-database",
+      "label": "AFSC Investigate Database",
+      "url": "https://investigate.afsc.org/",
+      "citationText": "American Friends Service Committee. (n.d.). Investigate database. https://investigate.afsc.org/"
+    },
+    {
+      "id": "src_texas-government-code-chapter-808",
+      "label": "Texas Government Code Chapter 808",
+      "url": "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.808.htm",
+      "citationText": "Texas Legislature. (2017). Texas Government Code, Chapter 808: Prohibition on investment in companies that boycott Israel. https://statutes.capitol.texas.gov/Docs/GV/htm/GV.808.htm"
+    },
+    {
+      "id": "src_ssrn-investor-identity-4324537",
+      "label": "SSRN: Investor Identity (4324537)",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4324537",
+      "citationText": "Levine, R. D. (2023). Investor identity and fiduciary duty. SSRN. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4324537",
+      "tags": [
+        "further_reading"
+      ]
+    },
+    {
+      "id": "src_cfa-institute-seven-kinds-of-asset-owner-institu",
+      "label": "CFA Institute: Seven Kinds of Asset Owner Institutions",
+      "url": "https://blogs.cfainstitute.org/investor/2018/02/20/the-seven-kinds-of-asset-owner-institutions/",
+      "citationText": "CFA Institute. (2018, February 20). The seven kinds of asset owner institutions. https://blogs.cfainstitute.org/investor/2018/02/20/the-seven-kinds-of-asset-owner-institutions/",
+      "tags": [
+        "further_reading"
+      ]
+    },
+    {
+      "id": "src_what-i-d-tell-your-cio-about-divestment",
+      "label": "What I’d Tell Your CIO about Divestment",
+      "url": "https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
+      "citationText": "Ethical Capital. (2023). What I'd tell your CIO about divestment. https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
+      "tags": [
+        "further_reading"
+      ]
+    }
+  ]
+}

@@ -59,7 +59,20 @@ const pickScreeningBody = (
 
 export function buildFactCheckReport(data: BriefExportData): string {
   const lines: string[] = [];
-  const { meta, context, opener, guide, keyPoints, nextSteps, templates, selectedOnePagers, sources, sourceLookup } = data;
+  const {
+    meta,
+    context,
+    opener,
+    guide,
+    keyPoints,
+    nextSteps,
+    templates,
+    selectedOnePagers,
+    sources,
+    sourceLookup,
+    assertions,
+    assertionLookup,
+  } = data;
 
   lines.push('=== FACT CHECK PACKAGE ===');
   lines.push(`DATASET_VERSION: ${meta.datasetVersion}`);
@@ -76,6 +89,7 @@ export function buildFactCheckReport(data: BriefExportData): string {
   lines.push(`  TEMPLATES: ${templates.length}`);
   lines.push(`  ATTACHMENTS: ${selectedOnePagers.length}`);
   lines.push(`  SOURCES: ${sources.length}`);
+  lines.push(`  ASSERTIONS: ${assertions.length}`);
   lines.push('');
 
   if (opener) {
@@ -102,6 +116,27 @@ export function buildFactCheckReport(data: BriefExportData): string {
       appendMultiline(lines, '  TITLE', point.title);
       appendMultiline(lines, '  ASSERTION', point.body);
       appendCitations(lines, '  CITATIONS', point.citations, sourceLookup);
+      if (point.assertions?.length) {
+        lines.push('  ASSERTION_LINKS:');
+        point.assertions.forEach((assertionId, idx) => {
+          const assertion = assertionLookup[assertionId];
+          if (!assertion) return;
+          lines.push(`    - ASSERTION_${idx + 1}: ${assertion.id}`);
+          appendMultiline(lines, '      TITLE', assertion.title);
+          appendMultiline(lines, '      STATEMENT', assertion.statement);
+          if (assertion.confidence) {
+            lines.push(`      CONFIDENCE: ${assertion.confidence}`);
+          }
+          if (assertion.evidence.length) {
+            lines.push('      EVIDENCE:');
+            assertion.evidence.forEach(sourceId => {
+              const source = sourceLookup[sourceId];
+              if (!source) return;
+              lines.push(`        - [${source.id}] ${asCitationText(source)}`);
+            });
+          }
+        });
+      }
       lines.push('');
     });
   }

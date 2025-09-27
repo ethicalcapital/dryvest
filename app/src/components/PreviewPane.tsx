@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown';
-import type { BriefContext, Node } from '../lib/schema';
+import type { BriefContext, Node, SourceRecord } from '../lib/schema';
 import { GitHubFeedback } from './GitHubFeedback';
 
 interface PreviewPaneProps {
@@ -8,13 +8,13 @@ interface PreviewPaneProps {
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Extract<Node, { type: 'key_point' }>[];
   nextSteps: Extract<Node, { type: 'next_step' }>[];
-  sources: Extract<Node, { type: 'source' }>[];
+  sources: SourceRecord[];
   screeningNode?: Extract<Node, { type: 'policy_statement' }>;
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
   venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
   templates: Extract<Node, { type: 'template_snippet' }>[];
   selectedOnePagers: Extract<Node, { type: 'one_pager' }>[];
-  sourceLookup: Record<string, Extract<Node, { type: 'source' }>>;
+  sourceLookup: Record<string, SourceRecord>;
 }
 
 const sectionClass =
@@ -57,7 +57,7 @@ function Section({
 
 function renderCitations(
   ids: string[] | undefined,
-  sourceLookup: Record<string, Extract<Node, { type: 'source' }>>
+  sourceLookup: Record<string, SourceRecord>
 ) {
   if (!ids?.length) return null;
   return (

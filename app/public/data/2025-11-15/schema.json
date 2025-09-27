@@ -1,0 +1,27 @@
+{
+  "version": "2025-11-15",
+  "createdAt": "2025-11-15T00:00:00.000Z",
+  "taxonomies": {
+    "identity": [
+      "individual",
+      "swf",
+      "public_pension",
+      "corporate_pension",
+      "endowment",
+      "foundation",
+      "insurance",
+      "central_bank",
+      "government"
+    ],
+    "audience": [
+      "individuals",
+      "staff",
+      "consultants",
+      "boards"
+    ],
+    "level": [
+      "plain",
+      "technical"
+    ]
+  }
+}

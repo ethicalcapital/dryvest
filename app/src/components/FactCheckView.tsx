@@ -83,7 +83,7 @@ export function FactCheckView({ exportData }: FactCheckViewProps) {
     }
   };
 
-  const { keyPoints, nextSteps, sources } = exportData;
+  const { keyPoints, nextSteps, sources, assertions } = exportData;
 
   return (
     <div className="mt-8 space-y-4">
@@ -114,6 +114,10 @@ export function FactCheckView({ exportData }: FactCheckViewProps) {
               <div>
                 <dt className="font-medium text-slate-600">Unique sources</dt>
                 <dd>{sources.length}</dd>
+              </div>
+              <div>
+                <dt className="font-medium text-slate-600">Assertions linked</dt>
+                <dd>{assertions.length}</dd>
               </div>
             </dl>
           </div>

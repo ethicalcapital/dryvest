@@ -47,6 +47,7 @@ export const KeyPointNodeSchema = BaseNodeSchema.extend({
   title: z.string(),
   body: z.string(),
   citations: z.array(z.string()).optional(),
+  assertions: z.array(z.string()).optional(),
 });
 
 const PolicyVariantSchema = z.object({
@@ -144,6 +145,8 @@ export const ManifestSchema = z.object({
   schema: z.string(),
   nodes: z.string(),
   playlists: z.string(),
+  sources: z.string().optional(),
+  assertions: z.string().optional(),
   source: z.string().optional(),
   fallbackVersion: z.string().optional(),
 });
@@ -165,13 +168,61 @@ export const SchemaDocumentSchema = z.object({
 
 export type SchemaDocument = z.infer<typeof SchemaDocumentSchema>;
 
+export const SourceRecordSchema = z
+  .object({
+    id: z.string(),
+    label: z.string(),
+    url: z.string().url(),
+    citationText: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  })
+  .strict();
+
+export type SourceRecord = z.infer<typeof SourceRecordSchema>;
+
+export const SourcesDocumentSchema = z.object({
+  version: z.string(),
+  sources: z.array(SourceRecordSchema),
+});
+
+export type SourcesDocument = z.infer<typeof SourcesDocumentSchema>;
+
+export const AssertionRecordSchema = z
+  .object({
+    id: z.string(),
+    title: z.string(),
+    statement: z.string(),
+    evidence: z.array(z.string()).min(1),
+    supports: z.array(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+    confidence: z.enum(['low', 'medium', 'high']).optional(),
+    author: z.string().optional(),
+    reviewer: z.string().optional(),
+    lastReviewed: z.string().optional(),
+    notes: z.string().optional(),
+  })
+  .strict();
+
+export type AssertionRecord = z.infer<typeof AssertionRecordSchema>;
+
+export const AssertionsDocumentSchema = z.object({
+  version: z.string(),
+  assertions: z.array(AssertionRecordSchema),
+});
+
+export type AssertionsDocument = z.infer<typeof AssertionsDocumentSchema>;
+
 export interface Dataset {
   version: string;
   manifest: Manifest;
   schema: SchemaDocument;
   nodes: Node[];
   playlists: Playlist[];
+  sources: SourceRecord[];
+  assertions: AssertionRecord[];
   nodeIndex: Record<string, Node>;
+  sourceIndex: Record<string, SourceRecord>;
+  assertionIndex: Record<string, AssertionRecord>;
   playlistById: Record<string, Playlist>;
   playlistsByKind: Record<string, Playlist[]>;
 }

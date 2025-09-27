@@ -1,4 +1,9 @@
-import type { BriefContext, Node } from './schema';
+import type {
+  AssertionRecord,
+  BriefContext,
+  Node,
+  SourceRecord,
+} from './schema';
 
 export type BriefTone = 'plain' | 'technical';
 
@@ -23,8 +28,10 @@ export interface BriefExportData {
   templates: Array<Extract<Node, { type: 'template_snippet' }>>;
   venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
   selectedOnePagers: Array<Extract<Node, { type: 'one_pager' }>>;
-  sources: Array<Extract<Node, { type: 'source' }>>;
-  sourceLookup: Record<string, Extract<Node, { type: 'source' }>>;
+  sources: SourceRecord[];
+  sourceLookup: Record<string, SourceRecord>;
+  assertions: AssertionRecord[];
+  assertionLookup: Record<string, AssertionRecord>;
 }
 
 // Tufte-style layout helpers for PDF export
@@ -36,21 +43,19 @@ const divider = (label: string) => `## ${label}`;
 
 const gatherCitations = (
   ids: string[] | undefined,
-  lookup: Record<string, Extract<Node, { type: 'source' }>>
+  lookup: Record<string, SourceRecord>
 ) =>
   (ids ?? [])
     .map(id => lookup[id])
-    .filter((source): source is Extract<Node, { type: 'source' }> =>
-      Boolean(source)
-    );
+    .filter((source): source is SourceRecord => Boolean(source));
 
-const formatCitationText = (source: Extract<Node, { type: 'source' }>) =>
+const formatCitationText = (source: SourceRecord) =>
   source.citationText ?? `${source.label}. ${source.url}`;
 
-const formatCitationList = (
-  sources: Array<Extract<Node, { type: 'source' }>>
-) =>
-  sources.length ? sources.map(source => `- ${formatCitationText(source)}`).join('\n') : undefined;
+const formatCitationList = (sources: SourceRecord[]) =>
+  sources.length
+    ? sources.map(source => `- ${formatCitationText(source)}`).join('\n')
+    : undefined;
 
 const pickScreeningBody = (
   node: Extract<Node, { type: 'policy_statement' }> | undefined,

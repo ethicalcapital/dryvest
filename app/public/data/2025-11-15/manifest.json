@@ -1,0 +1,9 @@
+{
+  "version": "2025-11-15",
+  "schema": "schema.json",
+  "nodes": "nodes.json",
+  "playlists": "playlists.json",
+  "source": "content/bds_pack.json",
+  "sources": "sources.json",
+  "assertions": "assertions.json"
+}

@@ -1,0 +1,65 @@
+{
+  "version": "2025-11-15",
+  "assertions": [
+    {
+      "id": "assert_benchmark_grade_exclusions",
+      "title": "Benchmark-grade exclusions maintain performance",
+      "statement": "Large public asset owners such as NBIM maintain benchmark-like performance after conduct-based exclusions by rebalancing and controlling factor exposures.",
+      "evidence": [
+        "src_nbim-responsible-investment",
+        "src_nbim-exclusion-of-companies"
+      ],
+      "supports": [
+        "kp_professional-exclusions-maintain-benchmark-like-performance"
+      ],
+      "confidence": "high",
+      "tags": [
+        "benchmarking",
+        "exclusions"
+      ],
+      "author": "ethical-capital",
+      "lastReviewed": "2025-11-15",
+      "reviewer": "dryvest-editorial"
+    },
+    {
+      "id": "assert_tracking_error_controls",
+      "title": "Tracking error can be budgeted and controlled",
+      "statement": "Index providers (MSCI, FTSE Russell) document exclusion methodologies that explicitly budget tracking error and maintain target factor exposures.",
+      "evidence": [
+        "src_msci-esg-indexes-methodology",
+        "src_ftse-russell-squaring-the-circle-on-carbon-track"
+      ],
+      "supports": [
+        "kp_tracking-error-and-factor-neutrality"
+      ],
+      "confidence": "medium",
+      "tags": [
+        "portfolio-engineering",
+        "tracking-error"
+      ],
+      "author": "ethical-capital",
+      "lastReviewed": "2025-11-15",
+      "reviewer": "dryvest-editorial"
+    },
+    {
+      "id": "assert_modern_fiduciary_guidance",
+      "title": "Modern fiduciary guidance recognizes ESG materiality",
+      "statement": "UN PRI and US DOL guidance clarify that material ESG factors and client objectives can be incorporated without abandoning prudent, return-seeking management.",
+      "evidence": [
+        "src_un-pri-fiduciary-duty-in-the-21st-century",
+        "src_us-dol-esg-factors-fact-sheet"
+      ],
+      "supports": [
+        "kp_fiduciary-duty-and-values-alignment"
+      ],
+      "confidence": "medium",
+      "tags": [
+        "fiduciary",
+        "policy"
+      ],
+      "author": "ethical-capital",
+      "lastReviewed": "2025-11-15",
+      "reviewer": "dryvest-editorial"
+    }
+  ]
+}

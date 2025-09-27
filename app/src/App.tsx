@@ -29,10 +29,9 @@ import {
   resolveOpener,
   resolvePlaylistNodes,
   selectPlaylistByKind,
-  uniqueNodes,
 } from './lib/resolve';
 
-const DATASET_VERSION = '2025-09-25';
+const DATASET_VERSION = '2025-11-15';
 const DEFAULT_PLAYLIST_ID = 'brief_key_points_default';
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
 
@@ -61,11 +60,6 @@ const toNextStepNodes = (nodes: Node[]) =>
   nodes.filter(
     (node): node is Extract<Node, { type: 'next_step' }> =>
       node.type === 'next_step'
-  );
-
-const toSourceNodes = (nodes: Node[]) =>
-  nodes.filter(
-    (node): node is Extract<Node, { type: 'source' }> => node.type === 'source'
   );
 
 function App() {
@@ -255,25 +249,62 @@ function App() {
     return toNextStepNodes(nodes);
   }, [dataset, context]);
 
+  const sourceLookup = dataset?.sourceIndex ?? {};
+
+  const screeningNode =
+    dataset?.nodeIndex['policy_screening_knowledge']?.type ===
+    'policy_statement'
+      ? (dataset.nodeIndex['policy_screening_knowledge'] as Extract<
+          Node,
+          { type: 'policy_statement' }
+        >)
+      : undefined;
+
+  const policyAlignment =
+    dataset?.nodeIndex['policy_alignment']?.type === 'policy_statement'
+      ? (dataset.nodeIndex['policy_alignment'] as Extract<
+          Node,
+          { type: 'policy_statement' }
+        >)
+      : undefined;
+
   const sourceNodes = useMemo(() => {
-    if (!dataset) return [];
-    const { nodes } = resolveByKind(dataset, 'sources', context);
-    return uniqueNodes(toSourceNodes(nodes));
-  }, [dataset, context]);
+    const datasetRef = dataset;
+    if (!datasetRef) return [];
 
-  const allSourceNodes = useMemo(
-    () =>
-      dataset?.nodes.filter(
-        (node): node is Extract<Node, { type: 'source' }> =>
-          node.type === 'source'
-      ) ?? [],
-    [dataset]
-  );
+    const ids = new Set<string>();
 
-  const sourceLookup = useMemo(
-    () => Object.fromEntries(allSourceNodes.map(node => [node.id, node])),
-    [allSourceNodes]
-  );
+    const collectCitations = (citations?: string[]) => {
+      citations?.forEach(id => ids.add(id));
+    };
+
+    keyPointNodes.forEach(point => collectCitations(point.citations));
+    collectCitations(policyAlignment?.citations);
+    collectCitations(screeningNode?.citations);
+
+    const sourcesPlaylist = selectPlaylistByKind(
+      datasetRef.playlistsByKind,
+      'sources',
+      context
+    );
+
+    if (sourcesPlaylist) {
+      sourcesPlaylist.items.forEach(item => {
+        if (item.conditions && !matchesTargets(item.conditions, context)) {
+          return;
+        }
+        ids.add(item.ref);
+      });
+    }
+
+    const records = Array.from(ids)
+      .map(id => datasetRef.sourceIndex[id])
+      .filter(
+        (record): record is (typeof datasetRef.sources)[number] => Boolean(record)
+      );
+
+    return records.length ? records : datasetRef.sources;
+  }, [dataset, keyPointNodes, policyAlignment, screeningNode, context]);
 
   const opener = useMemo(
     () => (dataset ? resolveOpener(dataset, context) : undefined),
@@ -311,23 +342,6 @@ function App() {
       Boolean(node.lines?.length)
   );
 
-  const screeningNode =
-    dataset?.nodeIndex['policy_screening_knowledge']?.type ===
-    'policy_statement'
-      ? (dataset.nodeIndex['policy_screening_knowledge'] as Extract<
-          Node,
-          { type: 'policy_statement' }
-        >)
-      : undefined;
-
-  const policyAlignment =
-    dataset?.nodeIndex['policy_alignment']?.type === 'policy_statement'
-      ? (dataset.nodeIndex['policy_alignment'] as Extract<
-          Node,
-          { type: 'policy_statement' }
-        >)
-      : undefined;
-
   const activeVenueSnippet = venueSnippet;
 
   const exportData = useMemo<BriefExportData>(
@@ -352,6 +366,8 @@ function App() {
       selectedOnePagers,
       sources: sourceNodes,
       sourceLookup,
+      assertions: dataset?.assertions ?? [],
+      assertionLookup: dataset?.assertionIndex ?? {},
     }),
     [
       context,

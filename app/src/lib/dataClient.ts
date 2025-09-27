@@ -4,8 +4,18 @@ import {
   NodesDocumentSchema,
   PlaylistsDocumentSchema,
   SchemaDocumentSchema,
+  SourcesDocumentSchema,
+  AssertionsDocumentSchema,
 } from './schema';
-import type { Dataset, Manifest, SchemaDocument } from './schema';
+import type {
+  Dataset,
+  Manifest,
+  SchemaDocument,
+  SourceRecord,
+  SourcesDocument,
+  AssertionRecord,
+  AssertionsDocument,
+} from './schema';
 
 const DATA_BASE_PATH = '/data';
 
@@ -57,12 +67,30 @@ function buildDataset(
   manifest: Manifest,
   schemaDoc: SchemaDocument,
   nodesDoc: z.infer<typeof NodesDocumentSchema>,
-  playlistsDoc: z.infer<typeof PlaylistsDocumentSchema>
+  playlistsDoc: z.infer<typeof PlaylistsDocumentSchema>,
+  sourcesDoc?: SourcesDocument,
+  assertionsDoc?: AssertionsDocument
 ): Dataset {
   indexPlaylists(nodesDoc.version, manifest.version, schemaDoc);
+  const filteredNodes = nodesDoc.nodes.filter(node => node.type !== 'source');
+
+  const sources: SourceRecord[] = sourcesDoc
+    ? sourcesDoc.sources
+    : nodesDoc.nodes
+        .filter(node => node.type === 'source')
+        .map(node => ({
+          id: node.id,
+          label: (node as any).label,
+          url: (node as any).url,
+          citationText: (node as any).citationText,
+        }));
+
+  const assertions: AssertionRecord[] = assertionsDoc
+    ? assertionsDoc.assertions
+    : [];
 
   const nodeIndex = Object.fromEntries(
-    nodesDoc.nodes.map(node => [node.id, node])
+    filteredNodes.map(node => [node.id, node])
   );
   const playlistById = Object.fromEntries(
     playlistsDoc.playlists.map(playlist => [playlist.id, playlist])
@@ -81,9 +109,13 @@ function buildDataset(
     version: manifest.version,
     manifest,
     schema: schemaDoc,
-    nodes: nodesDoc.nodes,
+    nodes: filteredNodes,
     playlists: playlistsDoc.playlists,
+    sources,
+    assertions,
     nodeIndex,
+    sourceIndex: Object.fromEntries(sources.map(source => [source.id, source])),
+    assertionIndex: Object.fromEntries(assertions.map(assertion => [assertion.id, assertion])),
     playlistById,
     playlistsByKind,
   };
@@ -111,14 +143,35 @@ export async function loadDataset(
   const nodesUrl = `${basePath}/${version}/${manifest.nodes}`;
   const playlistsUrl = `${basePath}/${version}/${manifest.playlists}`;
 
-  try {
-    const [schemaDoc, nodesDoc, playlistsDoc] = await Promise.all([
-      fetchJson(schemaUrl, SchemaDocumentSchema),
-      fetchJson(nodesUrl, NodesDocumentSchema),
-      fetchJson(playlistsUrl, PlaylistsDocumentSchema),
-    ]);
+  const sourcesUrl = manifest.sources
+    ? `${basePath}/${version}/${manifest.sources}`
+    : undefined;
+  const assertionsUrl = manifest.assertions
+    ? `${basePath}/${version}/${manifest.assertions}`
+    : undefined;
 
-    return buildDataset(manifest, schemaDoc, nodesDoc, playlistsDoc);
+  try {
+    const [schemaDoc, nodesDoc, playlistsDoc, sourcesDoc, assertionsDoc] =
+      await Promise.all([
+        fetchJson(schemaUrl, SchemaDocumentSchema),
+        fetchJson(nodesUrl, NodesDocumentSchema),
+        fetchJson(playlistsUrl, PlaylistsDocumentSchema),
+        sourcesUrl
+          ? fetchJson(sourcesUrl, SourcesDocumentSchema)
+          : Promise.resolve(undefined),
+        assertionsUrl
+          ? fetchJson(assertionsUrl, AssertionsDocumentSchema)
+          : Promise.resolve(undefined),
+      ]);
+
+    return buildDataset(
+      manifest,
+      schemaDoc,
+      nodesDoc,
+      playlistsDoc,
+      sourcesDoc,
+      assertionsDoc
+    );
   } catch (error) {
     if (manifest.fallbackVersion && manifest.fallbackVersion !== version) {
       return loadDataset(manifest.fallbackVersion, options);
