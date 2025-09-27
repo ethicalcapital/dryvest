@@ -542,7 +542,7 @@ function App() {
 
           {/* Comparison View (only in compare mode) */}
           {briefMode === 'compare' && dataset && (
-            <ComparisonView dataset={dataset} />
+            <ComparisonView dataset={dataset} context={context} />
           )}
 
           {/* Tone Toggle - only show for quick and custom modes */}

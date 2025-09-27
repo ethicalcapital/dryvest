@@ -2,7 +2,7 @@ import { useMemo, useId } from 'react';
 import { Check } from 'lucide-react';
 import type { BriefContext, Node } from '../lib/schema';
 import type { Dataset } from '../lib/schema';
-import { matchesTargets } from '../lib/resolve';
+import { getKeyPointsForContext } from '../lib/keyPoints';
 
 interface CustomBriefBuilderProps {
   dataset: Dataset;
@@ -25,12 +25,9 @@ export function CustomBriefBuilder({
   const levelSelectId = useId();
   // Get all available key points for current context
   const availableKeyPoints = useMemo(() => {
-    return dataset.nodes
-      .filter(
-        (node): node is Extract<Node, { type: 'key_point' }> =>
-          node.type === 'key_point' && matchesTargets(node.targets, context)
-      )
-      .sort((a, b) => a.title.localeCompare(b.title));
+    return getKeyPointsForContext(dataset, context).sort((a, b) =>
+      a.title.localeCompare(b.title)
+    );
   }, [dataset, context]);
 
   const toggleKeyPoint = (keyPointId: string) => {

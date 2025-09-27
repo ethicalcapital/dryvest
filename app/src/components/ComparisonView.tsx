@@ -18,13 +18,16 @@ import type {
   EntityProfile,
   AssertionRecord,
   SourceRecord,
+  BriefContext,
 } from '../lib/schema';
 import { GitHubFeedback } from './GitHubFeedback';
 import { ResponseQualityGuide } from './ResponseQualityGuide';
 import { InstitutionalFlashcards } from './InstitutionalFlashcards';
+import { matchesTargets } from '../lib/resolve';
 
 interface ComparisonViewProps {
   dataset: Dataset;
+  context: BriefContext;
 }
 
 const ENTITY_ICONS: Record<string, React.ComponentType<{ size?: number }>> = {
@@ -59,6 +62,8 @@ const CONTENT_TYPES = [
 
 const DEFAULT_SELECTION: string[] = ['endowment', 'corporate_pension'];
 
+type ComparisonContentType = (typeof CONTENT_TYPES)[number]['key'];
+
 const getIcon = (entityId: string) => ENTITY_ICONS[entityId] ?? Users;
 
 const formatCitation = (source: SourceRecord) =>
@@ -85,11 +90,12 @@ const AssertionEvidence = ({
   );
 };
 
-export function ComparisonView({ dataset }: ComparisonViewProps) {
+export function ComparisonView({ dataset, context }: ComparisonViewProps) {
   const [selectedEntities, setSelectedEntities] = useState<string[]>(
     DEFAULT_SELECTION
   );
-  const [selectedContentType, setSelectedContentType] = useState('opener');
+  const [selectedContentType, setSelectedContentType] =
+    useState<ComparisonContentType>('opener');
 
   const entityProfiles = useMemo(
     () => dataset.entities.filter(profile => ENTITY_ICONS[profile.id]),
@@ -127,13 +133,21 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
 
   const getContentForEntity = (
     entityId: string,
-    contentType: string
-  ): Node[] =>
-    dataset.nodes.filter(node => {
+    contentType: ComparisonContentType
+  ): Node[] => {
+    const entityContext: BriefContext = {
+      ...context,
+      identity: entityId,
+    };
+    return dataset.nodes.filter(node => {
       if (node.type !== contentType) return false;
-      if (!node.targets?.identity) return false;
-      return node.targets.identity.includes(entityId);
+      const identityTargets = node.targets?.identity;
+      if (!identityTargets || !identityTargets.includes(entityId)) {
+        return false;
+      }
+      return matchesTargets(node.targets, entityContext);
     });
+  };
 
   const resolveEntityProfile = (entityId: string): EntityProfile | undefined =>
     dataset.entityIndex[entityId];
