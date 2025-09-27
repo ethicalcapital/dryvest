@@ -1,6 +1,6 @@
 import { useMemo, useId } from 'react';
 import { Check } from 'lucide-react';
-import type { BriefContext, Node } from '../lib/schema';
+import type { BriefContext } from '../lib/schema';
 import type { Dataset } from '../lib/schema';
 import { getKeyPointsForContext } from '../lib/keyPoints';
 
