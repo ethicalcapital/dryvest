@@ -61,20 +61,22 @@ function renderCitations(
 ) {
   if (!ids?.length) return null;
   return (
-    <ul className="mt-3 space-y-1 text-xs text-slate-500">
+    <ul className="mt-3 space-y-2 text-xs leading-relaxed text-slate-600">
       {ids.map(id => {
         const source = sourceLookup[id];
         if (!source) return null;
+        const citation = source.citationText
+          ? source.citationText
+          : `${source.label}. ${source.url}`;
         return (
           <li key={id}>
-            <a
-              className="font-medium text-indigo-600 hover:text-indigo-700"
-              href={source.url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => <span>{children}</span>,
+              }}
             >
-              {source.label}
-            </a>
+              {citation}
+            </ReactMarkdown>
           </li>
         );
       })}
@@ -284,19 +286,23 @@ export function PreviewPane({
 
       {sources.length ? (
         <Section title="Sources" anchor="sources">
-          <ul className="space-y-2 text-sm">
-            {sources.map(source => (
-              <li key={source.id}>
-                <a
-                  className="font-medium text-indigo-600 hover:text-indigo-700"
-                  href={source.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {source.label}
-                </a>
-              </li>
-            ))}
+          <ul className="space-y-2 text-sm leading-relaxed text-slate-700">
+            {sources.map(source => {
+              const citation = source.citationText
+                ? source.citationText
+                : `${source.label}. ${source.url}`;
+              return (
+                <li key={source.id}>
+                  <ReactMarkdown
+                    components={{
+                      p: ({ children }) => <span>{children}</span>,
+                    }}
+                  >
+                    {citation}
+                  </ReactMarkdown>
+                </li>
+              );
+            })}
           </ul>
         </Section>
       ) : null}

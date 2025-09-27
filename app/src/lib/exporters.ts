@@ -33,19 +33,23 @@ const tufteSection = (content: string) => `${content}\n`;
 
 const divider = (label: string) => `## ${label}`;
 
-const formatCitations = (
+const gatherCitations = (
   ids: string[] | undefined,
   lookup: Record<string, Extract<Node, { type: 'source' }>>
-): string | undefined => {
-  if (!ids?.length) return undefined;
-  const parts = ids
+) =>
+  (ids ?? [])
     .map(id => lookup[id])
     .filter((source): source is Extract<Node, { type: 'source' }> =>
       Boolean(source)
-    )
-    .map(source => `- [${source.label}](${source.url})`);
-  return parts.length ? parts.join('\n') : undefined;
-};
+    );
+
+const formatCitationText = (source: Extract<Node, { type: 'source' }>) =>
+  source.citationText ?? `${source.label}. ${source.url}`;
+
+const formatCitationList = (
+  sources: Array<Extract<Node, { type: 'source' }>>
+) =>
+  sources.length ? sources.map(source => `- ${formatCitationText(source)}`).join('\n') : undefined;
 
 const pickScreeningBody = (
   node: Extract<Node, { type: 'policy_statement' }> | undefined,
@@ -103,9 +107,11 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
   if (keyPoints.length) {
     lines.push(tufteHeader('Key Assessment Points'));
     keyPoints.forEach((point, index) => {
-      // Tufte-style numbered sections with margin citations
-      const citations = formatCitations(point.citations, sourceLookup);
-      const marginNote = citations ? tufteMarginNote(citations.replace(/- \[/g, '').replace(/\]\([^)]+\)/g, '')) : '';
+      const citationSources = gatherCitations(point.citations, sourceLookup);
+      const marginSummary = citationSources
+        .map(formatCitationText)
+        .join('; ');
+      const marginNote = marginSummary ? tufteMarginNote(marginSummary) : '';
 
       lines.push(`### ${index + 1}. ${point.title}${marginNote}`);
       if (point.body) {
@@ -132,7 +138,9 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
   if (policyAlignment?.bullets?.length) {
     lines.push(divider('Policy Alignment'));
     policyAlignment.bullets.forEach(item => lines.push(`- ${item}`));
-    const references = formatCitations(policyAlignment.citations, sourceLookup);
+    const references = formatCitationList(
+      gatherCitations(policyAlignment.citations, sourceLookup)
+    );
     if (references) {
       lines.push(references);
     }
@@ -166,7 +174,7 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
     lines.push('## References');
     lines.push('');
     sources.forEach((source, index) => {
-      lines.push(`${index + 1}. ${source.label}. Available at: ${source.url}`);
+      lines.push(`${index + 1}. ${formatCitationText(source)}`);
     });
   }
 

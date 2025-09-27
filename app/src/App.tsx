@@ -15,12 +15,12 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BetaDisclaimer } from './components/BetaDisclaimer';
 import { PalestineStatement } from './components/PalestineStatement';
-import { InstitutionalLiteracyFlashcards } from './components/InstitutionalLiteracyFlashcards';
 import { ScenarioCards, type Scenario } from './components/ScenarioCards';
 import { TemperatureControls } from './components/TemperatureControls';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import { initAnalytics, trackEvent } from './lib/analytics';
+import { DisclaimerGate } from './components/DisclaimerGate';
 import {
   matchesTargets,
   resolveByKind,
@@ -100,6 +100,10 @@ function App() {
 
   const [params, setParams] = useBriefParams(defaults);
   const hasTrackedOpen = useRef(false);
+  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('dryvest:disclaimer-accepted') === 'true';
+  });
 
   useEffect(() => {
     initAnalytics({ token: analyticsToken, spa: true });
@@ -423,12 +427,21 @@ function App() {
     setBriefTone(scenario.context.level as BriefTone);
   };
 
+  const handleDisclaimerAccept = () => {
+    setHasAcceptedDisclaimer(true);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('dryvest:disclaimer-accepted', 'true');
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
+      {!hasAcceptedDisclaimer ? (
+        <DisclaimerGate onAccept={handleDisclaimerAccept} />
+      ) : null}
       <Header />
       <PalestineStatement />
       <BetaDisclaimer />
-      <InstitutionalLiteracyFlashcards />
 
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
@@ -446,10 +459,14 @@ function App() {
               <p className="text-slate-600 text-lg">
                 Dryvest turns moral demands into technical language that can be implemented as investment policy.
               </p>
-              <p className="text-sm text-slate-500">
-                Dataset version{' '}
-                <span className="font-mono">{dataset.version}</span> •
-                Questions?{' '}
+              <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
+                <span>
+                  Dataset version{' '}
+                  <span className="font-mono">{dataset.version}</span>
+                </span>
+                <span className="hidden sm:inline" aria-hidden="true">
+                  •
+                </span>
                 <a
                   href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
                   target="_blank"
@@ -459,40 +476,31 @@ function App() {
                 >
                   Ask for clarification
                 </a>
-              </p>
-            </div>
-            <div className="mt-6 grid gap-4 rounded-xl border border-indigo-100 bg-white/80 p-6 shadow-sm md:grid-cols-[minmax(0,1fr),220px]">
-              <div>
-                <p className="text-xs font-heading uppercase tracking-wide text-indigo-600 mb-2">
-                  How to use Dryvest
-                </p>
-                <ol className="space-y-2 text-sm text-slate-600">
-                  <li>
-                    <span className="font-semibold text-slate-900">Step 1.</span>{' '}
-                    Pick the investor identity and audience you need to brief.
-                  </li>
-                  <li>
-                    <span className="font-semibold text-slate-900">Step 2.</span>{' '}
-                    Review the recommended script Dryvest assembles for that context.
-                  </li>
-                  <li>
-                    <span className="font-semibold text-slate-900">Step 3.</span>{' '}
-                    Download or copy the brief to walk into your meeting prepared.
-                  </li>
-                </ol>
               </div>
-              <div className="flex flex-col justify-center gap-3 rounded-lg bg-indigo-50 p-4 text-center">
-                <p className="text-sm text-slate-700">
-                  Start with Quick Brief to get an institutional-ready script in under a minute.
-                </p>
-                <button
-                  type="button"
-                  onClick={handleQuickStart}
-                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                  style={{ backgroundColor: 'var(--ecic-purple)' }}
-                >
-                  Start with Quick Brief
-                </button>
+            </div>
+            <div className="mt-6 rounded-xl border border-indigo-100 bg-white/80 p-6 shadow-sm">
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-2xl space-y-2">
+                  <p className="text-sm uppercase tracking-wide font-heading text-indigo-600">
+                    How Dryvest helps
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Choose the briefing flow that fits your meeting. Quick Brief assembles an institutional script in under a minute, Custom Brief lets you curate the strategy, and Compare shows how different institutions respond.
+                  </p>
+                </div>
+                <div className="flex flex-col items-start gap-2 md:items-end">
+                  <button
+                    type="button"
+                    onClick={handleQuickStart}
+                    className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
+                    style={{ backgroundColor: 'var(--ecic-purple)' }}
+                  >
+                    Start with Quick Brief
+                  </button>
+                  <span className="text-xs text-slate-500">
+                    Educational intelligence – not investment advice.
+                  </span>
+                </div>
               </div>
             </div>
           </div>

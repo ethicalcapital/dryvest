@@ -163,11 +163,29 @@ export function InstitutionalFlashcards() {
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-heading font-semibold text-slate-900">
-          Institutional Literacy Flashcards
-        </h3>
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between mb-4">
+        <div>
+          <h3 className="text-lg font-heading font-semibold text-slate-900">
+            Institutional Literacy Flashcards
+          </h3>
+          <p className="mt-1 max-w-xl text-sm text-slate-600">
+            Learn the assessment questions that separate empty promises from real
+            accountability. Use each prompt to benchmark how seriously an
+            institution is acting on your demands.
+          </p>
+        </div>
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              document.getElementById('quality-guide')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              });
+            }}
+            className="inline-flex items-center rounded-lg border border-indigo-600 px-3 py-2 text-xs font-semibold text-indigo-600 hover:bg-indigo-50 transition-colors"
+          >
+            Review assessment rubric
+          </button>
           <span className="text-sm text-slate-600">
             {currentCardIndex + 1} of {FLASHCARD_DECK.length}
           </span>

@@ -456,11 +456,10 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
         </div>
       )}
 
-      {/* Institutional Learning Flashcards */}
-      <InstitutionalFlashcards />
-
-      {/* Response Quality Assessment Guide */}
-      <ResponseQualityGuide />
+      <section id="institutional-literacy" className="space-y-6">
+        <InstitutionalFlashcards />
+        <ResponseQualityGuide />
+      </section>
 
       {/* Comparison Grid */}
       {selectedEntities.length >= 2 && (
