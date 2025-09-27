@@ -1,5 +1,5 @@
 {
-  "version": "2025-11-15",
+  "version": "2025-09-27",
   "sources": [
     {
       "id": "src_afsc-investigate",
@@ -300,7 +300,7 @@
     },
     {
       "id": "src_ethical-capital-screening-policy",
-      "label": "Ethical Capital — Screening Policy",
+      "label": "Ethical Capital \u2014 Screening Policy",
       "url": "https://ethicic.com/content/process/screening-policy",
       "citationText": "Ethical Capital. (n.d.). Investment screening policy. https://ethicic.com/content/process/screening-policy"
     },
@@ -348,7 +348,7 @@
     },
     {
       "id": "src_what-i-d-tell-your-cio-about-divestment",
-      "label": "What I’d Tell Your CIO about Divestment",
+      "label": "What I\u2019d Tell Your CIO about Divestment",
       "url": "https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
       "citationText": "Ethical Capital. (2023). What I'd tell your CIO about divestment. https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment",
       "tags": [

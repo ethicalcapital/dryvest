@@ -32,7 +32,7 @@ const renderForm = (overrides?: {
     <ContactForm
       params={{ ...baseParams, ...(params ?? {}) }}
       tone={tone ?? 'plain'}
-      datasetVersion={datasetVersion ?? '2025-09-25'}
+      datasetVersion={datasetVersion ?? '2025-09-27'}
       attachmentCount={attachmentCount ?? 2}
     />
   );
@@ -107,7 +107,7 @@ describe('ContactForm', () => {
       expect(screen.getByText(/received—thank you/i)).toBeInTheDocument();
       expect(trackEvent).toHaveBeenCalledWith('contact_submitted', {
         newsletterOptIn: true,
-        datasetVersion: '2025-09-25',
+        datasetVersion: '2025-09-27',
       });
     });
 

@@ -37,7 +37,7 @@ const exportData: BriefExportData = {
     venue: 'board_meeting',
     level: 'plain',
     playlistId: 'test-playlist',
-    datasetVersion: '2025-09-25',
+    datasetVersion: '2025-09-27',
   },
   context: {
     identity: 'endowment',
@@ -178,7 +178,7 @@ describe('FactCheckView', () => {
     expect(clickSpy).toHaveBeenCalledTimes(1);
     expect(trackEvent).toHaveBeenCalledWith('download_clicked', {
       format: 'fact-check',
-      datasetVersion: '2025-09-25',
+      datasetVersion: '2025-09-27',
     });
   });
 });

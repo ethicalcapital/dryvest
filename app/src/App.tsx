@@ -31,7 +31,7 @@ import {
   selectPlaylistByKind,
 } from './lib/resolve';
 
-const DATASET_VERSION = '2025-11-15';
+const DATASET_VERSION = '2025-09-27';
 const DEFAULT_PLAYLIST_ID = 'brief_key_points_default';
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
 

@@ -1,5 +1,5 @@
 {
-  "version": "2025-11-15",
+  "version": "2025-09-27",
   "nodes": [
     {
       "id": "opener_generic",
@@ -55,7 +55,7 @@
     {
       "id": "opener_public_pension_base",
       "type": "opener",
-      "text": "Public plans can use consultant/manager mandates, set a tracking-error guardrail, and phase implementation while keeping beneficiaries’ risk/return in focus.",
+      "text": "Public plans can use consultant/manager mandates, set a tracking-error guardrail, and phase implementation while keeping beneficiaries\u2019 risk/return in focus.",
       "targets": {
         "identity": [
           "public_pension"
@@ -170,7 +170,7 @@
         "ask": "Adopt conduct-based exclusions with a formal ethics/oversight process and public rationales.",
         "implementation": "Multi-manager mandates with optimization constraints; preserve factor/sector neutrality; staged rebalances.",
         "reporting": "Publish exclusion list and rationale; periodic reviews and appeals mechanism; transparent methodology.",
-        "risk": "Explicit tracking-error budget (e.g., 15–30 bps) and central risk model governance."
+        "risk": "Explicit tracking-error budget (e.g., 15\u201330 bps) and central risk model governance."
       },
       "targets": {
         "identity": [
@@ -185,7 +185,7 @@
         "ask": "Consultant memo and manager mandates for conduct-based exclusions; define guardrails.",
         "implementation": "Passive screened index or benchmark-aware constraints; phased divestment to minimize costs; maintain diversification.",
         "reporting": "Quarterly one-page dashboard; publish criteria and exclusion list.",
-        "risk": "Tracking-error limit (e.g., ≤30 bps) and factor neutrality by vendor."
+        "risk": "Tracking-error limit (e.g., \u226430 bps) and factor neutrality by vendor."
       },
       "targets": {
         "identity": [
@@ -456,7 +456,7 @@
       "id": "kp_public_pension_peer-funds-already-run-conduct-screens",
       "type": "key_point",
       "title": "Peer funds already run conduct screens",
-      "body": "KLP, AkademikerPension, and PFZW have implemented occupation-related exclusions with neutral-to-positive performance impact—use their public reporting as precedent.",
+      "body": "KLP, AkademikerPension, and PFZW have implemented occupation-related exclusions with neutral-to-positive performance impact\u2014use their public reporting as precedent.",
       "citations": [
         "src_klp-divests-settlement-companies",
         "src_akademikerpension-statement",
@@ -502,7 +502,7 @@
       "id": "kp_government_link-divestment-to-credit-and-liquidity-management",
       "type": "key_point",
       "title": "Link divestment to credit and liquidity management",
-      "body": "Credit downgrades and liquidity stress—like the recent Israel bond freeze—provide fiduciary cover for rebalancing into aligned issuers.",
+      "body": "Credit downgrades and liquidity stress\u2014like the recent Israel bond freeze\u2014provide fiduciary cover for rebalancing into aligned issuers.",
       "citations": [
         "src_moody-s-downgrades-israel",
         "src_cuyahoga-county-israel-bond-freeze"
@@ -547,7 +547,7 @@
       "id": "kp_central_bank_link-divestment-to-credit-and-liquidity-management",
       "type": "key_point",
       "title": "Link divestment to credit and liquidity management",
-      "body": "Credit downgrades and liquidity stress—like the recent Israel bond freeze—provide fiduciary cover for rebalancing into aligned issuers.",
+      "body": "Credit downgrades and liquidity stress\u2014like the recent Israel bond freeze\u2014provide fiduciary cover for rebalancing into aligned issuers.",
       "citations": [
         "src_moody-s-downgrades-israel",
         "src_cuyahoga-county-israel-bond-freeze"
@@ -572,7 +572,7 @@
         },
         {
           "id": "points",
-          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human-rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set—linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
+          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human-rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set\u2014linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
           "transforms": {
             "tone": "points"
           }
@@ -627,7 +627,7 @@
       "title": "Venue cues",
       "lines": [
         "Summarize the Recommended Approach and reporting cadence.",
-        "Be crisp on ‘why now’ and what changes operationally."
+        "Be crisp on \u2018why now\u2019 and what changes operationally."
       ],
       "targets": {
         "venue": [
@@ -640,7 +640,7 @@
       "type": "template_snippet",
       "title": "Venue cues",
       "lines": [
-        "Time-limited: focus on 2–3 key points and one specific ask.",
+        "Time-limited: focus on 2\u20133 key points and one specific ask.",
         "Bring printed one-pagers; avoid acronyms; cite one authoritative source."
       ],
       "targets": {
@@ -679,7 +679,7 @@
       "id": "ctr_bds-is-illegal-in-our-state",
       "type": "counter",
       "claim": "BDS is illegal in our state.",
-      "response": "State procurement laws target country boycotts. A conduct-based screen—grounded in UN Guiding Principles and applied to any violator—has survived review and mirrors how public systems like UC Regents structure exclusions.",
+      "response": "State procurement laws target country boycotts. A conduct-based screen\u2014grounded in UN Guiding Principles and applied to any violator\u2014has survived review and mirrors how public systems like UC Regents structure exclusions.",
       "citations": [
         "src_un-guiding-principles-on-business-human-rights",
         "src_koontz-v-watson-opinion",
@@ -714,7 +714,7 @@
       "id": "ctr_esg-has-underperformed-we-re-moving-away-from-values-investing",
       "type": "counter",
       "claim": "ESG has underperformed/We're moving away from values investing.",
-      "response": "Our approach is high-active-share, research-driven investing—not an index fad. Ethical Capital's growth strategy has delivered benchmark-like returns while holding higher cash-flow yield companies, showing exclusion discipline can coexist with market performance.",
+      "response": "Our approach is high-active-share, research-driven investing\u2014not an index fad. Ethical Capital's growth strategy has delivered benchmark-like returns while holding higher cash-flow yield companies, showing exclusion discipline can coexist with market performance.",
       "citations": [
         "src_what-i-d-tell-your-cio-about-divestment",
         "src_nyu-stern-esg-and-financial-performance",
@@ -747,7 +747,7 @@
       "id": "ctr_this-is-virtue-signaling-that-won-t-change-anything",
       "type": "counter",
       "claim": "This is virtue signaling that won't change anything.",
-      "response": "Our clients' signals become shared policy. Every valid alert we receive is researched and added to firm-wide exclusions, and our flagship growth strategy has matched MSCI ACWI while staying values-aligned—so the work is both communal and financially credible.",
+      "response": "Our clients' signals become shared policy. Every valid alert we receive is researched and added to firm-wide exclusions, and our flagship growth strategy has matched MSCI ACWI while staying values-aligned\u2014so the work is both communal and financially credible.",
       "citations": [
         "src_ethical-capital-investment-screening-policy",
         "src_what-i-d-tell-your-cio-about-divestment"
@@ -757,7 +757,7 @@
       "id": "ctr_we-need-engagement-not-divestment",
       "type": "counter",
       "claim": "We need engagement, not divestment.",
-      "response": "Escalation ladders work: institutions like the Church of England and Danish pensions engage first, set time-bound objectives, and divest when companies fail to remedy violations—preserving credibility and risk discipline.",
+      "response": "Escalation ladders work: institutions like the Church of England and Danish pensions engage first, set time-bound objectives, and divest when companies fail to remedy violations\u2014preserving credibility and risk discipline.",
       "citations": [
         "src_church-of-england-pensions-board-divestment",
         "src_akademikerpension-statement",
@@ -768,7 +768,7 @@
       "id": "ctr_what-about-china-saudi-arabia-other-countries",
       "type": "counter",
       "claim": "What about China/Saudi Arabia/other countries?",
-      "response": "Apply one standard everywhere: our policy covers any issuer implicated in grave violations—Israeli, Chinese, American, or otherwise—using international law and third-party evidence as triggers.",
+      "response": "Apply one standard everywhere: our policy covers any issuer implicated in grave violations\u2014Israeli, Chinese, American, or otherwise\u2014using international law and third-party evidence as triggers.",
       "citations": [
         "src_un-guiding-principles-on-business-human-rights",
         "src_amnesty-israel-s-system-of-apartheid",
@@ -779,7 +779,7 @@
       "id": "ctr_this-politicizes-our-investment-process",
       "type": "counter",
       "claim": "This politicizes our investment process.",
-      "response": "Ignoring credible violations is itself a political stance. We use ethical screening as an active risk-management decision—protecting portfolios from legal, reputational, and stranded-asset exposure identified in our screening policy.",
+      "response": "Ignoring credible violations is itself a political stance. We use ethical screening as an active risk-management decision\u2014protecting portfolios from legal, reputational, and stranded-asset exposure identified in our screening policy.",
       "citations": [
         "src_ethical-capital-investment-screening-policy",
         "src_us-dol-esg-guidance",
@@ -990,7 +990,7 @@
       "id": "ctr_apartheid-divestment-was-chaos-why-repeat-it",
       "type": "counter",
       "claim": "Apartheid divestment was chaos; why repeat it?",
-      "response": "Apartheid divestment proved you can stand on ethics without breaking returns. Our firm’s policy embraces that precedent: we run apartheid-free portfolios with documented process and rely on sustained, multi-channel pressure—divestment plus engagement—just as history shows.",
+      "response": "Apartheid divestment proved you can stand on ethics without breaking returns. Our firm\u2019s policy embraces that precedent: we run apartheid-free portfolios with documented process and rely on sustained, multi-channel pressure\u2014divestment plus engagement\u2014just as history shows.",
       "citations": [
         "src_what-i-d-tell-your-cio-about-divestment",
         "src_ethical-capital-investment-screening-policy"
@@ -1009,8 +1009,8 @@
     {
       "id": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start",
       "type": "counter",
-      "claim": "This sounds expensive or complicated—where do I even start?",
-      "response": "Ethical screening is messy in practice—that’s why investors hire professionals to map the evidence, translate it into exclusions, and keep the process on track.",
+      "claim": "This sounds expensive or complicated\u2014where do I even start?",
+      "response": "Ethical screening is messy in practice\u2014that\u2019s why investors hire professionals to map the evidence, translate it into exclusions, and keep the process on track.",
       "citations": [
         "src_ethical-capital-investment-screening-policy"
       ]
@@ -1127,7 +1127,7 @@
     {
       "id": "step_family_friends_encourage-them-to-revisit-the-conversation-a",
       "type": "next_step",
-      "text": "Encourage them to revisit the conversation after they’ve tried a small allocation shift.",
+      "text": "Encourage them to revisit the conversation after they\u2019ve tried a small allocation shift.",
       "targets": {
         "identity": [
           "family_friends"

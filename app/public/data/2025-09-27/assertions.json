@@ -1,5 +1,5 @@
 {
-  "version": "2025-11-15",
+  "version": "2025-09-27",
   "assertions": [
     {
       "id": "assert_benchmark_grade_exclusions",
@@ -18,7 +18,7 @@
         "exclusions"
       ],
       "author": "ethical-capital",
-      "lastReviewed": "2025-11-15",
+      "lastReviewed": "2025-09-27",
       "reviewer": "dryvest-editorial"
     },
     {
@@ -38,7 +38,7 @@
         "tracking-error"
       ],
       "author": "ethical-capital",
-      "lastReviewed": "2025-11-15",
+      "lastReviewed": "2025-09-27",
       "reviewer": "dryvest-editorial"
     },
     {
@@ -58,7 +58,7 @@
         "policy"
       ],
       "author": "ethical-capital",
-      "lastReviewed": "2025-11-15",
+      "lastReviewed": "2025-09-27",
       "reviewer": "dryvest-editorial"
     }
   ]
