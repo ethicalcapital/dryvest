@@ -1,60 +1,118 @@
-# Dryvestment
+# Dryvest
 
+Dryvest is Ethical Capital’s educational briefing tool that turns divestment demands into implementation-ready talking points and policy language. This repository hosts the React/Tailwind frontend, Cloudflare Pages/Workers infrastructure, and the static dataset consumed by the app (`public/data/<version>`).
 
+> **Educational Use Only** – Dryvest and all related exports are strategic intelligence for organizing. They are not investment, legal, or tax advice.
 
+## Quick Start
 
-This repository manages the copy, citations, and playlists in a
-content-focused workflow before the app consumes a compiled bundle.
+```bash
+# install deps
+cd app
+npm install
 
-## Contents
+# run locally with Vite dev server
+npm run dev
 
-- `content/bds_pack.json` – master JSON defining openers, guides, key points,
-  counters, next steps, sources, and audience overrides. The structure matches
-  the schema currently consumed by the Labs UI.
-- `content/*.md` – long-form one pagers that surface as optional attachments in
-  the brief builder (fiduciary playbook, JLENS rebuttals, etc.).
+# type/lint/test
+npm run type-check
+npm run lint
+npm run test
 
-## Current JSON Shape (2025-09-25)
+# production build (tsc + vite build)
+npm run build
+```
 
-Top-level keys in `bds_pack.json`:
+Prerequisites:
+- Node.js 20+
+- npm 10+
+- Cloudflare Wrangler CLI if you want to deploy or tail workers (`npm install -g wrangler`).
 
-| Key                      | Type   | Purpose                                                      |
-| ------------------------ | ------ | ------------------------------------------------------------ |
-| `version`                | string | Content pack version tag                                     |
-| `openers`                | object | Generic opening paragraphs                                   |
-| `identity_openers`       | object | Identity + venue specific openers                            |
-| `identity_guides`        | object | "Ask / implementation / reporting / risk" blocks per identity |
-| `one_pagers`             | array  | Optional attachment descriptors (id, title, markdown)        |
-| `key_points`             | array  | Default talking points                                       |
-| `key_points_by_entity`   | object | Identity-specific talking point overrides                    |
-| `screening_knowledge`    | object | Shared “screening is intelligence” copy                      |
-| `venue_notes`            | object | Venue-specific reminders                                     |
-| `counters`               | array  | Canonical claim/response/citation tuples                     |
-| `counter_sets`           | object | Claim lists grouped by audience (`family_friends`, etc.)     |
-| `model_resolution`       | string | Sample resolution language                                   |
-| `next_steps`             | array  | General action checklist                                     |
-| `next_steps_by_entity`   | object | Additional steps for individuals/family audiences            |
-| `sources`                | array  | Shared bibliography                                          |
-| `further_reading`        | array  | Optional extra links                                         |
-| `policy_alignment`       | object | Messaging fragments for alignment section                    |
-| `government_policy_snippet` | string | Issuer-specific policy note                               |
-| `cio_note` / `cio_links` | string/array | CIO framing and supporting references                   |
+## Project Structure
 
-Counter and source sets refer back to the canonical lists by grouping claim IDs
-or source entries for each audience type.
+```
+.
+├── app/                   # React frontend
+│   ├── public/            # Static assets + dataset bundles
+│   ├── src/               # Components, hooks, lib modules
+│   ├── src/components/ContactForm.tsx      # Follow-up form in actions rail
+│   ├── src/components/FactCheckView.tsx    # Fact-check export mode
+│   └── src/lib/factCheck.ts                # Generates fact-check reports
+├── functions/api/         # Cloudflare Pages Functions
+│   ├── contact.ts         # Stores contact submissions in KV and relays to LACRM
+│   └── generate-pdf.ts    # PDF export proxy (Typst service)
+├── public/data/<version>/ # App dataset (manifest, nodes, playlists)
+├── wrangler.toml          # Cloudflare project config (KV binding `HOOKS`)
+└── README.md
+```
 
-## Validation & Roadmap
+Key frontend paths:
+- `src/App.tsx` – top-level layout, mode switching (Quick/Custom/Compare/Fact Check).
+- `src/components/ActionsPanel.tsx` – PDF/Markdown/Anki exports + contact form.
+- `src/components/PreviewPane.tsx` – renders scripting content with APA citations.
 
-- No automated validation is bundled yet. Consumers should continue using the
-  existing Labs tooling until we introduce JSON Schema and playlists.
-- Planned refactor (tracked separately) will normalize nodes, playlists, and
-  provenance metadata as discussed in the Dryvestment planning docs.
+## Cloudflare Workers & KV
 
-## Usage
+- `functions/api/contact.ts` accepts POST JSON `{ name?, email?, message, newsletterOptIn?, meta? }`, stores it in the `HOOKS` KV namespace (production + preview binding `caf4e19f1388423fade84340c27a929c`), and POSTs to `env.LACRM_WEBHOOK_URL` if configured.
+- `functions/api/generate-pdf.ts` proxies markdown payloads to the Typst export service. Configure `TYPST_EXPORT_TOKEN`, `HOOK_TYPST_EXPORT_URL`, and `ALLOWED_ORIGINS` in Cloudflare project settings.
 
-1. Clone the repository (or install via the distribution method we publish).
-2. Import `content/bds_pack.json` into the brief generator build step.
-3. Attach one-pager markdown files when you need optional attachments.
+To test workers locally, use `npx wrangler pages dev app/dist --kv=HOOKS=<namespace>` after building the frontend.
 
-> ⚠️ Educational use only. All narratives reflect Ethical Capital Labs research
-> and do not constitute investment advice.
+## Testing
+
+We use [Vitest](https://vitest.dev/) with Testing Library for React components and Workers.
+
+```bash
+npm run test            # one-off run
+npm run test:watch      # watch mode
+npm run type-check      # ts --noEmit
+npm run lint            # eslint
+```
+
+Notable tests:
+- `src/components/__tests__/ContactForm.test.tsx` – payload validation, success/error flows.
+- `src/components/__tests__/FactCheckView.test.tsx` – copy/download and analytics tracking.
+- `functions/api/__tests__/contact.test.ts` – KV persistence and webhook relay behavior.
+
+## Deployment
+
+1. Build the frontend (`npm run build`), which writes to `app/dist/`.
+2. Deploy via Cloudflare Pages (see CI pipeline or run `npx wrangler pages deploy app/dist --project-name <project>`).
+3. Ensure the following environment variables are set in Cloudflare:
+   - `TYPST_EXPORT_TOKEN`
+   - `HOOK_TYPST_EXPORT_URL`
+   - `ALLOWED_ORIGINS`
+   - `LACRM_WEBHOOK_URL` (optional)
+4. KV namespace `HOOKS` (ID `caf4e19f1388423fade84340c27a929c`) must exist and be bound to the project.
+
+## Roadmap
+
+The next phases focus on data normalization, ingestion, and reviewer tooling:
+
+1. **Schema Normalization**
+   - Extract reusable assertions into `assertions.json` with confidence metadata.
+   - Move sources into `sources.json` with structured fields (publisher, date, APA citation).
+   - Add `qa` status to nodes for editorial tracking.
+
+2. **Third-Party List Ingestion**
+   - Define a canonical format for external exclusion lists (`lists/<provider>.json`).
+   - Build a CLI to ingest CSV/JSON feeds (AFSC, MSCI, public funds) and link entries to assertions.
+
+3. **Reviewer Workflow**
+   - Enhance Fact Check view with filters (`unreviewed`, `missing citation`, etc.).
+   - Add email notifications or dashboard summarizing new submissions from the contact form.
+
+4. **Validation & Tooling**
+   - Introduce JSON Schema validation for dataset bundles.
+   - Add smoke tests for PDF/Markdown export integrity (assert references appear in output).
+   - Implement integration tests that run the full export pipeline in CI.
+
+5. **UX Enhancements**
+   - Optional: inline follow-up contact submission confirmation via modal/toast.
+   - Improve analytics dashboards for download/copy/contact events.
+
+If you’re interested in contributing, please open an issue or reach out via the contact form inside the app. For internal collaborators, keep dataset edits in sync with `public/data/<version>/` and coordinate version bumps in `src/App.tsx` (`DATASET_VERSION`).
+
+---
+
+For questions or access requests, contact Ethical Capital at [hello@ethicic.com](mailto:hello@ethicic.com).
