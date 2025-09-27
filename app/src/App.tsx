@@ -11,7 +11,7 @@ import { ModeSelector, type BriefMode } from './components/ModeSelector';
 import { CustomBriefBuilder } from './components/CustomBriefBuilder';
 import { ComparisonView } from './components/ComparisonView';
 import { FactCheckView } from './components/FactCheckView';
-import { ToneToggle, type BriefTone } from './components/ToneToggle';
+import type { BriefTone } from './components/ToneToggle';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BetaDisclaimer } from './components/BetaDisclaimer';
@@ -543,14 +543,6 @@ function App() {
           {/* Comparison View (only in compare mode) */}
           {briefMode === 'compare' && dataset && (
             <ComparisonView dataset={dataset} context={context} />
-          )}
-
-          {/* Tone Toggle - only show for quick and custom modes */}
-          {briefMode !== 'compare' && (
-            <ToneToggle
-              tone={briefTone}
-              onToneChange={setBriefTone}
-            />
           )}
 
           {briefMode === 'fact_check' && (
