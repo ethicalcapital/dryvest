@@ -147,6 +147,7 @@ export const ManifestSchema = z.object({
   playlists: z.string(),
   sources: z.string().optional(),
   assertions: z.string().optional(),
+  entities: z.string().optional(),
   source: z.string().optional(),
   fallbackVersion: z.string().optional(),
 });
@@ -212,6 +213,31 @@ export const AssertionsDocumentSchema = z.object({
 
 export type AssertionsDocument = z.infer<typeof AssertionsDocumentSchema>;
 
+export const EntityProfileSchema = z
+  .object({
+    id: z.string(),
+    label: z.string(),
+    shortDescription: z.string().optional(),
+    timeHorizon: z.string().optional(),
+    typicalWithdrawal: z.string().optional(),
+    governanceStyle: z.string().optional(),
+    keyConstraints: z.array(z.string()).optional(),
+    stakeholders: z.array(z.string()).optional(),
+    assertions: z.array(z.string()).optional(),
+    sources: z.array(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+  })
+  .strict();
+
+export type EntityProfile = z.infer<typeof EntityProfileSchema>;
+
+export const EntitiesDocumentSchema = z.object({
+  version: z.string(),
+  entities: z.array(EntityProfileSchema),
+});
+
+export type EntitiesDocument = z.infer<typeof EntitiesDocumentSchema>;
+
 export interface Dataset {
   version: string;
   manifest: Manifest;
@@ -220,9 +246,11 @@ export interface Dataset {
   playlists: Playlist[];
   sources: SourceRecord[];
   assertions: AssertionRecord[];
+  entities: EntityProfile[];
   nodeIndex: Record<string, Node>;
   sourceIndex: Record<string, SourceRecord>;
   assertionIndex: Record<string, AssertionRecord>;
+  entityIndex: Record<string, EntityProfile>;
   playlistById: Record<string, Playlist>;
   playlistsByKind: Record<string, Playlist[]>;
 }

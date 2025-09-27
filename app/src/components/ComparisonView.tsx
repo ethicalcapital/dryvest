@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Building2,
   Building,
@@ -9,8 +9,16 @@ import {
   Banknote,
   Globe,
   BarChart3,
+  Users,
+  Megaphone,
 } from 'lucide-react';
-import type { Dataset, Node } from '../lib/schema';
+import type {
+  Dataset,
+  Node,
+  EntityProfile,
+  AssertionRecord,
+  SourceRecord,
+} from '../lib/schema';
 import { GitHubFeedback } from './GitHubFeedback';
 import { ResponseQualityGuide } from './ResponseQualityGuide';
 import { InstitutionalFlashcards } from './InstitutionalFlashcards';
@@ -19,183 +27,16 @@ interface ComparisonViewProps {
   dataset: Dataset;
 }
 
-const IDENTITY_LABELS: Record<
-  string,
-  {
-    label: string;
-    icon: React.ComponentType<{ size?: number; className?: string }>;
-    context: {
-      timeHorizon: string;
-      withdrawalRate: string;
-      keyConstraints: string[];
-      governanceStyle: string;
-      stakeholders: string[];
-    };
-  }
-> = {
-  individual: {
-    label: 'Individual',
-    icon: UserCircle,
-    context: {
-      timeHorizon: 'Variable (retirement planning)',
-      withdrawalRate: '4-6% in retirement phase',
-      keyConstraints: [
-        'Tax optimization',
-        'Liquidity for life events',
-        'Risk capacity',
-      ],
-      governanceStyle: 'Personal values-based decision-making',
-      stakeholders: ['Self', 'Family', 'Heirs', 'Charitable beneficiaries'],
-    },
-  },
-  corporate_pension: {
-    label: 'Corporate Pension',
-    icon: Building,
-    context: {
-      timeHorizon: 'Long-term (20-30 years)',
-      withdrawalRate: 'Actuarially determined based on obligations',
-      keyConstraints: [
-        'ERISA fiduciary prudence',
-        'Funding requirements',
-        'Participant protection',
-      ],
-      governanceStyle: 'Professional trustees serving participant interests',
-      stakeholders: [
-        'Plan participants',
-        'Beneficiaries',
-        'Corporate sponsor',
-        'Union representatives',
-      ],
-    },
-  },
-  public_pension: {
-    label: 'Public Pension',
-    icon: Landmark,
-    context: {
-      timeHorizon: 'Very long-term (30+ years)',
-      withdrawalRate: '3-5% target with demographic adjustments',
-      keyConstraints: [
-        'Fiduciary duty to participants',
-        'Public transparency',
-        'Political accountability',
-      ],
-      governanceStyle: 'Elected/appointed boards serving public employees',
-      stakeholders: [
-        'Public employees',
-        'Retirees',
-        'Taxpayers',
-        'Legislative bodies',
-        'Citizens',
-      ],
-    },
-  },
-  endowment: {
-    label: 'Endowment',
-    icon: Building2,
-    context: {
-      timeHorizon: 'Perpetual',
-      withdrawalRate: '4-5% annual spending rate',
-      keyConstraints: [
-        'Mission alignment',
-        'Donor intent preservation',
-        'Intergenerational equity',
-      ],
-      governanceStyle: 'Trustee governance balancing mission and prudence',
-      stakeholders: [
-        'Students',
-        'Faculty',
-        'Alumni',
-        'Donors',
-        'Academic community',
-        'Society',
-      ],
-    },
-  },
-  foundation: {
-    label: 'Foundation',
-    icon: Handshake,
-    context: {
-      timeHorizon: 'Perpetual (private) or Limited (operating)',
-      withdrawalRate: '5% minimum distribution (private), Variable (operating)',
-      keyConstraints: [
-        'Mission alignment requirements',
-        'IRS compliance',
-        'Charitable purpose',
-      ],
-      governanceStyle: 'Board governance dedicated to philanthropic mission',
-      stakeholders: [
-        'Beneficiary communities',
-        'Grantees',
-        'Donors/founders',
-        'Social causes',
-        'Public good',
-      ],
-    },
-  },
-  insurance: {
-    label: 'Insurance',
-    icon: ShieldCheck,
-    context: {
-      timeHorizon: 'Medium-term (5-15 years)',
-      withdrawalRate: 'Matched to policy obligations and claims',
-      keyConstraints: [
-        'Solvency requirements',
-        'Liability matching',
-        'Regulatory capital',
-      ],
-      governanceStyle:
-        'Corporate governance with policyholder protection focus',
-      stakeholders: [
-        'Policyholders',
-        'Beneficiaries',
-        'Regulators',
-        'Shareholders',
-        'Communities',
-      ],
-    },
-  },
-  central_bank: {
-    label: 'Central Bank',
-    icon: Banknote,
-    context: {
-      timeHorizon: 'Variable (policy dependent)',
-      withdrawalRate: 'Policy-driven, counter-cyclical',
-      keyConstraints: [
-        'Monetary policy mandates',
-        'Independence requirements',
-        'Economic stability',
-      ],
-      governanceStyle: 'Independent institution serving public monetary policy',
-      stakeholders: [
-        'Citizens',
-        'Government',
-        'Financial system',
-        'International community',
-        'Economy',
-      ],
-    },
-  },
-  government: {
-    label: 'Sovereign Wealth Fund',
-    icon: Globe,
-    context: {
-      timeHorizon: 'Very long-term (intergenerational)',
-      withdrawalRate:
-        'Variable by mandate (stabilization, savings, development)',
-      keyConstraints: [
-        'Sovereign mandate',
-        'Political oversight',
-        'Resource stewardship',
-      ],
-      governanceStyle: 'Government oversight with professional management',
-      stakeholders: [
-        'Current citizens',
-        'Future generations',
-        'National development',
-        'Economic stability',
-      ],
-    },
-  },
+const ENTITY_ICONS: Record<string, React.ComponentType<{ size?: number }>> = {
+  individual: UserCircle,
+  corporate_pension: Building,
+  public_pension: Landmark,
+  endowment: Building2,
+  foundation: Handshake,
+  insurance: ShieldCheck,
+  central_bank: Banknote,
+  government: Megaphone,
+  swf: Globe,
 };
 
 const CONTENT_TYPES = [
@@ -216,38 +57,116 @@ const CONTENT_TYPES = [
   },
 ];
 
+const DEFAULT_SELECTION: string[] = ['endowment', 'corporate_pension'];
+
+const getIcon = (entityId: string) => ENTITY_ICONS[entityId] ?? Users;
+
+const formatCitation = (source: SourceRecord) =>
+  source.citationText ?? `${source.label}. ${source.url}`;
+
+const AssertionEvidence = ({
+  assertion,
+  sourceIndex,
+}: {
+  assertion: AssertionRecord;
+  sourceIndex: Record<string, SourceRecord>;
+}) => {
+  if (!assertion.evidence?.length) return null;
+  const sources = assertion.evidence
+    .map(id => sourceIndex[id])
+    .filter((record): record is SourceRecord => Boolean(record));
+  if (!sources.length) return null;
+  return (
+    <ul className="mt-2 space-y-1 text-xs leading-relaxed text-slate-500">
+      {sources.map(source => (
+        <li key={`${assertion.id}-${source.id}`}>{formatCitation(source)}</li>
+      ))}
+    </ul>
+  );
+};
+
 export function ComparisonView({ dataset }: ComparisonViewProps) {
-  const [selectedEntities, setSelectedEntities] = useState<string[]>([
-    'endowment',
-    'corporate_pension',
-  ]);
+  const [selectedEntities, setSelectedEntities] = useState<string[]>(
+    DEFAULT_SELECTION
+  );
   const [selectedContentType, setSelectedContentType] = useState('opener');
 
+  const entityProfiles = useMemo(
+    () => dataset.entities.filter(profile => ENTITY_ICONS[profile.id]),
+    [dataset.entities]
+  );
+
+  const availableEntityIds = useMemo(
+    () => entityProfiles.map(profile => profile.id),
+    [entityProfiles]
+  );
+
+  useEffect(() => {
+    if (!availableEntityIds.length) return;
+    setSelectedEntities(prev => {
+      const filtered = prev.filter(id => availableEntityIds.includes(id));
+      const needed = Math.max(0, 2 - filtered.length);
+      if (needed <= 0) return filtered.slice(0, 4);
+      const additions = availableEntityIds.filter(
+        id => !filtered.includes(id)
+      );
+      return [...filtered, ...additions.slice(0, needed)];
+    });
+  }, [availableEntityIds.join('|')]);
+
   const toggleEntity = (entityId: string) => {
-    setSelectedEntities(
-      prev =>
-        prev.includes(entityId)
-          ? prev.filter(id => id !== entityId)
-          : prev.length < 4
-            ? [...prev, entityId]
-            : prev // Limit to 4 for readability
-    );
+    if (!availableEntityIds.includes(entityId)) return;
+    setSelectedEntities(prev => {
+      if (prev.includes(entityId)) {
+        return prev.filter(id => id !== entityId);
+      }
+      if (prev.length >= 4) return prev;
+      return [...prev, entityId];
+    });
   };
 
   const getContentForEntity = (
     entityId: string,
     contentType: string
-  ): Node[] => {
-    return dataset.nodes.filter(node => {
+  ): Node[] =>
+    dataset.nodes.filter(node => {
       if (node.type !== contentType) return false;
       if (!node.targets?.identity) return false;
       return node.targets.identity.includes(entityId);
     });
+
+  const resolveEntityProfile = (entityId: string): EntityProfile | undefined =>
+    dataset.entityIndex[entityId];
+
+  const resolveEntitySources = (profile?: EntityProfile): SourceRecord[] => {
+    if (!profile?.sources?.length) return [];
+    return profile.sources
+      .map(id => dataset.sourceIndex[id])
+      .filter((record): record is SourceRecord => Boolean(record));
   };
 
-  const availableEntities = Object.keys(IDENTITY_LABELS).filter(entityId =>
-    dataset.nodes.some(node => node.targets?.identity?.includes(entityId))
-  );
+  const resolveEntityAssertions = (
+    profile?: EntityProfile
+  ): AssertionRecord[] => {
+    if (!profile?.assertions?.length) return [];
+    return profile.assertions
+      .map(id => dataset.assertionIndex[id])
+      .filter((record): record is AssertionRecord => Boolean(record));
+  };
+
+  const renderSourceList = (sources: SourceRecord[]) => {
+    if (!sources.length) return null;
+    return (
+      <div className="mt-4">
+        <p className="text-xs font-semibold text-slate-700">Sources</p>
+        <ul className="mt-1 space-y-1 text-xs text-slate-500">
+          {sources.map(source => (
+            <li key={source.id}>{formatCitation(source)}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -263,10 +182,11 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {availableEntities.map(entityId => {
-            const entity = IDENTITY_LABELS[entityId];
+          {availableEntityIds.map(entityId => {
+            const profile = resolveEntityProfile(entityId);
+            if (!profile) return null;
             const isSelected = selectedEntities.includes(entityId);
-            const IconComponent = entity.icon;
+            const IconComponent = getIcon(entityId);
 
             return (
               <button
@@ -301,7 +221,7 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                     <IconComponent size={16} />
                   </div>
                   <span className="font-heading font-medium">
-                    {entity.label}
+                    {profile.label}
                   </span>
                 </div>
               </button>
@@ -351,7 +271,7 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
         </p>
       </div>
 
-      {/* Institutional Context Cards - only show when entities are selected */}
+      {/* Institutional Context Cards */}
       {selectedEntities.length >= 2 && (
         <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
           <h3 className="text-lg font-heading font-semibold text-slate-900 mb-3">
@@ -373,14 +293,14 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
             }`}
           >
             {selectedEntities.map(entityId => {
-              const entity = IDENTITY_LABELS[entityId];
-              const IconComponent = entity.icon;
+              const profile = resolveEntityProfile(entityId);
+              if (!profile) return null;
+              const IconComponent = getIcon(entityId);
+              const entitySources = resolveEntitySources(profile);
+              const entityAssertions = resolveEntityAssertions(profile);
 
               return (
-                <div
-                  key={entityId}
-                  className="border border-slate-200 rounded-lg p-4"
-                >
+                <div key={entityId} className="border border-slate-200 rounded-lg p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div
                       className="p-2 rounded-lg text-white"
@@ -388,66 +308,101 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                     >
                       <IconComponent size={18} />
                     </div>
-                    <h4 className="font-heading font-semibold text-slate-900">
-                      {entity.label}
-                    </h4>
+                    <div>
+                      <h4 className="font-heading font-semibold text-slate-900">
+                        {profile.label}
+                      </h4>
+                      {profile.shortDescription ? (
+                        <p className="text-xs text-slate-500 mt-1">
+                          {profile.shortDescription}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
 
                   <div className="space-y-3 text-sm">
                     <div>
                       <span className="font-medium text-slate-700">
-                        Time Horizon:
+                        Time horizon
                       </span>
-                      <p className="text-slate-600">
-                        {entity.context.timeHorizon}
+                      <p className="text-slate-600 mt-1">
+                        {profile.timeHorizon ?? 'Varies by institution'}
                       </p>
                     </div>
 
                     <div>
                       <span className="font-medium text-slate-700">
-                        Withdrawal Rate:
+                        Withdrawal / spending cadence
                       </span>
-                      <p className="text-slate-600">
-                        {entity.context.withdrawalRate}
+                      <p className="text-slate-600 mt-1">
+                        {profile.typicalWithdrawal ?? 'Mandate dependent'}
                       </p>
                     </div>
 
                     <div>
                       <span className="font-medium text-slate-700">
-                        Governance:
+                        Governance
                       </span>
-                      <p className="text-slate-600">
-                        {entity.context.governanceStyle}
+                      <p className="text-slate-600 mt-1">
+                        {profile.governanceStyle ?? 'Varies by governing body'}
                       </p>
                     </div>
 
-                    <div>
-                      <span className="font-medium text-slate-700">
-                        Key Constraints:
-                      </span>
-                      <ul className="text-slate-600 mt-1 space-y-1">
-                        {entity.context.keyConstraints.map(
-                          (constraint, idx) => (
+                    {profile.keyConstraints?.length ? (
+                      <div>
+                        <span className="font-medium text-slate-700">
+                          Key constraints
+                        </span>
+                        <ul className="text-slate-600 mt-1 space-y-1">
+                          {profile.keyConstraints.map((constraint, idx) => (
                             <li key={idx} className="text-xs">
                               • {constraint}
                             </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
 
-                    <div>
-                      <span className="font-medium text-slate-700">
-                        Stakeholders:
-                      </span>
-                      <ul className="text-slate-600 mt-1 space-y-1">
-                        {entity.context.stakeholders.map((stakeholder, idx) => (
-                          <li key={idx} className="text-xs">
-                            • {stakeholder}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {profile.stakeholders?.length ? (
+                      <div>
+                        <span className="font-medium text-slate-700">
+                          Stakeholders
+                        </span>
+                        <ul className="text-slate-600 mt-1 space-y-1">
+                          {profile.stakeholders.map((stakeholder, idx) => (
+                            <li key={idx} className="text-xs">
+                              • {stakeholder}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+
+                    {entityAssertions.length ? (
+                      <div>
+                        <span className="font-medium text-slate-700">
+                          Assertions to cite
+                        </span>
+                        <ul className="mt-1 space-y-2 text-xs text-slate-600">
+                          {entityAssertions.map(assertion => (
+                            <li key={assertion.id}>
+                              <p className="font-semibold text-slate-700">
+                                {assertion.title}
+                              </p>
+                              <p className="text-slate-600 mt-1">
+                                {assertion.statement}
+                              </p>
+                              <AssertionEvidence
+                                assertion={assertion}
+                                sourceIndex={dataset.sourceIndex}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+
+                    {renderSourceList(entitySources)}
                   </div>
                 </div>
               );
@@ -472,7 +427,7 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
             <p className="text-sm text-slate-600 mt-1">
               Notice how the same core message gets tailored to each
               institution's unique context, constraints, and decision-making
-              process. This isn't just different wording - it reflects
+              process. This isn't just different wording—it reflects
               fundamentally different institutional realities.
             </p>
           </div>
@@ -487,16 +442,13 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
             } divide-y md:divide-y-0 md:divide-x divide-gray-200`}
           >
             {selectedEntities.map(entityId => {
-              const entity = IDENTITY_LABELS[entityId];
-              const content = getContentForEntity(
-                entityId,
-                selectedContentType
-              );
-              const IconComponent = entity.icon;
+              const profile = resolveEntityProfile(entityId);
+              if (!profile) return null;
+              const content = getContentForEntity(entityId, selectedContentType);
+              const IconComponent = getIcon(entityId);
 
               return (
                 <div key={entityId} className="p-6">
-                  {/* Entity Header */}
                   <div className="flex items-center gap-3 mb-4">
                     <div
                       className="p-2 rounded-lg text-white"
@@ -506,7 +458,7 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                     </div>
                     <div>
                       <h4 className="font-heading font-semibold text-slate-900">
-                        {entity.label}
+                        {profile.label}
                       </h4>
                       <p className="text-xs text-slate-500">
                         {content.length}{' '}
@@ -515,12 +467,11 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                     </div>
                   </div>
 
-                  {/* Content Items */}
                   <div className="space-y-4">
                     {content.length === 0 ? (
                       <div className="text-sm text-slate-500 italic py-4">
                         No specific {selectedContentType} content for{' '}
-                        {entity.label.toLowerCase()}
+                        {profile.label.toLowerCase()}
                       </div>
                     ) : (
                       content.map(item => (
@@ -531,12 +482,12 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                           <div className="space-y-2">
                             {item.type === 'opener' && (
                               <div className="text-sm text-slate-700 leading-relaxed">
-                                "
+                                “
                                 {
-                                  (item as Extract<Node, { type: 'opener' }>)
-                                    .text
+                                  (item as Extract<Node, { type: 'opener' }>).
+                                    text
                                 }
-                                "
+                                ”
                               </div>
                             )}
 
@@ -551,10 +502,20 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                                   if (sections) {
                                     return (
                                       <div className="space-y-2">
-                                        <div><strong>Ask:</strong> {sections.ask}</div>
-                                        <div><strong>Implementation:</strong> {sections.implementation}</div>
-                                        <div><strong>Reporting:</strong> {sections.reporting}</div>
-                                        <div><strong>Risk:</strong> {sections.risk}</div>
+                                        <div>
+                                          <strong>Ask:</strong> {sections.ask}
+                                        </div>
+                                        <div>
+                                          <strong>Implementation:</strong>{' '}
+                                          {sections.implementation}
+                                        </div>
+                                        <div>
+                                          <strong>Reporting:</strong>{' '}
+                                          {sections.reporting}
+                                        </div>
+                                        <div>
+                                          <strong>Risk:</strong> {sections.risk}
+                                        </div>
                                       </div>
                                     );
                                   }
@@ -568,29 +529,21 @@ export function ComparisonView({ dataset }: ComparisonViewProps) {
                                 <h5 className="font-heading font-semibold text-slate-900 text-sm mb-1">
                                   {
                                     (
-                                      item as Extract<
-                                        Node,
-                                        { type: 'key_point' }
-                                      >
+                                      item as Extract<Node, { type: 'key_point' }>
                                     ).title
                                   }
                                 </h5>
                                 <div className="text-sm text-slate-700 leading-relaxed">
                                   {
                                     (
-                                      item as Extract<
-                                        Node,
-                                        { type: 'key_point' }
-                                      >
+                                      item as Extract<Node, { type: 'key_point' }>
                                     ).body
                                   }
                                 </div>
                               </div>
                             )}
 
-                            {/* Additional targeting context */}
-                            {(item.targets?.audience ||
-                              item.targets?.venue) && (
+                            {(item.targets?.audience || item.targets?.venue) && (
                               <div className="text-xs text-slate-500 pt-2 border-t border-slate-100">
                                 {item.targets.audience && (
                                   <span>

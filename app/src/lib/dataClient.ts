@@ -6,6 +6,7 @@ import {
   SchemaDocumentSchema,
   SourcesDocumentSchema,
   AssertionsDocumentSchema,
+  EntitiesDocumentSchema,
 } from './schema';
 import type {
   Dataset,
@@ -15,6 +16,8 @@ import type {
   SourcesDocument,
   AssertionRecord,
   AssertionsDocument,
+  EntityProfile,
+  EntitiesDocument,
 } from './schema';
 
 const DATA_BASE_PATH = '/data';
@@ -69,7 +72,8 @@ function buildDataset(
   nodesDoc: z.infer<typeof NodesDocumentSchema>,
   playlistsDoc: z.infer<typeof PlaylistsDocumentSchema>,
   sourcesDoc?: SourcesDocument,
-  assertionsDoc?: AssertionsDocument
+  assertionsDoc?: AssertionsDocument,
+  entitiesDoc?: EntitiesDocument
 ): Dataset {
   indexPlaylists(nodesDoc.version, manifest.version, schemaDoc);
   const filteredNodes = nodesDoc.nodes.filter(node => node.type !== 'source');
@@ -87,6 +91,10 @@ function buildDataset(
 
   const assertions: AssertionRecord[] = assertionsDoc
     ? assertionsDoc.assertions
+    : [];
+
+  const entities: EntityProfile[] = entitiesDoc
+    ? entitiesDoc.entities
     : [];
 
   const nodeIndex = Object.fromEntries(
@@ -113,9 +121,11 @@ function buildDataset(
     playlists: playlistsDoc.playlists,
     sources,
     assertions,
+    entities,
     nodeIndex,
     sourceIndex: Object.fromEntries(sources.map(source => [source.id, source])),
     assertionIndex: Object.fromEntries(assertions.map(assertion => [assertion.id, assertion])),
+    entityIndex: Object.fromEntries(entities.map(entity => [entity.id, entity])),
     playlistById,
     playlistsByKind,
   };
@@ -149,9 +159,19 @@ export async function loadDataset(
   const assertionsUrl = manifest.assertions
     ? `${basePath}/${version}/${manifest.assertions}`
     : undefined;
+  const entitiesUrl = manifest.entities
+    ? `${basePath}/${version}/${manifest.entities}`
+    : undefined;
 
   try {
-    const [schemaDoc, nodesDoc, playlistsDoc, sourcesDoc, assertionsDoc] =
+    const [
+      schemaDoc,
+      nodesDoc,
+      playlistsDoc,
+      sourcesDoc,
+      assertionsDoc,
+      entitiesDoc,
+    ] =
       await Promise.all([
         fetchJson(schemaUrl, SchemaDocumentSchema),
         fetchJson(nodesUrl, NodesDocumentSchema),
@@ -162,6 +182,9 @@ export async function loadDataset(
         assertionsUrl
           ? fetchJson(assertionsUrl, AssertionsDocumentSchema)
           : Promise.resolve(undefined),
+        entitiesUrl
+          ? fetchJson(entitiesUrl, EntitiesDocumentSchema)
+          : Promise.resolve(undefined),
       ]);
 
     return buildDataset(
@@ -170,7 +193,8 @@ export async function loadDataset(
       nodesDoc,
       playlistsDoc,
       sourcesDoc,
-      assertionsDoc
+      assertionsDoc,
+      entitiesDoc
     );
   } catch (error) {
     if (manifest.fallbackVersion && manifest.fallbackVersion !== version) {

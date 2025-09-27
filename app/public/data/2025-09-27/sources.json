@@ -354,6 +354,146 @@
       "tags": [
         "further_reading"
       ]
+    },
+    {
+      "id": "src_us-dol-erisa-overview",
+      "label": "U.S. Department of Labor: ERISA Overview",
+      "url": "https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/erisa-for-retirement-plans",
+      "citationText": "U.S. Department of Labor. (2024). ERISA for retirement plans. https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/erisa-for-retirement-plans",
+      "tags": [
+        "corporate_pension",
+        "fiduciary"
+      ]
+    },
+    {
+      "id": "src_pbgc_investment_policy",
+      "label": "PBGC: Investment Policy Statement",
+      "url": "https://www.pbgc.gov/about/investments/investment-policy-statement",
+      "citationText": "Pension Benefit Guaranty Corporation. (2023). Investment policy statement. https://www.pbgc.gov/about/investments/investment-policy-statement",
+      "tags": [
+        "corporate_pension",
+        "governance"
+      ]
+    },
+    {
+      "id": "src_nasra_public_pension_basics",
+      "label": "NASRA: Public Pension Plan Design",
+      "url": "https://www.nasra.org/publicfundsurvey",
+      "citationText": "National Association of State Retirement Administrators. (2024). Public pension plan design. https://www.nasra.org/publicfundsurvey",
+      "tags": [
+        "public_pension",
+        "governance"
+      ]
+    },
+    {
+      "id": "src_gfoa_pension_best_practices",
+      "label": "GFOA: Best Practices for Public Retirement Systems",
+      "url": "https://www.gfoa.org/materials/best-practices-public-employee-retirement-systems",
+      "citationText": "Government Finance Officers Association. (2023). Best practices for public employee retirement systems. https://www.gfoa.org/materials/best-practices-public-employee-retirement-systems",
+      "tags": [
+        "public_pension",
+        "governance"
+      ]
+    },
+    {
+      "id": "src_nacubo_tiaa_spending",
+      "label": "NACUBO-TIAA Study of Endowments",
+      "url": "https://www.nacubo.org/Research/2024/NACUBO-TIAA-Study-of-Endowments",
+      "citationText": "NACUBO & TIAA. (2024). Study of endowments: Average spending rates. https://www.nacubo.org/Research/2024/NACUBO-TIAA-Study-of-Endowments",
+      "tags": [
+        "endowment",
+        "spending"
+      ]
+    },
+    {
+      "id": "src_irs_foundation_distribution",
+      "label": "IRS: Private Foundation Minimum Distributions",
+      "url": "https://www.irs.gov/charities-non-profits/private-foundations/annual-excise-tax-on-undistributed-income-of-private-foundations",
+      "citationText": "Internal Revenue Service. (2024). Annual excise tax on undistributed income of private foundations. https://www.irs.gov/charities-non-profits/private-foundations/annual-excise-tax-on-undistributed-income-of-private-foundations",
+      "tags": [
+        "foundation",
+        "distribution"
+      ]
+    },
+    {
+      "id": "src_naic_risk_based_capital",
+      "label": "NAIC: Risk-Based Capital Overview",
+      "url": "https://content.naic.org/industry/risk-based-capital",
+      "citationText": "National Association of Insurance Commissioners. (2024). Risk-based capital. https://content.naic.org/industry/risk-based-capital",
+      "tags": [
+        "insurance",
+        "regulation"
+      ]
+    },
+    {
+      "id": "src_naic_asset_liability_management",
+      "label": "NAIC: Asset-Liability Management Guidance",
+      "url": "https://content.naic.org/cmte_e_alirt_tf.htm",
+      "citationText": "National Association of Insurance Commissioners. (2023). Asset-liability management regulatory guidance. https://content.naic.org/cmte_e_alirt_tf.htm",
+      "tags": [
+        "insurance",
+        "liability_matching"
+      ]
+    },
+    {
+      "id": "src_bis_central_bank_independence",
+      "label": "BIS: Central Bank Governance and Independence",
+      "url": "https://www.bis.org/publ/othp31.htm",
+      "citationText": "Bank for International Settlements. (2023). Central bank governance and independence. https://www.bis.org/publ/othp31.htm",
+      "tags": [
+        "central_bank",
+        "governance"
+      ]
+    },
+    {
+      "id": "src_imf_central_bank_mandates",
+      "label": "IMF: Central Bank Mandates",
+      "url": "https://www.imf.org/en/Publications/WP/Issues/2023/07/21/Central-Bank-Mandates-532658",
+      "citationText": "International Monetary Fund. (2023). Central bank mandates: Evolution and practices. https://www.imf.org/en/Publications/WP/Issues/2023/07/21/Central-Bank-Mandates-532658",
+      "tags": [
+        "central_bank",
+        "mandate"
+      ]
+    },
+    {
+      "id": "src_swf_institute_overview",
+      "label": "SWFI: Sovereign Wealth Fund Basics",
+      "url": "https://www.swfinstitute.org/sovereign-wealth-fund",
+      "citationText": "Sovereign Wealth Fund Institute. (2024). Sovereign wealth fund basics. https://www.swfinstitute.org/sovereign-wealth-fund",
+      "tags": [
+        "swf",
+        "mandate"
+      ]
+    },
+    {
+      "id": "src_imf_santiago_principles",
+      "label": "IMF: Santiago Principles Overview",
+      "url": "https://www.imf.org/external/np/pp/eng/2008/102708.pdf",
+      "citationText": "International Monetary Fund. (2008). Sovereign wealth funds: Recommended practices (Santiago Principles). https://www.imf.org/external/np/pp/eng/2008/102708.pdf",
+      "tags": [
+        "swf",
+        "governance"
+      ]
+    },
+    {
+      "id": "src_gfoa_investment_policy",
+      "label": "GFOA: Investment Policy Best Practices",
+      "url": "https://www.gfoa.org/materials/investment-policy",
+      "citationText": "Government Finance Officers Association. (2023). Investment policy best practices for governments. https://www.gfoa.org/materials/investment-policy",
+      "tags": [
+        "government",
+        "investment_policy"
+      ]
+    },
+    {
+      "id": "src_cfpb_retirement_accounts",
+      "label": "CFPB: Managing Retirement Accounts",
+      "url": "https://www.consumerfinance.gov/consumer-tools/retirement/",
+      "citationText": "Consumer Financial Protection Bureau. (2024). Managing retirement accounts. https://www.consumerfinance.gov/consumer-tools/retirement/",
+      "tags": [
+        "individual",
+        "retirement"
+      ]
     }
   ]
 }

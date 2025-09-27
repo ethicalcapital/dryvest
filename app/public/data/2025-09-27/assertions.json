@@ -60,6 +60,165 @@
       "author": "ethical-capital",
       "lastReviewed": "2025-09-27",
       "reviewer": "dryvest-editorial"
+    },
+    {
+      "id": "assert_corporate_pension_erisa_duty",
+      "title": "Corporate pensions operate under ERISA fiduciary standards",
+      "statement": "Corporate defined-benefit plans are governed by ERISA, requiring fiduciaries to act solely in participants' interests and document prudent investment processes.",
+      "evidence": [
+        "src_us-dol-erisa-overview",
+        "src_pbgc_investment_policy"
+      ],
+      "supports": [],
+      "tags": [
+        "corporate_pension",
+        "fiduciary"
+      ],
+      "confidence": "high",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_public_pension_transparency_governance",
+      "title": "Public pensions balance fiduciary duty with public accountability",
+      "statement": "State and local retirement systems are governed by fiduciary boards that operate under open-meeting, disclosure, and beneficiary-focused standards.",
+      "evidence": [
+        "src_nasra_public_pension_basics",
+        "src_gfoa_pension_best_practices"
+      ],
+      "supports": [],
+      "tags": [
+        "public_pension",
+        "governance"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_endowment_spending_norms",
+      "title": "Endowments target 4-5% spending to preserve purchasing power",
+      "statement": "University and foundation endowments typically adopt spending policies near 4-5% to balance mission support with intergenerational equity.",
+      "evidence": [
+        "src_nacubo_tiaa_spending",
+        "src_irs_foundation_distribution"
+      ],
+      "supports": [],
+      "tags": [
+        "endowment",
+        "spending"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_foundation_distribution_requirement",
+      "title": "Private foundations must distribute at least 5% annually",
+      "statement": "U.S. private foundations are required to distribute a minimum of 5% of average asset value each year toward charitable purposes.",
+      "evidence": [
+        "src_irs_foundation_distribution"
+      ],
+      "supports": [],
+      "tags": [
+        "foundation",
+        "distribution"
+      ],
+      "confidence": "high",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_insurance_liability_alignment",
+      "title": "Insurers invest with liability-matching and capital rules",
+      "statement": "Insurance portfolios are managed to match expected policy liabilities and satisfy NAIC risk-based capital requirements, limiting allocation flexibility.",
+      "evidence": [
+        "src_naic_risk_based_capital",
+        "src_naic_asset_liability_management"
+      ],
+      "supports": [],
+      "tags": [
+        "insurance",
+        "liability_matching"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_central_bank_independence",
+      "title": "Central banks defend policy independence and balance sheet integrity",
+      "statement": "Modern central banks manage reserves with mandates that emphasize monetary policy independence, balance sheet risk controls, and political neutrality.",
+      "evidence": [
+        "src_bis_central_bank_independence",
+        "src_imf_central_bank_mandates"
+      ],
+      "supports": [],
+      "tags": [
+        "central_bank",
+        "governance"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_swf_mandates_and_santiago_principles",
+      "title": "Sovereign wealth funds follow mandate-specific investment frameworks",
+      "statement": "Sovereign wealth funds operate under stabilization, savings, or development mandates with governance expectations codified by the Santiago Principles.",
+      "evidence": [
+        "src_swf_institute_overview",
+        "src_imf_santiago_principles"
+      ],
+      "supports": [],
+      "tags": [
+        "swf",
+        "governance"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_government_investment_policy_principles",
+      "title": "Municipal investment policies prioritize safety, liquidity, and transparency",
+      "statement": "Government treasuries and cash pools follow GFOA best practices emphasizing safety, liquidity, diversification, and documented exceptions for public accountability.",
+      "evidence": [
+        "src_gfoa_investment_policy"
+      ],
+      "supports": [],
+      "tags": [
+        "government",
+        "investment_policy"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
+    },
+    {
+      "id": "assert_individual_retirement_guidance",
+      "title": "Household investors balance risk capacity, liquidity, and values",
+      "statement": "Individual investors are encouraged to keep emergency reserves, align retirement accounts with stated goals, and use screened products where available without exceeding risk tolerance.",
+      "evidence": [
+        "src_cfpb_retirement_accounts"
+      ],
+      "supports": [],
+      "tags": [
+        "individual",
+        "retirement"
+      ],
+      "confidence": "medium",
+      "author": "ethical-capital",
+      "reviewer": "dryvest-editorial",
+      "lastReviewed": "2025-09-27"
     }
   ]
 }

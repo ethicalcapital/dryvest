@@ -1,0 +1,279 @@
+{
+  "version": "2025-09-27",
+  "entities": [
+    {
+      "id": "individual",
+      "label": "Individual Investor",
+      "shortDescription": "Households balancing risk capacity, liquidity needs, and values across taxable and retirement accounts.",
+      "timeHorizon": "Varies by life stage (emergency reserves, retirement horizon, legacy goals)",
+      "typicalWithdrawal": "Income replacement withdrawals begin after retirement; otherwise focused on accumulation.",
+      "governanceStyle": "Self-directed choices informed by advisors, custodians, or accountability groups.",
+      "keyConstraints": [
+        "Emergency liquidity and cash buffers",
+        "Risk tolerance and capacity",
+        "Product availability via custodians",
+        "Tax considerations"
+      ],
+      "stakeholders": [
+        "Account owner",
+        "Household/partner",
+        "Future heirs or philanthropic goals"
+      ],
+      "assertions": [
+        "assert_individual_retirement_guidance"
+      ],
+      "sources": [
+        "src_cfpb_retirement_accounts"
+      ],
+      "tags": [
+        "individual",
+        "retirement"
+      ]
+    },
+    {
+      "id": "corporate_pension",
+      "label": "Corporate Pension Plan",
+      "shortDescription": "ERISA-regulated defined-benefit plans stewarded by trustees for participant benefit.",
+      "timeHorizon": "Long-dated liability profile (20-30 years) with de-risking glidepaths",
+      "typicalWithdrawal": "Benefit obligations determined actuarially; payouts tied to participant retirements.",
+      "governanceStyle": "Named fiduciaries and investment committees operating under ERISA documentation and prudence rules.",
+      "keyConstraints": [
+        "ERISA fiduciary duty and exclusive-benefit rule",
+        "Funding status and PBGC oversight",
+        "Corporate sponsor risk management",
+        "Accounting impact (ASC 715)"
+      ],
+      "stakeholders": [
+        "Active employees and retirees",
+        "Plan trustees",
+        "Corporate sponsor and treasury",
+        "Unions or employee representatives"
+      ],
+      "assertions": [
+        "assert_corporate_pension_erisa_duty"
+      ],
+      "sources": [
+        "src_us-dol-erisa-overview",
+        "src_pbgc_investment_policy"
+      ],
+      "tags": [
+        "pension",
+        "erisa"
+      ]
+    },
+    {
+      "id": "public_pension",
+      "label": "Public Pension System",
+      "shortDescription": "State and local retirement systems balancing fiduciary duty with statutory and public accountability.",
+      "timeHorizon": "Intergenerational horizon with actuarial smoothing across economic cycles",
+      "typicalWithdrawal": "Benefit cash flows linked to retiree demographics and statutory formulas.",
+      "governanceStyle": "Boards comprised of trustees, beneficiaries, and public appointees under open-meeting and disclosure statutes.",
+      "keyConstraints": [
+        "Statutory fiduciary obligations",
+        "Political and public oversight",
+        "Funding ratio targets",
+        "Collective bargaining and legislative constraints"
+      ],
+      "stakeholders": [
+        "Active members and retirees",
+        "Taxpayers",
+        "Legislators and oversight bodies",
+        "Public watchdog organizations"
+      ],
+      "assertions": [
+        "assert_public_pension_transparency_governance"
+      ],
+      "sources": [
+        "src_nasra_public_pension_basics",
+        "src_gfoa_pension_best_practices"
+      ],
+      "tags": [
+        "public_pension",
+        "governance"
+      ]
+    },
+    {
+      "id": "endowment",
+      "label": "Endowment",
+      "shortDescription": "Perpetual investment pools supporting academic or mission-driven institutions.",
+      "timeHorizon": "Perpetual capital with spending rules balancing current and future beneficiaries",
+      "typicalWithdrawal": "4-5% policy spending rate averaged over market cycles",
+      "governanceStyle": "Board of trustees or investment committee aligns mission with fiduciary prudence and donor intent.",
+      "keyConstraints": [
+        "Mission alignment and donor restrictions",
+        "Intergenerational equity",
+        "Liquidity for capital commitments and spending",
+        "Peer benchmarking"
+      ],
+      "stakeholders": [
+        "Students and faculty",
+        "Donors and alumni",
+        "Community served",
+        "Institutional leadership"
+      ],
+      "assertions": [
+        "assert_endowment_spending_norms"
+      ],
+      "sources": [
+        "src_nacubo_tiaa_spending"
+      ],
+      "tags": [
+        "endowment",
+        "mission"
+      ]
+    },
+    {
+      "id": "foundation",
+      "label": "Private Foundation",
+      "shortDescription": "Grantmaking entities required to distribute funds annually while preserving mission alignment.",
+      "timeHorizon": "Perpetual or time-limited based on charter",
+      "typicalWithdrawal": "\u22655% IRS minimum distribution requirement",
+      "governanceStyle": "Board/trustees with philanthropic mandate and IRS compliance responsibilities.",
+      "keyConstraints": [
+        "IRS distribution and reporting rules",
+        "Mission program alignment",
+        "Donor intent",
+        "Reputational stewardship"
+      ],
+      "stakeholders": [
+        "Grantees and beneficiary communities",
+        "Donors/founders",
+        "Program staff",
+        "Regulators"
+      ],
+      "assertions": [
+        "assert_foundation_distribution_requirement"
+      ],
+      "sources": [
+        "src_irs_foundation_distribution"
+      ],
+      "tags": [
+        "foundation",
+        "distribution"
+      ]
+    },
+    {
+      "id": "insurance",
+      "label": "Insurance Company Portfolio",
+      "shortDescription": "Balance sheets managed to meet policyholder liabilities under risk-based capital rules.",
+      "timeHorizon": "Matched to liability cash flows, typically medium-term with precise duration targets",
+      "typicalWithdrawal": "Liability-driven payouts; investment income supports statutory reserves.",
+      "governanceStyle": "Investment committees with actuarial, risk, and regulatory oversight.",
+      "keyConstraints": [
+        "Risk-based capital requirements",
+        "Asset-liability duration matching",
+        "Policyholder guarantees",
+        "Rating agency expectations"
+      ],
+      "stakeholders": [
+        "Policyholders",
+        "Shareholders or mutual owners",
+        "Regulators",
+        "Rating agencies"
+      ],
+      "assertions": [
+        "assert_insurance_liability_alignment"
+      ],
+      "sources": [
+        "src_naic_risk_based_capital",
+        "src_naic_asset_liability_management"
+      ],
+      "tags": [
+        "insurance",
+        "liability_matching"
+      ]
+    },
+    {
+      "id": "central_bank",
+      "label": "Central Bank Reserve Portfolio",
+      "shortDescription": "Official-sector investors balancing monetary policy mandates with reserve safety and liquidity.",
+      "timeHorizon": "Mandate-driven; reserves managed for stability rather than return maximization",
+      "typicalWithdrawal": "Interventions and liquidity operations rather than fixed spending",
+      "governanceStyle": "Independent policy boards supported by reserve management teams and statutory mandates.",
+      "keyConstraints": [
+        "Monetary policy independence",
+        "Capital preservation and liquidity",
+        "Political neutrality",
+        "International credibility"
+      ],
+      "stakeholders": [
+        "Citizens",
+        "Government",
+        "Financial institutions",
+        "Global partners"
+      ],
+      "assertions": [
+        "assert_central_bank_independence"
+      ],
+      "sources": [
+        "src_bis_central_bank_independence",
+        "src_imf_central_bank_mandates"
+      ],
+      "tags": [
+        "central_bank",
+        "policy"
+      ]
+    },
+    {
+      "id": "government",
+      "label": "Municipal Investment Pool",
+      "shortDescription": "City, county, or state treasuries investing public funds under safety, liquidity, and transparency mandates.",
+      "timeHorizon": "Short- to medium-term cash flows aligned to budget cycles",
+      "typicalWithdrawal": "Liquidity needs for operations, debt service, and capital projects.",
+      "governanceStyle": "Treasurer and investment committee operating under adopted investment policy statements and public reporting.",
+      "keyConstraints": [
+        "State statute and charter requirements",
+        "Safety-liquidity-yield hierarchy",
+        "Public transparency",
+        "Counterparty and concentration limits"
+      ],
+      "stakeholders": [
+        "Residents",
+        "Elected officials",
+        "Public service departments",
+        "Rating agencies"
+      ],
+      "assertions": [
+        "assert_government_investment_policy_principles"
+      ],
+      "sources": [
+        "src_gfoa_investment_policy"
+      ],
+      "tags": [
+        "government",
+        "investment_policy"
+      ]
+    },
+    {
+      "id": "swf",
+      "label": "Sovereign Wealth Fund",
+      "shortDescription": "State-owned investment funds pursuing stabilization, savings, or development mandates.",
+      "timeHorizon": "Depends on mandate: near-term stabilization, intergenerational saving, or long-term development",
+      "typicalWithdrawal": "Mandate-driven distributions for budget support or development projects.",
+      "governanceStyle": "Government sponsor with professional management aligned to Santiago Principles.",
+      "keyConstraints": [
+        "Mandate clarity and legal framework",
+        "Political oversight",
+        "Public reporting and Santiago Principles",
+        "Currency and commodity exposure management"
+      ],
+      "stakeholders": [
+        "Current citizens",
+        "Future generations",
+        "Government ministries",
+        "International partners"
+      ],
+      "assertions": [
+        "assert_swf_mandates_and_santiago_principles"
+      ],
+      "sources": [
+        "src_swf_institute_overview",
+        "src_imf_santiago_principles"
+      ],
+      "tags": [
+        "swf",
+        "sovereign"
+      ]
+    }
+  ]
+}

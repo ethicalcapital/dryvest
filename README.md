@@ -41,7 +41,7 @@ Prerequisites:
 ├── functions/api/         # Cloudflare Pages Functions
 │   ├── contact.ts         # Stores contact submissions in KV and relays to LACRM
 │   └── generate-pdf.ts    # PDF export proxy (Typst service)
-├── public/data/<version>/ # App dataset (manifest, nodes, playlists)
+├── public/data/<version>/ # App dataset (manifest, nodes, playlists, sources, assertions, entity profiles)
 ├── wrangler.toml          # Cloudflare project config (KV binding `HOOKS`)
 └── README.md
 ```
@@ -50,6 +50,18 @@ Key frontend paths:
 - `src/App.tsx` – top-level layout, mode switching (Quick/Custom/Compare/Fact Check).
 - `src/components/ActionsPanel.tsx` – PDF/Markdown/Anki exports + contact form.
 - `src/components/PreviewPane.tsx` – renders scripting content with APA citations.
+
+### Dataset Layout
+
+Each dataset version under `public/data/<version>/` includes:
+
+- `manifest.json` – lists file pointers (nodes, playlists, sources, assertions, entities).
+- `nodes.json` – normalized content nodes (no embedded sources).
+- `playlists.json` – target-aware playlists that drive selection.
+- `sources.json` – catalog of citation records (APA text, tags).
+- `assertions.json` – reusable statements with evidence links.
+- `entities.json` – profile metadata for each identity (constraints, stakeholders, citations).
+- `schema.json` – taxonomies used to validate available values.
 
 ## Cloudflare Workers & KV
 
