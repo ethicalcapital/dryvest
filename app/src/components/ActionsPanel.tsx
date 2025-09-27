@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import clsx from 'clsx';
 import { ClipboardCopy } from 'lucide-react';
 import type { BriefParams } from '../hooks/useBriefParams';
@@ -13,61 +13,6 @@ interface ActionsPanelProps {
   exportData: BriefExportData;
 }
 
-const ActionButton = ({
-  icon: Icon,
-  label,
-  description,
-  onClick,
-  disabled = false,
-}: {
-  icon: typeof ClipboardCopy;
-  label: string;
-  description: string;
-  onClick: () => void;
-  disabled?: boolean;
-}) => (
-  <button
-    type="button"
-    disabled={disabled}
-    onClick={onClick}
-    className={clsx(
-      'w-full rounded-lg border px-4 py-3 text-left text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-      disabled
-        ? 'cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400'
-        : 'border-slate-200 bg-white hover:bg-indigo-50'
-    )}
-    style={{
-      ['--tw-ring-color' as any]: 'var(--ecic-purple)',
-    }}
-    onMouseEnter={e => {
-      if (!disabled) {
-        e.currentTarget.style.borderColor = 'var(--ecic-purple)';
-      }
-    }}
-    onMouseLeave={e => {
-      if (!disabled) {
-        e.currentTarget.style.borderColor = 'var(--border-gray)';
-      }
-    }}
-  >
-    <div className="flex items-start gap-3">
-      <span
-        className="mt-0.5 rounded-md p-1 text-white"
-        style={{ backgroundColor: 'var(--ecic-purple)' }}
-      >
-        <Icon className="h-4 w-4" aria-hidden="true" />
-      </span>
-      <span>
-        <span className="block text-sm font-heading font-semibold text-slate-900">
-          {label}
-        </span>
-        <span className="mt-1 block text-xs text-slate-500">{description}</span>
-      </span>
-    </div>
-  </button>
-);
-
-
 export function ActionsPanel({
   params,
   selectedDocs,
@@ -76,6 +21,7 @@ export function ActionsPanel({
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>(
     'idle'
   );
+  const focusRingStyles: CSSProperties = { ['--tw-ring-color' as any]: 'var(--ecic-purple)' };
 
   const handleCopy = async (tone: BriefTone) => {
     try {
@@ -103,39 +49,15 @@ export function ActionsPanel({
   };
 
   return (
-    <aside className="space-y-4">
-      <div className="rounded-xl border border-slate-200 bg-white/80 p-5 shadow-sm">
-        <h2 className="text-sm font-semibold text-slate-900">Actions</h2>
-        <p className="mt-1 text-xs text-slate-500">
-          URL reflects the current configuration. Copy, download, and print
-          workflows render deterministic markdown snapshots.
-        </p>
-        <p className="mt-3 text-xs text-slate-400">
-          Identity:{' '}
-          <span className="font-medium text-slate-600">{params.identity}</span>{' '}
-          · Audience:{' '}
-          <span className="font-medium text-slate-600">{params.audience}</span>{' '}
-          · Attachments:{' '}
-          <span className="font-medium text-slate-600">
-            {selectedDocs.length}
-          </span>
+    <aside className="space-y-4 lg:sticky lg:top-24">
+      <div className="rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+        <h2 className="text-base font-heading font-semibold text-slate-900">
+          Share this brief
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          For educational use—share with your committee and keep the paper trail tidy.
         </p>
         <div className="mt-4 space-y-3">
-          <ActionButton
-            icon={ClipboardCopy}
-            label={
-              copyState === 'copied'
-                ? 'Copied!'
-                : copyState === 'error'
-                  ? 'Copy failed'
-                  : 'Copy text'
-            }
-            description="Copy the brief text for quick sharing in emails or documents."
-            disabled={copyState === 'error'}
-            onClick={() => handleCopy('plain')}
-          />
-
-          {/* PDF Export - Primary download option */}
           <PDFExportButton
             context={{
               identity: params.identity,
@@ -145,10 +67,39 @@ export function ActionsPanel({
             }}
             exportData={exportData}
           />
+          <button
+            type="button"
+            onClick={() => handleCopy('plain')}
+            disabled={copyState === 'error'}
+            className={clsx(
+              'w-full inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+              copyState === 'error'
+                ? 'cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400'
+                : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
+            )}
+            style={focusRingStyles}
+          >
+            <ClipboardCopy size={16} />
+            {copyState === 'copied'
+              ? 'Copied talking points'
+              : copyState === 'error'
+                ? 'Copy failed'
+                : 'Copy talking points'}
+          </button>
+          <p className="text-xs text-slate-500">
+            Identity: <span className="font-medium text-slate-600">{params.identity}</span> · Audience:{' '}
+            <span className="font-medium text-slate-600">{params.audience}</span> · Attachments:{' '}
+            <span className="font-medium text-slate-600">{selectedDocs.length}</span>
+          </p>
         </div>
+        {copyState === 'error' && (
+          <p className="mt-2 text-xs text-red-600">
+            Clipboard unavailable in this browser. Paste manually from the download instead.
+          </p>
+        )}
       </div>
       <div className="rounded-xl border border-indigo-200 bg-indigo-50/60 p-5 text-sm text-indigo-900">
-        <h3 className="text-sm font-semibold">Feedback</h3>
+        <h3 className="text-sm font-heading font-semibold">Feedback</h3>
         <p className="mt-1 text-xs text-indigo-800">
           Tell us how this session landed. We’ll use aggregated, anonymised
           feedback to improve counter matrices and implementation guidance.

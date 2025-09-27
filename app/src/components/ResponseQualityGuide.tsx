@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import {
   CheckCircle,
   AlertTriangle,
   XCircle,
-  ChevronDown,
-  ChevronUp,
 } from 'lucide-react';
 
 interface Question {
@@ -90,11 +87,6 @@ const ASSESSMENT_QUESTIONS: Question[] = [
 ];
 
 export function ResponseQualityGuide() {
-  const [expandedQuestion, setExpandedQuestion] = useState<string | null>(null);
-
-  const toggleQuestion = (questionId: string) => {
-    setExpandedQuestion(prev => (prev === questionId ? null : questionId));
-  };
 
   const getResponseIcon = (type: 'bad' | 'ok' | 'great') => {
     switch (type) {
@@ -119,87 +111,65 @@ export function ResponseQualityGuide() {
   };
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
+    <div id="quality-guide" className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm">
       <div className="mb-4">
         <h3 className="text-lg font-heading font-semibold text-slate-900 mb-2">
           Are They Taking You Literally or Seriously?
         </h3>
         <p className="text-sm text-slate-600">
-          Use these questions to assess whether an institution is offering
-          performative compliance or genuine commitment. Great answers show
-          quantifiable processes, specific metrics, and accountability
-          mechanisms.
+          Use these questions to assess whether an institution is making
+          empty promises or genuine commitment. Great answers show
+          specific processes, clear metrics, and real accountability.
         </p>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-6">
         {ASSESSMENT_QUESTIONS.map(q => (
-          <div key={q.id} className="border border-slate-200 rounded-lg">
-            <button
-              onClick={() => toggleQuestion(q.id)}
-              className="w-full p-4 text-left hover:bg-slate-50 flex items-center justify-between"
-            >
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-medium px-2 py-1 rounded-full bg-slate-100 text-slate-600">
-                    {q.focus}
-                  </span>
-                </div>
-                <h4 className="font-heading font-medium text-slate-900 text-sm">
-                  {q.question}
-                </h4>
+          <div key={q.id} className="grid gap-4 lg:grid-cols-[1fr,1fr,1fr,1fr] border border-slate-200 rounded-lg p-4">
+            {/* Question - Left Column */}
+            <div className="lg:col-span-1">
+              <div className="mb-2">
+                <span className="text-xs font-medium px-2 py-1 rounded-full bg-slate-100 text-slate-600">
+                  {q.focus}
+                </span>
               </div>
-              <div className="ml-4">
-                {expandedQuestion === q.id ? (
-                  <ChevronUp size={20} className="text-slate-400" />
-                ) : (
-                  <ChevronDown size={20} className="text-slate-400" />
-                )}
+              <h4 className="font-heading font-medium text-slate-900 text-sm">
+                {q.question}
+              </h4>
+            </div>
+
+            {/* Bad Answer */}
+            <div className={`p-3 rounded border ${getResponseBgColor('bad')}`}>
+              <div className="flex items-start gap-2 mb-2">
+                {getResponseIcon('bad')}
+                <span className="text-xs font-semibold text-slate-900">
+                  Performative
+                </span>
               </div>
-            </button>
+              <p className="text-xs text-slate-700 italic leading-tight">{q.bad}</p>
+            </div>
 
-            {expandedQuestion === q.id && (
-              <div className="px-4 pb-4 space-y-3">
-                {/* Bad Answer */}
-                <div
-                  className={`p-3 rounded border ${getResponseBgColor('bad')}`}
-                >
-                  <div className="flex items-start gap-2 mb-2">
-                    {getResponseIcon('bad')}
-                    <span className="text-sm font-medium text-slate-900">
-                      Literal/Performative Response
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-700 italic">{q.bad}</p>
-                </div>
-
-                {/* OK Answer */}
-                <div
-                  className={`p-3 rounded border ${getResponseBgColor('ok')}`}
-                >
-                  <div className="flex items-start gap-2 mb-2">
-                    {getResponseIcon('ok')}
-                    <span className="text-sm font-medium text-slate-900">
-                      Some Process/Awareness
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-700 italic">{q.ok}</p>
-                </div>
-
-                {/* Great Answer */}
-                <div
-                  className={`p-3 rounded border ${getResponseBgColor('great')}`}
-                >
-                  <div className="flex items-start gap-2 mb-2">
-                    {getResponseIcon('great')}
-                    <span className="text-sm font-medium text-slate-900">
-                      Serious Commitment/Quantifiable
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-700 italic">{q.great}</p>
-                </div>
+            {/* OK Answer */}
+            <div className={`p-3 rounded border ${getResponseBgColor('ok')}`}>
+              <div className="flex items-start gap-2 mb-2">
+                {getResponseIcon('ok')}
+                <span className="text-xs font-semibold text-slate-900">
+                  Some Process
+                </span>
               </div>
-            )}
+              <p className="text-xs text-slate-700 italic leading-tight">{q.ok}</p>
+            </div>
+
+            {/* Great Answer */}
+            <div className={`p-3 rounded border ${getResponseBgColor('great')}`}>
+              <div className="flex items-start gap-2 mb-2">
+                {getResponseIcon('great')}
+                <span className="text-xs font-semibold text-slate-900">
+                  Serious/Quantifiable
+                </span>
+              </div>
+              <p className="text-xs text-slate-700 italic leading-tight">{q.great}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -215,7 +185,7 @@ export function ResponseQualityGuide() {
           <strong>Pro Tip:</strong> Institutions that take you seriously will
           provide specific metrics, named data sources, defined timelines, and
           clear accountability mechanisms. Vague commitments to "do good" or
-          "improve ESG" are red flags for performative compliance.
+          "improve ESG" are red flags for empty promises.
         </p>
       </div>
     </div>

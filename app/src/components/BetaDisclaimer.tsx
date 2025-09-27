@@ -20,7 +20,7 @@ export function BetaDisclaimer() {
                   BETA
                 </span>
                 <span className="text-sm font-medium text-amber-800">
-                  Institutional Intelligence Tool in Development
+                  Tool in Development
                 </span>
               </div>
               <p className="text-sm text-amber-700 leading-relaxed">

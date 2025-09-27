@@ -98,15 +98,8 @@ export function PreviewPane({
 }: PreviewPaneProps) {
   return (
     <div className="space-y-6" data-preview-content>
-      {opener ? (
-        <Section title="Opening angle" anchor="opener">
-          <p>{opener.text}</p>
-          <GitHubFeedback node={opener} />
-        </Section>
-      ) : null}
-
       {guide ? (
-        <Section title="Recommended approach" anchor="approach">
+        <Section title="Strategic approach" anchor="approach">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <h3 className="text-sm font-semibold text-slate-900">
@@ -126,43 +119,27 @@ export function PreviewPane({
               <h3 className="text-sm font-semibold text-slate-900">
                 Reporting cadence
               </h3>
-              <p className="text-sm text-slate-700">
-                {guide.sections.reporting}
-              </p>
+              <p className="text-sm text-slate-700">{guide.sections.reporting}</p>
             </div>
             <div>
               <h3 className="text-sm font-semibold text-slate-900">
                 Risk discipline
               </h3>
-              <p className="text-sm text-slate-700">{guide.sections.risk}</p>
+              <p className="text-sm text-slate-700">
+                {guide.sections.risk}
+              </p>
             </div>
           </div>
           <GitHubFeedback node={guide} />
         </Section>
       ) : null}
 
-      {screeningNode ? (
-        <Section title="Screening as intelligence" anchor="screening">
-          {screeningNode.variants?.length ? (
-            <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
-              <ReactMarkdown>
-                {screeningNode.variants.find(
-                  variant => variant.transforms?.tone === context.level
-                )?.body ?? screeningNode.variants[0].body}
-              </ReactMarkdown>
-            </div>
-          ) : screeningNode.body ? (
-            <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
-              <ReactMarkdown>{screeningNode.body}</ReactMarkdown>
-            </div>
-          ) : null}
-          <GitHubFeedback node={screeningNode} />
-        </Section>
-      ) : null}
-
       {keyPoints.length ? (
-        <Section title="Key points" anchor="key-points">
-          <ol className="space-y-4">
+        <Section title="Script for your audience" anchor="key-points">
+          <p className="text-sm font-semibold text-slate-700">
+            Lead with these points to translate your demand into routine policy language.
+          </p>
+          <ol className="mt-3 space-y-4">
             {keyPoints.map(point => (
               <li
                 key={point.id}
@@ -180,10 +157,12 @@ export function PreviewPane({
         </Section>
       ) : null}
 
-
       {nextSteps.length ? (
-        <Section title="Next steps" anchor="next-steps">
-          <ul className="list-disc space-y-2 pl-5 text-sm text-slate-700">
+        <Section title="Next steps to keep momentum" anchor="next-steps">
+          <p className="text-sm text-slate-700">
+            Close with concrete follow-through so administrators know what comes next.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-slate-700">
             {nextSteps.map(step => (
               <li key={step.id}>
                 {step.text}
@@ -191,6 +170,33 @@ export function PreviewPane({
               </li>
             ))}
           </ul>
+        </Section>
+      ) : null}
+
+      {opener ? (
+        <Section title="Opening angle" anchor="opener">
+          <p>{opener.text}</p>
+          <GitHubFeedback node={opener} />
+        </Section>
+      ) : null}
+
+
+      {screeningNode ? (
+        <Section title="Investment screening strategy" anchor="screening">
+          {screeningNode.variants?.length ? (
+            <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
+              <ReactMarkdown>
+                {screeningNode.variants.find(
+                  variant => variant.transforms?.tone === context.level
+                )?.body ?? screeningNode.variants[0].body}
+              </ReactMarkdown>
+            </div>
+          ) : screeningNode.body ? (
+            <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
+              <ReactMarkdown>{screeningNode.body}</ReactMarkdown>
+            </div>
+          ) : null}
+          <GitHubFeedback node={screeningNode} />
         </Section>
       ) : null}
 

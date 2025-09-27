@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useId } from 'react';
 import { Check } from 'lucide-react';
 import type { BriefContext, Node } from '../lib/schema';
 import type { Dataset } from '../lib/schema';
@@ -19,6 +19,10 @@ export function CustomBriefBuilder({
   selectedKeyPoints,
   onKeyPointsChange,
 }: CustomBriefBuilderProps) {
+  const identitySelectId = useId();
+  const audienceSelectId = useId();
+  const venueSelectId = useId();
+  const levelSelectId = useId();
   // Get all available key points for current context
   const availableKeyPoints = useMemo(() => {
     return dataset.nodes
@@ -56,10 +60,14 @@ export function CustomBriefBuilder({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {/* Identity */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label
+              className="block text-sm font-medium text-slate-700 mb-2"
+              htmlFor={identitySelectId}
+            >
               Identity
             </label>
             <select
+              id={identitySelectId}
               value={context.identity || ''}
               onChange={e =>
                 onContextChange({
@@ -95,10 +103,14 @@ export function CustomBriefBuilder({
 
           {/* Audience */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label
+              className="block text-sm font-medium text-slate-700 mb-2"
+              htmlFor={audienceSelectId}
+            >
               Audience
             </label>
             <select
+              id={audienceSelectId}
               value={context.audience || ''}
               onChange={e =>
                 onContextChange({
@@ -129,10 +141,14 @@ export function CustomBriefBuilder({
 
           {/* Venue */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label
+              className="block text-sm font-medium text-slate-700 mb-2"
+              htmlFor={venueSelectId}
+            >
               Venue
             </label>
             <select
+              id={venueSelectId}
               value={context.venue || ''}
               onChange={e =>
                 onContextChange({
@@ -164,10 +180,14 @@ export function CustomBriefBuilder({
 
           {/* Level */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label
+              className="block text-sm font-medium text-slate-700 mb-2"
+              htmlFor={levelSelectId}
+            >
               Level
             </label>
             <select
+              id={levelSelectId}
               value={context.level || ''}
               onChange={e =>
                 onContextChange({

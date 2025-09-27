@@ -4,7 +4,7 @@ import { useDataset } from './hooks/useDataset';
 import { useBriefParams } from './hooks/useBriefParams';
 import type { BriefParams } from './hooks/useBriefParams';
 import type { BriefContext, Node } from './lib/schema';
-import { FiltersPanel } from './components/FiltersPanel';
+// import { FiltersPanel } from './components/FiltersPanel';
 import { PreviewPane } from './components/PreviewPane';
 import { ActionsPanel } from './components/ActionsPanel';
 import { ModeSelector, type BriefMode } from './components/ModeSelector';
@@ -15,6 +15,9 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BetaDisclaimer } from './components/BetaDisclaimer';
 import { PalestineStatement } from './components/PalestineStatement';
+import { InstitutionalLiteracyFlashcards } from './components/InstitutionalLiteracyFlashcards';
+import { ScenarioCards, type Scenario } from './components/ScenarioCards';
+import { TemperatureControls } from './components/TemperatureControls';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import { initAnalytics, trackEvent } from './lib/analytics';
@@ -72,6 +75,11 @@ function App() {
   const [briefTone, setBriefTone] = useState<BriefTone>('plain');
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
   const [customContext, setCustomContext] = useState<BriefContext>({});
+  const quickStartRef = useRef<HTMLDivElement | null>(null);
+
+  // Scenario-based quick brief state
+  const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
+  const [directness, setDirectness] = useState<'diplomatic' | 'direct'>('diplomatic');
 
   const defaults = useMemo<BriefParams>(() => {
     if (!dataset?.schema?.taxonomies) {
@@ -190,7 +198,7 @@ function App() {
 
   const onePagerIds = useMemo(() => onePagers.map(doc => doc.id), [onePagers]);
 
-  const [selectedDocs, toggleDoc] = useSelectionParam('docs', {
+  const [selectedDocs, , setSelectedDocs] = useSelectionParam('docs', {
     allowed: onePagerIds,
     defaults: [],
   });
@@ -398,11 +406,29 @@ function App() {
     return null;
   }
 
+  const handleQuickStart = () => {
+    setBriefMode('quick');
+    window.requestAnimationFrame(() => {
+      quickStartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
+  const handleScenarioSelect = (scenario: Scenario) => {
+    setSelectedScenario(scenario);
+    // Set the context from the scenario
+    setParams(scenario.context);
+    // Auto-select the scenario's one-pagers
+    setSelectedDocs(scenario.onePagers);
+    // Set appropriate tone
+    setBriefTone(scenario.context.level as BriefTone);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
       <Header />
       <PalestineStatement />
       <BetaDisclaimer />
+      <InstitutionalLiteracyFlashcards />
 
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
@@ -414,11 +440,11 @@ function App() {
               v.0.0.1
             </p>
             <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
-              Dryvest: Make divestment boring enough to actually happen
+              Dryvest: Make divestment so boring it happens
             </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                The revolution will be footnoted. Get the technical language that turns moral demands into routine investment policies, because bureaucratic beats dramatic.
+                Dryvest turns moral demands into technical language that can be implemented as investment policy.
               </p>
               <p className="text-sm text-slate-500">
                 Dataset version{' '}
@@ -434,6 +460,40 @@ function App() {
                   Ask for clarification
                 </a>
               </p>
+            </div>
+            <div className="mt-6 grid gap-4 rounded-xl border border-indigo-100 bg-white/80 p-6 shadow-sm md:grid-cols-[minmax(0,1fr),220px]">
+              <div>
+                <p className="text-xs font-heading uppercase tracking-wide text-indigo-600 mb-2">
+                  How to use Dryvest
+                </p>
+                <ol className="space-y-2 text-sm text-slate-600">
+                  <li>
+                    <span className="font-semibold text-slate-900">Step 1.</span>{' '}
+                    Pick the investor identity and audience you need to brief.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-slate-900">Step 2.</span>{' '}
+                    Review the recommended script Dryvest assembles for that context.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-slate-900">Step 3.</span>{' '}
+                    Download or copy the brief to walk into your meeting prepared.
+                  </li>
+                </ol>
+              </div>
+              <div className="flex flex-col justify-center gap-3 rounded-lg bg-indigo-50 p-4 text-center">
+                <p className="text-sm text-slate-700">
+                  Start with Quick Brief to get an institutional-ready script in under a minute.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleQuickStart}
+                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
+                  style={{ backgroundColor: 'var(--ecic-purple)' }}
+                >
+                  Start with Quick Brief
+                </button>
+              </div>
             </div>
           </div>
 
@@ -464,49 +524,82 @@ function App() {
             />
           )}
 
-          {/* Main content grid - hide in compare mode */}
-          {briefMode !== 'compare' && (
-            <div
-              className={`grid gap-6 ${
-                briefMode === 'quick'
-                  ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
-                  : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
-              }`}
-            >
-              {/* Filters Panel - only show in quick mode */}
-              {briefMode === 'quick' && (
-                <FiltersPanel
-                  dataset={dataset}
-                  params={params}
-                  setParams={setParams}
-                  selectedDocs={selectedDocs}
-                  toggleDoc={toggleDoc}
-                  onePagers={onePagers}
+          {/* Scenario selection - full width */}
+          {briefMode === 'quick' && !selectedScenario && (
+              <div className="max-w-4xl mx-auto">
+                <ScenarioCards onScenarioSelect={handleScenarioSelect} />
+              </div>
+            )}
+
+            {/* Main content grid - only show when scenario is selected or not in quick mode */}
+            {(briefMode !== 'quick' || selectedScenario) && (
+              <div
+                ref={briefMode === 'quick' ? quickStartRef : undefined}
+                className={`grid gap-6 ${
+                  briefMode === 'quick'
+                    ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
+                    : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
+                }`}
+              >
+                {/* Quick Brief Flow - Temperature controls and scenario info */}
+                {briefMode === 'quick' && selectedScenario && (
+                  <div className="space-y-6">
+                    <TemperatureControls
+                      complexity={briefTone}
+                      directness={directness}
+                      onComplexityChange={setBriefTone}
+                      onDirectnessChange={setDirectness}
+                    />
+
+                    <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <h4 className="font-heading font-semibold text-slate-900">
+                            {selectedScenario.title}
+                          </h4>
+                          <p className="text-sm text-slate-600">
+                            {selectedScenario.description}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setSelectedScenario(null)}
+                        className="text-sm text-indigo-600 hover:text-indigo-800 underline"
+                      >
+                        ← Choose different scenario
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+              {/* Only show preview when scenario is selected in quick mode, or always in other modes */}
+              {(briefMode !== 'quick' || selectedScenario) && (
+                <PreviewPane
+                  context={context}
+                  opener={opener}
+                  guide={guide}
+                  keyPoints={keyPointNodes}
+                  nextSteps={nextStepNodes}
+                  sources={sourceNodes}
+                  screeningNode={screeningNode}
+                  policyAlignment={policyAlignment}
+                  venueSnippet={venueSnippet}
+                  templates={templateSnippets}
+                  selectedOnePagers={selectedOnePagers}
+                  sourceLookup={sourceLookup}
                 />
               )}
 
-              <PreviewPane
-                context={context}
-                opener={opener}
-                guide={guide}
-                keyPoints={keyPointNodes}
-                nextSteps={nextStepNodes}
-                sources={sourceNodes}
-                screeningNode={screeningNode}
-                policyAlignment={policyAlignment}
-                venueSnippet={venueSnippet}
-                templates={templateSnippets}
-                selectedOnePagers={selectedOnePagers}
-                sourceLookup={sourceLookup}
-              />
-
-              <ActionsPanel
-                params={params}
-                selectedDocs={selectedDocs}
-                exportData={exportData}
-              />
+              {/* Only show actions when scenario is selected in quick mode, or always in other modes */}
+              {(briefMode !== 'quick' || selectedScenario) && (
+                <ActionsPanel
+                  params={params}
+                  selectedDocs={selectedDocs}
+                  exportData={exportData}
+                />
+              )}
             </div>
-          )}
+            )}
         </div>
       </main>
 

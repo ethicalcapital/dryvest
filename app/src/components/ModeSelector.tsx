@@ -84,11 +84,11 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
             <div>
               <h3 className="font-heading font-semibold mb-1">Custom Brief</h3>
               <p className="text-sm text-slate-600">
-                Build technical compliance documentation for your specific situation.
-                Mix policy language that makes change feel inevitable, not optional.
+                Build detailed strategy documents for your specific situation.
+                Use policy language that makes change feel inevitable, not optional.
               </p>
               <div className="mt-2 text-xs text-slate-500">
-                ✓ Technical language • ✓ Custom mix • ✓ Compliance-focused
+                ✓ Technical language • ✓ Custom mix • ✓ Strategy-focused
               </div>
             </div>
           </div>
