@@ -270,31 +270,31 @@ function App() {
   }, [dataset, params, applyParams]);
 
   // Context depends on mode - quick uses params, custom uses customContext
-  const context = useMemo<BriefContext>(
-    () =>
-      briefMode === 'quick'
-        ? {
-            identity: params.identity,
-            audience: params.audience,
-            venue: params.venue,
-            motivation: params.motivation,
-            motivationSecondary: params.motivationSecondary,
-            level: 'technical',
-          }
-        : {
-            ...customContext,
-            level: 'technical',
-          },
-    [
-      briefMode,
-      params.identity,
-      params.audience,
-      params.venue,
-      params.motivation,
-      params.motivationSecondary,
-      customContext,
-    ]
-  );
+  const context = useMemo<BriefContext>(() => {
+    if (briefMode === 'custom') {
+      return {
+        ...customContext,
+        level: 'technical',
+      };
+    }
+
+    return {
+      identity: params.identity,
+      audience: params.audience,
+      venue: params.venue,
+      motivation: params.motivation,
+      motivationSecondary: params.motivationSecondary,
+      level: 'technical',
+    };
+  }, [
+    briefMode,
+    customContext,
+    params.identity,
+    params.audience,
+    params.venue,
+    params.motivation,
+    params.motivationSecondary,
+  ]);
 
   useEffect(() => {
     if (!hasAcceptedDisclaimer) return;
@@ -389,186 +389,205 @@ function App() {
     setContextTouched(!contextHasSelectableOptions);
   }, [datasetVersion, contextHasSelectableOptions]);
 
-  const isQuickMode = briefMode === 'quick';
   const customContextReady = Boolean(
-    customContext.identity && customContext.audience
+    customContext.identity && customContext.audience && customContext.motivation
   );
   const exportsReady = selectedOnePagers.length > 0;
   const quickPrimarySelections = Boolean(
     params.identity && params.audience && params.motivation
   );
-  const quickContextReady =
-    briefMode !== 'quick' ? true : contextTouched && quickPrimarySelections;
+  const quickContextReady = contextTouched && quickPrimarySelections;
 
-  const sessionSteps = useMemo(
-    () => {
-      const modeMeta = (() => {
-        switch (briefMode) {
-          case 'custom':
-            return {
-              title: 'Custom Brief mode',
-              description:
-                'Curate each key point and supporting evidence to match your campaign.',
-              badge: 'Advanced',
-            };
-          case 'compare':
-            return {
-              title: 'Compare Institutions',
-              description:
-                'Review how different institution types respond so you can tailor asks.',
-              badge: 'Analysis',
-            };
-          case 'fact_check':
-            return {
-              title: 'Fact Check workspace',
-              description:
-                'Audit every citation and export a parser-friendly reference dossier.',
-              badge: 'Quality',
-            };
-          default:
-            return {
-              title: 'Quick Brief active',
-              description:
-                'Default guided flow with scenario-specific institutional language.',
-              badge: 'Default flow',
-            };
-        }
-      })();
+  const quickChecklist = [
+    'Choose the organization you’re targeting.',
+    'Select who needs to approve or implement the change.',
+    'Rank the primary campaign driver (add a secondary if it helps).',
+  ];
 
-      const contextMeta = (() => {
-        if (isQuickMode) {
-          const parts = [
-            params.identity
-              ? `Identity: ${formatTaxonomyValue(params.identity)}`
-              : null,
-            params.audience
-              ? `Audience: ${formatTaxonomyValue(params.audience)}`
-              : null,
-            params.motivation
-              ? `Primary: ${formatTaxonomyValue(params.motivation)}`
-              : null,
-            params.motivationSecondary
-              ? `Secondary: ${formatTaxonomyValue(params.motivationSecondary)}`
-              : null,
-          ].filter(Boolean);
-          const description = parts.join(' • ');
+  const customChecklist = [
+    'Set the organization and audience in the builder controls above.',
+    'Choose the campaign drivers that explain why the institution will move.',
+    'Select the key points you want before exporting attachments or PDFs.',
+  ];
 
-          if (contextTouched) {
-            return {
-              status: 'done' as StepStatus,
-              title: 'Context ready',
-              description: description || 'Custom context captured.',
-              helper:
-                'Adjust identity, audience, or motivation to explore alternate governance.',
-            };
-          }
+  const modeSelectionSteps = [
+    'Quick Brief: translate demands into policy-ready language in minutes.',
+    'Custom Builder: handcraft strategy decks with bespoke components.',
+    'Compare Institutions: benchmark governance patterns across investor types.',
+    'Fact Check: audit citations and generate diligence-ready packets.',
+  ];
 
-          return {
-            status: 'active' as StepStatus,
-            title: 'Select your context',
-            description:
-              description ? `Defaults → ${description}` : 'Update the selections above to lock context.',
-            helper:
-              'Choose institution, audience, and drivers so the brief reflects the portfolio in front of you.',
-          };
-        }
+  const renderContextGate = (
+    title: string,
+    description: string,
+    steps: string[]
+  ) => (
+    <div className="rounded-xl border border-dashed border-slate-300 bg-white/70 p-6 shadow-sm">
+      <h3 className="text-sm font-heading font-semibold text-slate-900">{title}</h3>
+      <p className="mt-2 text-sm text-slate-600">{description}</p>
+      {steps.length ? (
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-xs text-slate-500">
+          {steps.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
 
-        if (customContextReady) {
-          const parts = [
-            customContext.identity
-              ? `Identity: ${formatTaxonomyValue(customContext.identity)}`
-              : null,
-            customContext.audience
-              ? `Audience: ${formatTaxonomyValue(customContext.audience)}`
-              : null,
-            customContext.motivation
-              ? `Primary: ${formatTaxonomyValue(customContext.motivation)}`
-              : null,
-            customContext.motivationSecondary
-              ? `Secondary: ${formatTaxonomyValue(customContext.motivationSecondary)}`
-              : null,
-          ].filter(Boolean);
+  const renderPreviewAndActions = (layout: 'stack' | 'grid' = 'grid') => {
+    const preview = (
+      <PreviewPane
+        context={context}
+        guide={guide}
+        keyPoints={keyPointNodes}
+        nextSteps={nextStepNodes}
+        sources={sourceNodes}
+        policyAlignment={policyAlignment}
+        venueSnippet={venueSnippet}
+        templates={templateSnippets}
+        selectedOnePagers={selectedOnePagers}
+        sourceLookup={sourceLookup}
+      />
+    );
 
-          return {
-            status: 'done' as StepStatus,
-            title: 'Context ready',
-            description: parts.join(' • ') || 'Custom context captured.',
-            helper: 'Adjust any field to explore alternate governance paths.',
-          };
-        }
+    const actions = (
+      <ActionsPanel
+        params={params}
+        selectedDocs={selectedDocs}
+        exportData={exportData}
+        tone="technical"
+      />
+    );
 
-        return {
-          status: 'active' as StepStatus,
-          title: 'Set your context',
-          description:
-            'Add identity and audience so outputs reference the right process.',
-          helper: 'Dryvest uses these details to lock in tone and procedural steps.',
-        };
-      })();
-
-      const exportMeta = exportsReady
-        ? {
-            status: 'done' as StepStatus,
-            title: 'Exports queued',
-            description: `${selectedOnePagers.length} supporting attachment${
-              selectedOnePagers.length === 1 ? '' : 's'
-            } ready`,
-            helper: 'Download or share directly from the Actions panel when needed.',
-          }
-        : {
-            status: 'pending' as StepStatus,
-            title: 'Prep your exports',
-            description:
-              'Select attachments, downloads, or copies once your brief feels ready.',
-            helper: 'Use the attachments step or Actions panel to add one-pagers and generate exports.',
-          };
-
-      return [
-        {
-          id: 'approach',
-          step: 'Step 1',
-          status: 'done' as StepStatus,
-          title: modeMeta.title,
-          description: modeMeta.description,
-          badge: modeMeta.badge,
-        },
-        {
-          id: 'context',
-          step: 'Step 2',
-          ...contextMeta,
-        },
-        {
-          id: 'exports',
-          step: 'Step 3',
-          ...exportMeta,
-        },
-      ];
-    }, [
-      briefMode,
-      customContext.identity,
-      customContext.audience,
-      customContext.motivation,
-      exportsReady,
-      isQuickMode,
-      params.identity,
-      params.audience,
-      params.venue,
-      params.motivation,
-      contextTouched,
-      selectedOnePagers.length,
-    ]) as Array<
-    {
-      id: string;
-      step: string;
-      status: StepStatus;
-      title: string;
-      description: string;
-      helper?: string;
-      badge?: string;
+    if (layout === 'stack') {
+      return (
+        <>
+          {preview}
+          {actions}
+        </>
+      );
     }
-  >;
 
-const keyPointPlaylist = useMemo(() => {
+    return (
+      <div className="grid gap-6 lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]">
+        {preview}
+        {actions}
+      </div>
+    );
+  };
+
+  const workspaceContent = (() => {
+    if (!dataset) return null;
+
+    if (!briefMode) {
+      return renderContextGate(
+        'Select a workspace to begin',
+        'Dryvest adapts to the job you need to tackle. Pick a mode above to unlock the right dataset view for this session.',
+        modeSelectionSteps
+      );
+    }
+
+    switch (briefMode) {
+      case 'quick':
+        return (
+          <div ref={quickStartRef} className="space-y-6">
+            <QuickBriefContextPanel
+              dataset={dataset}
+              params={params}
+              onParamChange={setParams}
+              motivationOptions={motivationOptions}
+              selectedDocs={selectedDocs}
+              toggleDoc={toggleDoc}
+              onePagers={onePagers}
+            />
+            {quickContextReady
+              ? renderPreviewAndActions('stack')
+              : renderContextGate(
+                  'Configure your briefing to unlock recommendations',
+                  'Dial in the investor, decision audience, and campaign drivers above. Once the context is set, Dryvest will surface tailored strategy language and exports.',
+                  quickChecklist
+                )}
+          </div>
+        );
+      case 'custom':
+        return (
+          <div className="space-y-6">
+            <CustomBriefBuilder
+              dataset={dataset}
+              context={customContext}
+              onContextChange={handleCustomContextChange}
+              selectedKeyPoints={customKeyPoints}
+              onKeyPointsChange={setCustomKeyPoints}
+            />
+            {customContextReady
+              ? renderPreviewAndActions('grid')
+              : renderContextGate(
+                  'Set your context to curate a custom brief',
+                  'Fill in the organization, audience, and drivers in the builder controls above before selecting key points.',
+                  customChecklist
+                )}
+          </div>
+        );
+      case 'compare':
+        return (
+          <div className="space-y-6">
+            <QuickBriefContextPanel
+              dataset={dataset}
+              params={params}
+              onParamChange={setParams}
+              motivationOptions={motivationOptions}
+              selectedDocs={selectedDocs}
+              toggleDoc={toggleDoc}
+              onePagers={onePagers}
+            />
+            {quickContextReady ? (
+              <>
+                <ComparisonView dataset={dataset} context={context} />
+                {renderPreviewAndActions('grid')}
+              </>
+            ) : (
+              renderContextGate(
+                'Lock your context to compare institutions',
+                'Adjust the selections above so we know which investor journey to benchmark. Dryvest will then surface patterns and exports tailored to that identity.',
+                quickChecklist
+              )
+            )}
+          </div>
+        );
+      case 'fact_check':
+        return (
+          <div className="space-y-6">
+            <QuickBriefContextPanel
+              dataset={dataset}
+              params={params}
+              onParamChange={setParams}
+              motivationOptions={motivationOptions}
+              selectedDocs={selectedDocs}
+              toggleDoc={toggleDoc}
+              onePagers={onePagers}
+            />
+            {quickContextReady
+              ? (
+                  <FactCheckView
+                    dataset={dataset}
+                    context={context}
+                    exportData={exportData}
+                  />
+                )
+              : renderContextGate(
+                  'Lock your context before running fact check',
+                  'Set the investor, audience, and drivers so Dryvest can pull the correct citations and assertions for verification.',
+                  quickChecklist
+                )}
+          </div>
+        );
+      default:
+        return null;
+    }
+  })();
+
+  const keyPointPlaylist = useMemo(() => {
     if (!dataset) return undefined;
     if (params.playlist && dataset.playlistById[params.playlist]) {
       return dataset.playlistById[params.playlist];
@@ -954,106 +973,7 @@ const keyPointPlaylist = useMemo(() => {
           {/* Mode Selector */}
           <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
 
-          {/* Custom Brief Builder (only in custom mode) */}
-          {briefMode === 'custom' && dataset && (
-            <CustomBriefBuilder
-              dataset={dataset}
-              context={customContext}
-              onContextChange={handleCustomContextChange}
-              selectedKeyPoints={customKeyPoints}
-              onKeyPointsChange={setCustomKeyPoints}
-            />
-          )}
-
-          {/* Comparison View (only in compare mode) */}
-          {briefMode === 'compare' && dataset && (
-            <ComparisonView dataset={dataset} context={context} />
-          )}
-
-          {briefMode === 'fact_check' && dataset && (
-            <FactCheckView
-              dataset={dataset}
-              context={context}
-              exportData={exportData}
-            />
-          )}
-
-          {/* Main content grid */}
-          {briefMode && briefMode !== 'fact_check' && (
-            briefMode === 'quick' ? (
-              <div ref={quickStartRef} className="space-y-6">
-                {dataset && (
-                  <QuickBriefContextPanel
-                    dataset={dataset}
-                    params={params}
-                    onParamChange={setParams}
-                    motivationOptions={motivationOptions}
-                    selectedDocs={selectedDocs}
-                    toggleDoc={toggleDoc}
-                    onePagers={onePagers}
-                  />
-                )}
-
-                {quickContextReady ? (
-                  <>
-                    <PreviewPane
-                      guide={guide}
-                      keyPoints={keyPointNodes}
-                      nextSteps={nextStepNodes}
-                      sources={sourceNodes}
-                      policyAlignment={policyAlignment}
-                      venueSnippet={venueSnippet}
-                      templates={templateSnippets}
-                      selectedOnePagers={selectedOnePagers}
-                      sourceLookup={sourceLookup}
-                    />
-
-                    <ActionsPanel
-                      params={params}
-                      selectedDocs={selectedDocs}
-                      exportData={exportData}
-                      tone="technical"
-                    />
-                  </>
-                ) : (
-                  <div className="rounded-xl border border-dashed border-slate-300 bg-white/70 p-6 shadow-sm">
-                    <h3 className="text-sm font-heading font-semibold text-slate-900">
-                      Configure your briefing to unlock recommendations
-                    </h3>
-                    <p className="mt-2 text-sm text-slate-600">
-                      Pick the organization type, decision audience, and campaign drivers above. Once the context is locked, Dryvest will surface tailored strategy points and next steps.
-                    </p>
-                    <ul className="mt-3 list-disc space-y-1 pl-5 text-xs text-slate-500">
-                      <li>Choose the organization you&rsquo;re targeting.</li>
-                      <li>Select who needs to approve or implement the change.</li>
-                      <li>Rank the primary and optional secondary campaign drivers.</li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="grid gap-6 lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]">
-                <PreviewPane
-                  guide={guide}
-                  keyPoints={keyPointNodes}
-                  nextSteps={nextStepNodes}
-                  sources={sourceNodes}
-                  policyAlignment={policyAlignment}
-                  venueSnippet={venueSnippet}
-                  templates={templateSnippets}
-                  selectedOnePagers={selectedOnePagers}
-                  sourceLookup={sourceLookup}
-                />
-
-                <ActionsPanel
-                  params={params}
-                  selectedDocs={selectedDocs}
-                  exportData={exportData}
-                  tone="technical"
-                />
-              </div>
-            )
-          )}
+          {workspaceContent}
         </div>
       </main>
 
