@@ -1,5 +1,10 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import clsx from 'clsx';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { CheckCircle2, Circle, Clock3 } from 'lucide-react';
 import './App.css';
 import { useDataset } from './hooks/useDataset';
@@ -24,7 +29,11 @@ import {
   setAnalyticsConsent as setAnalyticsTrackingConsent,
   setAnalyticsContext,
 } from './lib/analytics';
-import { DEFAULT_PLAYLIST_ID, DEFAULT_DATASET_VERSION } from './lib/constants';
+import {
+  DEFAULT_PLAYLIST_ID,
+  DEFAULT_DATASET_VERSION,
+  DEFAULT_VENUE_OPTIONS,
+} from './lib/constants';
 import { DisclaimerGate } from './components/DisclaimerGate';
 import {
   matchesTargets,
@@ -34,6 +43,8 @@ import {
   resolvePlaylistNodes,
   selectPlaylistByKind,
 } from './lib/resolve';
+import { formatTaxonomyValue } from './lib/format';
+import { QuickBriefContextPanel } from './components/QuickBriefContextPanel';
 
 const DATASET_VERSION = DEFAULT_DATASET_VERSION;
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
@@ -101,15 +112,6 @@ const SUPPORTED_TEMPLATE_IDS = [
   'tmpl_public_meeting_brief',
 ];
 
-function formatTaxonomyValue(value?: string | null) {
-  if (!value) return 'Not set';
-  return value
-    .split(/[_-]/g)
-    .filter(Boolean)
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
-}
-
 function App() {
   // New state for dual-mode interface
   const [briefMode, setBriefMode] = useState<BriefMode>('quick');
@@ -149,7 +151,24 @@ function App() {
     return base;
   }, [dataset]);
 
-  const [params, setParams] = useBriefParams(defaults);
+  const [params, applyParams] = useBriefParams(defaults);
+  const [contextTouched, setContextTouched] = useState(false);
+
+  const setParams = useCallback(
+    (next: Partial<BriefParams>, options: { touchContext?: boolean } = {}) => {
+      const { touchContext = true } = options;
+      if (
+        touchContext &&
+        (['identity', 'audience', 'venue', 'motivation'] as (keyof BriefParams)[]).some(key =>
+          Object.prototype.hasOwnProperty.call(next, key)
+        )
+      ) {
+        setContextTouched(true);
+      }
+      applyParams(next);
+    },
+    [applyParams]
+  );
   const hasTrackedOpen = useRef(false);
  
   useEffect(() => {
@@ -235,9 +254,9 @@ function App() {
     }
 
     if (Object.keys(corrections).length) {
-      setParams(corrections);
+      applyParams(corrections);
     }
-  }, [dataset, params, setParams]);
+  }, [dataset, params, applyParams]);
 
   // Context depends on mode - quick uses params, custom uses customContext
   const context = useMemo<BriefContext>(
@@ -303,7 +322,7 @@ function App() {
 
   const onePagerIds = useMemo(() => onePagers.map(doc => doc.id), [onePagers]);
 
-  const [selectedDocs] = useSelectionParam('docs', {
+  const [selectedDocs, toggleDoc] = useSelectionParam('docs', {
     allowed: onePagerIds,
     defaults: [],
   });
@@ -318,6 +337,9 @@ function App() {
         ),
     [dataset, selectedDocs]
   );
+
+  const identityOptions = dataset?.schema?.taxonomies?.identity ?? [];
+  const audienceOptions = dataset?.schema?.taxonomies?.audience ?? [];
 
   const availableMotivations = useMemo(() => {
     const values = dataset?.schema?.taxonomies?.motivation;
@@ -336,6 +358,26 @@ function App() {
       })),
     [availableMotivations]
   );
+
+  const datasetVersion = dataset?.version;
+  const identityCount = identityOptions.length;
+  const audienceCount = audienceOptions.length;
+  const motivationCount = availableMotivations.length;
+  const venueCount = DEFAULT_VENUE_OPTIONS.length;
+
+  const contextHasSelectableOptions = useMemo(
+    () =>
+      identityCount > 1 ||
+      audienceCount > 1 ||
+      motivationCount > 1 ||
+      venueCount > 1,
+    [identityCount, audienceCount, motivationCount, venueCount]
+  );
+
+  useEffect(() => {
+    if (!datasetVersion) return;
+    setContextTouched(!contextHasSelectableOptions);
+  }, [datasetVersion, contextHasSelectableOptions]);
 
   const isQuickMode = briefMode === 'quick';
   const customContextReady = Boolean(
@@ -387,16 +429,32 @@ function App() {
             params.audience
               ? `Audience: ${formatTaxonomyValue(params.audience)}`
               : null,
+            params.venue
+              ? `Venue: ${formatTaxonomyValue(params.venue)}`
+              : null,
             params.motivation
               ? `Motivation: ${formatTaxonomyValue(params.motivation)}`
               : null,
           ].filter(Boolean);
+          const description = parts.join(' • ');
+
+          if (contextTouched) {
+            return {
+              status: 'done' as StepStatus,
+              title: 'Context ready',
+              description: description || 'Custom context captured.',
+              helper:
+                'Adjust identity, audience, venue, or motivation to explore alternate governance.',
+            };
+          }
 
           return {
-            status: 'done' as StepStatus,
-            title: 'Quick brief context locked',
-            description: parts.join(' • ') || 'Default context active.',
-            helper: 'Adjust identity, audience, or motivation to tune implementation.',
+            status: 'active' as StepStatus,
+            title: 'Select your context',
+            description:
+              description ? `Defaults → ${description}` : 'Pick options in the left column.',
+            helper:
+              'Choose institution, audience, venue, and driver so the brief feels like it belongs.',
           };
         }
 
@@ -476,7 +534,9 @@ function App() {
       isQuickMode,
       params.identity,
       params.audience,
+      params.venue,
       params.motivation,
+      contextTouched,
       selectedOnePagers.length,
     ]) as Array<
     {
@@ -998,48 +1058,16 @@ function App() {
                   : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
               }`}
             >
-              {briefMode === 'quick' && (
-                <div className="space-y-6">
-                  <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
-                    <div className="mb-3">
-                      <h4 className="font-heading font-semibold text-slate-900">
-                        Primary driver
-                      </h4>
-                      <p className="text-sm text-slate-600">
-                        Choose the motivation guiding this brief so Dryvest surfaces the right
-                        strategy and outcomes.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      {motivationOptions.map(option => {
-                        const active = params.motivation === option.value;
-                        return (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => setParams({ motivation: option.value })}
-                            className={clsx(
-                              'w-full rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                              active
-                                ? 'border-ecic-purple/70 bg-ecic-purple/10 text-ecic-purple shadow-sm'
-                                : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
-                            )}
-                            style={{
-                              '--tw-ring-color': 'var(--ecic-purple)',
-                            } as CSSProperties}
-                          >
-                            <div className="font-heading text-sm font-semibold">
-                              {option.label}
-                            </div>
-                            <p className="mt-1 text-xs text-slate-600">
-                              {option.helper}
-                            </p>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
+              {briefMode === 'quick' && dataset && (
+                <QuickBriefContextPanel
+                  dataset={dataset}
+                  params={params}
+                  onParamChange={setParams}
+                  motivationOptions={motivationOptions}
+                  selectedDocs={selectedDocs}
+                  toggleDoc={toggleDoc}
+                  onePagers={onePagers}
+                />
               )}
 
               <PreviewPane
