@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Sparkles, Target, Compass, Lightbulb, Wand2 } from 'lucide-react';
 import type { BriefMode } from './ModeSelector';
 
@@ -86,11 +85,6 @@ export function CampaignIntentPanel({
 }: CampaignIntentPanelProps) {
   const trimmedIntent = intent.trim();
   const characterCount = intent.length;
-
-  const selectedObjective = useMemo(
-    () => OBJECTIVE_OPTIONS.find(option => option.value === objective) ?? OBJECTIVE_OPTIONS[0],
-    [objective]
-  );
 
   const recommended = suggestedMode
     ? {
