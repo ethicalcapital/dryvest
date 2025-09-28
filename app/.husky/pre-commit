@@ -1,1 +1,2 @@
-npm test
+#!/bin/sh
+npm --prefix app test && node scripts/dataset-coverage.mjs

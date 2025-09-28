@@ -2619,6 +2619,12 @@
       "targets": {
         "identity": [
           "individual"
+        ],
+        "audience": [
+          "individuals"
+        ],
+        "level": [
+          "plain"
         ]
       }
     },
@@ -2639,7 +2645,13 @@
       ],
       "targets": {
         "identity": [
+          "individual"
+        ],
+        "audience": [
           "family_friends"
+        ],
+        "level": [
+          "plain"
         ]
       }
     },
@@ -3103,6 +3115,150 @@
           "ref": "tmpl_policy_conduct_controls"
         }
       ]
+    },
+    {
+      "id": "key_points_individual_family_friends",
+      "kind": "key_points",
+      "title": "Key points: individual → family/friends",
+      "items": [
+        {
+          "ref": "kp_family_friends_screened-index-track-record"
+        },
+        {
+          "ref": "kp_family_friends_brokerage-shortcuts"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "family_friends"
+        ]
+      }
+    },
+    {
+      "id": "key_points_stakeholder_coalitions",
+      "kind": "key_points",
+      "title": "Key points: stakeholder coalitions",
+      "items": [
+        {
+          "ref": "kp_stakeholders_formalize-beneficiary-record"
+        },
+        {
+          "ref": "kp_stakeholders_public_transparency_leverage"
+        },
+        {
+          "ref": "kp_foundation_payout_discipline"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "government"
+        ],
+        "audience": [
+          "stakeholders"
+        ]
+      }
+    },
+    {
+      "id": "key_points_colleague_alignment",
+      "kind": "key_points",
+      "title": "Key points: colleague alignment",
+      "items": [
+        {
+          "ref": "kp_colleagues_map-existing-controls"
+        },
+        {
+          "ref": "kp_colleagues_bundle-quick-wins"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "colleagues"
+        ]
+      }
+    },
+    {
+      "id": "key_points_regulated_public",
+      "kind": "key_points",
+      "title": "Key points: regulators (public plans)",
+      "items": [
+        {
+          "ref": "kp_regulated_document_compliance_position"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "government"
+        ],
+        "audience": [
+          "regulated"
+        ]
+      }
+    },
+    {
+      "id": "key_points_regulated_insurance",
+      "kind": "key_points",
+      "title": "Key points: regulators (insurance)",
+      "items": [
+        {
+          "ref": "kp_regulated_link_to_rbc"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "regulated"
+        ]
+      }
+    },
+    {
+      "id": "key_points_executive_sponsors",
+      "kind": "key_points",
+      "title": "Key points: executive sponsor",
+      "items": [
+        {
+          "ref": "kp_individual_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_individual_start-with-your-own-accounts"
+        },
+        {
+          "ref": "kp_individual_use-the-screened-options-your-custodian-already-offers"
+        },
+        {
+          "ref": "kp_executive_sponsor_control_ledger"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "individual"
+        ],
+        "audience": [
+          "individuals"
+        ]
+      }
     }
   ]
 }

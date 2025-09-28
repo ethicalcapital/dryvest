@@ -150,6 +150,22 @@ export function QuickBriefContextPanel({
     return set;
   }, [dataset.nodes, dataset.playlists]);
 
+  const audiencesByIdentity = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    const register = (targets?: Node['targets']) => {
+      if (!targets?.identity || !targets?.audience) return;
+      for (const identity of targets.identity) {
+        const existing = map.get(identity) ?? new Set<string>();
+        targets.audience.forEach(value => existing.add(value));
+        map.set(identity, existing);
+      }
+    };
+
+    dataset.playlists.forEach(playlist => register(playlist.targets));
+    dataset.nodes.forEach(node => register(node.targets));
+    return map;
+  }, [dataset.playlists, dataset.nodes]);
+
   const audiences = useMemo(() => {
     const values = dataset.schema.taxonomies?.audience ?? [];
     const ordered = AUDIENCE_ORDER.filter(value => values.includes(value));
@@ -159,12 +175,25 @@ export function QuickBriefContextPanel({
       return combined;
     }
     const filtered = combined.filter(value => referencedAudiences.has(value));
-    if (filtered.length) {
-      return filtered;
+    const base = filtered.length ? filtered : combined;
+    if (!params.identity) {
+      return base;
     }
-    const fallback = ['boards', 'fiduciary', 'consultants', 'staff'];
-    return combined.filter(value => fallback.includes(value));
-  }, [dataset.schema.taxonomies?.audience, referencedAudiences]);
+    const supported = audiencesByIdentity.get(params.identity);
+    if (supported?.size) {
+      const supportedValues = new Set(supported);
+      const scoped = base.filter(value => supportedValues.has(value));
+      if (scoped.length) {
+        return scoped;
+      }
+    }
+    return base;
+  }, [
+    dataset.schema.taxonomies?.audience,
+    referencedAudiences,
+    audiencesByIdentity,
+    params.identity,
+  ]);
   const motivations = useMemo(() => {
     const allowed = dataset.schema.taxonomies?.motivation;
     const order = allowed && allowed.length ? allowed : motivationOptions.map(opt => opt.value);
