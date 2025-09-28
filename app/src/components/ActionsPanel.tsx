@@ -7,6 +7,7 @@ import { buildMarkdown } from '../lib/exporters';
 import { trackEvent } from '../lib/analytics';
 import { PDFExportButton } from './PDFExportButton';
 import { generateTitle } from '../lib/pdf-export';
+import { formatTaxonomyValue } from '../lib/format';
 import {
   INSTITUTIONAL_FLASHCARDS,
   buildAnkiTsv,
@@ -195,12 +196,16 @@ export function ActionsPanel({
           <p className="text-xs text-slate-500 space-x-1">
             <span>
               Identity:{' '}
-              <span className="font-medium text-slate-600">{params.identity}</span>
+              <span className="font-medium text-slate-600">
+                {formatTaxonomyValue(params.identity)}
+              </span>
             </span>
             <span>·</span>
             <span>
               Audience:{' '}
-              <span className="font-medium text-slate-600">{params.audience}</span>
+              <span className="font-medium text-slate-600">
+                {formatTaxonomyValue(params.audience)}
+              </span>
             </span>
             {params.motivation ? (
               <>
@@ -208,7 +213,7 @@ export function ActionsPanel({
                 <span>
                   Motivation:{' '}
                   <span className="font-medium text-slate-600">
-                    {params.motivation.replace(/[_-]/g, ' ')}
+                    {formatTaxonomyValue(params.motivation)}
                   </span>
                 </span>
               </>
