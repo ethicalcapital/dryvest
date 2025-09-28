@@ -1,7 +1,16 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { KEY_POINTS, FACTS, ORGANIZATIONS, DRIVERS, AUDIENCES } from "../data.js";
+import {
+  KEY_POINTS,
+  FACTS,
+  ORGANIZATIONS,
+  DRIVERS,
+  AUDIENCES,
+  NEXT_STEPS,
+  DOCS,
+  TRAILHEADS
+} from "../data.js";
 
 const ORG_OPTIONS = [{ id: "any", name: "Any organization" }, ...ORGANIZATIONS];
 const DRIVER_OPTIONS = [{ id: "any", name: "Any driver" }, ...DRIVERS];
@@ -36,28 +45,124 @@ function filterEntries(entries, filters) {
   });
 }
 
+function pickPrimaryStep(trailhead) {
+  if (!trailhead?.steps?.length) return null;
+  const priorityOrder = [
+    (step) => step.kind === "point",
+    (step) => step.kind === "fact",
+    () => true
+  ];
+  for (const predicate of priorityOrder) {
+    const match = trailhead.steps.find(predicate);
+    if (match) return match;
+  }
+  return trailhead.steps[0];
+}
+
+function resolveStep(step, lookups) {
+  if (!step) return null;
+  switch (step.kind) {
+    case "point": {
+      const point = lookups.points[step.ref];
+      if (!point) return null;
+      return { label: "Key Point", title: point.title, body: point.body };
+    }
+    case "fact": {
+      const fact = lookups.facts[step.ref];
+      if (!fact) return null;
+      return { label: "Evidence", title: fact.claim, body: fact.support };
+    }
+    case "doc": {
+      const doc = lookups.docs[step.ref];
+      if (!doc) return null;
+      return { label: "Model Document", title: doc.title, body: doc.summary };
+    }
+    case "step": {
+      const next = lookups.nextSteps[step.ref];
+      if (!next) return null;
+      return { label: "Next Step", title: next.text, body: null };
+    }
+    default:
+      return null;
+  }
+}
+
 export default function FactCheck({ initialType = "points" }) {
   const [type, setType] = useState(TYPE_OPTIONS.some((opt) => opt.id === initialType) ? initialType : "points");
   const [filters, setFilters] = useState({ org: "any", driver: "any", audience: "any", q: "" });
   const [index, setIndex] = useState(0);
+  const [activeTrailheadId, setActiveTrailheadId] = useState(null);
+  const [pendingTargetId, setPendingTargetId] = useState(null);
+
+  const lookups = useMemo(
+    () => ({
+      docs: Object.fromEntries(DOCS.map((doc) => [doc.id, doc])),
+      points: Object.fromEntries(KEY_POINTS.map((point) => [point.id, point])),
+      facts: Object.fromEntries(FACTS.map((fact) => [fact.id, fact])),
+      nextSteps: Object.fromEntries(NEXT_STEPS.map((step) => [step.id, step]))
+    }),
+    []
+  );
+
   const entries = useMemo(() => {
     const pool = type === "facts" ? FACTS : KEY_POINTS;
     return filterEntries(pool, { ...filters, q: filters.q.trim().toLowerCase() });
   }, [type, filters]);
   const current = entries[index] || null;
+  const activeTrailhead = useMemo(
+    () => TRAILHEADS.find((trail) => trail.id === activeTrailheadId) || null,
+    [activeTrailheadId]
+  );
 
-  const onChangeType = (next) => {
+  useEffect(() => {
+    if (!pendingTargetId) return;
+    const idx = entries.findIndex((entry) => entry.id === pendingTargetId);
+    if (idx !== -1) {
+      setIndex(idx);
+    } else {
+      setIndex(0);
+    }
+    setPendingTargetId(null);
+  }, [entries, pendingTargetId]);
+
+  const handleTypeChange = (next) => {
     setType(next);
     setIndex(0);
+    setActiveTrailheadId(null);
+    setPendingTargetId(null);
   };
 
-  const onChangeFilter = (key, value) => {
+  const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setIndex(0);
+    setActiveTrailheadId(null);
+    setPendingTargetId(null);
   };
 
   const onNext = () => setIndex((prev) => (entries.length ? (prev + 1) % entries.length : 0));
   const onPrev = () => setIndex((prev) => (entries.length ? (prev - 1 + entries.length) % entries.length : 0));
+
+  const applyTrailhead = (trailhead) => {
+    const primaryStep = pickPrimaryStep(trailhead);
+    const desiredType = primaryStep?.kind === "fact" ? "facts" : "points";
+    const filtersToApply = {
+      org: trailhead.filters?.org ?? "any",
+      driver: trailhead.filters?.driver ?? "any",
+      audience: trailhead.filters?.audience ?? "any",
+      q: ""
+    };
+
+    setActiveTrailheadId(trailhead.id);
+    setType(desiredType);
+    setFilters(filtersToApply);
+    setIndex(0);
+    setPendingTargetId(primaryStep?.ref ?? null);
+  };
+
+  const clearTrailhead = () => {
+    setActiveTrailheadId(null);
+    setPendingTargetId(null);
+  };
 
   return (
     <div className="card" style={{ display: "grid", gap: 16 }}>
@@ -66,12 +171,35 @@ export default function FactCheck({ initialType = "points" }) {
         <p className="meta">Cycle through Dryvest’s vetted assertions and proofs to build fluency before you brief stakeholders.</p>
       </div>
 
+      <div className="section" style={{ display: "grid", gap: 12 }}>
+        <div className="row" style={{ justifyContent: "space-between", alignItems: "center" }}>
+          <h3 style={{ margin: 0 }}>Trailheads</h3>
+          {activeTrailhead ? (
+            <button className="btn ghost" onClick={clearTrailhead}>Clear selection</button>
+          ) : null}
+        </div>
+        <div className="grid cols-3">
+          {TRAILHEADS.map((trail) => (
+            <button
+              key={trail.id}
+              className={`card option ${trail.id === activeTrailheadId ? "selected" : ""}`}
+              style={{ textAlign: "left" }}
+              onClick={() => applyTrailhead(trail)}
+              aria-pressed={trail.id === activeTrailheadId}
+            >
+              <strong>{trail.title}</strong>
+              <div className="meta">{trail.summary}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="section" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {TYPE_OPTIONS.map((option) => (
           <button
             key={option.id}
             className={`btn ${type === option.id ? "primary" : "secondary"}`}
-            onClick={() => onChangeType(option.id)}
+            onClick={() => handleTypeChange(option.id)}
             aria-pressed={type === option.id}
           >
             {option.label}
@@ -86,7 +214,7 @@ export default function FactCheck({ initialType = "points" }) {
             <select
               className="input"
               value={filters.org}
-              onChange={(e) => onChangeFilter("org", e.target.value)}
+              onChange={(e) => handleFilterChange("org", e.target.value)}
             >
               {ORG_OPTIONS.map((opt) => (
                 <option key={opt.id} value={opt.id}>{opt.name}</option>
@@ -98,7 +226,7 @@ export default function FactCheck({ initialType = "points" }) {
             <select
               className="input"
               value={filters.driver}
-              onChange={(e) => onChangeFilter("driver", e.target.value)}
+              onChange={(e) => handleFilterChange("driver", e.target.value)}
             >
               {DRIVER_OPTIONS.map((opt) => (
                 <option key={opt.id} value={opt.id}>{opt.name}</option>
@@ -110,7 +238,7 @@ export default function FactCheck({ initialType = "points" }) {
             <select
               className="input"
               value={filters.audience}
-              onChange={(e) => onChangeFilter("audience", e.target.value)}
+              onChange={(e) => handleFilterChange("audience", e.target.value)}
             >
               {AUDIENCE_OPTIONS.map((opt) => (
                 <option key={opt.id} value={opt.id}>{opt.name}</option>
@@ -125,7 +253,7 @@ export default function FactCheck({ initialType = "points" }) {
             type="search"
             value={filters.q}
             placeholder={type === "facts" ? "Search claims, support, citations" : "Search key points"}
-            onChange={(e) => onChangeFilter("q", e.target.value)}
+            onChange={(e) => handleFilterChange("q", e.target.value)}
           />
         </label>
       </div>
@@ -184,6 +312,31 @@ export default function FactCheck({ initialType = "points" }) {
           Shuffle between key points and evidence to rehearse the story. When something resonates, add the related documents from the Library so your brief keeps that insight.
         </div>
       </div>
+
+      {activeTrailhead ? (
+        <div className="section">
+          <div className="card" style={{ display: "grid", gap: 10 }}>
+            <h3 style={{ margin: 0 }}>Trailhead steps</h3>
+            <ol className="list">
+              {activeTrailhead.steps.map((step) => {
+                const resolved = resolveStep(step, lookups);
+                if (!resolved) return null;
+                return (
+                  <li key={`${step.kind}-${step.ref}`} className="list-row" style={{ gridTemplateColumns: "1fr" }}>
+                    <div>
+                      <div className="meta">{resolved.label}</div>
+                      <strong>{resolved.title}</strong>
+                      {resolved.body ? (
+                        <div className="meta">{resolved.body}</div>
+                      ) : null}
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

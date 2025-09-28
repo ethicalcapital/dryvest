@@ -70,6 +70,58 @@ const factIds = [
   'kp_policy_master_reporting_matrix'
 ];
 
+const trailheadDefs = [
+  {
+    id: 'policy_guardrails',
+    title: 'Policy-First Guardrails',
+    summary: 'Anchor trustees in a modern fiduciary interpretation before you show the conduct controls.',
+    filters: { org: 'corp', driver: 'regulatory', audience: 'board' },
+    steps: [
+      { kind: 'point', ref: 'kp_policy_modern_fiduciary_mandate' },
+      { kind: 'point', ref: 'kp_policy_coso_erm_conduct' },
+      { kind: 'doc', ref: 'fiduciary_playbook' },
+      { kind: 'step', ref: 'step_policy_conduct_risk_inventory' },
+      { kind: 'fact', ref: 'kp_policy_master_reporting_matrix' }
+    ]
+  },
+  {
+    id: 'conduct_risk_controls',
+    title: 'Conduct Risk Control Framework',
+    summary: 'Show staff how to turn ESG controversy into an auditable control system with reporting hooks.',
+    filters: { org: 'foundation', driver: 'external', audience: 'staff' },
+    steps: [
+      { kind: 'point', ref: 'kp_policy_oecd_rbc_due_diligence' },
+      { kind: 'doc', ref: 'conduct_risk_control_framework' },
+      { kind: 'step', ref: 'step_policy_conduct_reporting_matrix' },
+      { kind: 'fact', ref: 'kp_policy_escalation_triggers' }
+    ]
+  },
+  {
+    id: 'divestment_exposure',
+    title: 'Divestment Exposure Assessment',
+    summary: 'Quantify impact on tracking error and show regulators the prudence memo before the motion.',
+    filters: { org: 'public', driver: 'regulatory', audience: 'committee' },
+    steps: [
+      { kind: 'point', ref: 'kp_policy_attestation_expectations' },
+      { kind: 'doc', ref: 'divestment_exposure_assessment' },
+      { kind: 'step', ref: 'step_corporate_commission_exposure_analysis' },
+      { kind: 'fact', ref: 'kp_policy_coso_erm_conduct' }
+    ]
+  },
+  {
+    id: 'identity_alignment',
+    title: 'Identity Alignment Sprint',
+    summary: 'Keep boards focused on values-meet-governance outcomes with mission reporting and escalation triggers.',
+    filters: { org: 'foundation', driver: 'internal', audience: 'board' },
+    steps: [
+      { kind: 'point', ref: 'kp_outcome_identity_alignment' },
+      { kind: 'doc', ref: 'policy_framework' },
+      { kind: 'step', ref: 'step_policy_conduct_reporting_matrix' },
+      { kind: 'fact', ref: 'kp_policy_escalation_triggers' }
+    ]
+  }
+];
+
 function mapIdentities(values = []) {
   const mapped = new Set();
   for (const value of values) {
@@ -246,6 +298,7 @@ async function main() {
   facts.sort((a, b) => a.claim.localeCompare(b.claim));
   const keyPoints = normalizeKeyPoints(nodesJson.nodes, sourceMap).sort((a, b) => a.title.localeCompare(b.title));
   const nextSteps = normalizeNextSteps(nodesJson.nodes).sort((a, b) => a.text.localeCompare(b.text));
+  const trailheads = trailheadDefs;
 
   const ORGANIZATIONS = [
     { id: 'corp', name: 'Corporate Pension Plan', desc: 'Employer-sponsored retirement fund.' },
@@ -286,6 +339,7 @@ async function main() {
     `export const DOCS = ${JSON.stringify(docs, null, 2)};\n\n`,
     `export const KEY_POINTS = ${JSON.stringify(keyPoints, null, 2)};\n\n`,
     `export const NEXT_STEPS = ${JSON.stringify(nextSteps, null, 2)};\n\n`,
+    `export const TRAILHEADS = ${JSON.stringify(trailheads, null, 2)};\n\n`,
     `export const FACTS = ${JSON.stringify(facts, null, 2)};\n`
   ].join('');
 
