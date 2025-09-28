@@ -51,16 +51,13 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
       <div className="space-y-2">
         {MODE_OPTIONS.map(option => {
           const selected = mode === option.id;
-          const buttonStyle = {
-            ...(selected
-              ? {
-                  background:
-                    'linear-gradient(135deg, rgba(88, 28, 135, 0.95) 0%, rgba(20, 184, 166, 0.95) 100%)',
-                  color: '#ffffff',
-                }
-              : { backgroundColor: '#111827CC' }),
-            '--tw-ring-color': 'var(--ecic-purple)',
-          } as CSSProperties;
+          const buttonStyle: CSSProperties = selected
+            ? {
+                background:
+                  'linear-gradient(135deg, rgba(88, 28, 135, 0.95) 0%, rgba(20, 184, 166, 0.95) 100%)',
+                color: '#ffffff',
+              }
+            : { backgroundColor: '#111827CC' };
 
           return (
             <button
@@ -68,7 +65,7 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               type="button"
               onClick={() => onModeChange(option.id)}
               className={clsx(
-                'flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent',
+                'flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/20',
                 selected
                   ? 'border-transparent shadow-lg'
                   : 'border-white/10 text-white/70 hover:border-white/20'
