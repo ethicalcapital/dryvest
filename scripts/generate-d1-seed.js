@@ -40,7 +40,6 @@ const escape = value => String(value).replace(/'/g, "''");
 const json = value => escape(JSON.stringify(value));
 
 const statements = [];
-statements.push('BEGIN TRANSACTION;');
 statements.push(
   `INSERT INTO dataset_versions (version, manifest, schema, fallback_version) VALUES ('${escape(
     version
@@ -60,15 +59,13 @@ const tables = [
 for (const table of tables) {
   statements.push(`DELETE FROM ${table.name} WHERE version='${escape(version)}';`);
   for (const item of table.items) {
-    statements.push(
-      `INSERT INTO ${table.name} (version, id, payload) VALUES ('${escape(version)}', '${escape(
+  statements.push(
+    `INSERT INTO ${table.name} (version, id, payload) VALUES ('${escape(version)}', '${escape(
         item[table.key]
-      )}', '${json(item)}');`
-    );
-  }
+      )}', '${json(item)}') ON CONFLICT(version, id) DO UPDATE SET payload=excluded.payload;`
+  );
 }
-
-statements.push('COMMIT;');
+}
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, statements.join('\n') + '\n', 'utf8');

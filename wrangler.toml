@@ -21,8 +21,7 @@ preview_id = "caf4e19f1388423fade84340c27a929c"
 [[d1_databases]]
 binding = "DRYVEST_DB"
 database_name = "dryvest"
-# Replace with the production database ID after provisioning
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "7e33620c-2a5a-4e89-9f18-29ccd1cbafb8"
 
 [durable_objects]
 bindings = [
