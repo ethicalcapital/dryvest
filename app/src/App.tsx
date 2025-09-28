@@ -925,54 +925,88 @@ function App() {
     );
   }
 
+  const workspaceContent = renderWorkspaceContent();
+
   return (
-    <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
+    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
       <Header />
       <PalestineStatement />
 
       <main className="flex-1">
-        <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
-          <div className="mb-8">
-            <p
-              className="text-xs uppercase tracking-wide font-heading font-medium"
-              style={{ color: 'var(--ecic-purple)' }}
-            >
-              v.0.0.2
-            </p>
-            <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
-              Dryvest: Make divestment so boring it happens
-            </h1>
-            <div className="mt-3 max-w-4xl space-y-2">
-              <p className="text-slate-600 text-lg">
-                Dryvest translates moral demands into language investment committees can sign.
+        <section className="relative overflow-hidden bg-brand-gradient text-white">
+          <div className="absolute -top-40 right-[-10%] h-80 w-80 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
+          <div
+            className="absolute bottom-[-30%] left-[-20%] h-96 w-96 rounded-full blur-3xl"
+            style={{ backgroundColor: 'rgba(20, 184, 166, 0.25)' }}
+            aria-hidden="true"
+          />
+          <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
+            <div className="max-w-3xl space-y-6">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-heading uppercase tracking-wide text-white/80">
+                v.0.0.2
               </p>
-              <p className="text-slate-500 text-sm">
-                Start by choosing a workspace. Dryvest uses the same dataset everywhere—it just changes how much of the brief we assemble for you.
+              <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white">
+                Dryvest: Make divestment so boring it happens
+              </h1>
+              <p className="text-lg text-white/90">
+                Dryvest translates moral demands into language investment committees can sign. Pick the workspace that matches your moment and we&rsquo;ll shape the brief around it.
               </p>
-              <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
-                <span>
-                  Dataset version{' '}
-                  <span className="font-mono">{dataset.version}</span>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-white/80">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 font-mono">
+                  Dataset {dataset.version}
                 </span>
-                <span className="hidden sm:inline" aria-hidden="true">
+                <span className="hidden sm:block" aria-hidden="true">
                   •
                 </span>
                 <a
                   href="mailto:hello@ethicic.com?subject=Dryvest%20clarification"
-                  className="hover:underline"
-                  style={{ color: 'var(--ecic-teal)' }}
+                  className="inline-flex items-center gap-1 underline decoration-white/40 underline-offset-4 hover:text-white"
                 >
                   Ask for clarification
                 </a>
               </div>
             </div>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-xs font-heading font-semibold uppercase text-white/70">Cited dataset</p>
+                <p className="text-sm text-white/90">Every talking point links back to the sources in {dataset.version}.</p>
+              </div>
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-xs font-heading font-semibold uppercase text-white/70">Context lock</p>
+                <p className="text-sm text-white/90">Nothing loads until you pick the institution, audience, and campaign driver.</p>
+              </div>
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-xs font-heading font-semibold uppercase text-white/70">Export kits</p>
+                <p className="text-sm text-white/90">One click adds templates, one-pagers, and citations to your briefing.</p>
+              </div>
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-xs font-heading font-semibold uppercase text-white/70">Educational guardrail</p>
+                <p className="text-sm text-white/90">Outputs stay educational. You decide the ask before anything is shared.</p>
+              </div>
+            </div>
           </div>
+        </section>
 
-          {/* Mode Selector */}
-          <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
+        <section className="relative -mt-16 pb-12">
+          <div className="mx-auto w-full max-w-6xl px-6">
+            <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
+          </div>
+        </section>
 
-          {renderWorkspaceContent()}
-        </div>
+        <section className="pb-16">
+          <div className="mx-auto w-full max-w-6xl px-6">
+            <div className="rounded-3xl bg-white shadow-2xl ring-1 ring-slate-200">
+              <div className="p-6 sm:p-8">
+                {workspaceContent ?? (
+                  <div className="flex min-h-[220px] items-center justify-center text-sm text-slate-500">
+                    Pick a workspace above to start drafting.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

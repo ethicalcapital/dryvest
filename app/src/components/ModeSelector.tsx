@@ -65,9 +65,9 @@ const MODE_OPTIONS: Array<{
 
 export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
-    <section className="mb-8 rounded-2xl border border-indigo-100 bg-white/85 p-8 shadow-sm">
+    <section className="relative z-[1] mb-10 rounded-3xl border border-white/40 bg-white p-8 shadow-2xl">
       <header className="max-w-3xl space-y-2 mb-6">
-        <p className="text-xs font-heading uppercase tracking-wide text-indigo-600">
+        <p className="text-xs font-heading uppercase tracking-wide text-slate-500">
           Choose your workspace
         </p>
         <h2 className="text-2xl font-heading font-semibold text-slate-900">
@@ -81,44 +81,72 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
       <div className="grid gap-4 md:grid-cols-2">
         {MODE_OPTIONS.map(option => {
           const selected = mode === option.id;
+          const buttonStyle = {
+            ...(selected
+              ? {
+                  background:
+                    'linear-gradient(135deg, var(--ecic-purple) 0%, var(--ecic-teal) 100%)',
+                  color: '#ffffff',
+                }
+              : {}),
+            '--tw-ring-color': 'var(--ecic-purple)',
+          } as CSSProperties;
+
           return (
             <button
               key={option.id}
               type="button"
               onClick={() => onModeChange(option.id)}
               className={clsx(
-                'text-left rounded-xl border px-5 py-4 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+                'transform text-left rounded-2xl border px-6 py-6 transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white shadow-lg',
                 selected
-                  ? 'border-ecic-purple bg-ecic-purple/10 text-slate-900 shadow-sm'
-                  : 'border-slate-200 bg-white text-slate-700 hover:border-ecic-purple/40'
+                  ? 'border-transparent text-white shadow-2xl -translate-y-1'
+                  : 'border-slate-200 bg-white text-slate-700 hover:-translate-y-1 hover:border-ecic-purple/40'
               )}
-              style={{ '--tw-ring-color': 'var(--ecic-purple)' } as CSSProperties}
+              style={buttonStyle}
             >
               <div className="flex items-start gap-3">
                 <div
                   className={clsx(
                     'flex h-10 w-10 items-center justify-center rounded-lg',
-                    selected ? 'bg-ecic-purple text-white' : 'bg-slate-100 text-slate-600'
+                    selected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
                   )}
                 >
                   {option.icon}
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <p className="text-xs font-heading uppercase tracking-wide text-indigo-600">
+                    <p
+                      className={clsx(
+                        'text-xs font-heading uppercase tracking-wide',
+                        selected ? 'text-white/80' : 'text-indigo-600'
+                      )}
+                    >
                       {option.eyebrow}
                     </p>
                     {selected ? (
-                      <span className="rounded-full bg-ecic-purple/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ecic-purple">
+                      <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
                         Selected
                       </span>
                     ) : null}
                   </div>
-                  <h3 className="text-lg font-heading font-semibold text-slate-900">
+                  <h3
+                    className={clsx(
+                      'text-lg font-heading font-semibold',
+                      selected ? 'text-white' : 'text-slate-900'
+                    )}
+                  >
                     {option.title}
                   </h3>
-                  <p className="text-sm text-slate-600">{option.description}</p>
-                  <ul className="list-disc pl-4 text-xs text-slate-500 space-y-1">
+                  <p className={clsx('text-sm', selected ? 'text-white/90' : 'text-slate-600')}>
+                    {option.description}
+                  </p>
+                  <ul
+                    className={clsx(
+                      'list-disc pl-4 text-xs space-y-1',
+                      selected ? 'text-white/80' : 'text-slate-500'
+                    )}
+                  >
                     {option.bullets.map((bullet, index) => (
                       <li key={index}>{bullet}</li>
                     ))}
