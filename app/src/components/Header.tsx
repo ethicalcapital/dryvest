@@ -12,12 +12,9 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <a
-              href="https://ethicic.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/"
               className="flex items-center gap-3 hover:opacity-90 transition-opacity"
             >
-              {/* Logo SVG */}
               <div className="flex items-center gap-3">
                 <img
                   src="/ecic-logo.svg"
@@ -58,14 +55,9 @@ export function Header() {
 
           {/* CTA Buttons */}
           <div className="flex items-center space-x-4">
-            <a
-              href="https://forms.lessannoyingcrm.com/view/4052147773342280568097228809934"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex text-sm font-heading font-medium text-white hover:opacity-90 transition-opacity"
-            >
-              Request Speaking
-            </a>
+            <p className="hidden sm:block text-xs uppercase tracking-[0.3em] text-white/70">
+              Translate moral demands into implementable investment policy
+            </p>
             <a
               href="https://ethicic.com/content/pages/consultation"
               target="_blank"
