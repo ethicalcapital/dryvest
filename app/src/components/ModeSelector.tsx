@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import {
   Zap,
   Wrench,
@@ -21,7 +20,7 @@ interface ModeSelectorProps {
 const MODE_DETAILS: Record<BriefMode, {
   title: string;
   description: string;
-  icon: ReactNode;
+  icon: JSX.Element;
   highlights: string;
 }> = {
   quick: {

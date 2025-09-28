@@ -36,10 +36,7 @@ type AnalyticsEventName =
   | 'mailing_opt_in'
   | 'analytics_consent_changed'
   | 'feedback_link_clicked'
-  | 'contact_submitted'
-  | 'campaign_objective_selected'
-  | 'campaign_intent_saved'
-  | 'suggested_mode_activated';
+  | 'contact_submitted';
 
 type Category = 'engagement' | 'content' | 'usage' | 'feedback' | 'other';
 
@@ -64,9 +61,6 @@ const CATEGORY_MAP: Record<string, Category> = {
   analytics_consent_changed: 'feedback',
   feedback_link_clicked: 'feedback',
   contact_submitted: 'feedback',
-  campaign_objective_selected: 'engagement',
-  campaign_intent_saved: 'engagement',
-  suggested_mode_activated: 'engagement',
 };
 
 interface DurableAnalyticsEvent {
