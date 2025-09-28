@@ -312,13 +312,6 @@
       "markdownPath": "content/performance_reality_check.md"
     },
     {
-      "id": "one_pager_legal_speech",
-      "type": "one_pager",
-      "title": "Legal & Speech Landscape",
-      "description": "Courts, statutes, and messaging to defuse antisemitism and legality pushback.",
-      "markdownPath": "content/legal_speech_landscape.md"
-    },
-    {
       "id": "one_pager_about_ec",
       "type": "one_pager",
       "title": "About Ethical Capital & Dryvestment",
@@ -802,20 +795,6 @@
       }
     },
     {
-      "id": "src_jerusalem-declaration-on-antisemitism",
-      "type": "source",
-      "label": "Jerusalem Declaration on Antisemitism",
-      "url": "https://jerusalemdeclaration.org/",
-      "citationText": "Jerusalem Declaration on Antisemitism. (2021). Jerusalem Declaration on Antisemitism. https://jerusalemdeclaration.org/"
-    },
-    {
-      "id": "src_baldassi-v-france-echr",
-      "type": "source",
-      "label": "Baldassi v. France (ECHR)",
-      "url": "https://hudoc.echr.coe.int/eng?i=001-202195",
-      "citationText": "Baldassi and Others v. France, App. No. 15271/16, Eur. Ct. H.R. (2020). https://hudoc.echr.coe.int/eng?i=001-202195"
-    },
-    {
       "id": "src_naacp-v-claiborne-hardware-458-u-s-886",
       "type": "source",
       "label": "NAACP v. Claiborne Hardware (458 U.S. 886)",
@@ -828,18 +807,6 @@
       "label": "Amnesty: Israel's System of Apartheid",
       "url": "https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/",
       "citationText": "Amnesty International. (2022). Israel's apartheid against Palestinians: Cruel system of domination and crime against humanity. https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/"
-    },
-    {
-      "id": "ctr_this-is-antisemitic-we-can-t-single-out-israel",
-      "type": "counter",
-      "claim": "This is antisemitic/We can't single out Israel.",
-      "response": "Anchor the policy in conduct: international law and human rights standards apply globally. The Jerusalem Declaration and leading Jewish organizations affirm that boycotting state conduct is protected speech, not antisemitism.",
-      "citations": [
-        "src_jerusalem-declaration-on-antisemitism",
-        "src_baldassi-v-france-echr",
-        "src_naacp-v-claiborne-hardware-458-u-s-886",
-        "src_amnesty-israel-s-system-of-apartheid"
-      ]
     },
     {
       "id": "src_amawi-v-pflugerville-isd-opinion",
@@ -883,46 +850,6 @@
         "src_afsc-investigate",
         "src_msci-esg-indexes-factsheet",
         "src_msci-esg-focus-methodology"
-      ]
-    },
-    {
-      "id": "src_pew-research-jewish-americans-in-2020",
-      "type": "source",
-      "label": "Pew Research: Jewish Americans in 2020",
-      "url": "https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/",
-      "citationText": "Pew Research Center. (2021). Jewish Americans in 2020. https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/"
-    },
-    {
-      "id": "src_jewish-electorate-institute-2021-poll",
-      "type": "source",
-      "label": "Jewish Electorate Institute 2021 Poll",
-      "url": "https://www.jewishelectorateinstitute.org/2021-national-survey",
-      "citationText": "Jewish Electorate Institute. (2021). National survey of Jewish voters. https://www.jewishelectorateinstitute.org/2021-national-survey"
-    },
-    {
-      "id": "src_jewish-voice-for-peace-about",
-      "type": "source",
-      "label": "Jewish Voice for Peace: About",
-      "url": "https://www.jewishvoiceforpeace.org/about/",
-      "citationText": "Jewish Voice for Peace. (n.d.). About Jewish Voice for Peace. https://www.jewishvoiceforpeace.org/about/"
-    },
-    {
-      "id": "src_ifnotnow-mission",
-      "type": "source",
-      "label": "IfNotNow Mission",
-      "url": "https://www.ifnotnowmovement.org/mission",
-      "citationText": "IfNotNow. (n.d.). Mission. https://www.ifnotnowmovement.org/mission"
-    },
-    {
-      "id": "ctr_this-will-damage-our-relationship-with-jewish-donors-stakeholders",
-      "type": "counter",
-      "claim": "This will damage our relationship with Jewish donors/stakeholders.",
-      "response": "Jewish communities are not monolithic: polling shows broad support for holding the Israeli government accountable, and Jewish-led organizations publicly back conduct-based divestment grounded in human rights.",
-      "citations": [
-        "src_pew-research-jewish-americans-in-2020",
-        "src_jewish-electorate-institute-2021-poll",
-        "src_jewish-voice-for-peace-about",
-        "src_ifnotnow-mission"
       ]
     },
     {
@@ -1561,6 +1488,73 @@
         "further_reading"
       ],
       "citationText": "Ethical Capital. (2023). What I'd tell your CIO about divestment. https://ethicic.com/content/research/what-id-tell-your-cio-about-divestment"
+    },
+    {
+      "id": "kp_mission_divestment_exposure_assessment",
+      "type": "key_point",
+      "title": "Request a divestment exposure assessment",
+      "body": "When leadership resists exclusions, demand a Divestment Exposure Assessment that documents qualitative risk, models tracking error and funded-status impact, and sets clear escalation triggers. Forcing that report reframes divestment as a prudent governance step instead of a values debate.",
+      "citations": [
+        {
+          "label": "UN PRI: Fiduciary Duty in the 21st Century",
+          "url": "https://www.unpri.org/fiduciary-duty"
+        },
+        {
+          "label": "Oxford Sustainable Finance: Divestment Research",
+          "url": "https://www.smithschool.ox.ac.uk/research/sustainable-finance"
+        }
+      ],
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation",
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ]
+      },
+      "tags": [
+        "governance",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "step_request_divestment_exposure_assessment",
+      "type": "next_step",
+      "text": "Request a Divestment Exposure Assessment that includes qualitative risk dossiers, scenario and liability modeling, and a board-ready prudence memo, then calendar the follow-up meeting to review it.",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation",
+          "public_pension",
+          "corporate_pension",
+          "insurance",
+          "government",
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      }
     }
   ]
 }

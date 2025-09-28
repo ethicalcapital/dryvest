@@ -62,16 +62,10 @@
       "title": "Counters: family_friends",
       "items": [
         {
-          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
-        },
-        {
           "ref": "ctr_bds-is-illegal-in-our-state"
         },
         {
           "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
-        },
-        {
-          "ref": "ctr_this-will-damage-our-relationship-with-jewish-donors-stakeholders"
         },
         {
           "ref": "ctr_what-about-china-saudi-arabia-other-countries"
@@ -103,9 +97,6 @@
       "kind": "counters",
       "title": "Counters: fiduciary",
       "items": [
-        {
-          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
-        },
         {
           "ref": "ctr_bds-is-illegal-in-our-state"
         },
@@ -142,9 +133,6 @@
       "kind": "counters",
       "title": "Counters: regulated",
       "items": [
-        {
-          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
-        },
         {
           "ref": "ctr_bds-is-illegal-in-our-state"
         },
@@ -252,19 +240,10 @@
           "ref": "src_us-dol-esg-factors-fact-sheet"
         },
         {
-          "ref": "src_jerusalem-declaration-on-antisemitism"
-        },
-        {
-          "ref": "src_pew-research-jewish-americans-in-2020"
-        },
-        {
           "ref": "src_un-guiding-principles-on-business-human-rights"
         },
         {
           "ref": "src_nyu-stern-esg-and-financial-performance"
-        },
-        {
-          "ref": "src_baldassi-v-france-echr"
         },
         {
           "ref": "src_ethical-capital-investment-screening-policy"
@@ -444,12 +423,6 @@
           "ref": "src_cuyahoga-county-israel-bond-freeze"
         },
         {
-          "ref": "src_jerusalem-declaration-on-antisemitism"
-        },
-        {
-          "ref": "src_baldassi-v-france-echr"
-        },
-        {
           "ref": "src_naacp-v-claiborne-hardware-458-u-s-886"
         },
         {
@@ -463,18 +436,6 @@
         },
         {
           "ref": "src_msci-esg-focus-methodology"
-        },
-        {
-          "ref": "src_pew-research-jewish-americans-in-2020"
-        },
-        {
-          "ref": "src_jewish-electorate-institute-2021-poll"
-        },
-        {
-          "ref": "src_jewish-voice-for-peace-about"
-        },
-        {
-          "ref": "src_ifnotnow-mission"
         },
         {
           "ref": "src_what-i-d-tell-your-cio-about-divestment"

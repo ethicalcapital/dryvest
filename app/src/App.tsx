@@ -85,6 +85,24 @@ const toNextStepNodes = (nodes: Node[]) =>
 
 type StepStatus = 'done' | 'active' | 'pending';
 
+const SUPPORTED_TEMPLATE_IDS = [
+  'tmpl_model_resolution',
+  'tmpl_government_policy',
+  'note_cio',
+  'tmpl_corporate_board_briefing',
+  'tmpl_corporate_consultant_scope',
+  'tmpl_corporate_fiduciary_override',
+  'tmpl_spectrum_board_ladder',
+  'tmpl_spectrum_stakeholder_update',
+  'tmpl_insurance_alm_briefing',
+  'tmpl_insurance_capital_committee',
+  'tmpl_insurance_rating_agency',
+  'tmpl_foundation_board_resolution',
+  'tmpl_foundation_investment_committee_update',
+  'tmpl_public_board_resolution',
+  'tmpl_public_meeting_brief',
+];
+
 function formatTaxonomyValue(value?: string | null) {
   if (!value) return 'Not set';
   return value
@@ -607,13 +625,7 @@ function App() {
       dataset?.nodes.filter(
         (node): node is Extract<Node, { type: 'template_snippet' }> => {
           if (node.type !== 'template_snippet') return false;
-          if (
-            ![
-              'tmpl_model_resolution',
-              'tmpl_government_policy',
-              'note_cio',
-            ].includes(node.id)
-          )
+          if (!SUPPORTED_TEMPLATE_IDS.includes(node.id))
             return false;
           return matchesTargets(node.targets, context);
         }

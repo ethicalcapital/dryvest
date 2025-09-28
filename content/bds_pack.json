@@ -118,12 +118,6 @@
       "path": "content/performance_reality_check.md"
     },
     {
-      "id": "legal_speech",
-      "title": "Legal & Speech Landscape",
-      "description": "Courts, statutes, and messaging to defuse antisemitism and legality pushback.",
-      "path": "content/legal_speech_landscape.md"
-    },
-    {
       "id": "about_ec",
       "title": "About Ethical Capital & Dryvestment",
       "description": "Clarifies publisher responsibility, fiduciary posture, and follow-up channels for Dryvestment outputs.",
@@ -255,28 +249,6 @@
   },
   "counters": [
     {
-      "claim": "This is antisemitic/We can't single out Israel.",
-      "response": "Anchor the policy in conduct: international law and human rights standards apply globally. The Jerusalem Declaration and leading Jewish organizations affirm that boycotting state conduct is protected speech, not antisemitism.",
-      "citations": [
-        {
-          "label": "Jerusalem Declaration on Antisemitism",
-          "url": "https://jerusalemdeclaration.org/"
-        },
-        {
-          "label": "Baldassi v. France (ECHR)",
-          "url": "https://hudoc.echr.coe.int/eng?i=001-202195"
-        },
-        {
-          "label": "NAACP v. Claiborne Hardware (458 U.S. 886)",
-          "url": "https://supreme.justia.com/cases/federal/us/458/886/"
-        },
-        {
-          "label": "Amnesty: Israel's System of Apartheid",
-          "url": "https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/"
-        }
-      ]
-    },
-    {
       "claim": "BDS is illegal in our state.",
       "response": "State procurement laws target country boycotts. A conduct-based screen\u2014grounded in UN Guiding Principles and applied to any violator\u2014has survived review and mirrors how public systems like UC Regents structure exclusions.",
       "citations": [
@@ -313,28 +285,6 @@
         {
           "label": "MSCI ESG Focus Methodology",
           "url": "https://www.msci.com/documents/10199/91d79741-973c-559b-fc60-c47c4085b715"
-        }
-      ]
-    },
-    {
-      "claim": "This will damage our relationship with Jewish donors/stakeholders.",
-      "response": "Jewish communities are not monolithic: polling shows broad support for holding the Israeli government accountable, and Jewish-led organizations publicly back conduct-based divestment grounded in human rights.",
-      "citations": [
-        {
-          "label": "Pew Research: Jewish Americans in 2020",
-          "url": "https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/"
-        },
-        {
-          "label": "Jewish Electorate Institute 2021 Poll",
-          "url": "https://www.jewishelectorateinstitute.org/2021-national-survey"
-        },
-        {
-          "label": "Jewish Voice for Peace: About",
-          "url": "https://www.jewishvoiceforpeace.org/about/"
-        },
-        {
-          "label": "IfNotNow Mission",
-          "url": "https://www.ifnotnowmovement.org/mission"
         }
       ]
     },
@@ -847,20 +797,8 @@
       "url": "https://investigate.afsc.org/"
     },
     {
-      "label": "Jerusalem Declaration on Antisemitism",
-      "url": "https://jerusalemdeclaration.org/"
-    },
-    {
       "label": "Amnesty: Israel's System of Apartheid",
       "url": "https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/"
-    },
-    {
-      "label": "Pew Research: Jewish Americans in 2020",
-      "url": "https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/"
-    },
-    {
-      "label": "Jewish Voice for Peace: About",
-      "url": "https://www.jewishvoiceforpeace.org/about/"
     },
     {
       "label": "UN Guiding Principles on Business & Human Rights",
@@ -881,10 +819,6 @@
     {
       "label": "MSCI ESG Indexes Factsheet",
       "url": "https://www.msci.com/documents/1296102/17835852/MSCI-ESG-Indexes-Factsheet.pdf"
-    },
-    {
-      "label": "Baldassi v. France (ECHR)",
-      "url": "https://hudoc.echr.coe.int/eng?i=001-202195"
     },
     {
       "label": "NAACP v. Claiborne Hardware (458 U.S. 886)",
@@ -945,14 +879,6 @@
     {
       "label": "Free Money Podcast: Divestment Without Dissonance",
       "url": "https://freemoneypodcast.com/p/divestment-without-dissonance"
-    },
-    {
-      "label": "Jewish Electorate Institute 2021 Poll",
-      "url": "https://www.jewishelectorateinstitute.org/2021-national-survey"
-    },
-    {
-      "label": "IfNotNow Mission",
-      "url": "https://www.ifnotnowmovement.org/mission"
     },
     {
       "label": "Texas Government Code Chapter 808",
@@ -1216,10 +1142,8 @@
   },
   "counter_sets": {
     "family_friends": [
-      "This is antisemitic/We can't single out Israel.",
       "BDS is illegal in our state.",
       "We don't have the expertise/resources to evaluate these companies.",
-      "This will damage our relationship with Jewish donors/stakeholders.",
       "What about China/Saudi Arabia/other countries?",
       "This politicizes our investment process.",
       "ESG has underperformed/We're moving away from values investing.",
@@ -1228,7 +1152,6 @@
       "Apartheid divestment was chaos; why repeat it?"
     ],
     "fiduciary": [
-      "This is antisemitic/We can't single out Israel.",
       "BDS is illegal in our state.",
       "We don't have the expertise/resources to evaluate these companies.",
       "This creates legal liability/litigation risk.",
@@ -1239,7 +1162,6 @@
       "Apartheid divestment was chaos; why repeat it?"
     ],
     "regulated": [
-      "This is antisemitic/We can't single out Israel.",
       "BDS is illegal in our state.",
       "This creates legal liability/litigation risk.",
       "The board doesn't have authority to make investment decisions.",
@@ -1258,24 +1180,12 @@
         "url": "https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/retirement-investments-using-esg-factors"
       },
       {
-        "label": "Jerusalem Declaration on Antisemitism",
-        "url": "https://jerusalemdeclaration.org/"
-      },
-      {
-        "label": "Pew Research: Jewish Americans in 2020",
-        "url": "https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/"
-      },
-      {
         "label": "UN Guiding Principles on Business & Human Rights",
         "url": "https://www.ohchr.org/en/business-and-human-rights"
       },
       {
         "label": "NYU Stern: ESG and Financial Performance",
         "url": "https://www.stern.nyu.edu/sites/default/files/assets/documents/NYU-RAM_ESG-Paper_2021%20Rev_0.pdf"
-      },
-      {
-        "label": "Baldassi v. France (ECHR)",
-        "url": "https://hudoc.echr.coe.int/eng?i=001-202195"
       },
       {
         "label": "Ethical Capital: Investment Screening Policy",

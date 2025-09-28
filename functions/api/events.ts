@@ -1,17 +1,49 @@
-import { z } from 'zod';
-
 interface Env {
   DRYVEST_ANALYTICS: DurableObjectNamespace;
 }
 
-const EventSchema = z.object({
-  name: z.string().min(1),
-  timestamp: z.string().optional(),
-  contextHash: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
-});
+interface IncomingEvent {
+  name: string;
+  timestamp?: string;
+  contextHash?: string;
+  metadata?: Record<string, unknown>;
+}
 
-type IncomingEvent = z.infer<typeof EventSchema>;
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null && !Array.isArray(value);
+
+const parseEvent = (candidate: unknown): IncomingEvent | null => {
+  if (!isRecord(candidate)) return null;
+
+  const { name, timestamp, contextHash, metadata } = candidate;
+
+  if (typeof name !== 'string' || !name.trim()) {
+    return null;
+  }
+
+  if (timestamp !== undefined && typeof timestamp !== 'string') {
+    return null;
+  }
+
+  if (contextHash !== undefined && typeof contextHash !== 'string') {
+    return null;
+  }
+
+  let parsedMetadata: Record<string, unknown> | undefined;
+  if (metadata !== undefined) {
+    if (!isRecord(metadata)) {
+      return null;
+    }
+    parsedMetadata = metadata;
+  }
+
+  return {
+    name: name.trim(),
+    timestamp: timestamp,
+    contextHash,
+    metadata: parsedMetadata,
+  };
+};
 
 type Category = 'engagement' | 'content' | 'usage' | 'feedback' | 'other';
 
@@ -99,12 +131,11 @@ export class DryvestAnalyticsDO implements DurableObject {
       const events: PersistedEvent[] = [];
 
       for (const candidate of eventsArray) {
-        const parsed = EventSchema.safeParse(candidate);
-        if (!parsed.success) {
-          console.error('Invalid analytics event', parsed.error.flatten());
+        const data = parseEvent(candidate);
+        if (!data) {
+          console.error('Invalid analytics event payload', candidate);
           continue;
         }
-        const data = parsed.data;
         const category = CATEGORY_MAP[data.name] ?? 'other';
         const event: PersistedEvent = {
           name: data.name,

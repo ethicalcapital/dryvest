@@ -30,11 +30,25 @@ export function selectPlaylistByKind(
   const candidates = playlistsByKind[kind] ?? [];
   if (!candidates.length) return undefined;
 
-  const exactMatches = candidates.filter(playlist =>
-    matchesTargets(playlist.targets, context)
-  );
-  if (exactMatches.length) {
-    return exactMatches[0];
+  let best: Playlist | undefined;
+  let bestScore = -1;
+
+  for (const playlist of candidates) {
+    if (!matchesTargets(playlist.targets, context)) continue;
+    const score = playlist.targets
+      ? Object.values(playlist.targets).reduce(
+          (acc, values) => acc + (values ? 1 : 0),
+          0
+        )
+      : 0;
+    if (score > bestScore) {
+      best = playlist;
+      bestScore = score;
+    }
+  }
+
+  if (best) {
+    return best;
   }
 
   return candidates[0];

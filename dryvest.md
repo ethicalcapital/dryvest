@@ -40,8 +40,8 @@ Suggested top-level document
       {"ref": "kp_method_summary"}
     ]},
     { "id": "counters_fiduciary", "title": "Fiduciary Counters", "items": [
-      {"ref": "ctr_antisemitism_claim"},
-      {"ref": "ctr_fiduciary_duty"}
+      {"ref": "ctr_fiduciary_duty"},
+      {"ref": "ctr_process_risk_control"}
     ]}
   ],
   "render_presets": {
@@ -90,13 +90,13 @@ Node examples
 }
 
 {
-  "id": "ctr_antisemitism_claim",
+  "id": "ctr_fiduciary_duty",
   "type": "counter",
-  "claim": "Divestment is antisemitic.",
-  "response": "Critique targets state policy and complicit firms, not a people or faith...",
-  "citations": ["src_icj","src_hrw"],
-  "tags": ["speech","human_rights"],
-  "targets": { "audience": ["family_friends","regulated"] }
+  "claim": "Divestment violates fiduciary duty.",
+  "response": "Modern guidance allows incorporating conduct risk when there is a documented financial rationale and transparent process.",
+  "citations": ["src_dol_guidance","src_un_pri"],
+  "tags": ["fiduciary","risk"],
+  "targets": { "audience": ["fiduciary","regulated"] }
 }
 
 {

@@ -1,4 +1,4 @@
-import { Users, UserCheck, Building2, Megaphone } from 'lucide-react';
+import { Users, UserCheck, Building2, Megaphone, ClipboardList } from 'lucide-react';
 import type { BriefContext } from '../lib/schema';
 
 interface Scenario {
@@ -11,6 +11,21 @@ interface Scenario {
 }
 
 const SCENARIOS: Scenario[] = [
+  {
+    id: 'policy_scaffold',
+    title: 'Forge divestment guardrails',
+    description:
+      'Align trustees on when divestment triggers before you layer in conflict-specific data.',
+    icon: ClipboardList,
+    context: {
+      identity: 'public_pension',
+      audience: 'boards',
+      venue: 'full_board_meeting',
+      level: 'technical',
+      motivation: 'regulatory_drivers',
+    },
+    onePagers: ['one_pager_fiduciary_playbook', 'one_pager_performance_reality'],
+  },
   {
     id: 'university_divestment',
     title: 'University divestment campaign',
@@ -86,6 +101,7 @@ export function ScenarioCards({ onScenarioSelect }: ScenarioCardsProps) {
           const Icon = scenario.icon;
           return (
             <button
+              data-testid="scenario-card"
               key={scenario.id}
               onClick={() => onScenarioSelect(scenario)}
               className="group rounded-xl border border-slate-200 bg-white/80 p-6 text-left shadow-sm transition-all hover:border-indigo-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"

@@ -128,18 +128,6 @@
       "citationText": "Cleveland.com. (2024, August). Cuyahoga County treasurer won't reinvest in Israel bonds. https://www.cleveland.com/news/2024/08/cuyahoga-county-treasurer-wont-reinvest-in-israel-bonds.html"
     },
     {
-      "id": "src_jerusalem-declaration-on-antisemitism",
-      "label": "Jerusalem Declaration on Antisemitism",
-      "url": "https://jerusalemdeclaration.org/",
-      "citationText": "Jerusalem Declaration on Antisemitism. (2021). Jerusalem Declaration on Antisemitism. https://jerusalemdeclaration.org/"
-    },
-    {
-      "id": "src_baldassi-v-france-echr",
-      "label": "Baldassi v. France (ECHR)",
-      "url": "https://hudoc.echr.coe.int/eng?i=001-202195",
-      "citationText": "Baldassi and Others v. France, App. No. 15271/16, Eur. Ct. H.R. (2020). https://hudoc.echr.coe.int/eng?i=001-202195"
-    },
-    {
       "id": "src_naacp-v-claiborne-hardware-458-u-s-886",
       "label": "NAACP v. Claiborne Hardware (458 U.S. 886)",
       "url": "https://supreme.justia.com/cases/federal/us/458/886/",
@@ -168,30 +156,6 @@
       "label": "MSCI ESG Focus Methodology",
       "url": "https://www.msci.com/documents/10199/91d79741-973c-559b-fc60-c47c4085b715",
       "citationText": "MSCI. (n.d.). ESG Focus indexes methodology. https://www.msci.com/documents/10199/91d79741-973c-559b-fc60-c47c4085b715"
-    },
-    {
-      "id": "src_pew-research-jewish-americans-in-2020",
-      "label": "Pew Research: Jewish Americans in 2020",
-      "url": "https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/",
-      "citationText": "Pew Research Center. (2021). Jewish Americans in 2020. https://www.pewresearch.org/religion/2021/05/11/jewish-americans-in-2020/"
-    },
-    {
-      "id": "src_jewish-electorate-institute-2021-poll",
-      "label": "Jewish Electorate Institute 2021 Poll",
-      "url": "https://www.jewishelectorateinstitute.org/2021-national-survey",
-      "citationText": "Jewish Electorate Institute. (2021). National survey of Jewish voters. https://www.jewishelectorateinstitute.org/2021-national-survey"
-    },
-    {
-      "id": "src_jewish-voice-for-peace-about",
-      "label": "Jewish Voice for Peace: About",
-      "url": "https://www.jewishvoiceforpeace.org/about/",
-      "citationText": "Jewish Voice for Peace. (n.d.). About Jewish Voice for Peace. https://www.jewishvoiceforpeace.org/about/"
-    },
-    {
-      "id": "src_ifnotnow-mission",
-      "label": "IfNotNow Mission",
-      "url": "https://www.ifnotnowmovement.org/mission",
-      "citationText": "IfNotNow. (n.d.). Mission. https://www.ifnotnowmovement.org/mission"
     },
     {
       "id": "src_what-i-d-tell-your-cio-about-divestment",
@@ -494,6 +458,222 @@
         "individual",
         "retirement"
       ]
+    },
+    {
+      "id": "src_goodwinlaw_dol_abandons_esg_rule",
+      "label": "Goodwin Law: DOL Abandons ESG Rule",
+      "url": "https://www.goodwinlaw.com/en/insights/publications/2025/06/alerts-practices-erisalit-dol-abandons-esg-rule",
+      "citationText": "Goodwin Procter LLP. (2025, June 23). DOL abandons ESG rule in investment duties regulation; rescinds cryptocurrency guidance. https://www.goodwinlaw.com/en/insights/publications/2025/06/alerts-practices-erisalit-dol-abandons-esg-rule"
+    },
+    {
+      "id": "src_dol_advisory_opinion_2025_04a",
+      "label": "US DOL Advisory Opinion 2025-04A",
+      "url": "https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/advisory-opinions/2025-04a",
+      "citationText": "U.S. Department of Labor. (2025). Advisory Opinion 2025-04A. https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/advisory-opinions/2025-04a"
+    },
+    {
+      "id": "src_jdsupra_dol_pulls_racial_equity_guidance",
+      "label": "JD Supra: DOL Pulls Racial Equity Guidance",
+      "url": "https://www.jdsupra.com/legalnews/dol-pulls-the-plug-on-racial-equity-7723449/",
+      "citationText": "JD Supra. (2025, September 23). DOL pulls the plug on racial equity guidance. https://www.jdsupra.com/legalnews/dol-pulls-the-plug-on-racial-equity-7723449/"
+    },
+    {
+      "id": "src_massachusetts_firearm_divestment",
+      "label": "Massachusetts Firearm Divestment Fact Sheet",
+      "url": "https://www.mass.gov/doc/firearm-divestment-fact-sheet-0/download",
+      "citationText": "Commonwealth of Massachusetts. (n.d.). Firearm divestment fact sheet. https://www.mass.gov/doc/firearm-divestment-fact-sheet-0/download"
+    },
+    {
+      "id": "src_nyc_wong_v_nycers_dismissal",
+      "label": "NYC Comptroller: Wong v. NYCERS Dismissal",
+      "url": "https://comptroller.nyc.gov/newsroom/nyc-comptroller-lander-pension-trustees-celebrate-dismissal-of-lawsuit-challenging-fossil-fuel-divestment-by-new-york-city-pension-funds/",
+      "citationText": "Office of the New York City Comptroller. (2024, July 3). NYC Comptroller Lander & pension trustees celebrate dismissal of lawsuit challenging fossil fuel divestment by New York City pension funds. https://comptroller.nyc.gov/newsroom/nyc-comptroller-lander-pension-trustees-celebrate-dismissal-of-lawsuit-challenging-fossil-fuel-divestment-by-new-york-city-pension-funds/"
+    },
+    {
+      "id": "src_callan_divest_or_engage",
+      "label": "Callan: Divest or Engage?",
+      "url": "https://www.callan.com/blog-archive/divest-engage/",
+      "citationText": "Callan LLC. (2018). Divest or engage? Our advice for institutional investors. https://www.callan.com/blog-archive/divest-engage/"
+    },
+    {
+      "id": "src_cambridge_divestment_governance",
+      "label": "Cambridge Associates: Divestment Governance",
+      "url": "https://www.cambridgeassociates.com/insight/the-divestment-question-focus-on-governance/",
+      "citationText": "Cambridge Associates. (2024, May). The divestment question: Focus on governance. https://www.cambridgeassociates.com/insight/the-divestment-question-focus-on-governance/"
+    },
+    {
+      "id": "src_berkeley_irle_divestment_fiduciary",
+      "label": "Berkeley IRLE: Divestment Fulfills Fiduciary Duty",
+      "url": "https://irle.berkeley.edu/wp-content/uploads/2024/05/How-Divestment-Fulfills-Fiduciary-Duty.pdf",
+      "citationText": "Institute for Research on Labor and Employment, UC Berkeley. (2024, May). How divestment fulfills fiduciary duty: A response to CalPERS and CalSTRS. https://irle.berkeley.edu/wp-content/uploads/2024/05/How-Divestment-Fulfills-Fiduciary-Duty.pdf"
+    },
+    {
+      "id": "src_irish_times_trinity_divest",
+      "label": "Irish Times: Trinity divestment after protest",
+      "url": "https://www.irishtimes.com/ireland/education/2024/05/06/trinity-to-divest-from-companies-linked-to-israel-after-student-protest/",
+      "citationText": "Holland, K. (2024, May 6). Trinity to divest from companies linked to Israel after student protest. The Irish Times. https://www.irishtimes.com/ireland/education/2024/05/06/trinity-to-divest-from-companies-linked-to-israel-after-student-protest/"
+    },
+    {
+      "id": "src_rockefeller_brothers_divestment_review",
+      "label": "RBF: Ten years after divestment commitment",
+      "url": "https://www.rbf.org/news/ten-years-after-our-divestment-commitment",
+      "citationText": "Rockefeller Brothers Fund. (2025, September 16). Ten years after our divestment commitment. https://www.rbf.org/news/ten-years-after-our-divestment-commitment"
+    },
+    {
+      "id": "src_nathan_cummings_mission_alignment",
+      "label": "Nathan Cummings Foundation: 100% mission alignment",
+      "url": "https://nathancummings.org/news/nathan-cummings-foundation-commits-to-100-percent-mission-aligned-investing/",
+      "citationText": "Nathan Cummings Foundation. (2018, March 22). Nathan Cummings Foundation commits to 100 percent mission-aligned investing. https://nathancummings.org/news/nathan-cummings-foundation-commits-to-100-percent-mission-aligned-investing/"
+    },
+    {
+      "id": "src_debevoise_naic_rbc_task_force",
+      "label": "Debevoise: NAIC launches new RBC Task Force",
+      "url": "https://www.debevoise.com/insights/publications/2025/02/naic-launches-new-risk-based-capital-rbc-task-force",
+      "citationText": "Debevoise & Plimpton. (2025, February). NAIC launches new risk-based capital (RBC) task force. https://www.debevoise.com/insights/publications/2025/02/naic-launches-new-risk-based-capital-rbc-task-force"
+    },
+    {
+      "id": "src_aaa_liquidity_risk_management_2024",
+      "label": "American Academy of Actuaries: Liquidity Risk Management",
+      "url": "https://www.actuary.org/sites/default/files/2024-02/Liquidity-Risk-Management-for-Insurers.pdf",
+      "citationText": "American Academy of Actuaries. (2024, February). Liquidity risk management for insurers. https://www.actuary.org/sites/default/files/2024-02/Liquidity-Risk-Management-for-Insurers.pdf"
+    },
+    {
+      "id": "src_artemis_sidecar_surge_2025",
+      "label": "Artemis: Sidecar use continues to surge",
+      "url": "https://www.artemis.bm/news/sidecar-use-continues-to-surge-among-life-reinsurers-fitch/",
+      "citationText": "Artemis. (2025). Sidecar use continues to surge among life reinsurers: Fitch. https://www.artemis.bm/news/sidecar-use-continues-to-surge-among-life-reinsurers-fitch/"
+    },
+    {
+      "id": "src_deloitte_insurer_divestment_2021",
+      "label": "Deloitte: How insurers are divesting",
+      "url": "https://www2.deloitte.com/us/en/insights/industry/financial-services/insurer-divestment-digital-future.html",
+      "citationText": "Deloitte. (2021). How insurers are divesting to shift to a digital future. https://www2.deloitte.com/us/en/insights/industry/financial-services/insurer-divestment-digital-future.html"
+    },
+    {
+      "id": "src_chicago_fed_life_safety_net_2024",
+      "label": "Chicago Fed: U.S. life insurance safety net",
+      "url": "https://www.chicagofed.org/publications/notes-from-the-fifth-district/2024/us-life-insurance-safety-net",
+      "citationText": "Federal Reserve Bank of Chicago. (2024). The U.S. life insurance safety net. https://www.chicagofed.org/publications/notes-from-the-fifth-district/2024/us-life-insurance-safety-net"
+    },
+    {
+      "id": "src_caia_investment_committee_2024",
+      "label": "CAIA: Top-3 reasons to blow up your investment committee",
+      "url": "https://caia.org/blog/2024/01/14/top-3-reasons-you-should-blow-up-your-investment-committee",
+      "citationText": "CAIA Association. (2024, January 14). The top-3 reasons you should blow up your investment committee. https://caia.org/blog/2024/01/14/top-3-reasons-you-should-blow-up-your-investment-committee"
+    },
+    {
+      "id": "src_conning_insurance_saa_2017",
+      "label": "Conning: Strategic Asset Allocation for Insurers",
+      "url": "https://www.conning.com/docs/default-source/white-papers/strategic-asset-allocation-for-insurance-companies.pdf",
+      "citationText": "Conning. (2017, October). Strategic asset allocation for insurance companies. https://www.conning.com/docs/default-source/white-papers/strategic-asset-allocation-for-insurance-companies.pdf"
+    },
+    {
+      "id": "src_eiopa_equity_drivers_2018",
+      "label": "EIOPA: Potential drivers of insurers' equity investments",
+      "url": "https://www.eiopa.europa.eu/document-library/discussion-paper/potential-drivers-of-insurers-equity-investments_en",
+      "citationText": "European Insurance and Occupational Pensions Authority. (2018, June). Potential drivers of insurers' equity investments. https://www.eiopa.europa.eu/document-library/discussion-paper/potential-drivers-of-insurers-equity-investments_en"
+    },
+    {
+      "id": "src_irs_jeopardizing_investments",
+      "label": "IRS Treasury Reg. 26 CFR \u00a753.4944-1",
+      "url": "https://www.ecfr.gov/current/title-26/section-53.4944-1",
+      "citationText": "Internal Revenue Service. (2024). 26 CFR \u00a753.4944-1 - Taxes on investments which jeopardize charitable purpose. https://www.ecfr.gov/current/title-26/section-53.4944-1"
+    },
+    {
+      "id": "src_irs_notice_2015_62",
+      "label": "IRS Notice 2015-62",
+      "url": "https://www.irs.gov/pub/irs-drop/n-15-62.pdf",
+      "citationText": "Internal Revenue Service. (2015). Notice 2015-62: Investments made for charitable purposes. https://www.irs.gov/pub/irs-drop/n-15-62.pdf"
+    },
+    {
+      "id": "src_upmifa_text",
+      "label": "Uniform Prudent Management of Institutional Funds Act",
+      "url": "https://www.uniformlaws.org/HigherLogic/System/DownloadDocumentFile.ashx?DocumentFileKey=cf94d9a7-2a5c-84ca-9f06-0f775401d7a7",
+      "citationText": "Uniform Law Commission. (2012). Uniform Prudent Management of Institutional Funds Act (UPMIFA). https://www.uniformlaws.org/HigherLogic/System/DownloadDocumentFile.ashx?DocumentFileKey=cf94d9a7-2a5c-84ca-9f06-0f775401d7a7"
+    },
+    {
+      "id": "src_irs_private_foundation_payout",
+      "label": "IRS Private Foundation Minimum Distribution Requirements",
+      "url": "https://www.irs.gov/charities-non-profits/private-foundations/mandatory-payouts-private-foundations",
+      "citationText": "Internal Revenue Service. (2023). Mandatory payouts: Private foundations. https://www.irs.gov/charities-non-profits/private-foundations/mandatory-payouts-private-foundations"
+    },
+    {
+      "id": "src_california_const_article_xvi",
+      "label": "California Constitution Article XVI Section 17",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17.&lawCode=CONS",
+      "citationText": "California Constitution. (2024). Article XVI, Section 17. https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17.&lawCode=CONS"
+    },
+    {
+      "id": "src_ohio_rc_145_11",
+      "label": "Ohio Revised Code \u00a7145.11",
+      "url": "https://codes.ohio.gov/ohio-revised-code/section-145.11",
+      "citationText": "Ohio Revised Code. (2024). \u00a7145.11 Investment and fiduciary duties of the public employees retirement board. https://codes.ohio.gov/ohio-revised-code/section-145.11"
+    },
+    {
+      "id": "src_texas_sb13",
+      "label": "Texas Senate Bill 13 (2021)",
+      "url": "https://capitol.texas.gov/tlodocs/87R/billtext/pdf/SB00013F.pdf",
+      "citationText": "State of Texas. (2021). Senate Bill 13: Relating to state contracts with and investments in companies that boycott energy companies. https://capitol.texas.gov/tlodocs/87R/billtext/pdf/SB00013F.pdf"
+    },
+    {
+      "id": "src_texas_comptroller_energy_boycott_list",
+      "label": "Texas Comptroller Energy Boycott List",
+      "url": "https://comptroller.texas.gov/purchasing/publications/boycott-energy-companies.php",
+      "citationText": "Texas Comptroller of Public Accounts. (2024). Listing of financial companies that boycott energy companies. https://comptroller.texas.gov/purchasing/publications/boycott-energy-companies.php"
+    },
+    {
+      "id": "src_california_brown_act",
+      "label": "California Brown Act Open Meetings Guide",
+      "url": "https://oag.ca.gov/sites/all/files/agweb/pdfs/publications/brownAct2003.pdf",
+      "citationText": "California Attorney General. (2003). The Brown Act: Open meetings for local legislative bodies. https://oag.ca.gov/sites/all/files/agweb/pdfs/publications/brownAct2003.pdf"
+    },
+    {
+      "id": "src_gao_public_pension_debrief",
+      "label": "GAO: Public Pension Governance Practices",
+      "url": "https://www.gao.gov/assets/gao-18-171.pdf",
+      "citationText": "U.S. Government Accountability Office. (2018). Public pension plans: Governance practices vary; leading practices may help sponsors improve oversight. https://www.gao.gov/assets/gao-18-171.pdf"
+    },
+    {
+      "id": "src_russell_funded_status_volatility",
+      "label": "Russell Investments: Funded status volatility",
+      "url": "https://russellinvestments.com/us/blog/funded-status-volatility",
+      "citationText": "Russell Investments. (n.d.). Funded status volatility: Why it matters for pension plans. https://russellinvestments.com/us/blog/funded-status-volatility"
+    },
+    {
+      "id": "src_soa_discount_rate_sensitivity",
+      "label": "Society of Actuaries: Discount rate sensitivity",
+      "url": "https://www.soa.org/globalassets/assets/Files/Research/Projects/discount-rate-sensitivity.pdf",
+      "citationText": "Society of Actuaries. (2014). Discount rate sensitivities in pension plans. https://www.soa.org/globalassets/assets/Files/Research/Projects/discount-rate-sensitivity.pdf"
+    },
+    {
+      "id": "src_osfi_stress_testing_guideline",
+      "label": "OSFI: Stress testing guideline for defined benefit plans",
+      "url": "https://www.osfi-bsif.gc.ca/en/print/pdf/node/1484",
+      "citationText": "Office of the Superintendent of Financial Institutions. (2019). Stress testing guideline for plans with defined benefit provisions. https://www.osfi-bsif.gc.ca/en/print/pdf/node/1484"
+    },
+    {
+      "id": "src_oecd_pension_stress_testing",
+      "label": "OECD: Stress testing and scenario analysis of pension plans",
+      "url": "https://www.oecd.org/content/dam/iops/en/working-papers/WP-19-Stress-testing-and-Scenario-Analysis-of-Pension-Plans.pdf",
+      "citationText": "Organisation for Economic Co-operation and Development. (2018). Stress testing and scenario analysis of pension plans. https://www.oecd.org/content/dam/iops/en/working-papers/WP-19-Stress-testing-and-Scenario-Analysis-of-Pension-Plans.pdf"
+    },
+    {
+      "id": "src_rand_supply_chain_disruptions",
+      "label": "RAND: Supply chain disruptions risks",
+      "url": "https://www.rand.org/pubs/commentary/2021/11/supply-chain-disruptions-the-risks-and-consequences.html",
+      "citationText": "RAND Corporation. (2021). Supply chain disruptions: The risks and consequences. https://www.rand.org/pubs/commentary/2021/11/supply-chain-disruptions-the-risks-and-consequences.html"
+    },
+    {
+      "id": "src_fidelity_ips_considerations",
+      "label": "Fidelity: Investment policy statement considerations",
+      "url": "https://sponsor.fidelity.com/pspublic/pca/psw/public/library/manageplans/invest_policy_considerations.html",
+      "citationText": "Fidelity Investments. (2024). Investment policy statement considerations. https://sponsor.fidelity.com/pspublic/pca/psw/public/library/manageplans/invest_policy_considerations.html"
+    },
+    {
+      "id": "src_investopedia_ips",
+      "label": "Investopedia: Understanding an investment policy statement",
+      "url": "https://www.investopedia.com/terms/i/ips.asp",
+      "citationText": "Investopedia. (2024). Understanding an investment policy statement. https://www.investopedia.com/terms/i/ips.asp"
     }
   ]
 }

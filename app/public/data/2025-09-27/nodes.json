@@ -2,30 +2,18 @@
   "version": "2025-09-27",
   "nodes": [
     {
-      "id": "opener_generic",
-      "type": "opener",
-      "text": "We can align investments with basic human rights using professional, benchmark-aware implementation. Large institutions already use narrowly scoped exclusions while maintaining diversification and risk controls.",
+      "id": "ctr_apartheid-divestment-was-chaos-why-repeat-it",
+      "type": "counter",
+      "claim": "Apartheid divestment was chaos; why repeat it?",
+      "response": "Apartheid divestment proved you can stand on ethics without breaking returns. Our firm\u2019s policy embraces that precedent: we run apartheid-free portfolios with documented process and rely on sustained, multi-channel pressure\u2014divestment plus engagement\u2014just as history shows.",
+      "citations": [
+        "src_what-i-d-tell-your-cio-about-divestment",
+        "src_ethical-capital-investment-screening-policy"
+      ],
       "targets": {
         "audience": [
-          "stakeholders"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_individual_one_on_one",
-      "type": "opener",
-      "text": "For friends or family, emphasize aligning personal savings with shared values and keep the steps concrete and jargon-free.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "venue": [
-          "one_on_one"
-        ],
-        "audience": [
+          "boards",
+          "stakeholders",
           "family_friends"
         ],
         "level": [
@@ -34,149 +22,23 @@
       }
     },
     {
-      "id": "opener_individual_base",
-      "type": "opener",
-      "text": "Individual investors can align personal or household savings with their values using low-cost screened funds while keeping diversification and emergency reserves intact.",
+      "id": "ctr_bds-is-illegal-in-our-state",
+      "type": "counter",
+      "claim": "BDS is illegal in our state.",
+      "response": "State procurement laws target country boycotts. A conduct-based screen\u2014grounded in UN Guiding Principles and applied to any violator\u2014has survived review and mirrors how public systems like UC Regents structure exclusions.",
+      "citations": [
+        "src_un-guiding-principles-on-business-human-rights",
+        "src_koontz-v-watson-opinion",
+        "src_amawi-v-pflugerville-isd-opinion",
+        "src_jordahl-v-brnovich-opinion"
+      ],
       "targets": {
-        "identity": [
-          "individual"
-        ],
         "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_swf_base",
-      "type": "opener",
-      "text": "A sovereign fund can implement conduct-based exclusions via a formal ethics process, public rationales, and factor-neutral optimization with explicit tracking-error budgets.",
-      "targets": {
-        "identity": [
-          "swf"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_public_pension_town_meeting",
-      "type": "opener",
-      "text": "Public pensions can adopt a clear exclusion policy with consultant support, preserve diversification, and report progress without sacrificing fiduciary discipline.",
-      "targets": {
-        "identity": [
-          "public_pension"
-        ],
-        "venue": [
-          "town_meeting"
-        ],
-        "audience": [
-          "stakeholders"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_public_pension_base",
-      "type": "opener",
-      "text": "Public plans can use consultant/manager mandates, set a tracking-error guardrail, and phase implementation while keeping beneficiaries’ risk/return in focus.",
-      "targets": {
-        "identity": [
-          "public_pension"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_corporate_pension_base",
-      "type": "opener",
-      "text": "Corporate plans can update the IPS, adopt a screened index or constraints with minimal overhead, and maintain de-risking alignment.",
-      "targets": {
-        "identity": [
-          "corporate_pension"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_endowment_school_board",
-      "type": "opener",
-      "text": "An endowment can reflect mission and educational values with transparent criteria and periodic reviews.",
-      "targets": {
-        "identity": [
-          "endowment"
-        ],
-        "venue": [
-          "school_board"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_endowment_base",
-      "type": "opener",
-      "text": "Endowments can align with mission through a committee process, publish rationales, and maintain prudent risk controls.",
-      "targets": {
-        "identity": [
-          "endowment"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_foundation_base",
-      "type": "opener",
-      "text": "Foundations can align programs and portfolios, reduce reputational risk through clear criteria, and use simplified implementation paths.",
-      "targets": {
-        "identity": [
-          "foundation"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "opener_insurance_base",
-      "type": "opener",
-      "text": "Insurance portfolios can adopt narrow conduct screens consistent with ALM and capital/rating constraints, emphasizing best-efforts and risk integrity.",
-      "targets": {
-        "identity": [
-          "insurance"
-        ],
-        "audience": [
-          "boards"
+          "boards",
+          "staff",
+          "consultants",
+          "regulated",
+          "family_friends"
         ],
         "level": [
           "plain",
@@ -185,15 +47,87 @@
       }
     },
     {
-      "id": "opener_central_bank_base",
-      "type": "opener",
-      "text": "Official institutions can clarify mandate limits, apply best-efforts exclusions, and provide transparent rationales and constraints.",
+      "id": "ctr_corporate_divestment_violates_fiduciary",
+      "type": "counter",
+      "claim": "Divesting violates our ERISA fiduciary duty.",
+      "response": "ERISA requires a prudent pecuniary case, not silence. DOL guidance confirms fiduciaries may weigh conduct risks when they affect returns, and our policy keeps financial guardrails such as tracking-error caps, override clauses, and independent consultant opinions that show we are mitigating risk, not trading returns for politics.",
+      "citations": [
+        "src_us-dol-esg-guidance",
+        "src_goodwinlaw_dol_abandons_esg_rule",
+        "src_berkeley_irle_divestment_fiduciary"
+      ],
       "targets": {
-        "identity": [
-          "central_bank"
-        ],
         "audience": [
-          "boards"
+          "boards",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ],
+        "identity": [
+          "corporate_pension"
+        ]
+      }
+    },
+    {
+      "id": "ctr_corporate_engage_not_divest",
+      "type": "counter",
+      "claim": "We should keep the holdings and just engage.",
+      "response": "Consultants note engagement has limits when risks are tied to illegal conduct or unresponsive governance. Cambridge Associates and Callan both advise pairing escalation with divestment when conduct gaps persist, and our staged policy documents that the risk is material and that we exhausted less disruptive tools first.",
+      "citations": [
+        "src_cambridge_divestment_governance",
+        "src_callan_divest_or_engage"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ],
+        "identity": [
+          "corporate_pension"
+        ]
+      }
+    },
+    {
+      "id": "ctr_corporate_policy_is_discriminatory",
+      "type": "counter",
+      "claim": "This policy exposes us to discrimination claims.",
+      "response": "Advisory Opinion 2025-04A shows the answer is to tighten the language, not abandon the policy. We rely on neutral conduct-based criteria validated by UN data and maintain counsel-reviewed override logs so the screen targets documented violations everywhere, not any protected class or geography.",
+      "citations": [
+        "src_dol_advisory_opinion_2025_04a",
+        "src_jdsupra_dol_pulls_racial_equity_guidance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ],
+        "identity": [
+          "corporate_pension"
+        ]
+      }
+    },
+    {
+      "id": "ctr_divestment-is-ineffective-someone-else-just-buys-the-shares",
+      "type": "counter",
+      "claim": "Divestment is ineffective; someone else just buys the shares.",
+      "response": "The primary effects are reputational and in primary capital markets. Policies influence lenders, underwriters, and index providers and shift the cost of capital for targeted issuers.",
+      "citations": [
+        "src_oxford-ssee-research"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "stakeholders",
+          "family_friends"
         ],
         "level": [
           "plain"
@@ -201,18 +135,101 @@
       }
     },
     {
-      "id": "opener_government_city_council",
-      "type": "opener",
-      "text": "For government bond portfolios, define approved issuer lists and issuer screens consistent with procurement rules and transparency.",
+      "id": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries",
+      "type": "counter",
+      "claim": "Divestment will significantly hurt performance and beneficiaries.",
+      "response": "Naive exclusions can be costly, but professional managers use optimization and tracking-error limits to preserve factor exposures and benchmark-like returns.",
+      "citations": [
+        "src_msci-esg-index-construction"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_esg-has-underperformed-we-re-moving-away-from-values-investing",
+      "type": "counter",
+      "claim": "ESG has underperformed/We're moving away from values investing.",
+      "response": "Our approach is high-active-share, research-driven investing\u2014not an index fad. Ethical Capital's growth strategy has delivered benchmark-like returns while holding higher cash-flow yield companies, showing exclusion discipline can coexist with market performance.",
+      "citations": [
+        "src_what-i-d-tell-your-cio-about-divestment",
+        "src_nyu-stern-esg-and-financial-performance",
+        "src_mdpi-esg-scores-and-stock-returns"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_exclusions-reduce-diversification-too-much",
+      "type": "counter",
+      "claim": "Exclusions reduce diversification too much.",
+      "response": "Well-designed policies are narrow and conduct-based. Managers maintain diversification across sectors and factors while removing a limited set of issuers that breach defined standards.",
+      "citations": [
+        "src_msci-portfolio-construction"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_exclusions-violate-fiduciary-duty",
+      "type": "counter",
+      "claim": "Exclusions violate fiduciary duty.",
+      "response": "Fiduciary duty requires prudence, loyalty, and attention to material risk and client objectives. Values alignment and risk management can be implemented within a disciplined, return-seeking mandate.",
+      "citations": [
+        "src_un-pri-fiduciary-duty",
+        "src_us-dol-esg-guidance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_foundation_divestment_hurts_returns",
+      "type": "counter",
+      "claim": "Divesting or adding MRIs violates our duty to maximize returns.",
+      "response": "UPMIFA and IRS guidance both recognize that mission can be part of prudence. Boards that document risk, return, and mission factors in a prudence memo satisfy ordinary business care while reducing reputational and regulatory risk.",
+      "citations": [
+        "src_upmifa_text",
+        "src_irs_jeopardizing_investments",
+        "src_irs_notice_2015_62"
+      ],
       "targets": {
         "identity": [
-          "government"
-        ],
-        "venue": [
-          "city_council"
+          "foundation",
+          "endowment"
         ],
         "audience": [
-          "boards"
+          "boards",
+          "stakeholders"
         ],
         "level": [
           "plain"
@@ -220,15 +237,21 @@
       }
     },
     {
-      "id": "opener_government_base",
-      "type": "opener",
-      "text": "Government investors (city/county/state) can apply issuer screens/approved lists for bonds, observe procurement/governance limits, and report with best-efforts language.",
+      "id": "ctr_foundation_spending_erosion",
+      "type": "counter",
+      "claim": "If we fund MRIs or PRIs, we will erode the corpus and jeopardize grants.",
+      "response": "PRIs count toward the 5% payout and recycle capital as repayments arrive; MRIs live in the endowment and can grow the base for future distributions. The IRS payout rules stay intact as long as the foundation keeps the 5% floor.",
+      "citations": [
+        "src_irs_private_foundation_payout"
+      ],
       "targets": {
         "identity": [
-          "government"
+          "foundation",
+          "endowment"
         ],
         "audience": [
-          "boards"
+          "boards",
+          "stakeholders"
         ],
         "level": [
           "plain"
@@ -236,47 +259,592 @@
       }
     },
     {
-      "id": "guide_individual",
-      "type": "guide",
-      "sections": {
-        "ask": "Align personal or household savings with stated values and explain the exclusions in plain language.",
-        "implementation": "Use low-cost screened ETFs or managed accounts; document which companies are excluded and why.",
-        "reporting": "Keep a simple holdings list and revisit annually or after major portfolio changes.",
-        "risk": "Maintain emergency funds, diversification, and low fees while applying exclusions."
-      },
+      "id": "ctr_how-do-we-define-settlement-involvement",
+      "type": "counter",
+      "claim": "How do we define 'settlement involvement'?",
+      "response": "Use objective sources: UN databases, AFSC Investigate, and vendor ESG datasets itemize settlement-linked projects. Policies trigger off this evidence and require periodic review.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_un-database-on-settlements",
+        "src_klp-divests-settlement-companies"
+      ],
       "targets": {
-        "identity": [
-          "individual"
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
         ]
       }
     },
     {
-      "id": "guide_swf",
-      "type": "guide",
-      "sections": {
-        "ask": "Adopt conduct-based exclusions with a formal ethics/oversight process and public rationales.",
-        "implementation": "Multi-manager mandates with optimization constraints; preserve factor/sector neutrality; staged rebalances.",
-        "reporting": "Publish exclusion list and rationale; periodic reviews and appeals mechanism; transparent methodology.",
-        "risk": "Explicit tracking-error budget (e.g., 15–30 bps) and central risk model governance."
-      },
+      "id": "ctr_how-do-you-know-these-activist-lists-aren-t-biased",
+      "type": "counter",
+      "claim": "How do you know these activist lists aren't biased?",
+      "response": "We do not outsource ethics to third-party lists. About 40% of our exclusions are unique because we rebuild evidence in-house and document every call; activist data is an input, not the final answer.",
+      "citations": [
+        "src_ethical-capital-investment-screening-policy",
+        "src_ssrn-esg-ratings-divergence"
+      ],
       "targets": {
-        "identity": [
-          "swf"
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
         ]
       }
     },
     {
-      "id": "guide_public_pension",
-      "type": "guide",
-      "sections": {
-        "ask": "Consultant memo and manager mandates for conduct-based exclusions; define guardrails.",
-        "implementation": "Passive screened index or benchmark-aware constraints; phased divestment to minimize costs; maintain diversification.",
-        "reporting": "Quarterly one-page dashboard; publish criteria and exclusion list.",
-        "risk": "Tracking-error limit (e.g., ≤30 bps) and factor neutrality by vendor."
-      },
+      "id": "ctr_insurance_divestment_weakens_surplus",
+      "type": "counter",
+      "claim": "Selling blocks or risky assets will weaken surplus and hurt growth.",
+      "response": "RBC math runs the other direction: shedding high-charge assets lifts statutory surplus and frees capital for higher-ROE lines. We are redeploying that surplus into regulated, admitted assets that keep growth on track.",
+      "citations": [
+        "src_debevoise_naic_rbc_task_force",
+        "src_conning_insurance_saa_2017"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "stakeholders"
+        ]
+      }
+    },
+    {
+      "id": "ctr_insurance_rating_agency_penalty",
+      "type": "counter",
+      "claim": "Rating agencies will punish us for shrinking the balance sheet.",
+      "response": "Analysts reward capital adequacy and risk profile improvements. We are delivering pro-forma models that show higher redundancy at target ratings and engaging Moody's, S&P, Fitch, and AM Best before the announcement.",
+      "citations": [
+        "src_deloitte_insurer_divestment_2021",
+        "src_artemis_sidecar_surge_2025"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "consultants",
+          "stakeholders"
+        ]
+      }
+    },
+    {
+      "id": "ctr_israeli-companies-provide-essential-technology-services",
+      "type": "counter",
+      "claim": "Israeli companies provide essential technology/services.",
+      "response": "A conduct-first policy distinguishes between legitimate business and grave rights violations. Exclusions target companies whose revenue or technology is tied to occupation abuses; suppliers meeting standards remain investable.",
+      "citations": [
+        "src_klp-divests-settlement-companies",
+        "src_akademikerpension-statement",
+        "src_afsc-investigate"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data",
+      "type": "counter",
+      "claim": "MSCI or Sustainability ratings are more credible than activist data.",
+      "response": "We build proprietary screens because mainstream ratings are inconsistent and often influenced by commercial incentives. Specialist intelligence (AFSC, UN) identifies issues faster, and we overlay that insight with widely-used index tools for transparent delivery.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_ssrn-esg-ratings-divergence",
+        "src_ssrn-trustworthy-esg-ratings",
+        "src_ethical-capital-investment-screening-policy"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_our-endowment-foundation-documents-prohibit-political-positions",
+      "type": "counter",
+      "claim": "Our endowment/foundation documents prohibit political positions.",
+      "response": "Conduct-based policies focus on fiduciary risk, not partisan statements. UC Regents' guidelines and UTS's SRI history show boards can codify exclusions as part of their duty to manage reputational and legal risk.",
+      "citations": [
+        "src_uc-regents-investment-policy",
+        "src_union-theological-seminary-divestment"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_our-index-funds-can-t-accommodate-exclusions",
+      "type": "counter",
+      "claim": "Our index funds can't accommodate exclusions.",
+      "response": "Major providers offer screened versions of core indexes, and mandates can overlay exclusion lists via optimization. Public pensions already run Israel/settlement screens inside benchmark-aware vehicles.",
+      "citations": [
+        "src_ftse-russell-squaring-the-circle-on-carbon-track",
+        "src_msci-esg-indexes-factsheet",
+        "src_church-of-england-pensions-board-divestment"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_our-investment-consultant-manager-won-t-implement-this",
+      "type": "counter",
+      "claim": "Our investment consultant/manager won't implement this.",
+      "response": "Ask for transparency about current constraints. Managers already deliver exclusion mandates; mainstream ESG providers offer screened benchmarks, and active oversight keeps implementation honest even when broad-market funds remain.",
+      "citations": [
+        "src_msci-esg-indexes-factsheet",
+        "src_ftse-russell-squaring-the-circle-on-carbon-track",
+        "src_church-of-england-pensions-board-divestment",
+        "src_ssrn-esg-ratings-divergence"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_public_divestment_illegal",
+      "type": "counter",
+      "claim": "Divesting for conduct reasons is illegal under anti-ESG laws.",
+      "response": "Most statutes\u2014including Texas SB13\u2014allow actions tied to financially material risk or legal compliance. Document risk analysis, maintain boycott compliance logs, and show the decision protects beneficiaries, not politics.",
+      "citations": [
+        "src_texas_sb13",
+        "src_texas_comptroller_energy_boycott_list"
+      ],
       "targets": {
         "identity": [
           "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "stakeholders"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_public_process_burdensome",
+      "type": "counter",
+      "claim": "We do not have capacity to run a transparent divestment process.",
+      "response": "Sunshine compliance is manageable with a structured calendar: notice postings, public packets, and documented prudence memos. Other funds have followed the same governance playbook without violating open-meeting rules.",
+      "citations": [
+        "src_california_brown_act",
+        "src_gao_public_pension_debrief"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "stakeholders"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_settlement-products-are-a-tiny-portion-of-these-companies-revenues",
+      "type": "counter",
+      "claim": "Settlement products are a tiny portion of these companies' revenues.",
+      "response": "Even small revenue lines can signal structural risk: Caterpillar and Israeli banks face lawsuits, exclusions, and credit pressure tied to settlement activity. Screening reallocates capital to resilient issuers.",
+      "citations": [
+        "src_jury-awards-miller-vs-caterpillar",
+        "src_caterpillar-stock-reaction-to-nbim-exclusion",
+        "src_moody-s-downgrades-israel"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_the-board-doesn-t-have-authority-to-make-investment-decisions",
+      "type": "counter",
+      "claim": "The board doesn't have authority to make investment decisions.",
+      "response": "Boards set policy; staff and consultants implement. UC Regents and other fiduciary boards codify exclusions in IPS language while delegating execution to investment teams under defined tracking-error limits.",
+      "citations": [
+        "src_uc-regents-investment-policy",
+        "src_amawi-v-pflugerville-isd-opinion",
+        "src_nbim-responsible-investment"
+      ],
+      "targets": {
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_the-situation-is-too-complex-for-binary-decisions",
+      "type": "counter",
+      "claim": "The situation is too complex for binary decisions.",
+      "response": "Policies can blend process and precision. Evergreen State College defused protests by launching a task force, while Free Money highlights that continued dialogue about ethics and finance is itself part of responsible governance.",
+      "citations": [
+        "src_evergreen-state-agreement",
+        "src_free-money-podcast-divestment-without-dissonance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "stakeholders",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-creates-legal-liability-litigation-risk",
+      "type": "counter",
+      "claim": "This creates legal liability/litigation risk.",
+      "response": "Documented policy, credible sourcing, and alignment with fiduciary duties provide cover. Large funds like NBIM and PFZW publish their rationale and have avoided litigation by sticking to evidence-based conduct standards.",
+      "citations": [
+        "src_nbim-exclusion-decisions",
+        "src_pfzw-exclusion-decision",
+        "src_koontz-v-watson-opinion"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-distracts-from-our-core-mission",
+      "type": "counter",
+      "claim": "This distracts from our core mission.",
+      "response": "Mission and finance are intertwined. The Free Money conversation notes divestment debates deepen understanding of finance's role, while campuses like SFSU tailored policies that supported student learning without derailing institutional objectives.",
+      "citations": [
+        "src_free-money-podcast-divestment-without-dissonance",
+        "src_sfsu-foundation-policy-update"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "stakeholders",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-is-virtue-signaling-that-won-t-change-anything",
+      "type": "counter",
+      "claim": "This is virtue signaling that won't change anything.",
+      "response": "Our clients' signals become shared policy. Every valid alert we receive is researched and added to firm-wide exclusions, and our flagship growth strategy has matched MSCI ACWI while staying values-aligned\u2014so the work is both communal and financially credible.",
+      "citations": [
+        "src_ethical-capital-investment-screening-policy",
+        "src_what-i-d-tell-your-cio-about-divestment"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "stakeholders",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-politicizes-our-investment-process",
+      "type": "counter",
+      "claim": "This politicizes our investment process.",
+      "response": "Ignoring credible violations is itself a political stance. We use ethical screening as an active risk-management decision\u2014protecting portfolios from legal, reputational, and stranded-asset exposure identified in our screening policy.",
+      "citations": [
+        "src_ethical-capital-investment-screening-policy",
+        "src_us-dol-esg-guidance",
+        "src_cuyahoga-county-israel-bond-freeze"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain",
+      "type": "counter",
+      "claim": "This requires ongoing monitoring we can't maintain.",
+      "response": "Set cadence and delegate: many policies mandate annual reviews plus event-driven updates fed by third-party alerts. Consultants and managers absorb the monitoring, reporting back through dashboards.",
+      "citations": [
+        "src_evergreen-state-agreement",
+        "src_msci-esg-focus-methodology",
+        "src_nbim-responsible-investment"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-sets-dangerous-precedent-for-future-exclusions",
+      "type": "counter",
+      "claim": "This sets dangerous precedent for future exclusions.",
+      "response": "Institutions already manage multiple ethical screens. UTS and SFSU frame new exclusions as extensions of long-standing SRI policies, proving conduct standards can evolve while staying disciplined.",
+      "citations": [
+        "src_union-theological-seminary-divestment",
+        "src_sfsu-foundation-policy-update"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "stakeholders",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start",
+      "type": "counter",
+      "claim": "This sounds expensive or complicated\u2014where do I even start?",
+      "response": "Ethical screening is messy in practice\u2014that\u2019s why investors hire professionals to map the evidence, translate it into exclusions, and keep the process on track.",
+      "citations": [
+        "src_ethical-capital-investment-screening-policy"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants",
+          "family_friends"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_this-undermines-academic-freedom-and-exchange",
+      "type": "counter",
+      "claim": "This undermines academic freedom and exchange.",
+      "response": "Universities exist for inquiry. Ashby Monk and Kelly Grotke highlight that divestment conversations deepen learning and institutional character; policies can target financial holdings while protecting academic collaboration.",
+      "citations": [
+        "src_free-money-podcast-divestment-without-dissonance",
+        "src_sfsu-foundation-policy-update",
+        "src_union-theological-seminary-divestment"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "stakeholders",
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_un-databases-are-politically-motivated-and-unreliable",
+      "type": "counter",
+      "claim": "UN databases are politically motivated and unreliable.",
+      "response": "Treat activist research as the specialist edge. Ground-level groups like AFSC or the UN database track evidence sooner than generalized ESG vendors; large funds (e.g., KLP) use them as the investigative spine and apply mainstream index tools for implementation.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_un-database-on-settlements",
+        "src_klp-divests-settlement-companies",
+        "src_ssrn-impact-of-esg-rating-changes"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies",
+      "type": "counter",
+      "claim": "We don't have the expertise/resources to evaluate these companies.",
+      "response": "Leverage third-party intelligence and manager tools: AFSC Investigate provides evidence packs, and screened indexes from MSCI/FTSE offer plug-and-play implementation with documented tracking-error budgets.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_msci-esg-indexes-factsheet",
+        "src_msci-esg-focus-methodology"
+      ],
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_we-lack-precedent-from-peer-institutions",
+      "type": "counter",
+      "claim": "We lack precedent from peer institutions.",
+      "response": "Peer action is growing: institutions from SFSU to Union Theological Seminary and pension giants like KLP have adopted universal human-rights screens. They communicate the policy as a continuity of existing SRI principles.",
+      "citations": [
+        "src_union-theological-seminary-divestment",
+        "src_sfsu-foundation-policy-update",
+        "src_klp-divests-settlement-companies"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_we-need-engagement-not-divestment",
+      "type": "counter",
+      "claim": "We need engagement, not divestment.",
+      "response": "Escalation ladders work: institutions like the Church of England and Danish pensions engage first, set time-bound objectives, and divest when companies fail to remedy violations\u2014preserving credibility and risk discipline.",
+      "citations": [
+        "src_church-of-england-pensions-board-divestment",
+        "src_akademikerpension-statement",
+        "src_nbim-exclusion-decisions"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants",
+          "family_friends"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "ctr_we-re-a-global-institution-serving-diverse-stakeholders",
+      "type": "counter",
+      "claim": "We're a global institution serving diverse stakeholders.",
+      "response": "Global fiduciaries already run conduct screens. NBIM and KLP manage worldwide portfolios while excluding companies tied to occupation abuses, demonstrating universal standards work at scale.",
+      "citations": [
+        "src_nbim-responsible-investment",
+        "src_klp-divests-settlement-companies"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "ctr_what-about-china-saudi-arabia-other-countries",
+      "type": "counter",
+      "claim": "What about China/Saudi Arabia/other countries?",
+      "response": "Apply one standard everywhere: our policy covers any issuer implicated in grave violations\u2014Israeli, Chinese, American, or otherwise\u2014using international law and third-party evidence as triggers.",
+      "citations": [
+        "src_un-guiding-principles-on-business-human-rights",
+        "src_amnesty-israel-s-system-of-apartheid",
+        "src_klp-divests-settlement-companies"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "stakeholders",
+          "consultants",
+          "family_friends"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "guide_central_bank",
+      "type": "guide",
+      "sections": {
+        "ask": "Clarify mandate limits and adopt best-efforts exclusions with transparent rationale.",
+        "implementation": "Constraints consistent with reserve management; avoid market disruption.",
+        "reporting": "Public statement of limits and methods; periodic review.",
+        "risk": "Mandate-consistent risk posture with minimal deviation from reserve benchmarks."
+      },
+      "targets": {
+        "identity": [
+          "central_bank"
         ]
       }
     },
@@ -284,10 +852,10 @@
       "id": "guide_corporate_pension",
       "type": "guide",
       "sections": {
-        "ask": "Update IPS to reflect exclusions consistent with sponsor objectives.",
-        "implementation": "Low-overhead screened index; use vendor methodologies; minimize turnover and costs.",
-        "reporting": "Periodic sponsor reporting; document rationales and methods.",
-        "risk": "Maintain glidepath/de-risking; narrow scope to avoid mandate conflicts."
+        "ask": "Commission a Divestment Exposure Assessment that documents how conduct risk links to financial exposure and captures ERISA prudence.",
+        "implementation": "Use external data to build risk dossiers, run tracking error and liability aware modeling, and deliver scenario analysis without breaking the de risking glidepath.",
+        "reporting": "Provide a prudence memo, funded status sensitivity tables, and a calendar for policy updates shared with the sponsor treasury team.",
+        "risk": "Maintain diversification, document thresholds and override clauses, and align with DOL guidance so the assessment shows control rather than activism."
       },
       "targets": {
         "identity": [
@@ -326,36 +894,6 @@
       }
     },
     {
-      "id": "guide_insurance",
-      "type": "guide",
-      "sections": {
-        "ask": "Adopt narrow conduct screens consistent with ALM and capital/rating requirements.",
-        "implementation": "Best-efforts exclusions; vendor screen overlays; maintain liquidity ladder.",
-        "reporting": "Regulatory-aware disclosures; internal risk memos.",
-        "risk": "Tight tracking-error; preserve liability matching and capital buffers."
-      },
-      "targets": {
-        "identity": [
-          "insurance"
-        ]
-      }
-    },
-    {
-      "id": "guide_central_bank",
-      "type": "guide",
-      "sections": {
-        "ask": "Clarify mandate limits and adopt best-efforts exclusions with transparent rationale.",
-        "implementation": "Constraints consistent with reserve management; avoid market disruption.",
-        "reporting": "Public statement of limits and methods; periodic review.",
-        "risk": "Mandate-consistent risk posture with minimal deviation from reserve benchmarks."
-      },
-      "targets": {
-        "identity": [
-          "central_bank"
-        ]
-      }
-    },
-    {
       "id": "guide_government",
       "type": "guide",
       "sections": {
@@ -371,345 +909,73 @@
       }
     },
     {
-      "id": "one_pager_jlens_board",
-      "type": "one_pager",
-      "title": "Divestment Financial Impact: A Balanced Assessment",
-      "description": "Board-facing summary that rebuts the $33.2B loss claim and reframes fiduciary risk.",
-      "markdownPath": "content/jlens_board.md"
-    },
-    {
-      "id": "one_pager_jlens_technical",
-      "type": "one_pager",
-      "title": "Technical Review: JLens/ADL Divestment Impact Study",
-      "description": "Methodology critique for consultants and investment staff demanding replication standards.",
-      "markdownPath": "content/jlens_technical.md"
-    },
-    {
-      "id": "one_pager_fiduciary_playbook",
-      "type": "one_pager",
-      "title": "Fiduciary Playbook: Norway Model in a Box",
-      "description": "Gives trustees the guardrails, governance motions, and implementation checklist activists should ask for.",
-      "markdownPath": "content/fiduciary_playbook.md"
-    },
-    {
-      "id": "one_pager_performance_reality",
-      "type": "one_pager",
-      "title": "Performance Reality Check",
-      "description": "Benchmarks and research proving exclusions stay within basis points when executed professionally.",
-      "markdownPath": "content/performance_reality_check.md"
-    },
-    {
-      "id": "one_pager_legal_speech",
-      "type": "one_pager",
-      "title": "Legal & Speech Landscape",
-      "description": "Courts, statutes, and messaging to defuse antisemitism and legality pushback.",
-      "markdownPath": "content/legal_speech_landscape.md"
-    },
-    {
-      "id": "one_pager_about_ec",
-      "type": "one_pager",
-      "title": "About Ethical Capital & Dryvestment",
-      "description": "Clarifies publisher responsibility, fiduciary posture, and follow-up channels for Dryvestment outputs.",
-      "markdownPath": "content/about_ethical_capital.md"
-    },
-    {
-      "id": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
-      "type": "key_point",
-      "title": "Specialized intelligence catches what ESG ratings miss",
-      "body": "On-the-ground researchers (AFSC, UN) surface settlement and occupation ties long before generalized ESG vendors adjust their scores. Pair activist data for precision with MSCI/FTSE tools for delivery, so implementation stays repeatable.",
-      "citations": [
-        "src_afsc-investigate",
-        "src_un-database-on-settlements",
-        "src_ssrn-esg-ratings-divergence"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "kp_professional-exclusions-maintain-benchmark-like-performance",
-      "type": "key_point",
-      "title": "Professional exclusions maintain benchmark-like performance",
-      "body": "Large public funds implement conduct-based exclusions and continue to deliver returns close to their benchmarks by rebalancing and preserving factor exposures.",
-      "citations": [
-        "src_nbim-responsible-investment",
-        "src_nbim-exclusion-of-companies"
-      ],
-      "assertions": [
-        "assert_benchmark_grade_exclusions"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "kp_tracking-error-and-factor-neutrality",
-      "type": "key_point",
-      "title": "Tracking error and factor neutrality",
-      "body": "Exclusions can be implemented with explicit tracking-error budgets and factor controls so the portfolio stays close to its benchmark while meeting policy goals.",
-      "citations": [
-        "src_msci-esg-indexes-methodology",
-        "src_ftse-russell-squaring-the-circle-on-carbon-track"
-      ],
-      "assertions": [
-        "assert_tracking_error_controls"
-      ],
-      "targets": {
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "kp_fiduciary-duty-and-values-alignment",
-      "type": "key_point",
-      "title": "Fiduciary duty and values alignment",
-      "body": "Modern fiduciary guidance recognizes that material ESG risks and client objectives can be incorporated without abandoning prudent, return-seeking management.",
-      "citations": [
-        "src_un-pri-fiduciary-duty-in-the-21st-century",
-        "src_us-dol-esg-factors-fact-sheet"
-      ],
-      "assertions": [
-        "assert_modern_fiduciary_guidance"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "kp_individual_start-with-your-own-accounts",
-      "type": "key_point",
-      "title": "Start with your own accounts",
-      "body": "List holdings in retirement and brokerage accounts, then shift into screened ETFs or managed accounts that match your risk profile while keeping emergency reserves intact.",
-      "citations": [
-        "src_us-dol-esg-guidance",
-        "src_nyu-stern-esg-and-financial-performance"
-      ],
+      "id": "guide_individual",
+      "type": "guide",
+      "sections": {
+        "ask": "Align personal or household savings with stated values and explain the exclusions in plain language.",
+        "implementation": "Use low-cost screened ETFs or managed accounts; document which companies are excluded and why.",
+        "reporting": "Keep a simple holdings list and revisit annually or after major portfolio changes.",
+        "risk": "Maintain emergency funds, diversification, and low fees while applying exclusions."
+      },
       "targets": {
         "identity": [
           "individual"
-        ],
-        "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
         ]
       }
     },
     {
-      "id": "kp_individual_specialized-intelligence-catches-what-esg-ratings-miss",
-      "type": "key_point",
-      "title": "Specialized intelligence catches what ESG ratings miss",
-      "body": "On-the-ground researchers (AFSC, UN) surface settlement and occupation ties long before generalized ESG vendors adjust their scores. Pair activist data for precision with mainstream index tools for implementation.",
-      "citations": [
-        "src_afsc-investigate",
-        "src_un-database-on-settlements",
-        "src_ssrn-esg-ratings-divergence"
-      ],
+      "id": "guide_insurance",
+      "type": "guide",
+      "sections": {
+        "ask": "Adopt narrow conduct screens consistent with ALM and capital/rating requirements.",
+        "implementation": "Best-efforts exclusions; vendor screen overlays; maintain liquidity ladder.",
+        "reporting": "Regulatory-aware disclosures; internal risk memos.",
+        "risk": "Tight tracking-error; preserve liability matching and capital buffers."
+      },
       "targets": {
         "identity": [
-          "individual"
-        ],
-        "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
+          "insurance"
         ]
       }
     },
     {
-      "id": "kp_individual_use-the-screened-options-your-custodian-already-offers",
-      "type": "key_point",
-      "title": "Use the screened options your custodian already offers",
-      "body": "Most platforms list values-screened ETFs and separate-account providers. Switching allocations usually takes minutes once you have the tickers and minimums.",
-      "citations": [
-        "src_msci-esg-indexes-factsheet",
-        "src_ftse-russell-squaring-the-circle-on-carbon-track"
-      ],
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "kp_public_pension_consultants-can-document-explicit-guardrails",
-      "type": "key_point",
-      "title": "Consultants can document explicit guardrails",
-      "body": "Ask your consultant to publish tracking-error budgets, factor controls, and rebalancing cadence so trustees see how exclusions stay benchmark-aware.",
-      "citations": [
-        "src_msci-esg-indexes-factsheet",
-        "src_church-of-england-pensions-board-divestment"
-      ],
+      "id": "guide_public_pension",
+      "type": "guide",
+      "sections": {
+        "ask": "Consultant memo and manager mandates for conduct-based exclusions; define guardrails.",
+        "implementation": "Passive screened index or benchmark-aware constraints; phased divestment to minimize costs; maintain diversification.",
+        "reporting": "Quarterly one-page dashboard; publish criteria and exclusion list.",
+        "risk": "Tracking-error limit (e.g., \u226430 bps) and factor neutrality by vendor."
+      },
       "targets": {
         "identity": [
           "public_pension"
-        ],
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
         ]
       }
     },
     {
-      "id": "kp_public_pension_specialized-intelligence-catches-what-esg-ratings-miss",
-      "type": "key_point",
-      "title": "Specialized intelligence catches what ESG ratings miss",
-      "body": "AFSC and UN research identify occupation-linked issuers early; combine their insight with customization from mainstream vendors to deliver results consultants can monitor.",
-      "citations": [
-        "src_afsc-investigate",
-        "src_un-database-on-settlements",
-        "src_ssrn-esg-ratings-divergence"
-      ],
+      "id": "guide_swf",
+      "type": "guide",
+      "sections": {
+        "ask": "Adopt conduct-based exclusions with a formal ethics/oversight process and public rationales.",
+        "implementation": "Multi-manager mandates with optimization constraints; preserve factor/sector neutrality; staged rebalances.",
+        "reporting": "Publish exclusion list and rationale; periodic reviews and appeals mechanism; transparent methodology.",
+        "risk": "Explicit tracking-error budget (e.g., 15\u201330 bps) and central risk model governance."
+      },
       "targets": {
         "identity": [
-          "public_pension"
-        ],
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
+          "swf"
         ]
       }
     },
     {
-      "id": "kp_public_pension_peer-funds-already-run-conduct-screens",
-      "type": "key_point",
-      "title": "Peer funds already run conduct screens",
-      "body": "KLP, AkademikerPension, and PFZW have implemented occupation-related exclusions with neutral-to-positive performance impact—use their public reporting as precedent.",
-      "citations": [
-        "src_klp-divests-settlement-companies",
-        "src_akademikerpension-statement",
-        "src_pfzw-exclusion-decision"
-      ],
-      "targets": {
-        "identity": [
-          "public_pension"
-        ],
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "kp_government_use-approved-issuer-lists-to-stay-compliant",
-      "type": "key_point",
-      "title": "Use approved issuer lists to stay compliant",
-      "body": "Define a transparent approved issuer list that aligns with procurement statutes and discloses best-efforts limits for bond purchases.",
-      "citations": [
-        "src_ethical-capital-investment-screening-policy",
-        "src_un-guiding-principles-on-business-human-rights"
-      ],
-      "targets": {
-        "identity": [
-          "government"
-        ],
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "kp_government_report-exclusions-like-any-other-governance-control",
-      "type": "key_point",
-      "title": "Report exclusions like any other governance control",
-      "body": "Publish criteria, changes, and rationale on a set cadence so oversight bodies and auditors can verify compliance without politicizing the process.",
-      "citations": [
-        "src_ethical-capital-investment-screening-policy",
-        "src_koontz-v-watson-opinion"
-      ],
-      "targets": {
-        "identity": [
-          "government"
-        ],
-        "audience": [
-          "boards",
-          "staff"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "kp_government_link-divestment-to-credit-and-liquidity-management",
+      "id": "kp_central_bank_link-divestment-to-credit-and-liquidity-management",
       "type": "key_point",
       "title": "Link divestment to credit and liquidity management",
-      "body": "Credit downgrades and liquidity stress—like the recent Israel bond freeze—provide fiduciary cover for rebalancing into aligned issuers.",
+      "body": "Credit downgrades and liquidity stress\u2014like the recent Israel bond freeze\u2014provide fiduciary cover for rebalancing into aligned issuers.",
       "citations": [
         "src_moody-s-downgrades-israel",
         "src_cuyahoga-county-israel-bond-freeze"
-      ],
-      "targets": {
-        "identity": [
-          "government"
-        ],
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant",
-      "type": "key_point",
-      "title": "Use approved issuer lists to stay compliant",
-      "body": "Define a transparent approved issuer list that aligns with procurement statutes and discloses best-efforts limits for bond purchases.",
-      "citations": [
-        "src_ethical-capital-investment-screening-policy",
-        "src_un-guiding-principles-on-business-human-rights"
       ],
       "targets": {
         "identity": [
@@ -748,13 +1014,13 @@
       }
     },
     {
-      "id": "kp_central_bank_link-divestment-to-credit-and-liquidity-management",
+      "id": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant",
       "type": "key_point",
-      "title": "Link divestment to credit and liquidity management",
-      "body": "Credit downgrades and liquidity stress—like the recent Israel bond freeze—provide fiduciary cover for rebalancing into aligned issuers.",
+      "title": "Use approved issuer lists to stay compliant",
+      "body": "Define a transparent approved issuer list that aligns with procurement statutes and discloses best-efforts limits for bond purchases.",
       "citations": [
-        "src_moody-s-downgrades-israel",
-        "src_cuyahoga-county-israel-bond-freeze"
+        "src_ethical-capital-investment-screening-policy",
+        "src_un-guiding-principles-on-business-human-rights"
       ],
       "targets": {
         "identity": [
@@ -771,208 +1037,43 @@
       }
     },
     {
-      "id": "policy_screening_knowledge",
-      "type": "policy_statement",
-      "title": "Screening intelligence",
-      "variants": [
-        {
-          "id": "title",
-          "body": "Screening as Cumulative Knowledge",
-          "transforms": {
-            "tone": "title"
-          }
-        },
-        {
-          "id": "points",
-          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human-rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set—linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
-          "transforms": {
-            "tone": "points"
-          }
-        }
+      "id": "kp_corporate_civil_rights_risk",
+      "type": "key_point",
+      "title": "Civil-rights scrutiny requires neutral conduct-based criteria",
+      "body": "Advisory Opinion 2025-04A shows the DOL will flag investment programs that could violate federal civil-rights law even when ERISA process is sound. Divestment language must stay geography-neutral, cite objective UN conduct lists, and undergo civil-rights review so opponents cannot reframe the policy as discrimination.",
+      "citations": [
+        "src_dol_advisory_opinion_2025_04a",
+        "src_jdsupra_dol_pulls_racial_equity_guidance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "identity": [
+          "corporate_pension"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "compliance",
+        "risk_management"
       ]
     },
     {
-      "id": "venue_notes_one_on_one",
-      "type": "template_snippet",
-      "title": "Venue cues",
-      "lines": [
-        "Open with shared goals; invite concerns before proposing solutions.",
-        "Offer the brief and one or two sources relevant to their role."
-      ],
-      "targets": {
-        "venue": [
-          "one_on_one"
-        ]
-      }
-    },
-    {
-      "id": "venue_notes_small_group",
-      "type": "template_snippet",
-      "title": "Venue cues",
-      "lines": [
-        "Clarify decision rights and next steps.",
-        "Use the Identity Guide to align constraints and responsibilities."
-      ],
-      "targets": {
-        "venue": [
-          "small_group"
-        ]
-      }
-    },
-    {
-      "id": "venue_notes_committee_hearing",
-      "type": "template_snippet",
-      "title": "Venue cues",
-      "lines": [
-        "Keep to concrete asks; cite Policy Alignment and criteria.",
-        "Respect time limits; reference the full brief for details."
-      ],
-      "targets": {
-        "venue": [
-          "committee_hearing"
-        ]
-      }
-    },
-    {
-      "id": "venue_notes_full_board_meeting",
-      "type": "template_snippet",
-      "title": "Venue cues",
-      "lines": [
-        "Summarize the Recommended Approach and reporting cadence.",
-        "Be crisp on ‘why now’ and what changes operationally."
-      ],
-      "targets": {
-        "venue": [
-          "full_board_meeting"
-        ]
-      }
-    },
-    {
-      "id": "venue_notes_public_testimony",
-      "type": "template_snippet",
-      "title": "Venue cues",
-      "lines": [
-        "Time-limited: focus on 2–3 key points and one specific ask.",
-        "Bring printed one-pagers; avoid acronyms; cite one authoritative source."
-      ],
-      "targets": {
-        "venue": [
-          "public_testimony"
-        ]
-      }
-    },
-    {
-      "id": "venue_notes_written_memo",
-      "type": "template_snippet",
-      "title": "Venue cues",
-      "lines": [
-        "Include the Model Resolution if applicable.",
-        "Attach the Policy Alignment and relevant source links."
-      ],
-      "targets": {
-        "venue": [
-          "written_memo"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-is-antisemitic-we-can-t-single-out-israel",
-      "type": "counter",
-      "claim": "This is antisemitic/We can't single out Israel.",
-      "response": "Anchor the policy in conduct: international law and human rights standards apply globally. The Jerusalem Declaration and leading Jewish organizations affirm that boycotting state conduct is protected speech, not antisemitism.",
+      "id": "kp_corporate_db_vs_dc_litigation",
+      "type": "key_point",
+      "title": "DB litigation shields do not protect DC lineups",
+      "body": "The 2024 dismissal of Wong v. NYCERS rested on DB participants lacking standing because promised benefits are formula-driven. Corporate DC plans lack that protection, so divestment moves need heightened documentation of pecuniary analysis, participant communications, and consultant sign-off to withstand direct performance challenges.",
       "citations": [
-        "src_jerusalem-declaration-on-antisemitism",
-        "src_baldassi-v-france-echr",
-        "src_naacp-v-claiborne-hardware-458-u-s-886",
-        "src_amnesty-israel-s-system-of-apartheid"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_bds-is-illegal-in-our-state",
-      "type": "counter",
-      "claim": "BDS is illegal in our state.",
-      "response": "State procurement laws target country boycotts. A conduct-based screen—grounded in UN Guiding Principles and applied to any violator—has survived review and mirrors how public systems like UC Regents structure exclusions.",
-      "citations": [
-        "src_un-guiding-principles-on-business-human-rights",
-        "src_koontz-v-watson-opinion",
-        "src_amawi-v-pflugerville-isd-opinion",
-        "src_jordahl-v-brnovich-opinion"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants",
-          "regulated",
-          "family_friends"
-        ],
-        "level": [
-          "plain",
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies",
-      "type": "counter",
-      "claim": "We don't have the expertise/resources to evaluate these companies.",
-      "response": "Leverage third-party intelligence and manager tools: AFSC Investigate provides evidence packs, and screened indexes from MSCI/FTSE offer plug-and-play implementation with documented tracking-error budgets.",
-      "citations": [
-        "src_afsc-investigate",
-        "src_msci-esg-indexes-factsheet",
-        "src_msci-esg-focus-methodology"
-      ],
-      "targets": {
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-will-damage-our-relationship-with-jewish-donors-stakeholders",
-      "type": "counter",
-      "claim": "This will damage our relationship with Jewish donors/stakeholders.",
-      "response": "Jewish communities are not monolithic: polling shows broad support for holding the Israeli government accountable, and Jewish-led organizations publicly back conduct-based divestment grounded in human rights.",
-      "citations": [
-        "src_pew-research-jewish-americans-in-2020",
-        "src_jewish-electorate-institute-2021-poll",
-        "src_jewish-voice-for-peace-about",
-        "src_ifnotnow-mission"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_esg-has-underperformed-we-re-moving-away-from-values-investing",
-      "type": "counter",
-      "claim": "ESG has underperformed/We're moving away from values investing.",
-      "response": "Our approach is high-active-share, research-driven investing—not an index fad. Ethical Capital's growth strategy has delivered benchmark-like returns while holding higher cash-flow yield companies, showing exclusion discipline can coexist with market performance.",
-      "citations": [
-        "src_what-i-d-tell-your-cio-about-divestment",
-        "src_nyu-stern-esg-and-financial-performance",
-        "src_mdpi-esg-scores-and-stock-returns"
+        "src_nyc_wong_v_nycers_dismissal",
+        "src_us-dol-erisa-overview"
       ],
       "targets": {
         "audience": [
@@ -980,131 +1081,300 @@
           "consultants"
         ],
         "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-creates-legal-liability-litigation-risk",
-      "type": "counter",
-      "claim": "This creates legal liability/litigation risk.",
-      "response": "Documented policy, credible sourcing, and alignment with fiduciary duties provide cover. Large funds like NBIM and PFZW publish their rationale and have avoided litigation by sticking to evidence-based conduct standards.",
-      "citations": [
-        "src_nbim-exclusion-decisions",
-        "src_pfzw-exclusion-decision",
-        "src_koontz-v-watson-opinion"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_the-board-doesn-t-have-authority-to-make-investment-decisions",
-      "type": "counter",
-      "claim": "The board doesn't have authority to make investment decisions.",
-      "response": "Boards set policy; staff and consultants implement. UC Regents and other fiduciary boards codify exclusions in IPS language while delegating execution to investment teams under defined tracking-error limits.",
-      "citations": [
-        "src_uc-regents-investment-policy",
-        "src_amawi-v-pflugerville-isd-opinion",
-        "src_nbim-responsible-investment"
-      ],
-      "targets": {
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-is-virtue-signaling-that-won-t-change-anything",
-      "type": "counter",
-      "claim": "This is virtue signaling that won't change anything.",
-      "response": "Our clients' signals become shared policy. Every valid alert we receive is researched and added to firm-wide exclusions, and our flagship growth strategy has matched MSCI ACWI while staying values-aligned—so the work is both communal and financially credible.",
-      "citations": [
-        "src_ethical-capital-investment-screening-policy",
-        "src_what-i-d-tell-your-cio-about-divestment"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_we-need-engagement-not-divestment",
-      "type": "counter",
-      "claim": "We need engagement, not divestment.",
-      "response": "Escalation ladders work: institutions like the Church of England and Danish pensions engage first, set time-bound objectives, and divest when companies fail to remedy violations—preserving credibility and risk discipline.",
-      "citations": [
-        "src_church-of-england-pensions-board-divestment",
-        "src_akademikerpension-statement",
-        "src_nbim-exclusion-decisions"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants",
-          "family_friends"
-        ],
-        "level": [
           "plain",
           "technical"
+        ],
+        "identity": [
+          "corporate_pension"
+        ],
+        "motivation": [
+          "regulatory_drivers"
         ]
-      }
+      },
+      "tags": [
+        "litigation",
+        "compliance"
+      ]
     },
     {
-      "id": "ctr_what-about-china-saudi-arabia-other-countries",
-      "type": "counter",
-      "claim": "What about China/Saudi Arabia/other countries?",
-      "response": "Apply one standard everywhere: our policy covers any issuer implicated in grave violations—Israeli, Chinese, American, or otherwise—using international law and third-party evidence as triggers.",
+      "id": "kp_corporate_erisa_pecuniary_case",
+      "type": "key_point",
+      "title": "Corporate divestment must rest on a pecuniary fiduciary case",
+      "body": "ERISA binds corporate plan fiduciaries to act solely for participants and document prudent pecuniary analysis. Divestment policies need written prudence memos, legal counsel review, and consultant opinions that link conduct-based exclusions to sanctions, litigation, and reputational risk so the screen clearly mitigates financial exposure.",
       "citations": [
-        "src_un-guiding-principles-on-business-human-rights",
-        "src_amnesty-israel-s-system-of-apartheid",
-        "src_klp-divests-settlement-companies"
+        "src_us-dol-erisa-overview",
+        "src_us-dol-esg-guidance"
+      ],
+      "assertions": [
+        "assert_corporate_pension_erisa_duty"
       ],
       "targets": {
         "audience": [
           "boards",
-          "stakeholders",
           "consultants",
-          "family_friends"
+          "staff"
         ],
         "level": [
-          "plain",
           "technical"
+        ],
+        "identity": [
+          "corporate_pension"
+        ],
+        "motivation": [
+          "regulatory_drivers"
         ]
-      }
+      },
+      "tags": [
+        "fiduciary",
+        "risk_management"
+      ]
     },
     {
-      "id": "ctr_this-politicizes-our-investment-process",
-      "type": "counter",
-      "claim": "This politicizes our investment process.",
-      "response": "Ignoring credible violations is itself a political stance. We use ethical screening as an active risk-management decision—protecting portfolios from legal, reputational, and stranded-asset exposure identified in our screening policy.",
+      "id": "kp_corporate_implementation_friction",
+      "type": "key_point",
+      "title": "Implementation friction should shape the divestment brief",
+      "body": "Consultants warn that pooled funds and illiquid partnerships cannot take bespoke screens overnight. Stage quick wins in liquid accounts, plan full manager searches for pooled mandates, and document trade-offs so the policy scope and timeline match what governance and vendors can actually deliver.",
       "citations": [
-        "src_ethical-capital-investment-screening-policy",
+        "src_callan_divest_or_engage",
+        "src_cambridge_divestment_governance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "identity": [
+          "corporate_pension"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "kp_corporate_regulatory_pendulum_guardrails",
+      "type": "key_point",
+      "title": "Regulatory whiplash demands hard guardrails",
+      "body": "DOL guidance has swung from the 2020 financial-factors rule to the 2022 prudence rule and the pending 2025 reversal. The only durable strategy is to embed measurable controls such as tracking-error caps, diversification tests, override logs, and override clauses so the portfolio stays defensible regardless of which interpretation prevails.",
+      "citations": [
         "src_us-dol-esg-guidance",
+        "src_goodwinlaw_dol_abandons_esg_rule",
+        "src_massachusetts_firearm_divestment"
+      ],
+      "assertions": [
+        "assert_corporate_pension_erisa_duty"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "identity": [
+          "corporate_pension"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "fiduciary",
+        "compliance"
+      ]
+    },
+    {
+      "id": "kp_fiduciary-duty-and-values-alignment",
+      "type": "key_point",
+      "title": "Fiduciary duty and values alignment",
+      "body": "Modern fiduciary guidance recognizes that material ESG risks and client objectives can be incorporated without abandoning prudent, return-seeking management.",
+      "citations": [
+        "src_un-pri-fiduciary-duty-in-the-21st-century",
+        "src_us-dol-esg-factors-fact-sheet"
+      ],
+      "assertions": [
+        "assert_modern_fiduciary_guidance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "kp_foundation_fiduciary_modern_prudence",
+      "type": "key_point",
+      "title": "Modern prudence standard supports mission-aligned portfolios",
+      "body": "IRC \u00a74944 still forbids jeopardizing investments, but Treasury regulations judge prudence at the time of decision and across the whole portfolio. Paired with IRS Notice 2015-62, boards can document mission-driven allocations as ordinary business care when they evaluate risk, return, and charitable purpose in one deliberative process.",
+      "citations": [
+        "src_irs_jeopardizing_investments",
+        "src_irs_notice_2015_62"
+      ],
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "fiduciary",
+        "mission_alignment"
+      ]
+    },
+    {
+      "id": "kp_foundation_payout_discipline",
+      "type": "key_point",
+      "title": "5% payout is the floor\u2014use divestment to strengthen the base",
+      "body": "The mandatory 5% distribution is calculated on the average fair market value of the foundation's assets. Mission-aligned MRIs can grow corpus value, increasing the dollar amount of future grants, while PRIs recycle returns into new qualifying distributions. Documenting this feedback loop answers worries about eroding purchasing power.",
+      "citations": [
+        "src_irs_private_foundation_payout"
+      ],
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "boards",
+          "stakeholders"
+        ],
+        "level": [
+          "plain"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "payout",
+        "communications"
+      ]
+    },
+    {
+      "id": "kp_foundation_pri_mri_toolkit",
+      "type": "key_point",
+      "title": "PRIs and MRIs give trustees two levers for mission capital",
+      "body": "Program-related investments (PRIs) count toward the 5% payout and can recycle charitable capital, while mission-related investments (MRIs) sit in the endowment and pursue market-rate returns. Linking both in the investment policy statement clarifies when the foundation is deploying charitable risk capital versus permanent portfolio assets.",
+      "citations": [
+        "src_irs_notice_2015_62",
+        "src_irs_private_foundation_payout"
+      ],
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "impact_investing"
+      ]
+    },
+    {
+      "id": "kp_foundation_upmifa_mission_alignment",
+      "type": "key_point",
+      "title": "UPMIFA explicitly embeds mission into prudence analysis",
+      "body": "UPMIFA directs fiduciaries to consider the charitable purposes of the institution when setting investment strategy, alongside risk, return, liquidity, and diversification. Referencing the statute in board minutes shows that aligning the endowment with mission is part of prudent oversight\u2014not a deviation from it.",
+      "citations": [
+        "src_upmifa_text"
+      ],
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership"
+        ]
+      },
+      "tags": [
+        "governance",
+        "policy"
+      ]
+    },
+    {
+      "id": "kp_government_link-divestment-to-credit-and-liquidity-management",
+      "type": "key_point",
+      "title": "Link divestment to credit and liquidity management",
+      "body": "Credit downgrades and liquidity stress\u2014like the recent Israel bond freeze\u2014provide fiduciary cover for rebalancing into aligned issuers.",
+      "citations": [
+        "src_moody-s-downgrades-israel",
         "src_cuyahoga-county-israel-bond-freeze"
       ],
       "targets": {
+        "identity": [
+          "government"
+        ],
         "audience": [
           "boards",
           "staff",
-          "family_friends"
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "kp_government_report-exclusions-like-any-other-governance-control",
+      "type": "key_point",
+      "title": "Report exclusions like any other governance control",
+      "body": "Publish criteria, changes, and rationale on a set cadence so oversight bodies and auditors can verify compliance without politicizing the process.",
+      "citations": [
+        "src_ethical-capital-investment-screening-policy",
+        "src_koontz-v-watson-opinion"
+      ],
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "boards",
+          "staff"
         ],
         "level": [
           "plain"
@@ -1112,17 +1382,20 @@
       }
     },
     {
-      "id": "ctr_settlement-products-are-a-tiny-portion-of-these-companies-revenues",
-      "type": "counter",
-      "claim": "Settlement products are a tiny portion of these companies' revenues.",
-      "response": "Even small revenue lines can signal structural risk: Caterpillar and Israeli banks face lawsuits, exclusions, and credit pressure tied to settlement activity. Screening reallocates capital to resilient issuers.",
+      "id": "kp_government_use-approved-issuer-lists-to-stay-compliant",
+      "type": "key_point",
+      "title": "Use approved issuer lists to stay compliant",
+      "body": "Define a transparent approved issuer list that aligns with procurement statutes and discloses best-efforts limits for bond purchases.",
       "citations": [
-        "src_jury-awards-miller-vs-caterpillar",
-        "src_caterpillar-stock-reaction-to-nbim-exclusion",
-        "src_moody-s-downgrades-israel"
+        "src_ethical-capital-investment-screening-policy",
+        "src_un-guiding-principles-on-business-human-rights"
       ],
       "targets": {
+        "identity": [
+          "government"
+        ],
         "audience": [
+          "boards",
           "staff",
           "consultants"
         ],
@@ -1132,54 +1405,587 @@
       }
     },
     {
-      "id": "ctr_how-do-we-define-settlement-involvement",
-      "type": "counter",
-      "claim": "How do we define 'settlement involvement'?",
-      "response": "Use objective sources: UN databases, AFSC Investigate, and vendor ESG datasets itemize settlement-linked projects. Policies trigger off this evidence and require periodic review.",
+      "id": "kp_individual_specialized-intelligence-catches-what-esg-ratings-miss",
+      "type": "key_point",
+      "title": "Specialized intelligence catches what ESG ratings miss",
+      "body": "On-the-ground researchers (AFSC, UN) surface settlement and occupation ties long before generalized ESG vendors adjust their scores. Pair activist data for precision with mainstream index tools for implementation.",
       "citations": [
         "src_afsc-investigate",
         "src_un-database-on-settlements",
-        "src_klp-divests-settlement-companies"
+        "src_ssrn-esg-ratings-divergence"
       ],
       "targets": {
+        "identity": [
+          "individual"
+        ],
         "audience": [
-          "staff",
-          "consultants"
+          "individuals"
         ],
         "level": [
-          "technical"
+          "plain"
         ]
       }
     },
     {
-      "id": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain",
-      "type": "counter",
-      "claim": "This requires ongoing monitoring we can't maintain.",
-      "response": "Set cadence and delegate: many policies mandate annual reviews plus event-driven updates fed by third-party alerts. Consultants and managers absorb the monitoring, reporting back through dashboards.",
+      "id": "kp_individual_start-with-your-own-accounts",
+      "type": "key_point",
+      "title": "Start with your own accounts",
+      "body": "List holdings in retirement and brokerage accounts, then shift into screened ETFs or managed accounts that match your risk profile while keeping emergency reserves intact.",
       "citations": [
-        "src_evergreen-state-agreement",
-        "src_msci-esg-focus-methodology",
-        "src_nbim-responsible-investment"
+        "src_us-dol-esg-guidance",
+        "src_nyu-stern-esg-and-financial-performance"
       ],
       "targets": {
+        "identity": [
+          "individual"
+        ],
         "audience": [
-          "staff",
-          "consultants"
+          "individuals"
         ],
         "level": [
-          "technical"
+          "plain"
         ]
       }
     },
     {
-      "id": "ctr_our-investment-consultant-manager-won-t-implement-this",
-      "type": "counter",
-      "claim": "Our investment consultant/manager won't implement this.",
-      "response": "Ask for transparency about current constraints. Managers already deliver exclusion mandates; mainstream ESG providers offer screened benchmarks, and active oversight keeps implementation honest even when broad-market funds remain.",
+      "id": "kp_individual_use-the-screened-options-your-custodian-already-offers",
+      "type": "key_point",
+      "title": "Use the screened options your custodian already offers",
+      "body": "Most platforms list values-screened ETFs and separate-account providers. Switching allocations usually takes minutes once you have the tickers and minimums.",
       "citations": [
         "src_msci-esg-indexes-factsheet",
-        "src_ftse-russell-squaring-the-circle-on-carbon-track",
-        "src_church-of-england-pensions-board-divestment",
+        "src_ftse-russell-squaring-the-circle-on-carbon-track"
+      ],
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "individuals"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "kp_insurance_alm_capital_efficiency",
+      "type": "key_point",
+      "title": "Divestment unlocks ALM and capital efficiency",
+      "body": "ALM teams can convert negative convexity positions and long asset-duration gaps into capital-efficient portfolios by selling high charge assets and redeploying into duration-matched replacements. The move raises return on required capital while shrinking C-3 interest rate charges.",
+      "citations": [
+        "src_conning_insurance_saa_2017",
+        "src_aaa_liquidity_risk_management_2024"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "alm",
+        "capital"
+      ]
+    },
+    {
+      "id": "kp_insurance_esg_climate_pressure",
+      "type": "key_point",
+      "title": "Climate supervision accelerates conduct-based divestment",
+      "body": "Supervisors are embedding climate and ESG risk into solvency reviews. ORSA, NAIC climate surveys, and emerging EU-style due diligence regimes incentivize insurers to exit high-carbon exposures and document the shift as prudent risk management rather than values-driven activism.",
+      "citations": [
+        "src_eiopa_equity_drivers_2018",
+        "src_debevoise_naic_rbc_task_force"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "external_stakeholders",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "esg",
+        "climate"
+      ]
+    },
+    {
+      "id": "kp_insurance_implementation_ladder",
+      "type": "key_point",
+      "title": "Implementation ladder ranges from overlays to impact sleeves",
+      "body": "Insurers can stage divestment through a ladder: credit overlays to synthetically exit exposures, bespoke mandates or sidecars to outsource risk, full block sales to transfer liabilities, and mission-aligned private market sleeves that redeploy capital into justice-focused projects.",
+      "citations": [
+        "src_artemis_sidecar_surge_2025",
+        "src_caia_investment_committee_2024",
+        "src_deloitte_insurer_divestment_2021"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "kp_insurance_rating_agency_alignment",
+      "type": "key_point",
+      "title": "Rating agency dialogue should lead the transaction",
+      "body": "Moody's, S&P, Fitch, and AM Best all translate divestment into capital adequacy, risk profile, and liquidity metrics. Deliver pro-forma models that show reduced high-risk assets, higher capital redundancy, and improved liquidity coverage so analysts can upgrade\u2014or at least protect\u2014the financial strength rating.",
+      "citations": [
+        "src_deloitte_insurer_divestment_2021",
+        "src_artemis_sidecar_surge_2025"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "external_stakeholders",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "rating_agencies",
+        "communications"
+      ]
+    },
+    {
+      "id": "kp_insurance_regulatory_guardrails",
+      "type": "key_point",
+      "title": "Regulatory guardrails turn divestment into a solvency tool",
+      "body": "SAP restricts insurers to admitted assets, RBC assigns capital charges to every risk bucket, and ORSA demands a narrative showing resilience under stress. Proactive divestment from capital-inefficient holdings boosts statutory surplus, improves RBC ratios, and gives boards a defensible ORSA story before regulators ask for it.",
+      "citations": [
+        "src_debevoise_naic_rbc_task_force",
+        "src_aaa_liquidity_risk_management_2024",
+        "src_chicago_fed_life_safety_net_2024"
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "regulation",
+        "risk_management"
+      ]
+    },
+    {
+      "id": "kp_outcome_identity_alignment",
+      "type": "key_point",
+      "title": "Outcome: investments align with identity",
+      "body": "Clear divestment criteria anchor portfolios in the institution\u2019s stated ethics, letting trustees and staff demonstrate that capital flows reflect mission and fiduciary commitments. Alignment messaging reassures beneficiaries, donors, and community partners that investment actions match identity.",
+      "citations": [
+        "src_ethical-capital-screening-policy"
+      ],
+      "assertions": [
+        "assert_modern_fiduciary_guidance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ],
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "government",
+          "central_bank",
+          "swf",
+          "insurance",
+          "endowment",
+          "foundation"
+        ]
+      },
+      "tags": [
+        "outcome",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "kp_outcome_mission_trust",
+      "type": "key_point",
+      "title": "Outcome: mission trust reinforced",
+      "body": "When boards drive divestment, they can show donors, students, and program staff that capital decisions back institutional values without jeopardising spending policies. Transparent trade plans and impact dashboards keep leadership, faculty, and community stakeholders aligned.",
+      "citations": [
+        "src_ethical-capital-screening-policy"
+      ],
+      "assertions": [
+        "assert_endowment_spending_norms"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ],
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "motivation": [
+          "internal_leadership"
+        ]
+      },
+      "tags": [
+        "outcome",
+        "motivation_internal"
+      ]
+    },
+    {
+      "id": "kp_outcome_regulatory_confidence",
+      "type": "key_point",
+      "title": "Outcome: documented compliance confidence",
+      "body": "Conduct-based exclusions, optimization reports, and counsel sign-offs create an audit trail that satisfies fiduciary and statutory obligations. Regulators and attorneys general see proactive risk management, lowering litigation exposure and procurement challenges.",
+      "citations": [
+        "src_un-guiding-principles-on-business-human-rights",
+        "src_koontz-v-watson-opinion"
+      ],
+      "assertions": [
+        "assert_modern_fiduciary_guidance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ],
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "government",
+          "central_bank",
+          "swf",
+          "insurance"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "outcome",
+        "motivation_regulatory"
+      ]
+    },
+    {
+      "id": "kp_outcome_stakeholder_momentum",
+      "type": "key_point",
+      "title": "Outcome: stakeholder momentum sustained",
+      "body": "Coalitions see tangible follow-through when portfolios exit targeted issuers and capital is redeployed toward community priorities. Publishing progress dashboards and reinvestment pipelines keeps organizers engaged and channels pressure into ongoing governance improvements.",
+      "citations": [
+        "src_afsc-investigate"
+      ],
+      "assertions": [
+        "assert_public_pension_transparency_governance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ],
+        "identity": [
+          "public_pension",
+          "government",
+          "endowment",
+          "foundation"
+        ],
+        "motivation": [
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "outcome",
+        "motivation_external"
+      ]
+    },
+    {
+      "id": "kp_professional-exclusions-maintain-benchmark-like-performance",
+      "type": "key_point",
+      "title": "Professional exclusions maintain benchmark-like performance",
+      "body": "Large public funds implement conduct-based exclusions and continue to deliver returns close to their benchmarks by rebalancing and preserving factor exposures.",
+      "citations": [
+        "src_nbim-responsible-investment",
+        "src_nbim-exclusion-of-companies"
+      ],
+      "assertions": [
+        "assert_benchmark_grade_exclusions"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "kp_public_anti_esg_compliance",
+      "type": "key_point",
+      "title": "Anti-ESG statutes narrow pecuniary factors\u2014but allow risk framing",
+      "body": "Laws such as Texas SB13 and similar provisions restrict investment decisions that appear political. Fiduciaries can still act when they demonstrate material risk\u2014sanctions, litigation, stranded assets\u2014and maintain a compliance log tracking boycott lists and exemptions.",
+      "citations": [
+        "src_texas_sb13",
+        "src_texas_comptroller_energy_boycott_list"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "regulation",
+        "compliance"
+      ]
+    },
+    {
+      "id": "kp_public_fiduciary_exclusive_purpose",
+      "type": "key_point",
+      "title": "Exclusive-purpose clauses anchor divestment decisions",
+      "body": "State constitutions and statutes\u2014from California's Article XVI to Ohio's \u00a7145.11\u2014make the duty to participants paramount. Conduct-based divestment must be framed as protecting beneficiaries from legal, financial, or operational risk, not as a political gesture.",
+      "citations": [
+        "src_california_const_article_xvi",
+        "src_ohio_rc_145_11"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "fiduciary",
+        "policy"
+      ]
+    },
+    {
+      "id": "kp_public_pension_consultants-can-document-explicit-guardrails",
+      "type": "key_point",
+      "title": "Consultants can document explicit guardrails",
+      "body": "Ask your consultant to publish tracking-error budgets, factor controls, and rebalancing cadence so trustees see how exclusions stay benchmark-aware.",
+      "citations": [
+        "src_msci-esg-indexes-factsheet",
+        "src_church-of-england-pensions-board-divestment"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "kp_public_pension_peer-funds-already-run-conduct-screens",
+      "type": "key_point",
+      "title": "Peer funds already run conduct screens",
+      "body": "KLP, AkademikerPension, and PFZW have implemented occupation-related exclusions with neutral-to-positive performance impact\u2014use their public reporting as precedent.",
+      "citations": [
+        "src_klp-divests-settlement-companies",
+        "src_akademikerpension-statement",
+        "src_pfzw-exclusion-decision"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "kp_public_pension_specialized-intelligence-catches-what-esg-ratings-miss",
+      "type": "key_point",
+      "title": "Specialized intelligence catches what ESG ratings miss",
+      "body": "AFSC and UN research identify occupation-linked issuers early; combine their insight with customization from mainstream vendors to deliver results consultants can monitor.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_un-database-on-settlements",
+        "src_ssrn-esg-ratings-divergence"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "kp_public_procedural_prudence",
+      "type": "key_point",
+      "title": "Procedural prudence is the best defense",
+      "body": "Courts look at process\u2014documented analysis, expert input, and clear rationale\u2014not just outcomes. Maintaining detailed minutes, prudence memos, and consultant opinions turns a divestment decision into evidence of prudence if it is ever challenged.",
+      "citations": [
+        "src_gao_public_pension_debrief"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "governance",
+        "documentation"
+      ]
+    },
+    {
+      "id": "kp_public_transparency_requirements",
+      "type": "key_point",
+      "title": "Sunshine laws require public choreography",
+      "body": "Open-meeting statutes like the Brown Act dictate timelines for notice, agendas, and public comment. Successful divestment campaigns plan resolutions, RFPs, and consultant presentations so they meet statutory posting windows and withstand scrutiny.",
+      "citations": [
+        "src_california_brown_act"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "external_stakeholders",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "transparency",
+        "process"
+      ]
+    },
+    {
+      "id": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+      "type": "key_point",
+      "title": "Specialized intelligence catches what ESG ratings miss",
+      "body": "On-the-ground researchers (AFSC, UN) surface settlement and occupation ties long before generalized ESG vendors adjust their scores. Pair activist data for precision with MSCI/FTSE tools for delivery, so implementation stays repeatable.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_un-database-on-settlements",
         "src_ssrn-esg-ratings-divergence"
       ],
       "targets": {
@@ -1194,747 +2000,339 @@
       }
     },
     {
-      "id": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data",
-      "type": "counter",
-      "claim": "MSCI or Sustainability ratings are more credible than activist data.",
-      "response": "We build proprietary screens because mainstream ratings are inconsistent and often influenced by commercial incentives. Specialist intelligence (AFSC, UN) identifies issues faster, and we overlay that insight with widely-used index tools for transparent delivery.",
+      "id": "kp_spectrum_decision_triggers",
+      "type": "key_point",
+      "title": "Escalation triggers move institutions up the ladder",
+      "body": "Failed engagements, accelerator protest wins, and new compliance signals (like DOL civil-rights advisories) are the events boards can document to justify stepping from stewardship into screening or divestment.",
       "citations": [
-        "src_afsc-investigate",
-        "src_ssrn-esg-ratings-divergence",
-        "src_ssrn-trustworthy-esg-ratings",
-        "src_ethical-capital-investment-screening-policy"
+        "src_cambridge_divestment_governance",
+        "src_irish_times_trinity_divest",
+        "src_dol_advisory_opinion_2025_04a"
       ],
       "targets": {
         "audience": [
+          "boards",
           "staff",
           "consultants"
         ],
         "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-sets-dangerous-precedent-for-future-exclusions",
-      "type": "counter",
-      "claim": "This sets dangerous precedent for future exclusions.",
-      "response": "Institutions already manage multiple ethical screens. UTS and SFSU frame new exclusions as extensions of long-standing SRI policies, proving conduct standards can evolve while staying disciplined.",
-      "citations": [
-        "src_union-theological-seminary-divestment",
-        "src_sfsu-foundation-policy-update"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
           "plain"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
         ]
-      }
+      },
+      "tags": [
+        "strategy_spectrum",
+        "governance"
+      ]
     },
     {
-      "id": "ctr_our-endowment-foundation-documents-prohibit-political-positions",
-      "type": "counter",
-      "claim": "Our endowment/foundation documents prohibit political positions.",
-      "response": "Conduct-based policies focus on fiduciary risk, not partisan statements. UC Regents' guidelines and UTS's SRI history show boards can codify exclusions as part of their duty to manage reputational and legal risk.",
+      "id": "kp_spectrum_portfolio_integration",
+      "type": "key_point",
+      "title": "Portfolio plumbing must match the chosen tier",
+      "body": "Whichever rung you pick, refresh manager RFPs, build screened benchmarks, and extend risk reports so tracking error, impact metrics, and override logs show up alongside returns.",
       "citations": [
-        "src_uc-regents-investment-policy",
-        "src_union-theological-seminary-divestment"
+        "src_callan_divest_or_engage",
+        "src_msci-esg-index-construction",
+        "src_cambridge_divestment_governance"
       ],
       "targets": {
         "audience": [
           "boards",
+          "consultants",
           "staff"
         ],
         "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_we-re-a-global-institution-serving-diverse-stakeholders",
-      "type": "counter",
-      "claim": "We're a global institution serving diverse stakeholders.",
-      "response": "Global fiduciaries already run conduct screens. NBIM and KLP manage worldwide portfolios while excluding companies tied to occupation abuses, demonstrating universal standards work at scale.",
-      "citations": [
-        "src_nbim-responsible-investment",
-        "src_klp-divests-settlement-companies"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "consultants"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_the-situation-is-too-complex-for-binary-decisions",
-      "type": "counter",
-      "claim": "The situation is too complex for binary decisions.",
-      "response": "Policies can blend process and precision. Evergreen State College defused protests by launching a task force, while Free Money highlights that continued dialogue about ethics and finance is itself part of responsible governance.",
-      "citations": [
-        "src_evergreen-state-agreement",
-        "src_free-money-podcast-divestment-without-dissonance"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-undermines-academic-freedom-and-exchange",
-      "type": "counter",
-      "claim": "This undermines academic freedom and exchange.",
-      "response": "Universities exist for inquiry. Ashby Monk and Kelly Grotke highlight that divestment conversations deepen learning and institutional character; policies can target financial holdings while protecting academic collaboration.",
-      "citations": [
-        "src_free-money-podcast-divestment-without-dissonance",
-        "src_sfsu-foundation-policy-update",
-        "src_union-theological-seminary-divestment"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_we-lack-precedent-from-peer-institutions",
-      "type": "counter",
-      "claim": "We lack precedent from peer institutions.",
-      "response": "Peer action is growing: institutions from SFSU to Union Theological Seminary and pension giants like KLP have adopted universal human-rights screens. They communicate the policy as a continuity of existing SRI principles.",
-      "citations": [
-        "src_union-theological-seminary-divestment",
-        "src_sfsu-foundation-policy-update",
-        "src_klp-divests-settlement-companies"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-distracts-from-our-core-mission",
-      "type": "counter",
-      "claim": "This distracts from our core mission.",
-      "response": "Mission and finance are intertwined. The Free Money conversation notes divestment debates deepen understanding of finance's role, while campuses like SFSU tailored policies that supported student learning without derailing institutional objectives.",
-      "citations": [
-        "src_free-money-podcast-divestment-without-dissonance",
-        "src_sfsu-foundation-policy-update"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries",
-      "type": "counter",
-      "claim": "Divestment will significantly hurt performance and beneficiaries.",
-      "response": "Naive exclusions can be costly, but professional managers use optimization and tracking-error limits to preserve factor exposures and benchmark-like returns.",
-      "citations": [
-        "src_msci-esg-index-construction"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
           "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_exclusions-violate-fiduciary-duty",
-      "type": "counter",
-      "claim": "Exclusions violate fiduciary duty.",
-      "response": "Fiduciary duty requires prudence, loyalty, and attention to material risk and client objectives. Values alignment and risk management can be implemented within a disciplined, return-seeking mandate.",
-      "citations": [
-        "src_un-pri-fiduciary-duty",
-        "src_us-dol-esg-guidance"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
         ],
-        "level": [
-          "technical"
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
         ]
-      }
+      },
+      "tags": [
+        "implementation",
+        "portfolio_construction"
+      ]
     },
     {
-      "id": "ctr_divestment-is-ineffective-someone-else-just-buys-the-shares",
-      "type": "counter",
-      "claim": "Divestment is ineffective; someone else just buys the shares.",
-      "response": "The primary effects are reputational and in primary capital markets. Policies influence lenders, underwriters, and index providers and shift the cost of capital for targeted issuers.",
+      "id": "kp_spectrum_tier1_monitoring",
+      "type": "key_point",
+      "title": "Tier 1: Monitoring builds the human-rights risk map",
+      "body": "Start by piping specialist human-rights datasets into the portfolio risk stack to flag controversies and liability exposure without touching allocations. Treat AFSC investigative data and MSCI controversy scores like any other risk factor so trustees can see where holdings diverge from policy goals.",
       "citations": [
-        "src_oxford-ssee-research"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_exclusions-reduce-diversification-too-much",
-      "type": "counter",
-      "claim": "Exclusions reduce diversification too much.",
-      "response": "Well-designed policies are narrow and conduct-based. Managers maintain diversification across sectors and factors while removing a limited set of issuers that breach defined standards.",
-      "citations": [
-        "src_msci-portfolio-construction"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_our-index-funds-can-t-accommodate-exclusions",
-      "type": "counter",
-      "claim": "Our index funds can't accommodate exclusions.",
-      "response": "Major providers offer screened versions of core indexes, and mandates can overlay exclusion lists via optimization. Public pensions already run Israel/settlement screens inside benchmark-aware vehicles.",
-      "citations": [
-        "src_ftse-russell-squaring-the-circle-on-carbon-track",
-        "src_msci-esg-indexes-factsheet",
-        "src_church-of-england-pensions-board-divestment"
-      ],
-      "targets": {
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_israeli-companies-provide-essential-technology-services",
-      "type": "counter",
-      "claim": "Israeli companies provide essential technology/services.",
-      "response": "A conduct-first policy distinguishes between legitimate business and grave rights violations. Exclusions target companies whose revenue or technology is tied to occupation abuses; suppliers meeting standards remain investable.",
-      "citations": [
-        "src_klp-divests-settlement-companies",
-        "src_akademikerpension-statement",
+        "src_msci-esg-indexes-methodology",
         "src_afsc-investigate"
       ],
       "targets": {
         "audience": [
           "boards",
           "staff",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_un-databases-are-politically-motivated-and-unreliable",
-      "type": "counter",
-      "claim": "UN databases are politically motivated and unreliable.",
-      "response": "Treat activist research as the specialist edge. Ground-level groups like AFSC or the UN database track evidence sooner than generalized ESG vendors; large funds (e.g., KLP) use them as the investigative spine and apply mainstream index tools for implementation.",
-      "citations": [
-        "src_afsc-investigate",
-        "src_un-database-on-settlements",
-        "src_klp-divests-settlement-companies",
-        "src_ssrn-impact-of-esg-rating-changes"
-      ],
-      "targets": {
-        "audience": [
-          "staff",
           "consultants"
         ],
         "level": [
           "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
         ]
-      }
+      },
+      "tags": [
+        "implementation",
+        "strategy_spectrum"
+      ]
     },
     {
-      "id": "ctr_apartheid-divestment-was-chaos-why-repeat-it",
-      "type": "counter",
-      "claim": "Apartheid divestment was chaos; why repeat it?",
-      "response": "Apartheid divestment proved you can stand on ethics without breaking returns. Our firm’s policy embraces that precedent: we run apartheid-free portfolios with documented process and rely on sustained, multi-channel pressure—divestment plus engagement—just as history shows.",
+      "id": "kp_spectrum_tier2_stewardship",
+      "type": "key_point",
+      "title": "Tier 2: Stewardship demands an escalation ladder",
+      "body": "Document a stewardship policy that names priority human-rights asks, assigns owners for company dialogue, and spells out when escalation flips from private meetings to proxy votes, public statements, and director-withhold campaigns.",
       "citations": [
-        "src_what-i-d-tell-your-cio-about-divestment",
-        "src_ethical-capital-investment-screening-policy"
+        "src_callan_divest_or_engage",
+        "src_cambridge_divestment_governance"
       ],
       "targets": {
         "audience": [
           "boards",
-          "stakeholders",
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "ctr_how-do-you-know-these-activist-lists-aren-t-biased",
-      "type": "counter",
-      "claim": "How do you know these activist lists aren't biased?",
-      "response": "We do not outsource ethics to third-party lists. About 40% of our exclusions are unique because we rebuild evidence in-house and document every call; activist data is an input, not the final answer.",
-      "citations": [
-        "src_ethical-capital-investment-screening-policy",
-        "src_ssrn-esg-ratings-divergence"
-      ],
-      "targets": {
-        "audience": [
           "staff",
           "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start",
-      "type": "counter",
-      "claim": "This sounds expensive or complicated—where do I even start?",
-      "response": "Ethical screening is messy in practice—that’s why investors hire professionals to map the evidence, translate it into exclusions, and keep the process on track.",
-      "citations": [
-        "src_ethical-capital-investment-screening-policy"
-      ],
-      "targets": {
-        "audience": [
-          "staff",
-          "consultants",
-          "family_friends"
         ],
         "level": [
           "plain",
           "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
         ]
-      }
-    },
-    {
-      "id": "tmpl_model_resolution",
-      "type": "template_snippet",
-      "title": "Model Resolution",
-      "markdown": "RESOLVED: That the {localName} shall adopt a conduct-based investment exclusion policy, instructing its investment managers to avoid purchasing or holding securities of companies for which there is credible, public evidence of severe human rights violations, including complicity in violations under international humanitarian law; and be it further\n\nRESOLVED: That the {localName} directs its investment managers to implement this policy using professional portfolio construction techniques that maintain diversification and risk controls, including explicit tracking error limits relative to the benchmark; and be it further\n\nRESOLVED: That the {localName} will publish an exclusion rationale and a public list of excluded issuers, reviewed at least annually; and be it further\n\nRESOLVED: That the {localName} will phase implementation over an orderly period and report progress and holdings, subject to prudent trading and confidentiality constraints.",
-      "targets": {
-        "audience": [
-          "fiduciary",
-          "regulated"
-        ]
-      }
-    },
-    {
-      "id": "tmpl_government_policy",
-      "type": "template_snippet",
-      "title": "Government Policy Template",
-      "markdown": "Approved Issuers Policy (template)\\n\\nPurpose: Maintain an Approved Issuers List for fixed-income investing that aligns treasury practices with ethical standards and risk controls while complying with law and procurement rules.\\n\\nCriteria: Exclude issuers with credible, public evidence of severe human rights violations (including complicity in violations under international humanitarian law). Consider authoritative sources (sanctions lists, court decisions, official investigations) and reputable human-rights reporting.\\n\\nPortfolio Constraints: Preserve target duration, credit quality, liquidity, and diversification consistent with the investment policy and statutes.\\n\\nProcess: Treasurer (or designee) maintains Approved and Prohibited Issuer lists; legal/procurement review; annual review and event-driven updates; exceptions require written rationale, legal review, time limits, and notification to the governing body.\\n\\nTransparency & Reporting: Publish criteria and current lists subject to prudent trading and confidentiality; report changes and rationales at least annually.\\n\\nCompliance: This policy operates subject to state law, investment statutes, and procurement rules; in case of conflict, legal requirements prevail.",
-      "targets": {
-        "identity": [
-          "government"
-        ]
-      }
-    },
-    {
-      "id": "note_cio",
-      "type": "template_snippet",
-      "title": "CIO Implementation Note",
-      "markdown": "Implementation focuses on preserving benchmark alignment: specify a tracking-error budget, maintain factor neutrality, use vendor screened indexes or optimization constraints, and phase trades to avoid divestment shocks.",
-      "targets": {
-        "audience": [
-          "fiduciary"
-        ]
-      }
-    },
-    {
-      "id": "step_request-current-holdings-exposure-report-from-ma",
-      "type": "next_step",
-      "text": "Request current holdings/exposure report from managers.",
-      "targets": {
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "step_adopt-written-conduct-criteria-and-escalation-pr",
-      "type": "next_step",
-      "text": "Adopt written conduct criteria and escalation process.",
-      "targets": {
-        "audience": [
-          "boards"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_mandate-tracking-error-and-factor-exposure-contr",
-      "type": "next_step",
-      "text": "Mandate tracking error and factor exposure controls for managers.",
-      "targets": {
-        "audience": [
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "step_publish-a-public-exclusions-list-with-brief-rati",
-      "type": "next_step",
-      "text": "Publish a public exclusions list with brief rationales.",
-      "targets": {
-        "audience": [
-          "boards",
-          "staff"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_schedule-an-annual-review-and-public-update",
-      "type": "next_step",
-      "text": "Schedule an annual review and public update.",
-      "targets": {
-        "audience": [
-          "boards",
-          "staff"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_individual_list-your-current-retirement-and-brokerage-h",
-      "type": "next_step",
-      "text": "List your current retirement and brokerage holdings and note what you want to avoid.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_individual_shift-savings-into-screened-etfs-or-managed-",
-      "type": "next_step",
-      "text": "Shift savings into screened ETFs or managed accounts that match your risk tolerance.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_individual_set-a-reminder-to-review-allocations-annuall",
-      "type": "next_step",
-      "text": "Set a reminder to review allocations annually or after major life changes.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "individuals"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_family_friends_share-your-own-experience-reviewing-accounts",
-      "type": "next_step",
-      "text": "Share your own experience reviewing accounts and choosing screened funds.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_family_friends_offer-to-walk-through-their-brokerage-or-ret",
-      "type": "next_step",
-      "text": "Offer to walk through their brokerage or retirement platform to locate values-aligned options.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "step_family_friends_encourage-them-to-revisit-the-conversation-a",
-      "type": "next_step",
-      "text": "Encourage them to revisit the conversation after they’ve tried a small allocation shift.",
-      "targets": {
-        "identity": [
-          "individual"
-        ],
-        "audience": [
-          "family_friends"
-        ],
-        "level": [
-          "plain"
-        ]
-      }
-    },
-    {
-      "id": "policy_alignment",
-      "type": "policy_statement",
-      "title": "Policy alignment criteria",
-      "bullets": [
-        "Documented, explainable criteria with public rationales (no black boxes)",
-        "Conduct-first screening for risk mitigation; product screens for categorical harms when aligned with mission",
-        "Evidence-based decisions using primary and reputable sources with citations",
-        "Regular review cadence (at least annually) and event-driven updates",
-        "Escalation path from engagement to exclusion; documented exceptions with time limits",
-        "Implementation discipline: tracking-error guardrails, diversification, factor neutrality, phased trading",
-        "Transparency: publish criteria and lists subject to prudent trading and confidentiality"
-      ],
-      "citations": [
-        "src_ethical-capital-screening-policy"
+      },
+      "tags": [
+        "implementation",
+        "governance"
       ]
     },
     {
-      "id": "opener_pension_staff",
-      "type": "opener",
-      "text": "Staff can frame this as fiduciary risk governance: pull exposure runs from managers, cite peer pensions already using conduct screens, and show how tracking-error guardrails keep liabilities protected.",
+      "id": "kp_spectrum_tier3_targeted_screen",
+      "type": "key_point",
+      "title": "Tier 3: Targeted screens make the first portfolio cut",
+      "body": "Narrow exclusion lists anchored in UN or AFSC criteria let boards codify red lines, publish restricted issuers, and run performance against a custom screened benchmark so the policy impact stays auditable.",
+      "citations": [
+        "src_un-database-on-settlements",
+        "src_afsc-investigate"
+      ],
       "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "portfolio_construction"
+      ]
+    },
+    {
+      "id": "kp_spectrum_tier4_thematic_positive",
+      "type": "key_point",
+      "title": "Tier 4: Positive and thematic tilts show what you fund",
+      "body": "Allocating sleeves to human-rights solution themes and best-in-class issuers reframes the story from avoidance to proactive impact, backed by factor-aware ESG construction.",
+      "citations": [
+        "src_msci-esg-index-construction",
+        "src_oxford-sustainable-finance-divestment-research"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "kp_spectrum_tier5_full_divestment",
+      "type": "key_point",
+      "title": "Tier 5: Full divestment delivers the hard break",
+      "body": "When boards adopt conduct-based divestment statutes, publish the prohibited list, and stage the sell-down, they provide unmistakable proof that capital no longer backs the targeted harm and that policy guardrails can survive public scrutiny.",
+      "citations": [
+        "src_irish_times_trinity_divest",
+        "src_sfsu-foundation-policy-update"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "kp_spectrum_tier6_impact_reinvestment",
+      "type": "key_point",
+      "title": "Tier 6: Impact carve-outs channel capital to affected communities",
+      "body": "Dedicated private-market sleeves can finance Palestinian-led enterprises or justice-aligned infrastructure, pairing IRIS+ metrics with return targets so trustees see both impact and cash flow.",
+      "citations": [
+        "src_rockefeller_brothers_divestment_review",
+        "src_free-money-podcast-divestment-without-dissonance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "impact_investing"
+      ]
+    },
+    {
+      "id": "kp_spectrum_tier7_mission_partnerships",
+      "type": "key_point",
+      "title": "Tier 7: Mission-native partnerships align the whole enterprise",
+      "body": "Building long-term partnerships with funds and founders whose sole mandate is justice turns the portfolio into a mission delivery system; it demands patient capital, board conviction, and narrative-rich reporting.",
+      "citations": [
+        "src_nathan_cummings_mission_alignment",
+        "src_free-money-podcast-divestment-without-dissonance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "implementation",
+        "impact_investing"
+      ]
+    },
+    {
+      "id": "kp_strategy_external_stakeholders",
+      "type": "key_point",
+      "title": "External stakeholders: convert campaign pressure into structured capital moves",
+      "body": "Strategy spectrum: responsive divest-reinvest mandates, coalition-built exclusion lists, community reinvestment pools, and transparency dashboards that track follow-through.\nImplementation notes: co-design criteria with organizers, publish escalation ladders, and coordinate communications with governance, donor, and beneficiary groups.\nOutcomes to monitor: stakeholder sentiment shifts, media/regulator responses, capital redeployment volumes, and engagement opportunities created by divestment decisions.",
+      "citations": [
+        "src_afsc-investigate",
+        "src_naacp-v-claiborne-hardware-458-u-s-886"
+      ],
+      "assertions": [
+        "assert_public_pension_transparency_governance"
+      ],
+      "targets": {
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ],
         "identity": [
           "public_pension",
-          "corporate_pension"
+          "government",
+          "endowment",
+          "foundation",
+          "individual"
         ],
-        "audience": [
-          "staff"
-        ],
-        "level": [
-          "technical"
+        "motivation": [
+          "external_stakeholders"
         ]
-      }
+      },
+      "tags": [
+        "strategy_spectrum",
+        "motivation_external"
+      ]
     },
     {
-      "id": "opener_pension_consultant",
-      "type": "opener",
-      "text": "Consultants can bring trustees a vote-ready memo: define conduct triggers, outline optimized benchmark overlays, and hand over templates that document prudence while staff executes.",
+      "id": "kp_strategy_internal_leadership",
+      "type": "key_point",
+      "title": "Internal leadership: align mission and capital without losing discipline",
+      "body": "Strategy spectrum: mission-screen overlays, carve-out impact sleeves, delegated investment committee mandates, and donor-aligned policy statements with phased implementation schedules.\nImplementation notes: connect divestment criteria to charter language, donor restrictions, and campus/program goals; pilot with separate accounts or manager guidelines before system-wide rollout.\nOutcomes to monitor: mission KPI dashboards, spending policy resilience, peer benchmarking, and qualitative feedback loops from leadership and program staff.",
+      "citations": [
+        "src_ethical-capital-screening-policy",
+        "src_nacubo_tiaa_spending"
+      ],
+      "assertions": [
+        "assert_endowment_spending_norms"
+      ],
       "targets": {
-        "identity": [
-          "public_pension",
-          "corporate_pension"
-        ],
         "audience": [
+          "boards",
+          "staff",
           "consultants"
         ],
         "level": [
+          "plain",
           "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_mission_staff",
-      "type": "opener",
-      "text": "Mission-driven investment staff can translate campus and program demands into policy: map donor restrictions, propose phased exclusions, and pair mission statements with investment risk notes.",
-      "targets": {
+        ],
         "identity": [
           "endowment",
-          "foundation"
+          "foundation",
+          "individual"
         ],
-        "audience": [
-          "staff"
-        ],
-        "level": [
-          "technical"
+        "motivation": [
+          "internal_leadership"
         ]
-      }
-    },
-    {
-      "id": "opener_mission_consultant",
-      "type": "opener",
-      "text": "Advisors can frame alignment as reputational risk management: benchmark peer endowments, package screened fund menus, and show spending policy resilience under the exclusion set.",
-      "targets": {
-        "identity": [
-          "endowment",
-          "foundation"
-        ],
-        "audience": [
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_government_staff",
-      "type": "opener",
-      "text": "Treasury staff can lead with compliance: align exclusions with procurement statutes, present approved issuer watchlists, and document that liquidity and cash-flow schedules stay intact.",
-      "targets": {
-        "identity": [
-          "government"
-        ],
-        "audience": [
-          "staff"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_government_consultant",
-      "type": "opener",
-      "text": "Public-fund advisors can translate advocacy into policy language: cite municipal precedents, supply approved issuer models, and brief council members on sunshine-law friendly reporting cadences.",
-      "targets": {
-        "identity": [
-          "government"
-        ],
-        "audience": [
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_sovereign_staff",
-      "type": "opener",
-      "text": "Sovereign reserve teams can ground the ask in mandate protection: reference Santiago Principles, show best-efforts exclusions preserve liquidity, and schedule periodic policy reviews.",
-      "targets": {
-        "identity": [
-          "central_bank",
-          "swf"
-        ],
-        "audience": [
-          "staff"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_sovereign_consultant",
-      "type": "opener",
-      "text": "External partners can add independent credibility: document human-rights triggers, align with IMF governance guidance, and demonstrate tracking-error caps for reserve portfolios.",
-      "targets": {
-        "identity": [
-          "central_bank",
-          "swf"
-        ],
-        "audience": [
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_insurance_staff",
-      "type": "opener",
-      "text": "Insurance investment teams should tie exclusions to liability management: highlight RBC-friendly screened options, coordinate with actuaries on duration, and show rating agency expectations stay satisfied.",
-      "targets": {
-        "identity": [
-          "insurance"
-        ],
-        "audience": [
-          "staff"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
-    },
-    {
-      "id": "opener_insurance_consultant",
-      "type": "opener",
-      "text": "Consultants can bring carriers a capital-friendly roadmap: propose conduct screens that respect ALM tests, provide optimization outputs, and script regulator-ready documentation.",
-      "targets": {
-        "identity": [
-          "insurance"
-        ],
-        "audience": [
-          "consultants"
-        ],
-        "level": [
-          "technical"
-        ]
-      }
+      },
+      "tags": [
+        "strategy_spectrum",
+        "motivation_internal"
+      ]
     },
     {
       "id": "kp_strategy_regulatory_drivers",
@@ -1978,221 +2376,1690 @@
       ]
     },
     {
-      "id": "kp_strategy_internal_leadership",
+      "id": "kp_tracking-error-and-factor-neutrality",
       "type": "key_point",
-      "title": "Internal leadership: align mission and capital without losing discipline",
-      "body": "Strategy spectrum: mission-screen overlays, carve-out impact sleeves, delegated investment committee mandates, and donor-aligned policy statements with phased implementation schedules.\nImplementation notes: connect divestment criteria to charter language, donor restrictions, and campus/program goals; pilot with separate accounts or manager guidelines before system-wide rollout.\nOutcomes to monitor: mission KPI dashboards, spending policy resilience, peer benchmarking, and qualitative feedback loops from leadership and program staff.",
+      "title": "Tracking error and factor neutrality",
+      "body": "Exclusions can be implemented with explicit tracking-error budgets and factor controls so the portfolio stays close to its benchmark while meeting policy goals.",
       "citations": [
-        "src_ethical-capital-screening-policy",
-        "src_nacubo_tiaa_spending"
+        "src_msci-esg-indexes-methodology",
+        "src_ftse-russell-squaring-the-circle-on-carbon-track"
       ],
       "assertions": [
-        "assert_endowment_spending_norms"
+        "assert_tracking_error_controls"
       ],
       "targets": {
         "audience": [
-          "boards",
           "staff",
           "consultants"
         ],
         "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "note_cio",
+      "type": "template_snippet",
+      "title": "CIO Implementation Note",
+      "markdown": "Implementation focuses on preserving benchmark alignment: specify a tracking-error budget, maintain factor neutrality, use vendor screened indexes or optimization constraints, and phase trades to avoid divestment shocks.",
+      "targets": {
+        "audience": [
+          "fiduciary"
+        ]
+      }
+    },
+    {
+      "id": "one_pager_about_ec",
+      "type": "one_pager",
+      "title": "About Ethical Capital & Dryvestment",
+      "description": "Clarifies publisher responsibility, fiduciary posture, and follow-up channels for Dryvestment outputs.",
+      "markdownPath": "content/about_ethical_capital.md"
+    },
+    {
+      "id": "one_pager_fiduciary_playbook",
+      "type": "one_pager",
+      "title": "Fiduciary Playbook: Norway Model in a Box",
+      "description": "Gives trustees the guardrails, governance motions, and implementation checklist activists should ask for.",
+      "markdownPath": "content/fiduciary_playbook.md"
+    },
+    {
+      "id": "one_pager_jlens_board",
+      "type": "one_pager",
+      "title": "Divestment Financial Impact: A Balanced Assessment",
+      "description": "Board-facing summary that rebuts the $33.2B loss claim and reframes fiduciary risk.",
+      "markdownPath": "content/jlens_board.md"
+    },
+    {
+      "id": "one_pager_jlens_technical",
+      "type": "one_pager",
+      "title": "Technical Review: JLens/ADL Divestment Impact Study",
+      "description": "Methodology critique for consultants and investment staff demanding replication standards.",
+      "markdownPath": "content/jlens_technical.md"
+    },
+    {
+      "id": "one_pager_performance_reality",
+      "type": "one_pager",
+      "title": "Performance Reality Check",
+      "description": "Benchmarks and research proving exclusions stay within basis points when executed professionally.",
+      "markdownPath": "content/performance_reality_check.md"
+    },
+    {
+      "id": "opener_central_bank_base",
+      "type": "opener",
+      "text": "Official institutions can clarify mandate limits, apply best-efforts exclusions, and provide transparent rationales and constraints.",
+      "targets": {
+        "identity": [
+          "central_bank"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_corporate_pension_base",
+      "type": "opener",
+      "text": "Corporate plans can update the IPS, adopt a screened index or constraints with minimal overhead, and maintain de-risking alignment.",
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_endowment_base",
+      "type": "opener",
+      "text": "Endowments can align with mission through a committee process, publish rationales, and maintain prudent risk controls.",
+      "targets": {
+        "identity": [
+          "endowment"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_endowment_school_board",
+      "type": "opener",
+      "text": "An endowment can reflect mission and educational values with transparent criteria and periodic reviews.",
+      "targets": {
+        "identity": [
+          "endowment"
+        ],
+        "venue": [
+          "school_board"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_foundation_base",
+      "type": "opener",
+      "text": "Foundations can align programs and portfolios, reduce reputational risk through clear criteria, and use simplified implementation paths.",
+      "targets": {
+        "identity": [
+          "foundation"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_generic",
+      "type": "opener",
+      "text": "We can align investments with basic human rights using professional, benchmark-aware implementation. Large institutions already use narrowly scoped exclusions while maintaining diversification and risk controls.",
+      "targets": {
+        "audience": [
+          "stakeholders"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_government_base",
+      "type": "opener",
+      "text": "Government investors (city/county/state) can apply issuer screens/approved lists for bonds, observe procurement/governance limits, and report with best-efforts language.",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_government_city_council",
+      "type": "opener",
+      "text": "For government bond portfolios, define approved issuer lists and issuer screens consistent with procurement rules and transparency.",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "venue": [
+          "city_council"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_government_consultant",
+      "type": "opener",
+      "text": "Public-fund advisors can translate advocacy into policy language: cite municipal precedents, supply approved issuer models, and brief council members on sunshine-law friendly reporting cadences.",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_government_staff",
+      "type": "opener",
+      "text": "Treasury staff can lead with compliance: align exclusions with procurement statutes, present approved issuer watchlists, and document that liquidity and cash-flow schedules stay intact.",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_individual_base",
+      "type": "opener",
+      "text": "Individual investors can align personal or household savings with their values using low-cost screened funds while keeping diversification and emergency reserves intact.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "individuals"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_individual_one_on_one",
+      "type": "opener",
+      "text": "For friends or family, emphasize aligning personal savings with shared values and keep the steps concrete and jargon-free.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "venue": [
+          "one_on_one"
+        ],
+        "audience": [
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_insurance_base",
+      "type": "opener",
+      "text": "Insurance portfolios can adopt narrow conduct screens consistent with ALM and capital/rating constraints, emphasizing best-efforts and risk integrity.",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
           "plain",
           "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_insurance_consultant",
+      "type": "opener",
+      "text": "Consultants can bring carriers a capital-friendly roadmap: propose conduct screens that respect ALM tests, provide optimization outputs, and script regulator-ready documentation.",
+      "targets": {
+        "identity": [
+          "insurance"
         ],
+        "audience": [
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_insurance_staff",
+      "type": "opener",
+      "text": "Insurance investment teams should tie exclusions to liability management: highlight RBC-friendly screened options, coordinate with actuaries on duration, and show rating agency expectations stay satisfied.",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_mission_consultant",
+      "type": "opener",
+      "text": "Advisors can frame alignment as reputational risk management: benchmark peer endowments, package screened fund menus, and show spending policy resilience under the exclusion set.",
+      "targets": {
         "identity": [
           "endowment",
-          "foundation",
+          "foundation"
+        ],
+        "audience": [
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_mission_staff",
+      "type": "opener",
+      "text": "Mission-driven investment staff can translate campus and program demands into policy: map donor restrictions, propose phased exclusions, and pair mission statements with investment risk notes.",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_pension_consultant",
+      "type": "opener",
+      "text": "Consultants can bring trustees a vote-ready memo: define conduct triggers, outline optimized benchmark overlays, and hand over templates that document prudence while staff executes.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_pension_staff",
+      "type": "opener",
+      "text": "Staff can frame this as fiduciary risk governance: pull exposure runs from managers, cite peer pensions already using conduct screens, and show how tracking-error guardrails keep liabilities protected.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_public_pension_base",
+      "type": "opener",
+      "text": "Public plans can use consultant/manager mandates, set a tracking-error guardrail, and phase implementation while keeping beneficiaries\u2019 risk/return in focus.",
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_public_pension_town_meeting",
+      "type": "opener",
+      "text": "Public pensions can adopt a clear exclusion policy with consultant support, preserve diversification, and report progress without sacrificing fiduciary discipline.",
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "venue": [
+          "town_meeting"
+        ],
+        "audience": [
+          "stakeholders"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "opener_sovereign_consultant",
+      "type": "opener",
+      "text": "External partners can add independent credibility: document human-rights triggers, align with IMF governance guidance, and demonstrate tracking-error caps for reserve portfolios.",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_sovereign_staff",
+      "type": "opener",
+      "text": "Sovereign reserve teams can ground the ask in mandate protection: reference Santiago Principles, show best-efforts exclusions preserve liquidity, and schedule periodic policy reviews.",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "opener_swf_base",
+      "type": "opener",
+      "text": "A sovereign fund can implement conduct-based exclusions via a formal ethics process, public rationales, and factor-neutral optimization with explicit tracking-error budgets.",
+      "targets": {
+        "identity": [
+          "swf"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "policy_alignment",
+      "type": "policy_statement",
+      "title": "Policy alignment criteria",
+      "bullets": [
+        "Documented, explainable criteria with public rationales (no black boxes)",
+        "Conduct-first screening for risk mitigation; product screens for categorical harms when aligned with mission",
+        "Evidence-based decisions using primary and reputable sources with citations",
+        "Regular review cadence (at least annually) and event-driven updates",
+        "Escalation path from engagement to exclusion; documented exceptions with time limits",
+        "Implementation discipline: tracking-error guardrails, diversification, factor neutrality, phased trading",
+        "Transparency: publish criteria and lists subject to prudent trading and confidentiality"
+      ],
+      "citations": [
+        "src_ethical-capital-screening-policy"
+      ]
+    },
+    {
+      "id": "policy_screening_knowledge",
+      "type": "policy_statement",
+      "title": "Screening intelligence",
+      "variants": [
+        {
+          "id": "title",
+          "body": "Screening as Cumulative Knowledge",
+          "transforms": {
+            "tone": "title"
+          }
+        },
+        {
+          "id": "points",
+          "body": "- **Identify business model fragility.** Systematic exclusions focus attention on issuers whose operating models exhibit hidden tail risks (legal, reputational, sovereign), fragile customer bases, or supply chains exposed to human-rights litigation. (Sources: AFSC Investigate)\n- **Knowledge compounds.** Each exclusion deepens understanding of your opportunity set\u2014linking policy pledges (apartheid-free, harm avoidance) to concrete portfolio changes and documenting the institutional lesson. (Sources: Ethical Capital: Investment Screening Policy)\n- **Integration cadence as practice standard.** Treat credible database updates as investment intelligence: aim to assess and integrate material changes within 30 days (faster when practicable) with documented rationale. (Sources: AFSC Investigate)",
+          "transforms": {
+            "tone": "points"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step_adopt-written-conduct-criteria-and-escalation-pr",
+      "type": "next_step",
+      "text": "Adopt written conduct criteria and escalation process.",
+      "targets": {
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_amend_ips_guardrails",
+      "type": "next_step",
+      "text": "Amend the IPS with conduct definitions, tracking-error ceilings, diversification tests, and a fiduciary override clause.",
+      "targets": {
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_build_compliance_cycle",
+      "type": "next_step",
+      "text": "Set quarterly compliance checks, update exclusion lists, and maintain an override log tied to board reporting.",
+      "targets": {
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_commission_exposure_analysis",
+      "type": "next_step",
+      "text": "Commission consultants to map current exposure, model transaction costs, and stage manager searches for pooled funds.",
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_issue_manager_directives",
+      "type": "next_step",
+      "text": "Issue written directives to managers, negotiate side letters for transparency, and schedule exit timelines where screens cannot be applied.",
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_prepare_prudence_memo",
+      "type": "next_step",
+      "text": "Draft a prudence memo that ties each exclusion to specific pecuniary risks and captures legal and consultant sign-off.",
+      "targets": {
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_stage_quick_vs_structural",
+      "type": "next_step",
+      "text": "Sequence quick wins in liquid accounts before long-horizon private market exits, and brief trustees on the timeline trade-offs.",
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_family_friends_encourage-them-to-revisit-the-conversation-a",
+      "type": "next_step",
+      "text": "Encourage them to revisit the conversation after they\u2019ve tried a small allocation shift.",
+      "targets": {
+        "identity": [
           "individual"
+        ],
+        "audience": [
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_family_friends_offer-to-walk-through-their-brokerage-or-ret",
+      "type": "next_step",
+      "text": "Offer to walk through their brokerage or retirement platform to locate values-aligned options.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_family_friends_share-your-own-experience-reviewing-accounts",
+      "type": "next_step",
+      "text": "Share your own experience reviewing accounts and choosing screened funds.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "family_friends"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_foundation_portfolio_exposure_review",
+      "type": "next_step",
+      "text": "Map current holdings against mission criteria, highlighting fossil fuels, private prisons, or other red-flag sectors, and quantify both market value and share of total assets to prioritize divestment sequencing.",
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      }
+    },
+    {
+      "id": "step_foundation_pri_mri_pipeline",
+      "type": "next_step",
+      "text": "Build a joint grants\u2013investments pipeline that pairs program priorities with PRI lending opportunities and MRI manager searches, including underwriting standards and impact measurement plans.",
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      }
+    },
+    {
+      "id": "step_foundation_update_investment_policy",
+      "type": "next_step",
+      "text": "Amend the IPS to cite UPMIFA factors, define mission-related allocation targets, and incorporate a prudence memo checklist for every new MRI or PRI.",
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "regulatory_drivers"
+        ]
+      }
+    },
+    {
+      "id": "step_individual_list-your-current-retirement-and-brokerage-h",
+      "type": "next_step",
+      "text": "List your current retirement and brokerage holdings and note what you want to avoid.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "individuals"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_individual_set-a-reminder-to-review-allocations-annuall",
+      "type": "next_step",
+      "text": "Set a reminder to review allocations annually or after major life changes.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "individuals"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_individual_shift-savings-into-screened-etfs-or-managed-",
+      "type": "next_step",
+      "text": "Shift savings into screened ETFs or managed accounts that match your risk tolerance.",
+      "targets": {
+        "identity": [
+          "individual"
+        ],
+        "audience": [
+          "individuals"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_insurance_execute_overlay_program",
+      "type": "next_step",
+      "text": "Stand up credit or duration overlays to synthetically exit the targeted exposure while physical trades settle, so ALM metrics stay within tolerance throughout the transition.",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "internal_leadership",
+          "regulatory_drivers"
+        ]
+      }
+    },
+    {
+      "id": "step_insurance_plan_stranded_costs",
+      "type": "next_step",
+      "text": "Map stranded technology and staffing costs from the divested block and bake redeployment or run-off expenses into the deal model before signing.",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
         ],
         "motivation": [
           "internal_leadership"
         ]
-      },
-      "tags": [
-        "strategy_spectrum",
-        "motivation_internal"
-      ]
+      }
     },
     {
-      "id": "kp_strategy_external_stakeholders",
-      "type": "key_point",
-      "title": "External stakeholders: convert campaign pressure into structured capital moves",
-      "body": "Strategy spectrum: responsive divest-reinvest mandates, coalition-built exclusion lists, community reinvestment pools, and transparency dashboards that track follow-through.\nImplementation notes: co-design criteria with organizers, publish escalation ladders, and coordinate communications with governance, donor, and beneficiary groups.\nOutcomes to monitor: stakeholder sentiment shifts, media/regulator responses, capital redeployment volumes, and engagement opportunities created by divestment decisions.",
-      "citations": [
-        "src_afsc-investigate",
-        "src_naacp-v-claiborne-hardware-458-u-s-886"
-      ],
-      "assertions": [
-        "assert_public_pension_transparency_governance"
-      ],
+      "id": "step_insurance_prepare_rating_agency_brief",
+      "type": "next_step",
+      "text": "Draft a rating-agency briefing deck with pro-forma capital adequacy, risk profile metrics, and liquidity coverage so analysts can update their models immediately after announcement.",
       "targets": {
+        "identity": [
+          "insurance"
+        ],
         "audience": [
-          "boards",
           "staff",
           "consultants"
         ],
         "level": [
-          "plain",
           "technical"
-        ],
-        "identity": [
-          "public_pension",
-          "government",
-          "endowment",
-          "foundation",
-          "individual"
         ],
         "motivation": [
           "external_stakeholders"
         ]
-      },
-      "tags": [
-        "strategy_spectrum",
-        "motivation_external"
-      ]
+      }
     },
     {
-      "id": "kp_outcome_identity_alignment",
-      "type": "key_point",
-      "title": "Outcome: investments align with identity",
-      "body": "Clear divestment criteria anchor portfolios in the institution’s stated ethics, letting trustees and staff demonstrate that capital flows reflect mission and fiduciary commitments. Alignment messaging reassures beneficiaries, donors, and community partners that investment actions match identity.",
-      "citations": [
-        "src_ethical-capital-screening-policy"
-      ],
-      "assertions": [
-        "assert_modern_fiduciary_guidance"
-      ],
+      "id": "step_insurance_quantify_rbc_gain",
+      "type": "next_step",
+      "text": "Model the pre- and post-divestment RBC ratio, highlighting changes in C-1/C-3 charges and statutory surplus uplift for the capital committee.",
       "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "plain"
-        ],
         "identity": [
-          "public_pension",
-          "corporate_pension",
-          "government",
-          "central_bank",
-          "swf",
-          "insurance",
-          "endowment",
-          "foundation"
-        ]
-      },
-      "tags": [
-        "outcome",
-        "strategy_spectrum"
-      ]
-    },
-    {
-      "id": "kp_outcome_regulatory_confidence",
-      "type": "key_point",
-      "title": "Outcome: documented compliance confidence",
-      "body": "Conduct-based exclusions, optimization reports, and counsel sign-offs create an audit trail that satisfies fiduciary and statutory obligations. Regulators and attorneys general see proactive risk management, lowering litigation exposure and procurement challenges.",
-      "citations": [
-        "src_un-guiding-principles-on-business-human-rights",
-        "src_koontz-v-watson-opinion"
-      ],
-      "assertions": [
-        "assert_modern_fiduciary_guidance"
-      ],
-      "targets": {
-        "audience": [
-          "boards",
-          "staff",
-          "consultants"
-        ],
-        "level": [
-          "plain",
-          "technical"
-        ],
-        "identity": [
-          "public_pension",
-          "corporate_pension",
-          "government",
-          "central_bank",
-          "swf",
           "insurance"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
         ],
         "motivation": [
           "regulatory_drivers"
         ]
-      },
-      "tags": [
-        "outcome",
-        "motivation_regulatory"
-      ]
+      }
     },
     {
-      "id": "kp_outcome_mission_trust",
-      "type": "key_point",
-      "title": "Outcome: mission trust reinforced",
-      "body": "When boards drive divestment, they can show donors, students, and program staff that capital decisions back institutional values without jeopardising spending policies. Transparent trade plans and impact dashboards keep leadership, faculty, and community stakeholders aligned.",
-      "citations": [
-        "src_ethical-capital-screening-policy"
-      ],
-      "assertions": [
-        "assert_endowment_spending_norms"
-      ],
+      "id": "step_insurance_refresh_orsa_story",
+      "type": "next_step",
+      "text": "Update the ORSA narrative to explain how the divestment improves adverse-rate and catastrophe scenarios, and attach supporting stress tests for regulators.",
       "targets": {
+        "identity": [
+          "insurance"
+        ],
         "audience": [
-          "boards",
           "staff",
-          "consultants"
+          "boards"
         ],
         "level": [
-          "plain"
-        ],
-        "identity": [
-          "endowment",
-          "foundation"
+          "technical"
         ],
         "motivation": [
-          "internal_leadership"
+          "regulatory_drivers",
+          "external_stakeholders"
         ]
-      },
-      "tags": [
-        "outcome",
-        "motivation_internal"
-      ]
+      }
     },
     {
-      "id": "kp_outcome_stakeholder_momentum",
-      "type": "key_point",
-      "title": "Outcome: stakeholder momentum sustained",
-      "body": "Coalitions see tangible follow-through when portfolios exit targeted issuers and capital is redeployed toward community priorities. Publishing progress dashboards and reinvestment pipelines keeps organizers engaged and channels pressure into ongoing governance improvements.",
-      "citations": [
-        "src_afsc-investigate"
-      ],
-      "assertions": [
-        "assert_public_pension_transparency_governance"
-      ],
+      "id": "step_mandate-tracking-error-and-factor-exposure-contr",
+      "type": "next_step",
+      "text": "Mandate tracking error and factor exposure controls for managers.",
       "targets": {
         "audience": [
-          "boards",
           "staff",
           "consultants"
         ],
         "level": [
-          "plain"
-        ],
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_public_manage_boycott_lists",
+      "type": "next_step",
+      "text": "Establish a compliance log tracking state boycott lists, exemptions, and legal opinions so staff can reconcile conduct-based exclusions with anti-ESG statutes in every procurement or manager review.",
+      "targets": {
         "identity": [
-          "public_pension",
-          "government",
-          "endowment",
-          "foundation"
+          "public_pension"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      }
+    },
+    {
+      "id": "step_public_prudence_memo",
+      "type": "next_step",
+      "text": "Draft a prudence memo summarizing legal authority, financial analysis, stakeholder input, and recommended divestment actions; attach consultant and counsel sign-offs.",
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      }
+    },
+    {
+      "id": "step_public_public_notice_calendar",
+      "type": "next_step",
+      "text": "Build a Sunshine calendar covering notice deadlines, agenda posting, public comment briefings, and post-meeting disclosures for each divestment milestone.",
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
         ],
         "motivation": [
           "external_stakeholders"
         ]
+      }
+    },
+    {
+      "id": "step_publish-a-public-exclusions-list-with-brief-rati",
+      "type": "next_step",
+      "text": "Publish a public exclusions list with brief rationales.",
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_request-current-holdings-exposure-report-from-ma",
+      "type": "next_step",
+      "text": "Request current holdings/exposure report from managers.",
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_schedule-an-annual-review-and-public-update",
+      "type": "next_step",
+      "text": "Schedule an annual review and public update.",
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_spectrum_build_data_stack",
+      "type": "next_step",
+      "text": "Select and integrate human-rights data providers so monitoring, stewardship, and screening share the same controversy canon.",
+      "targets": {
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_spectrum_customize_benchmark",
+      "type": "next_step",
+      "text": "Commission custom screened benchmarks and tracking-error limits aligned with any exclusion or divestment policy.",
+      "targets": {
+        "audience": [
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_spectrum_define_escalation",
+      "type": "next_step",
+      "text": "Approve an escalation policy that sets time-bound engagement milestones and names the triggers for screens or divestment votes.",
+      "targets": {
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_spectrum_map_current_tier",
+      "type": "next_step",
+      "text": "Map current programs to the seven-tier ladder and document what motivates escalation (risk, mission, stakeholder pressure).",
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "step_spectrum_publish_integrated_report",
+      "type": "next_step",
+      "text": "Publish integrated board reporting that pairs financial performance with escalation status, policy compliance, and mission impact metrics.",
+      "targets": {
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "plain"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_corporate_board_briefing",
+      "type": "template_snippet",
+      "title": "Board briefing: conduct-based divestment",
+      "lines": [
+        "Lead with fiduciary purpose: we are mitigating sanctions, legal, and reputational risk documented in the prudence memo.",
+        "Show the guardrails - tracking-error ceiling, diversification tests, override clause - to confirm no sacrifice of participant returns.",
+        "Flag civil-rights review and neutral UN criteria so trustees see the policy as compliance infrastructure, not politics."
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_corporate_consultant_scope",
+      "type": "template_snippet",
+      "title": "Consultant scope of work",
+      "lines": [
+        "Quantify portfolio exposure, transaction costs, and tracking-error impact of the exclusion list.",
+        "Detail pooled-fund and private-market options, including replacement manager searches and side-letter transparency asks.",
+        "Provide a written opinion that the policy remains prudent under ERISA and recent DOL interpretations."
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "consultants",
+          "staff"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_corporate_fiduciary_override",
+      "type": "template_snippet",
+      "title": "Policy clause: fiduciary override",
+      "lines": [
+        "If compliance with the exclusion would clearly harm participant returns beyond [25] bps tracking error, the committee may approve an exception.",
+        "Document every override with consultant analysis and legal counsel review.",
+        "Revisit overrides during the annual policy audit to confirm they remain justified."
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_foundation_board_resolution",
+      "type": "template_snippet",
+      "title": "Board resolution outline: Mission-first endowment",
+      "lines": [
+        "Reference UPMIFA and IRC \u00a74944 to confirm mission alignment is consistent with fiduciary duty.",
+        "Adopt screening criteria, MRI/PRI allocation ranges, and a prudence memo requirement.",
+        "Set reporting cadence: annual exposure heatmap, impact dashboard, and override log for exceptions."
+      ],
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_foundation_investment_committee_update",
+      "type": "template_snippet",
+      "title": "Investment committee briefing: Mission alignment status",
+      "lines": [
+        "Open with progress against MRI/PRI targets and risk-adjusted performance.",
+        "Surface red-flag holdings, engagement outcomes, and recommended divestment actions.",
+        "Close with upcoming policy reviews, stakeholder consultations, and attestation timetable."
+      ],
+      "targets": {
+        "identity": [
+          "foundation",
+          "endowment"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_government_policy",
+      "type": "template_snippet",
+      "title": "Government Policy Template",
+      "markdown": "Approved Issuers Policy (template)\\n\\nPurpose: Maintain an Approved Issuers List for fixed-income investing that aligns treasury practices with ethical standards and risk controls while complying with law and procurement rules.\\n\\nCriteria: Exclude issuers with credible, public evidence of severe human rights violations (including complicity in violations under international humanitarian law). Consider authoritative sources (sanctions lists, court decisions, official investigations) and reputable human-rights reporting.\\n\\nPortfolio Constraints: Preserve target duration, credit quality, liquidity, and diversification consistent with the investment policy and statutes.\\n\\nProcess: Treasurer (or designee) maintains Approved and Prohibited Issuer lists; legal/procurement review; annual review and event-driven updates; exceptions require written rationale, legal review, time limits, and notification to the governing body.\\n\\nTransparency & Reporting: Publish criteria and current lists subject to prudent trading and confidentiality; report changes and rationales at least annually.\\n\\nCompliance: This policy operates subject to state law, investment statutes, and procurement rules; in case of conflict, legal requirements prevail.",
+      "targets": {
+        "identity": [
+          "government"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_insurance_alm_briefing",
+      "type": "template_snippet",
+      "title": "ALM team briefing",
+      "lines": [
+        "State the convexity, duration, and capital metrics the divestment fixes (e.g., gap shrinks from -1.5y to -0.5y).",
+        "Highlight RBC charge reductions and hedge adjustments required this week.",
+        "Close with clear handoffs: who is remapping the ALM dashboard, who is recalibrating hedges."
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "staff"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_insurance_capital_committee",
+      "type": "template_snippet",
+      "title": "Capital committee talking points",
+      "lines": [
+        "Lead with strategic alignment to the board-approved plan and Investment Policy Statement.",
+        "Quantify capital freed, ROE uplift, and redeployment targets (e.g., digital-first P&C growth).",
+        "Document governance: buyer ratings, TSA coverage, ORSA documentation, regulator briefing timeline."
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_insurance_rating_agency",
+      "type": "template_snippet",
+      "title": "Rating agency engagement outline",
+      "lines": [
+        "Send a formal note with pro-forma capital adequacy, liquidity, and risk metrics the day the deal is announced.",
+        "Offer analysts a walk-through that maps your numbers to their published methodology.",
+        "Archive every conversation and document to avoid off-channel communication risk."
+      ],
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "consultants",
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_model_resolution",
+      "type": "template_snippet",
+      "title": "Model Resolution",
+      "markdown": "RESOLVED: That the {localName} shall adopt a conduct-based investment exclusion policy, instructing its investment managers to avoid purchasing or holding securities of companies for which there is credible, public evidence of severe human rights violations, including complicity in violations under international humanitarian law; and be it further\n\nRESOLVED: That the {localName} directs its investment managers to implement this policy using professional portfolio construction techniques that maintain diversification and risk controls, including explicit tracking error limits relative to the benchmark; and be it further\n\nRESOLVED: That the {localName} will publish an exclusion rationale and a public list of excluded issuers, reviewed at least annually; and be it further\n\nRESOLVED: That the {localName} will phase implementation over an orderly period and report progress and holdings, subject to prudent trading and confidentiality constraints.",
+      "targets": {
+        "audience": [
+          "fiduciary",
+          "regulated"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_public_board_resolution",
+      "type": "template_snippet",
+      "title": "Public pension resolution skeleton",
+      "lines": [
+        "Cite exclusive-purpose clauses and the specific risk factors prompting action.",
+        "Direct staff to produce prudence memos, financial impact studies, and compliance reviews.",
+        "Set reporting expectations: quarterly exposure updates, public dashboards, and annual policy audits."
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_public_meeting_brief",
+      "type": "template_snippet",
+      "title": "Public meeting briefing packet",
+      "lines": [
+        "Include agenda summary, key talking points, and public comment FAQs.",
+        "Attach statutory references and compliance checks for Sunshine, anti-ESG, and fiduciary duties.",
+        "Add links to consultant reports, prudence memos, and draft resolutions for public download."
+      ],
+      "targets": {
+        "identity": [
+          "public_pension"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_spectrum_board_ladder",
+      "type": "template_snippet",
+      "title": "Board briefing: Spectrum of action",
+      "lines": [
+        "Open with the current tier, the documented trigger, and the recommended next rung.",
+        "Summarize guardrails: data coverage, tracking-error caps, consultant sign-offs, and civil-rights review.",
+        "Close with beneficiary messaging that links the move to risk mitigation and mission alignment."
+      ],
+      "targets": {
+        "audience": [
+          "boards"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_spectrum_stakeholder_update",
+      "type": "template_snippet",
+      "title": "Stakeholder update: Implementation ladder",
+      "lines": [
+        "Name the tier we are activating and why the evidence supports it.",
+        "Share what changes stakeholders will see next (policy publication, manager changes, reinvestment timeline).",
+        "Invite feedback loops so campaigns, staff, and beneficiaries stay plugged into the escalation cadence."
+      ],
+      "targets": {
+        "audience": [
+          "stakeholders",
+          "staff"
+        ]
+      }
+    },
+    {
+      "id": "venue_notes_committee_hearing",
+      "type": "template_snippet",
+      "title": "Venue cues",
+      "lines": [
+        "Keep to concrete asks; cite Policy Alignment and criteria.",
+        "Respect time limits; reference the full brief for details."
+      ],
+      "targets": {
+        "venue": [
+          "committee_hearing"
+        ]
+      }
+    },
+    {
+      "id": "venue_notes_full_board_meeting",
+      "type": "template_snippet",
+      "title": "Venue cues",
+      "lines": [
+        "Summarize the Recommended Approach and reporting cadence.",
+        "Be crisp on \u2018why now\u2019 and what changes operationally."
+      ],
+      "targets": {
+        "venue": [
+          "full_board_meeting"
+        ]
+      }
+    },
+    {
+      "id": "venue_notes_one_on_one",
+      "type": "template_snippet",
+      "title": "Venue cues",
+      "lines": [
+        "Open with shared goals; invite concerns before proposing solutions.",
+        "Offer the brief and one or two sources relevant to their role."
+      ],
+      "targets": {
+        "venue": [
+          "one_on_one"
+        ]
+      }
+    },
+    {
+      "id": "venue_notes_public_testimony",
+      "type": "template_snippet",
+      "title": "Venue cues",
+      "lines": [
+        "Time-limited: focus on 2\u20133 key points and one specific ask.",
+        "Bring printed one-pagers; avoid acronyms; cite one authoritative source."
+      ],
+      "targets": {
+        "venue": [
+          "public_testimony"
+        ]
+      }
+    },
+    {
+      "id": "venue_notes_small_group",
+      "type": "template_snippet",
+      "title": "Venue cues",
+      "lines": [
+        "Clarify decision rights and next steps.",
+        "Use the Identity Guide to align constraints and responsibilities."
+      ],
+      "targets": {
+        "venue": [
+          "small_group"
+        ]
+      }
+    },
+    {
+      "id": "venue_notes_written_memo",
+      "type": "template_snippet",
+      "title": "Venue cues",
+      "lines": [
+        "Include the Model Resolution if applicable.",
+        "Attach the Policy Alignment and relevant source links."
+      ],
+      "targets": {
+        "venue": [
+          "written_memo"
+        ]
+      }
+    },
+    {
+      "id": "kp_corporate_divestment_exposure_assessment",
+      "type": "key_point",
+      "title": "Divestment Exposure Assessment documents ERISA prudence",
+      "body": "Corporate fiduciaries can evidence loyalty and prudence by running a Divestment Exposure Assessment that ties conduct risk to financial impact, applies the DOL ESG rule, and produces a documented prudence file. Skipping that analysis leaves the board exposed to claims that it ignored material risk.",
+      "citations": [
+        "src_us-dol-esg-guidance",
+        "src_un-pri-fiduciary-duty-in-the-21st-century"
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
       },
       "tags": [
-        "outcome",
-        "motivation_external"
+        "strategy_spectrum",
+        "governance"
       ]
+    },
+    {
+      "id": "kp_corporate_module_qualitative_scan",
+      "type": "key_point",
+      "title": "Module 1: qualitative risk dossier",
+      "body": "Module 1 builds a documented risk dossier: screen holdings for conduct controversies across ESG categories, log sanctions and litigation exposure, and map stakeholder pressure so ERISA counsel can link qualitative signals to financial risk.",
+      "citations": [
+        "src_dol_advisory_opinion_2025_04a",
+        "src_un-guiding-principles-on-business-human-rights"
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "risk_management"
+      ]
+    },
+    {
+      "id": "kp_corporate_module_quantitative_controls",
+      "type": "key_point",
+      "title": "Module 2: quantify exposure and funded-status impact",
+      "body": "Module 2 quantifies exposure by comparing portfolio weights to the benchmark, modeling tracking error and factor drift, and running VaR, ES, and funded status sensitivity for each exclusion scenario so trustees see the capital impact.",
+      "citations": [
+        "src_ftse-russell-squaring-the-circle-on-carbon-track",
+        "src_russell_funded_status_volatility",
+        "src_soa_discount_rate_sensitivity"
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      },
+      "tags": [
+        "risk_management",
+        "implementation"
+      ]
+    },
+    {
+      "id": "kp_corporate_module_scenario_deck",
+      "type": "key_point",
+      "title": "Module 3: scenario deck for tail risk",
+      "body": "Module 3 delivers a scenario deck that stress tests sanctions shocks, catastrophic litigation, and systemic supply chain disruption so the board can see how severe events would hit returns, liquidity, and contribution requirements.",
+      "citations": [
+        "src_osfi_stress_testing_guideline",
+        "src_oecd_pension_stress_testing",
+        "src_rand_supply_chain_disruptions"
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "risk_management"
+      ]
+    },
+    {
+      "id": "kp_corporate_module_mitigation_triggers",
+      "type": "key_point",
+      "title": "Module 4: mitigation roadmap and triggers",
+      "body": "Module 4 turns findings into an action roadmap with trigger thresholds, override clauses, and an IPS update schedule so staff know when to escalate issues and the sponsor sees a ready governance plan.",
+      "citations": [
+        "src_fidelity_ips_considerations",
+        "src_investopedia_ips"
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      },
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "step_corporate_launch_exposure_assessment",
+      "type": "next_step",
+      "text": "Adopt a resolution commissioning the Divestment Exposure Assessment with clear scope, deliverables, and checkpoints with counsel and the investment consultant.",
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_build_risk_dossier",
+      "type": "next_step",
+      "text": "Build the qualitative risk dossier with conduct data, legal reviews, and stakeholder mapping, then archive it in the fiduciary file.",
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "external_stakeholders"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_model_funded_status",
+      "type": "next_step",
+      "text": "Deliver benchmarking for contested holdings plus tracking error, VaR or ES, and funded status modeling for every exclusion scenario.",
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      }
+    },
+    {
+      "id": "step_corporate_embed_triggers",
+      "type": "next_step",
+      "text": "Update the IPS and board calendar with trigger thresholds, override clauses, and reporting cadence tied to the assessment.",
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_corporate_prudence_packet",
+      "type": "template_snippet",
+      "title": "Divestment Exposure Assessment packet",
+      "lines": [
+        "Executive overview of the four module assessment with the fiduciary question it answers.",
+        "Tables for weights versus benchmark, tracking error, VaR or ES, and funded status deltas by scenario.",
+        "Mitigation roadmap listing trigger thresholds, assigned owners, and planned policy or vendor actions."
+      ],
+      "targets": {
+        "identity": [
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ]
+      }
+    },
+    {
+      "id": "kp_mission_divestment_exposure_assessment",
+      "type": "key_point",
+      "title": "Request a divestment exposure assessment",
+      "body": "When leadership resists exclusions, demand a Divestment Exposure Assessment that documents qualitative risk, models tracking error and funded-status impact, and sets clear escalation triggers. Forcing that report reframes divestment as a prudent governance step instead of a values debate.",
+      "citations": [
+        "src_un-pri-fiduciary-duty-in-the-21st-century",
+        "src_oxford-sustainable-finance-divestment-research"
+      ],
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation",
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "plain",
+          "technical"
+        ]
+      },
+      "tags": [
+        "governance",
+        "strategy_spectrum"
+      ]
+    },
+    {
+      "id": "step_request_divestment_exposure_assessment",
+      "type": "next_step",
+      "text": "Request a Divestment Exposure Assessment that includes qualitative risk dossiers, scenario and liability modeling, and a board-ready prudence memo, then calendar the follow-up meeting to review it.",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation",
+          "public_pension",
+          "corporate_pension",
+          "insurance",
+          "government",
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership",
+          "external_stakeholders"
+        ]
+      }
     }
   ]
 }

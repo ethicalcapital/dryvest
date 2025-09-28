@@ -178,3 +178,8 @@ If you’re interested in contributing, please open an issue or reach out via th
 ---
 
 For questions or access requests, contact Ethical Capital at [hello@ethicic.com](mailto:hello@ethicic.com).
+## Open TODOs
+
+- Add a reusable "policy-first" scaffold in the dataset so activists can start with abstract guardrails before targeting a specific conflict (e.g., a template snippet + quick-brief playlist that walks through “define conduct criteria → approve override clause → map escalation triggers”). That gives them language to ask, “under what circumstances would we divest?” before they drop in the Palestine-specific data.
+- Consider a dedicated node set for “institutional readiness questions” (one per identity/audience) that prompt stakeholders to declare whether divestment is ever acceptable, what thresholds apply, and who must sign off. Those can live alongside the spectrum tiers and surface in Quick Mode as pre-work.
+
