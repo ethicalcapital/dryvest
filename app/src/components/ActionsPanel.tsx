@@ -211,9 +211,20 @@ export function ActionsPanel({
               <>
                 <span>·</span>
                 <span>
-                  Motivation:{' '}
+                  Primary driver:{' '}
                   <span className="font-medium text-slate-600">
                     {formatTaxonomyValue(params.motivation)}
+                  </span>
+                </span>
+              </>
+            ) : null}
+            {params.motivationSecondary ? (
+              <>
+                <span>·</span>
+                <span>
+                  Secondary:{' '}
+                  <span className="font-medium text-slate-600">
+                    {formatTaxonomyValue(params.motivationSecondary)}
                   </span>
                 </span>
               </>

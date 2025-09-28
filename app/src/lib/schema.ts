@@ -277,6 +277,7 @@ export const BriefContextSchema = z
     venue: z.string().optional(),
     level: z.string().optional(),
     motivation: z.string().optional(),
+    motivationSecondary: z.string().optional(),
   })
   .strict();
 

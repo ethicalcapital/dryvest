@@ -4,6 +4,7 @@ import type { BriefContext } from '../lib/schema';
 
 export interface BriefParams extends BriefContext {
   playlist?: string;
+  motivationSecondary?: string;
 }
 
 const PARAM_KEYS: (keyof BriefParams)[] = [
@@ -12,6 +13,7 @@ const PARAM_KEYS: (keyof BriefParams)[] = [
   'venue',
   'level',
   'motivation',
+  'motivationSecondary',
   'playlist',
 ];
 

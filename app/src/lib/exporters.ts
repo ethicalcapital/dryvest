@@ -4,6 +4,7 @@ import type {
   Node,
   SourceRecord,
 } from './schema';
+import { formatTaxonomyValue } from './format';
 
 export type BriefTone = 'plain' | 'technical';
 
@@ -12,6 +13,8 @@ export interface BriefExportMeta {
   audience?: string;
   venue?: string;
   level?: string;
+  motivation?: string;
+  motivationSecondary?: string;
   playlistId: string;
   datasetVersion: string;
 }
@@ -93,6 +96,17 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
   lines.push(`**Prepared for:** ${meta.audience ?? 'Investment Decision-Makers'}`);
   lines.push(`**Context:** ${meta.identity ?? 'Institutional Investor'} • ${meta.venue ?? 'Strategic Review'}`);
   lines.push(`**Analysis:** ${tone === 'technical' ? 'Technical Assessment' : 'Executive Summary'}`);
+  const driverSummary = [
+    meta.motivation ? `Primary driver: ${formatTaxonomyValue(meta.motivation)}` : null,
+    meta.motivationSecondary
+      ? `Secondary driver: ${formatTaxonomyValue(meta.motivationSecondary)}`
+      : null,
+  ]
+    .filter(Boolean)
+    .join(' • ');
+  if (driverSummary) {
+    lines.push(`**Campaign drivers:** ${driverSummary}`);
+  }
   lines.push('');
   lines.push('---');
   lines.push('');

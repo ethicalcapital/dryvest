@@ -54,6 +54,7 @@ const FALLBACK_DEFAULTS: BriefParams = {
   venue: 'one_on_one',
   level: 'technical',
   motivation: 'regulatory_drivers',
+  motivationSecondary: undefined,
   playlist: DEFAULT_PLAYLIST_ID,
 };
 
@@ -158,10 +159,12 @@ function App() {
       const { touchContext = true } = options;
       if (
         touchContext &&
-    (['identity', 'audience', 'motivation'] as (keyof BriefParams)[]).some(key =>
-          Object.prototype.hasOwnProperty.call(next, key)
-        )
-      ) {
+    (
+      ['identity', 'audience', 'motivation', 'motivationSecondary'] as (keyof BriefParams)[]
+    ).some(key =>
+      Object.prototype.hasOwnProperty.call(next, key)
+    )
+  ) {
         setContextTouched(true);
       }
       applyParams(next);
@@ -216,6 +219,7 @@ function App() {
       audience: params.audience,
       venue: params.venue,
       motivation: params.motivation,
+      motivation_secondary: params.motivationSecondary,
       level: params.level,
       playlist: params.playlist,
     });
@@ -247,6 +251,17 @@ function App() {
     maybeCorrect('audience', schema.taxonomies?.audience);
     maybeCorrect('level', schema.taxonomies?.level);
     maybeCorrect('motivation', schema.taxonomies?.motivation);
+    if (params.motivationSecondary && schema.taxonomies?.motivation) {
+      if (!schema.taxonomies.motivation.includes(params.motivationSecondary)) {
+        corrections.motivationSecondary = undefined;
+      }
+    }
+    if (
+      params.motivationSecondary &&
+      params.motivationSecondary === params.motivation
+    ) {
+      corrections.motivationSecondary = undefined;
+    }
 
     if (params.playlist && !playlistById[params.playlist]) {
       corrections.playlist = FALLBACK_DEFAULTS.playlist;
@@ -266,6 +281,7 @@ function App() {
             audience: params.audience,
             venue: params.venue,
             motivation: params.motivation,
+            motivationSecondary: params.motivationSecondary,
             level: 'technical',
           }
         : {
@@ -278,6 +294,7 @@ function App() {
       params.audience,
       params.venue,
       params.motivation,
+      params.motivationSecondary,
       customContext,
     ]
   );
@@ -290,6 +307,7 @@ function App() {
       context.audience ?? '',
       context.venue ?? '',
       context.motivation ?? '',
+      context.motivationSecondary ?? '',
       context.level ?? '',
     ]);
     if (signature && signature !== lastContextSignatureRef.current) {
@@ -307,6 +325,7 @@ function App() {
     context.venue,
     context.level,
     context.motivation,
+    context.motivationSecondary,
     dataset?.version,
   ]);
 
@@ -424,7 +443,10 @@ function App() {
               ? `Audience: ${formatTaxonomyValue(params.audience)}`
               : null,
             params.motivation
-              ? `Motivation: ${formatTaxonomyValue(params.motivation)}`
+              ? `Primary: ${formatTaxonomyValue(params.motivation)}`
+              : null,
+            params.motivationSecondary
+              ? `Secondary: ${formatTaxonomyValue(params.motivationSecondary)}`
               : null,
           ].filter(Boolean);
           const description = parts.join(' • ');
@@ -445,7 +467,7 @@ function App() {
             description:
               description ? `Defaults → ${description}` : 'Update the selections above to lock context.',
             helper:
-              'Choose institution, audience, and driver so the brief reflects the portfolio in front of you.',
+              'Choose institution, audience, and drivers so the brief reflects the portfolio in front of you.',
           };
         }
 
@@ -458,7 +480,10 @@ function App() {
               ? `Audience: ${formatTaxonomyValue(customContext.audience)}`
               : null,
             customContext.motivation
-              ? `Motivation: ${formatTaxonomyValue(customContext.motivation)}`
+              ? `Primary: ${formatTaxonomyValue(customContext.motivation)}`
+              : null,
+            customContext.motivationSecondary
+              ? `Secondary: ${formatTaxonomyValue(customContext.motivationSecondary)}`
               : null,
           ].filter(Boolean);
 
@@ -709,6 +734,7 @@ function App() {
         venue: params.venue,
         level: params.level,
         motivation: params.motivation,
+        motivationSecondary: params.motivationSecondary,
         playlistId: keyPointPlaylist?.id ?? DEFAULT_PLAYLIST_ID,
         datasetVersion: dataset?.version ?? DATASET_VERSION,
       },
@@ -745,6 +771,7 @@ function App() {
       params.venue,
       params.level,
       params.motivation,
+      params.motivationSecondary,
       dataset?.version,
       keyPointPlaylist?.id,
     ]
