@@ -123,6 +123,9 @@ export function ActionsPanel({
         format: 'anki-tsv',
         cardCount: INSTITUTIONAL_FLASHCARDS.length,
       });
+      trackEvent('anki_export', {
+        cardCount: INSTITUTIONAL_FLASHCARDS.length,
+      });
       setDownloadError(null);
       setFlashcardStatus('success');
       window.setTimeout(() => setFlashcardStatus('idle'), 2000);

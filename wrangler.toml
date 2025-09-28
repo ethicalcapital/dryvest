@@ -15,3 +15,12 @@ binding = "HOOKS"
 # HOOKS KV namespace (production + preview). Update preview ID if needed.
 id = "caf4e19f1388423fade84340c27a929c"
 preview_id = "caf4e19f1388423fade84340c27a929c"
+
+[durable_objects]
+bindings = [
+  { name = "DRYVEST_ANALYTICS", class_name = "DryvestAnalyticsDO" }
+]
+
+[[migrations]]
+tag = "2025-09-28-analytics"
+new_classes = ["DryvestAnalyticsDO"]

@@ -1,5 +1,6 @@
 import { ExternalLink, MessageSquare, Edit } from 'lucide-react';
 import type { Node } from '../lib/schema';
+import { trackEvent } from '../lib/analytics';
 import { getGitHubEditLink, getGitHubFeedbackLink } from '../lib/github';
 
 interface GitHubFeedbackProps {
@@ -38,6 +39,12 @@ export function GitHubFeedback({
           rel="noopener noreferrer"
           className={linkClass}
           title="Edit this content on GitHub"
+          onClick={() =>
+            trackEvent('feedback_link_clicked', {
+              linkType: 'github_edit',
+              nodeId: node.id,
+            })
+          }
         >
           <Edit size={iconSize} />
           Edit
@@ -51,6 +58,12 @@ export function GitHubFeedback({
           rel="noopener noreferrer"
           className={linkClass}
           title="Provide feedback about this content"
+          onClick={() =>
+            trackEvent('feedback_link_clicked', {
+              linkType: 'github_feedback',
+              nodeId: node.id,
+            })
+          }
         >
           <MessageSquare size={iconSize} />
           Feedback

@@ -23,6 +23,7 @@ import {
   initAnalytics,
   trackEvent,
   setAnalyticsConsent as setAnalyticsTrackingConsent,
+  setAnalyticsContext,
 } from './lib/analytics';
 import { DEFAULT_PLAYLIST_ID, DEFAULT_DATASET_VERSION } from './lib/constants';
 import { DisclaimerGate } from './components/DisclaimerGate';
@@ -77,6 +78,8 @@ function App() {
     return window.localStorage.getItem('dryvest:analytics-consent') === 'granted';
   });
   const quickStartRef = useRef<HTMLDivElement | null>(null);
+  const modeStartRef = useRef<number>(Date.now());
+  const lastContextSignatureRef = useRef<string>('');
 
   // Scenario-based quick brief state
   const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
@@ -142,6 +145,7 @@ function App() {
       venue: params.venue,
       level: params.level,
       playlist: params.playlist,
+      directness,
     });
   }, [
     dataset,
@@ -150,6 +154,7 @@ function App() {
     params.level,
     params.venue,
     params.playlist,
+    directness,
   ]);
 
   useEffect(() => {
@@ -195,6 +200,24 @@ function App() {
           },
     [briefMode, params.identity, params.audience, params.venue, customContext]
   );
+
+  useEffect(() => {
+    setAnalyticsContext(context, dataset?.version);
+    const signature = JSON.stringify([
+      context.identity ?? '',
+      context.audience ?? '',
+      context.venue ?? '',
+      context.level ?? '',
+    ]);
+    if (signature && signature !== lastContextSignatureRef.current) {
+      lastContextSignatureRef.current = signature;
+      trackEvent('context_finalized', {
+        identity: context.identity,
+        audience: context.audience,
+        venue: context.venue,
+      });
+    }
+  }, [context.identity, context.audience, context.venue, context.level, dataset?.version]);
 
   const onePagers = useMemo(
     () =>
@@ -409,6 +432,7 @@ function App() {
       next_steps: nextStepNodes.length,
       attachments: selectedOnePagers.length,
       sources: sourceNodes.length,
+      tone: 'technical',
     });
   }, [
     dataset,
@@ -441,8 +465,20 @@ function App() {
     return null;
   }
 
+  const handleModeChange = (nextMode: BriefMode) => {
+    if (nextMode === briefMode) return;
+    const now = Date.now();
+    const elapsed = now - modeStartRef.current;
+    if (elapsed > 0) {
+      trackEvent('time_in_mode', { mode: briefMode, milliseconds: elapsed });
+    }
+    modeStartRef.current = now;
+    trackEvent('mode_selected', { mode: nextMode });
+    setBriefMode(nextMode);
+  };
+
   const handleQuickStart = () => {
-    setBriefMode('quick');
+    handleModeChange('quick');
     window.requestAnimationFrame(() => {
       quickStartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -454,7 +490,28 @@ function App() {
     setParams({ ...scenario.context, level: 'technical' });
     // Auto-select the scenario's one-pagers
     setSelectedDocs(scenario.onePagers);
-    // Keep tone fixed to technical
+    trackEvent('scenario_selected', {
+      scenarioId: scenario.id,
+      identity: scenario.context.identity,
+    });
+  };
+
+  const handleCustomContextChange = (next: BriefContext) => {
+    setCustomContext(next);
+    trackEvent('params_changed', {
+      identity: next.identity,
+      audience: next.audience,
+      venue: next.venue,
+      source: 'custom_builder',
+    });
+  };
+
+  const handleDirectnessChange = (next: 'diplomatic' | 'direct') => {
+    setDirectness(next);
+    trackEvent('params_changed', {
+      directness: next,
+      mode: briefMode,
+    });
   };
 
   const handleDisclaimerAccept = () => {
@@ -540,14 +597,14 @@ function App() {
           </div>
 
           {/* Mode Selector */}
-          <ModeSelector mode={briefMode} onModeChange={setBriefMode} />
+          <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
 
           {/* Custom Brief Builder (only in custom mode) */}
           {briefMode === 'custom' && dataset && (
             <CustomBriefBuilder
               dataset={dataset}
               context={customContext}
-              onContextChange={setCustomContext}
+              onContextChange={handleCustomContextChange}
               selectedKeyPoints={customKeyPoints}
               onKeyPointsChange={setCustomKeyPoints}
             />
@@ -589,7 +646,7 @@ function App() {
                   <div className="space-y-6">
                     <TemperatureControls
                       directness={directness}
-                      onDirectnessChange={setDirectness}
+                      onDirectnessChange={handleDirectnessChange}
                       levelDescription="Technical language"
                     />
 

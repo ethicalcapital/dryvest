@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { X, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { trackEvent } from '../lib/analytics';
 
 interface BetaDisclaimerProps {
   analyticsConsent: boolean;
@@ -123,6 +124,9 @@ export function BetaDisclaimer({
       }
 
       onAnalyticsConsentChange(analyticsOptIn);
+
+      trackEvent('analytics_consent_changed', { consent: analyticsOptIn });
+      trackEvent('mailing_opt_in', { optedIn: mailingOptIn });
 
       if (mailingOptIn && mailingLink) {
         window.open(mailingLink, '_blank', 'noopener,noreferrer');

@@ -3,6 +3,7 @@ import { Check } from 'lucide-react';
 import type { BriefContext } from '../lib/schema';
 import type { Dataset } from '../lib/schema';
 import { getKeyPointsForContext } from '../lib/keyPoints';
+import { trackEvent } from '../lib/analytics';
 
 interface CustomBriefBuilderProps {
   dataset: Dataset;
@@ -32,17 +33,36 @@ export function CustomBriefBuilder({
   const toggleKeyPoint = (keyPointId: string) => {
     if (selectedKeyPoints.includes(keyPointId)) {
       onKeyPointsChange(selectedKeyPoints.filter(id => id !== keyPointId));
+      trackEvent('key_point_toggled', {
+        keyPointId,
+        selected: false,
+        identity: context.identity,
+      });
     } else {
       onKeyPointsChange([...selectedKeyPoints, keyPointId]);
+      trackEvent('key_point_toggled', {
+        keyPointId,
+        selected: true,
+        identity: context.identity,
+      });
     }
   };
 
   const selectAll = () => {
     onKeyPointsChange(availableKeyPoints.map(kp => kp.id));
+    trackEvent('custom_keypoint_saved', {
+      action: 'select_all',
+      total: availableKeyPoints.length,
+      identity: context.identity,
+    });
   };
 
   const clearAll = () => {
     onKeyPointsChange([]);
+    trackEvent('custom_keypoint_saved', {
+      action: 'clear_all',
+      identity: context.identity,
+    });
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ClipboardCopy, Download } from 'lucide-react';
 
 import type { BriefContext, Dataset } from '../lib/schema';
@@ -122,6 +122,13 @@ export function FactCheckView({ dataset, context, exportData }: FactCheckViewPro
     }
   };
 
+  useEffect(() => {
+    if (!contextReports.length) return;
+    trackEvent('fact_check_context_viewed', {
+      contexts: contextReports.length,
+    });
+  }, [contextReports.length]);
+
   const handleDownload = () => {
     try {
       const blob = new Blob([combinedFactCheck], {
@@ -141,6 +148,9 @@ export function FactCheckView({ dataset, context, exportData }: FactCheckViewPro
       trackEvent('download_clicked', {
         format: 'fact-check',
         datasetVersion: dataset.version,
+        contexts: contextReports.length,
+      });
+      trackEvent('fact_check_bundle_downloaded', {
         contexts: contextReports.length,
       });
       setErrorMessage(null);

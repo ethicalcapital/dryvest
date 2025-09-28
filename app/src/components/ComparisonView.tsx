@@ -23,6 +23,7 @@ import type {
 import { GitHubFeedback } from './GitHubFeedback';
 import { ResponseQualityGuide } from './ResponseQualityGuide';
 import { InstitutionalFlashcards } from './InstitutionalFlashcards';
+import { trackEvent } from '../lib/analytics';
 import { matchesTargets } from '../lib/resolve';
 
 interface ComparisonViewProps {
@@ -106,6 +107,14 @@ export function ComparisonView({ dataset, context }: ComparisonViewProps) {
     () => entityProfiles.map(profile => profile.id),
     [entityProfiles]
   );
+
+  useEffect(() => {
+    if (!selectedEntities.length) return;
+    trackEvent('compare_context_viewed', {
+      entities: selectedEntities.slice().sort().join(','),
+      contentType: selectedContentType,
+    });
+  }, [selectedEntities, selectedContentType]);
 
   useEffect(() => {
     if (!availableEntityIds.length) return;

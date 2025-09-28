@@ -45,6 +45,10 @@ export function PDFExportButton({
         tone,
         datasetVersion: exportData.meta.datasetVersion,
       });
+      trackEvent('pdf_generated', {
+        title,
+        datasetVersion: exportData.meta.datasetVersion,
+      });
       setStatus('success');
       window.setTimeout(() => setStatus('idle'), 2000);
     } catch (error) {
