@@ -798,29 +798,6 @@ function App() {
     quickContextReady,
   ]);
 
-  if (loading && !dataset) {
-    return (
-      <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
-        <p className="text-lg font-medium">Loading institutional intelligence…</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-red-50 text-red-900 flex items-center justify-center p-6">
-        <div className="max-w-xl space-y-3">
-          <h1 className="text-2xl font-semibold">Data failed to load</h1>
-          <p>{error.message}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!dataset) {
-    return null;
-  }
-
   const handleModeChange = (nextMode: BriefMode) => {
     if (nextMode === briefMode) return;
     const now = Date.now();
@@ -923,6 +900,33 @@ function App() {
           onAccept={handleDisclaimerAccept}
           defaultAnalyticsConsent={analyticsConsent}
         />
+      </div>
+    );
+  }
+
+  if (loading && !dataset) {
+    return (
+      <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg font-medium">Loading institutional intelligence…</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-red-50 text-red-900 flex items-center justify-center p-6">
+        <div className="max-w-xl space-y-3">
+          <h1 className="text-2xl font-semibold">Data failed to load</h1>
+          <p>{error.message}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!dataset) {
+    return (
+      <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg font-medium">Preparing Dryvest dataset…</p>
       </div>
     );
   }
