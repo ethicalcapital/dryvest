@@ -10,14 +10,22 @@ interface UseDatasetResult {
 
 export function useDataset(
   version: string,
-  options?: { basePath?: string }
+  options?: { basePath?: string; enabled?: boolean }
 ): UseDatasetResult {
   const [dataset, setDataset] = useState<Dataset>();
   const [error, setError] = useState<DatasetError | Error>();
   const [loading, setLoading] = useState<boolean>(true);
   const basePath = options?.basePath;
+  const enabled = options?.enabled ?? true;
 
   useEffect(() => {
+    if (!enabled) {
+      setDataset(undefined);
+      setError(undefined);
+      setLoading(false);
+      return undefined;
+    }
+
     let isMounted = true;
     const load = async () => {
       setLoading(true);
@@ -44,7 +52,7 @@ export function useDataset(
     return () => {
       isMounted = false;
     };
-  }, [version, basePath]);
+  }, [version, basePath, enabled]);
 
   return { dataset, error, loading };
 }

@@ -111,8 +111,6 @@ function formatTaxonomyValue(value?: string | null) {
 }
 
 function App() {
-  const { dataset, error, loading } = useDataset(DATASET_VERSION);
-
   // New state for dual-mode interface
   const [briefMode, setBriefMode] = useState<BriefMode>('quick');
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
@@ -124,6 +122,15 @@ function App() {
   const quickStartRef = useRef<HTMLDivElement | null>(null);
   const modeStartRef = useRef<number>(Date.now());
   const lastContextSignatureRef = useRef<string>('');
+
+  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('dryvest:disclaimer-accepted') === 'true';
+  });
+
+  const { dataset, error, loading } = useDataset(DATASET_VERSION, {
+    enabled: hasAcceptedDisclaimer,
+  });
 
   const defaults = useMemo<BriefParams>(() => {
     if (!dataset?.schema?.taxonomies) {
@@ -144,12 +151,9 @@ function App() {
 
   const [params, setParams] = useBriefParams(defaults);
   const hasTrackedOpen = useRef(false);
-  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return window.localStorage.getItem('dryvest:disclaimer-accepted') === 'true';
-  });
-
+ 
   useEffect(() => {
+    if (!hasAcceptedDisclaimer) return;
     setAnalyticsTrackingConsent(analyticsConsent);
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(
@@ -157,15 +161,16 @@ function App() {
         analyticsConsent ? 'granted' : 'denied'
       );
     }
-  }, [analyticsConsent]);
+  }, [analyticsConsent, hasAcceptedDisclaimer]);
 
   useEffect(() => {
+    if (!hasAcceptedDisclaimer) return;
     if (!analyticsConsent || !analyticsToken) return;
     initAnalytics({ token: analyticsToken, spa: true });
-  }, [analyticsConsent, analyticsToken]);
+  }, [analyticsConsent, analyticsToken, hasAcceptedDisclaimer]);
 
   useEffect(() => {
-    if (!dataset || hasTrackedOpen.current) return;
+    if (!hasAcceptedDisclaimer || !dataset || hasTrackedOpen.current) return;
     trackEvent('app_opened', {
       version: dataset.version,
       identity: params.identity,
@@ -176,6 +181,7 @@ function App() {
     });
     hasTrackedOpen.current = true;
   }, [
+    hasAcceptedDisclaimer,
     dataset,
     params.identity,
     params.audience,
@@ -185,7 +191,7 @@ function App() {
   ]);
 
   useEffect(() => {
-    if (!dataset) return;
+    if (!hasAcceptedDisclaimer || !dataset) return;
     trackEvent('params_changed', {
       version: dataset.version,
       identity: params.identity,
@@ -196,6 +202,7 @@ function App() {
       playlist: params.playlist,
     });
   }, [
+    hasAcceptedDisclaimer,
     dataset,
     params.identity,
     params.audience,
@@ -258,6 +265,7 @@ function App() {
   );
 
   useEffect(() => {
+    if (!hasAcceptedDisclaimer) return;
     setAnalyticsContext(context, dataset?.version);
     const signature = JSON.stringify([
       context.identity ?? '',
@@ -274,7 +282,15 @@ function App() {
         venue: context.venue,
       });
     }
-  }, [context.identity, context.audience, context.venue, context.level, dataset?.version]);
+  }, [
+    hasAcceptedDisclaimer,
+    context.identity,
+    context.audience,
+    context.venue,
+    context.level,
+    context.motivation,
+    dataset?.version,
+  ]);
 
   const onePagers = useMemo(
     () =>
@@ -782,7 +798,7 @@ function App() {
           mailingOptIn,
           email: mailingOptIn ? normalizedEmail : undefined,
           meta: {
-            datasetVersion: dataset?.version,
+            datasetVersion: DATASET_VERSION,
             pathname:
               typeof window !== 'undefined'
                 ? window.location.pathname
@@ -827,14 +843,19 @@ function App() {
     }
   };
 
-  return (
-    <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
-      {!hasAcceptedDisclaimer ? (
+  if (!hasAcceptedDisclaimer) {
+    return (
+      <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
         <DisclaimerGate
           onAccept={handleDisclaimerAccept}
           defaultAnalyticsConsent={analyticsConsent}
         />
-      ) : null}
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
       <Header />
       <PalestineStatement />
 
