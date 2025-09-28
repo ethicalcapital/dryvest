@@ -122,6 +122,7 @@ The next phases focus on data normalization, ingestion, and reviewer tooling:
 5. **UX Enhancements**
    - Optional: inline follow-up contact submission confirmation via modal/toast.
    - Improve analytics dashboards for download/copy/contact events.
+   - Reintroduce a presentation tone control that works across quick/custom flows without duplicating temperature controls.
 
 If you’re interested in contributing, please open an issue or reach out via the contact form inside the app. For internal collaborators, keep dataset edits in sync with `public/data/<version>/` and coordinate version bumps in `src/App.tsx` (`DATASET_VERSION`).
 
