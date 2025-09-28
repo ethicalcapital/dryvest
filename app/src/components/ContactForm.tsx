@@ -92,11 +92,11 @@ export function ContactForm({
   return (
     <div className="rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm">
       <h3 className="text-base font-heading font-semibold text-slate-900">
-        Need deeper follow-up?
+        Share context or corrections
       </h3>
       <p className="mt-1 text-sm text-slate-600">
-        Send us campaign context or corrections. Optional fields help us route to the
-        right analyst. We store submissions securely and respond within two business days.
+        We review every note to refine Dryvest. We don't promise 1:1 replies, but you can
+        opt into briefing updates and dataset release emails below.
       </p>
 
       <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
@@ -112,14 +112,15 @@ export function ContactForm({
             />
           </label>
           <label className="text-sm text-slate-600">
-            Email (only if you want a reply)
+            Email for updates (enabled when you opt in)
             <input
               type="email"
               autoComplete="email"
               inputMode="email"
               value={email}
               onChange={event => setEmail(event.target.value)}
-              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+              disabled={!newsletterOptIn}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </label>
         </div>
@@ -141,12 +142,18 @@ export function ContactForm({
           <input
             type="checkbox"
             checked={newsletterOptIn}
-            onChange={event => setNewsletterOptIn(event.target.checked)}
+            onChange={event => {
+              const checked = event.target.checked;
+              setNewsletterOptIn(checked);
+              if (!checked) {
+                setEmail('');
+              }
+            }}
             className="mt-1 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
           />
           <span>
-            Send me the Ethical Capital briefing list. We share dataset updates and
-            campaign wins (low-volume, opt out anytime).
+            Send me Ethical Capital's Dryvest updates. Low-volume release notes and campaign
+            wins; you can unsubscribe anytime.
           </span>
         </label>
 

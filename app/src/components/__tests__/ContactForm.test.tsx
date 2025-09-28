@@ -77,15 +77,19 @@ describe('ContactForm', () => {
     renderForm();
 
     await user.type(screen.getByLabelText(/name/i), ' Ali Activist ');
-    await user.type(
-      screen.getByLabelText(/email/i),
-      'team@ethicalcapital.com'
+    const emailField = screen.getByLabelText(/email for updates/i);
+    expect(emailField).toBeDisabled();
+
+    await user.click(
+      screen.getByText(/send me ethical capital's dryvest updates/i)
     );
+    expect(emailField).toBeEnabled();
+
+    await user.type(emailField, 'team@ethicalcapital.com');
     await user.type(
       screen.getByLabelText(/what do you need/i),
       'Please review the sovereign wealth exclusions update.'
     );
-    await user.click(screen.getByText(/send me the ethical capital briefing list/i));
 
     await user.click(getSubmitButton());
 

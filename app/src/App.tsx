@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { CheckCircle2, Circle, Clock3 } from 'lucide-react';
 import './App.css';
 import { useDataset } from './hooks/useDataset';
 import { useBriefParams } from './hooks/useBriefParams';
@@ -65,6 +66,17 @@ const toNextStepNodes = (nodes: Node[]) =>
     (node): node is Extract<Node, { type: 'next_step' }> =>
       node.type === 'next_step'
   );
+
+type StepStatus = 'done' | 'active' | 'pending';
+
+function formatTaxonomyValue(value?: string | null) {
+  if (!value) return 'Not set';
+  return value
+    .split(/[_-]/g)
+    .filter(Boolean)
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
 
 function App() {
   const { dataset, error, loading } = useDataset(DATASET_VERSION);
@@ -245,6 +257,181 @@ function App() {
         ),
     [dataset, selectedDocs]
   );
+
+  const isQuickMode = briefMode === 'quick';
+  const customContextReady = Boolean(
+    customContext.identity && customContext.audience && customContext.venue
+  );
+  const scenarioReady = Boolean(selectedScenario);
+  const exportsReady = selectedOnePagers.length > 0;
+
+  const sessionSteps = useMemo(
+    () => {
+      const modeMeta = (() => {
+        switch (briefMode) {
+          case 'custom':
+            return {
+              title: 'Custom Brief mode',
+              description:
+                'Curate each key point and supporting evidence to match your campaign.',
+              badge: 'Advanced',
+            };
+          case 'compare':
+            return {
+              title: 'Compare Institutions',
+              description:
+                'Review how different institution types respond so you can tailor asks.',
+              badge: 'Analysis',
+            };
+          case 'fact_check':
+            return {
+              title: 'Fact Check workspace',
+              description:
+                'Audit every citation and export a parser-friendly reference dossier.',
+              badge: 'Quality',
+            };
+          default:
+            return {
+              title: 'Quick Brief active',
+              description:
+                'Default guided flow with scenario-specific institutional language.',
+              badge: 'Default flow',
+            };
+        }
+      })();
+
+      const contextMeta = (() => {
+        if (isQuickMode) {
+          if (scenarioReady && selectedScenario) {
+            return {
+              status: 'done' as StepStatus,
+              title: 'Scenario locked in',
+              description: selectedScenario.title,
+              helper: selectedScenario.description,
+            };
+          }
+          return {
+            status: 'active' as StepStatus,
+            title: 'Pick your scenario',
+            description: 'Choose the institution journey that matches your campaign.',
+            helper: 'Scenarios tune tone, attachments, and implementation detail.',
+          };
+        }
+
+        if (customContextReady) {
+          const parts = [
+            customContext.identity
+              ? `Identity: ${formatTaxonomyValue(customContext.identity)}`
+              : null,
+            customContext.audience
+              ? `Audience: ${formatTaxonomyValue(customContext.audience)}`
+              : null,
+            customContext.venue
+              ? `Venue: ${formatTaxonomyValue(customContext.venue)}`
+              : null,
+          ].filter(Boolean);
+
+          return {
+            status: 'done' as StepStatus,
+            title: 'Context ready',
+            description: parts.join(' • ') || 'Custom context captured.',
+            helper: 'Adjust any field to explore alternate governance paths.',
+          };
+        }
+
+        return {
+          status: 'active' as StepStatus,
+          title: 'Set your context',
+          description:
+            'Add identity, audience, and venue so outputs reference the right process.',
+          helper: 'Dryvest uses these details to lock in tone and procedural steps.',
+        };
+      })();
+
+      const exportMeta = exportsReady
+        ? {
+            status: 'done' as StepStatus,
+            title: 'Exports queued',
+            description: `${selectedOnePagers.length} supporting attachment${
+              selectedOnePagers.length === 1 ? '' : 's'
+            } ready`,
+            helper: 'Download or share directly from the Actions panel when needed.',
+          }
+        : {
+            status: 'pending' as StepStatus,
+            title: 'Prep your exports',
+            description:
+              'Select attachments, downloads, or copies once your brief feels ready.',
+            helper: 'Use the right rail to add one-pagers or export PDF/Markdown.',
+          };
+
+      return [
+        {
+          id: 'approach',
+          step: 'Step 1',
+          status: 'done' as StepStatus,
+          title: modeMeta.title,
+          description: modeMeta.description,
+          badge: modeMeta.badge,
+        },
+        {
+          id: 'context',
+          step: 'Step 2',
+          ...contextMeta,
+        },
+        {
+          id: 'exports',
+          step: 'Step 3',
+          ...exportMeta,
+        },
+      ];
+    }, [
+      briefMode,
+      customContext.identity,
+      customContext.audience,
+      customContext.venue,
+      exportsReady,
+      isQuickMode,
+      scenarioReady,
+      selectedOnePagers.length,
+      selectedScenario,
+    ]) as Array<
+    {
+      id: string;
+      step: string;
+      status: StepStatus;
+      title: string;
+      description: string;
+      helper?: string;
+      badge?: string;
+    }
+  >;
+
+  const getStatusVisual = (status: StepStatus) => {
+    switch (status) {
+      case 'done':
+        return {
+          container: 'border-emerald-200 bg-emerald-50/70',
+          iconWrapper: 'bg-emerald-100 text-emerald-600',
+          stepClass: 'text-emerald-700',
+          icon: <CheckCircle2 className="h-5 w-5" />,
+        };
+      case 'active':
+        return {
+          container: 'border-indigo-200 bg-indigo-50/70',
+          iconWrapper: 'bg-indigo-100 text-indigo-600',
+          stepClass: 'text-indigo-700',
+          icon: <Clock3 className="h-5 w-5" />,
+        };
+      default:
+        return {
+          container: 'border-slate-200 bg-white',
+          iconWrapper: 'bg-slate-100 text-slate-500',
+          stepClass: 'text-slate-600',
+          icon: <Circle className="h-5 w-5" />,
+        };
+    }
+  };
 
 
   const keyPointPlaylist = useMemo(() => {
@@ -569,28 +756,97 @@ function App() {
                 </a>
               </div>
             </div>
-            <div className="mt-6 rounded-xl border border-indigo-100 bg-white/80 p-6 shadow-sm">
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="max-w-2xl space-y-2">
-                  <p className="text-sm uppercase tracking-wide font-heading text-indigo-600">
-                    How Dryvest helps
-                  </p>
-                  <p className="text-sm text-slate-600">
-                    Choose the briefing flow that fits your meeting. Quick Brief assembles an institutional script in under a minute, Custom Brief lets you curate the strategy, and Compare shows how different institutions respond.
-                  </p>
+            <div className="mt-6 rounded-xl border border-indigo-100 bg-white/85 p-6 shadow-sm">
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div className="max-w-3xl space-y-2">
+                    <p className="text-sm uppercase tracking-wide font-heading text-indigo-600">
+                      How Dryvest helps
+                    </p>
+                    <p className="text-sm text-slate-600">
+                      Quick Brief opens automatically so you can drop straight into institutional language.
+                      Switch modes whenever you need deliberate composition, benchmarking comparisons,
+                      or a full documentation audit.
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-start gap-3 md:items-end">
+                    {isQuickMode ? (
+                      scenarioReady && selectedScenario ? (
+                        <div className="flex w-full max-w-xs flex-col gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-4 py-3 text-left md:text-right">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-indigo-700">
+                            Quick Brief in progress
+                          </span>
+                          <p className="text-sm font-heading font-semibold text-slate-900">
+                            {selectedScenario.title}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={handleQuickStart}
+                            className="inline-flex items-center justify-center rounded-md border border-indigo-300 px-3 py-1.5 text-xs font-medium text-indigo-700 transition hover:border-indigo-400 hover:bg-white"
+                          >
+                            Jump to outputs
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={handleQuickStart}
+                          className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
+                          style={{ backgroundColor: 'var(--ecic-purple)' }}
+                        >
+                          Browse Quick Brief scenarios
+                        </button>
+                      )
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={handleQuickStart}
+                        className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
+                        style={{ backgroundColor: 'var(--ecic-purple)' }}
+                      >
+                        Return to Quick Brief
+                      </button>
+                    )}
+                    <span className="text-xs text-slate-500">
+                      Educational intelligence – not investment advice.
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col items-start gap-2 md:items-end">
-                  <button
-                    type="button"
-                    onClick={handleQuickStart}
-                    className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                    style={{ backgroundColor: 'var(--ecic-purple)' }}
-                  >
-                    Start with Quick Brief
-                  </button>
-                  <span className="text-xs text-slate-500">
-                    Educational intelligence – not investment advice.
-                  </span>
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {sessionSteps.map(step => {
+                    const visuals = getStatusVisual(step.status);
+                    return (
+                      <div
+                        key={step.id}
+                        className={`rounded-lg border p-4 transition ${visuals.container}`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div
+                            className={`flex h-9 w-9 items-center justify-center rounded-full ${visuals.iconWrapper}`}
+                          >
+                            {visuals.icon}
+                          </div>
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide">
+                              <span className={visuals.stepClass}>{step.step}</span>
+                              {step.badge ? (
+                                <span className="rounded-full border border-current/40 px-2 py-0.5 text-[10px] font-semibold tracking-wide">
+                                  {step.badge}
+                                </span>
+                              ) : null}
+                            </div>
+                            <h3 className="text-sm font-heading font-semibold text-slate-900">
+                              {step.title}
+                            </h3>
+                            <p className="text-sm text-slate-600">{step.description}</p>
+                            {step.helper ? (
+                              <p className="text-xs text-slate-500">{step.helper}</p>
+                            ) : null}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

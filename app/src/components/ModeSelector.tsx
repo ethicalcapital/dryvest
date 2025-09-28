@@ -42,7 +42,18 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
               <Zap size={20} />
             </div>
             <div>
-              <h3 className="font-heading font-semibold mb-1">Quick Brief</h3>
+              <h3 className="font-heading font-semibold mb-1 flex items-center gap-2">
+                Quick Brief
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                    mode === 'quick'
+                      ? 'bg-white text-indigo-700'
+                      : 'bg-indigo-50 text-indigo-700'
+                  }`}
+                >
+                  Default
+                </span>
+              </h3>
               <p className="text-sm text-slate-600">
                 Understand where your proposal will land with your specific institution type.
                 Get the context that makes the difference between yes and no.
