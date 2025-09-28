@@ -57,9 +57,9 @@ export function QuickBriefContextPanel({
       <StepSection
         title="Which institution are you speaking for?"
         step="1"
-        helper="Swap the default individual profile for the portfolio you're targeting."
+        helper="Choose the investor type you need to brief."
       >
-        <div className="grid grid-cols-1 gap-2">
+        <div className="space-y-2">
           {identities.map(value => {
             const active = params.identity === value;
             return (
@@ -69,8 +69,8 @@ export function QuickBriefContextPanel({
                 label={formatTaxonomyValue(value)}
                 description={
                   active
-                    ? 'Currently shaping language for this investor type.'
-                    : 'Preview how Dryvest describes this investor.'
+                    ? 'Active context'
+                    : 'Set brief to this institution'
                 }
                 onClick={() => onParamChange({ identity: value })}
               />
@@ -82,9 +82,9 @@ export function QuickBriefContextPanel({
       <StepSection
         title="Who has to say yes?"
         step="2"
-        helper="Pick the governing audience so procedural steps land correctly."
+        helper="Who has to approve or implement the decision?"
       >
-        <div className="grid grid-cols-1 gap-2">
+        <div className="space-y-2">
           {audiences.map(value => {
             const active = params.audience === value;
             return (
@@ -94,8 +94,8 @@ export function QuickBriefContextPanel({
                 label={formatTaxonomyValue(value)}
                 description={
                   active
-                    ? 'Briefing tuned to this room.'
-                    : 'See how the story changes when another room is in charge.'
+                    ? 'Active context'
+                    : 'Switch briefing to this audience'
                 }
                 onClick={() => onParamChange({ audience: value })}
               />
