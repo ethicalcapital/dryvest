@@ -1,169 +1,210 @@
-import {
-  Zap,
-  Wrench,
-  BarChart3,
-  ClipboardList,
-  Sparkles,
-  MessageSquareQuote,
-} from 'lucide-react';
+import { Zap, Wrench, BarChart3, ClipboardList } from 'lucide-react';
 
 export type BriefMode = 'quick' | 'custom' | 'compare' | 'fact_check';
 
 interface ModeSelectorProps {
   mode: BriefMode;
   onModeChange: (mode: BriefMode) => void;
-  recommendedMode?: BriefMode;
-  insight?: string;
-  onQuickStart?: () => void;
 }
 
-const MODE_DETAILS: Record<BriefMode, {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  highlights: string;
-}> = {
-  quick: {
-    title: 'Quick Brief',
-    description:
-      'Drop the right institution-specific language on demand with scenario-aware attachments.',
-    icon: <Zap size={18} />, 
-    highlights: 'Instant scripts • scenario-driven • ready for trustees',
-  },
-  custom: {
-    title: 'Custom Brief',
-    description:
-      'Compose surgical messaging for each stakeholder while keeping citations aligned.',
-    icon: <Wrench size={18} />, 
-    highlights: 'Modular decks • tone control • campaign-first',
-  },
-  compare: {
-    title: 'Compare Institutions',
-    description:
-      'Study the bureaucracy: understand which committees sign, stall, or escalate your demand.',
-    icon: <BarChart3 size={18} />, 
-    highlights: 'Precedents • governance map • risk narratives',
-  },
-  fact_check: {
-    title: 'Fact Check',
-    description:
-      'Export parser-ready citations, QA checklists, and attachments for audit trails.',
-    icon: <ClipboardList size={18} />, 
-    highlights: 'Attribution-first • parser friendly • audit proof',
-  },
-};
-
-const RECOMMENDATION_COPY: Record<BriefMode, string> = {
-  quick: 'Fastest route to institutional language when you need a board-ready script.',
-  custom: 'Curate each plank of your campaign without losing citation discipline.',
-  compare: 'Understand how peers responded so you can escalate with evidence.',
-  fact_check: 'Hand auditors, faculty, and journalists the receipts they expect.',
-};
-
-export function ModeSelector({
-  mode,
-  onModeChange,
-  recommendedMode,
-  insight,
-  onQuickStart,
-}: ModeSelectorProps) {
-  const handleSelect = (nextMode: BriefMode) => {
-    if (nextMode === 'quick' && onQuickStart) {
-      onQuickStart();
-      return;
-    }
-    if (nextMode !== mode) {
-      onModeChange(nextMode);
-    }
-  };
-
+export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-sm">
-      <div className="flex items-start justify-between gap-3">
-        <h2 className="text-lg font-heading font-semibold text-slate-900">
-          Choose your pathway
-        </h2>
-        {insight ? (
-          <div className="flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">
-            <MessageSquareQuote size={14} className="text-slate-500" />
-            <span className="line-clamp-1">“{insight}”</span>
-          </div>
-        ) : null}
-      </div>
-
-      {recommendedMode ? (
-        <div className="mt-4 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
+    <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm mb-6">
+      <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">
+        Choose Your Approach
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Quick Brief */}
+        <button
+          onClick={() => onModeChange('quick')}
+          className={`p-4 rounded-lg border-2 text-left transition-all ${
+            mode === 'quick'
+              ? 'bg-indigo-50 text-indigo-900'
+              : 'border-slate-200 bg-white hover:bg-indigo-50'
+          }`}
+          style={{
+            borderColor:
+              mode === 'quick' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'quick' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+          }}
+        >
           <div className="flex items-start gap-3">
-            <Sparkles size={18} className="text-indigo-600" />
-            <div className="space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-600">
-                Recommended
-              </p>
-              <p className="text-sm font-heading font-semibold text-slate-900">
-                {MODE_DETAILS[recommendedMode].title}
-              </p>
-              <p className="text-xs text-indigo-700">
-                {RECOMMENDATION_COPY[recommendedMode]}
-              </p>
-              <button
-                type="button"
-                onClick={() => handleSelect(recommendedMode)}
-                className="inline-flex items-center gap-2 rounded-md border border-indigo-300 bg-white px-3 py-1.5 text-xs font-semibold text-indigo-700 transition hover:border-indigo-400"
-              >
-                Activate {MODE_DETAILS[recommendedMode].title}
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
-      <div className="mt-5 space-y-3">
-        {(Object.keys(MODE_DETAILS) as BriefMode[]).map(option => {
-          const details = MODE_DETAILS[option];
-          const isActive = option === mode;
-          const isRecommended = option === recommendedMode;
-          return (
-            <button
-              key={option}
-              type="button"
-              onClick={() => handleSelect(option)}
-              className={`w-full rounded-xl border text-left transition ${
-                isActive
-                  ? 'border-indigo-500 bg-indigo-50 shadow-sm'
-                  : 'border-slate-200 bg-white hover:border-indigo-200 hover:bg-indigo-50/60'
+            <div
+              className={`p-2 rounded-lg ${
+                mode === 'quick' ? 'text-white' : 'bg-slate-100 text-slate-600'
               }`}
+              style={{
+                backgroundColor:
+                  mode === 'quick' ? 'var(--ecic-purple)' : undefined,
+              }}
             >
-              <div className="flex items-start gap-3 p-4">
-                <div
-                  className={`rounded-lg p-2 ${
-                    isActive ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+              <Zap size={20} />
+            </div>
+            <div>
+              <h3 className="font-heading font-semibold mb-1 flex items-center gap-2">
+                Quick Brief
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                    mode === 'quick'
+                      ? 'bg-white text-indigo-700'
+                      : 'bg-indigo-50 text-indigo-700'
                   }`}
                 >
-                  {details.icon}
-                </div>
-                <div className="space-y-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-heading font-semibold text-slate-900">
-                      {details.title}
-                    </h3>
-                    {isActive ? (
-                      <span className="rounded-full bg-indigo-600/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-700">
-                        Active
-                      </span>
-                    ) : null}
-                    {isRecommended && !isActive ? (
-                      <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-700">
-                        Suggested
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="text-sm text-slate-700">{details.description}</p>
-                  <p className="text-xs text-slate-500">{details.highlights}</p>
-                </div>
+                  Default
+                </span>
+              </h3>
+              <p className="text-sm text-slate-600">
+                Understand where your proposal will land with your specific institution type.
+                Get the context that makes the difference between yes and no.
+              </p>
+              <div className="mt-2 text-xs text-slate-500">
+                ✓ Institution-specific • ✓ Context-aware • ✓ Ready to use
               </div>
-            </button>
-          );
-        })}
+            </div>
+          </div>
+        </button>
+
+        {/* Custom Brief */}
+        <button
+          onClick={() => onModeChange('custom')}
+          className={`p-4 rounded-lg border-2 text-left transition-all ${
+            mode === 'custom'
+              ? 'bg-indigo-50 text-indigo-900'
+              : 'border-slate-200 bg-white hover:bg-indigo-50'
+          }`}
+          style={{
+            borderColor:
+              mode === 'custom' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'custom' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+          }}
+        >
+          <div className="flex items-start gap-3">
+            <div
+              className={`p-2 rounded-lg ${
+                mode === 'custom' ? 'text-white' : 'bg-slate-100 text-slate-600'
+              }`}
+              style={{
+                backgroundColor:
+                  mode === 'custom' ? 'var(--ecic-purple)' : undefined,
+              }}
+            >
+              <Wrench size={20} />
+            </div>
+            <div>
+              <h3 className="font-heading font-semibold mb-1">Custom Brief</h3>
+              <p className="text-sm text-slate-600">
+                Build detailed strategy documents for your specific situation.
+                Use policy language that makes change feel inevitable, not optional.
+              </p>
+              <div className="mt-2 text-xs text-slate-500">
+                ✓ Technical language • ✓ Custom mix • ✓ Strategy-focused
+              </div>
+            </div>
+          </div>
+        </button>
+
+        {/* Compare Mode */}
+        <button
+          onClick={() => onModeChange('compare')}
+          className={`p-4 rounded-lg border-2 text-left transition-all ${
+            mode === 'compare'
+              ? 'bg-indigo-50 text-indigo-900'
+              : 'border-slate-200 bg-white hover:bg-indigo-50'
+          }`}
+          style={{
+            borderColor:
+              mode === 'compare' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'compare' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+          }}
+        >
+          <div className="flex items-start gap-3">
+            <div
+              className={`p-2 rounded-lg ${
+                mode === 'compare'
+                  ? 'text-white'
+                  : 'bg-slate-100 text-slate-600'
+              }`}
+              style={{
+                backgroundColor:
+                  mode === 'compare' ? 'var(--ecic-purple)' : undefined,
+              }}
+            >
+              <BarChart3 size={20} />
+            </div>
+            <div>
+              <h3 className="font-heading font-semibold mb-1">
+                Compare Institutions
+              </h3>
+              <p className="text-sm text-slate-600">
+                See how different institutions routinely handle these policies.
+                Learn which bureaucratic processes work where.
+              </p>
+              <div className="mt-2 text-xs text-slate-500">
+                ✓ Standard procedures • ✓ Institution patterns • ✓ Proven processes
+              </div>
+            </div>
+          </div>
+        </button>
+
+        {/* Fact Check */}
+        <button
+          onClick={() => onModeChange('fact_check')}
+          className={`p-4 rounded-lg border-2 text-left transition-all ${
+            mode === 'fact_check'
+              ? 'bg-indigo-50 text-indigo-900'
+              : 'border-slate-200 bg-white hover:bg-indigo-50'
+          }`}
+          style={{
+            borderColor:
+              mode === 'fact_check' ? 'var(--ecic-purple)' : 'var(--border-gray)',
+            backgroundColor:
+              mode === 'fact_check' ? 'rgba(88, 28, 135, 0.05)' : undefined,
+          }}
+        >
+          <div className="flex items-start gap-3">
+            <div
+              className={`p-2 rounded-lg ${
+                mode === 'fact_check'
+                  ? 'text-white'
+                  : 'bg-slate-100 text-slate-600'
+              }`}
+              style={{
+                backgroundColor:
+                  mode === 'fact_check' ? 'var(--ecic-purple)' : undefined,
+              }}
+            >
+              <ClipboardList size={20} />
+            </div>
+            <div>
+              <h3 className="font-heading font-semibold mb-1">Fact Check</h3>
+              <p className="text-sm text-slate-600">
+                Export a fully-attributed briefing digest. Audit every claim,
+                citation, template, and attachment before you circulate material.
+              </p>
+              <div className="mt-2 text-xs text-slate-500">
+                ✓ Exhaustive references • ✓ QA checklist • ✓ Parser-friendly syntax
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      {/* Educational reminder */}
+      <div
+        className="mt-4 p-3 rounded-lg border"
+        style={{
+          backgroundColor: 'rgba(245, 158, 11, 0.05)',
+          borderColor: 'var(--ecic-amber)',
+        }}
+      >
+        <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
+          <strong>Bureaucratic beats dramatic.</strong> This intelligence helps you
+          frame moral demands as routine policy implementation.
+          Use for campaign strategy, not investment advice.
+        </p>
       </div>
     </div>
   );
