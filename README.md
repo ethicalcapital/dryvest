@@ -95,6 +95,23 @@ The UI now queries D1 instead of bundling the dataset into the frontend. To prov
 
 5. **API shape**: `GET /api/dataset?version=<id>` returns `{ version, manifest, schema, nodes, playlists, sources, assertions, entities }`. The frontend falls back to the legacy JSON bundle only if the API call fails (e.g., D1 not seeded during local dev).
 
+### Spreadsheet-friendly exports
+
+If teammates need to audit the content in a spreadsheet, use the helper script to flatten the dataset into CSV files:
+
+```bash
+# default version 2025-09-27, reads from app/public/data/…
+node scripts/export-dataset-csv.js
+
+# specify a version
+node scripts/export-dataset-csv.js --version 2025-09-27
+
+# or hit a running API (e.g., wrangler pages dev)
+node scripts/export-dataset-csv.js --api http://localhost:8788/api/dataset
+```
+
+CSV files are written to `exports/` (ignored by git). Each CSV has columns expanded into plain English—targets, assertions, evidence, etc.—so the data can be opened directly in Excel/Sheets.
+
 ## Cloudflare Workers & KV
 
 - `functions/api/contact.ts` accepts POST JSON `{ name?, email?, message, newsletterOptIn?, meta? }`, stores it in the `HOOKS` KV namespace (production + preview binding `caf4e19f1388423fade84340c27a929c`), and POSTs to `env.LACRM_WEBHOOK_URL` if configured.

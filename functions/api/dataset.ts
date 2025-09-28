@@ -33,6 +33,7 @@ const toJsonArray = async (
 export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
   const url = new URL(request.url);
   const requestedVersion = url.searchParams.get('version') ?? undefined;
+  const pretty = url.searchParams.get('pretty') === '1';
 
   const latestRow = await env.DRYVEST_DB.prepare<DatasetVersionRow>(
     requestedVersion
@@ -62,27 +63,37 @@ export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
   const [nodes, playlists, sources, assertions, entities] = await Promise.all([
     toJsonArray(
       env.DRYVEST_DB
-        .prepare<PayloadRow>('SELECT payload FROM nodes WHERE version = ?')
+        .prepare<PayloadRow>(
+          'SELECT payload FROM nodes WHERE version = ? ORDER BY json_extract(payload, "$.id")'
+        )
         .bind(version)
     ),
     toJsonArray(
       env.DRYVEST_DB
-        .prepare<PayloadRow>('SELECT payload FROM playlists WHERE version = ?')
+        .prepare<PayloadRow>(
+          'SELECT payload FROM playlists WHERE version = ? ORDER BY json_extract(payload, "$.id")'
+        )
         .bind(version)
     ),
     toJsonArray(
       env.DRYVEST_DB
-        .prepare<PayloadRow>('SELECT payload FROM sources WHERE version = ?')
+        .prepare<PayloadRow>(
+          'SELECT payload FROM sources WHERE version = ? ORDER BY json_extract(payload, "$.id")'
+        )
         .bind(version)
     ),
     toJsonArray(
       env.DRYVEST_DB
-        .prepare<PayloadRow>('SELECT payload FROM assertions WHERE version = ?')
+        .prepare<PayloadRow>(
+          'SELECT payload FROM assertions WHERE version = ? ORDER BY json_extract(payload, "$.id")'
+        )
         .bind(version)
     ),
     toJsonArray(
       env.DRYVEST_DB
-        .prepare<PayloadRow>('SELECT payload FROM entities WHERE version = ?')
+        .prepare<PayloadRow>(
+          'SELECT payload FROM entities WHERE version = ? ORDER BY json_extract(payload, "$.id")'
+        )
         .bind(version)
     ),
   ]);
@@ -108,7 +119,11 @@ export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
     entities,
   };
 
-  return new Response(JSON.stringify(dataset), {
+  const body = pretty
+    ? JSON.stringify(dataset, null, 2)
+    : JSON.stringify(dataset);
+
+  return new Response(body, {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Access-Control-Allow-Origin': '*',

@@ -1,6 +1,7 @@
 # Node artifacts
 app/node_modules/
 node_modules/
+exports/
 
 app/dist/
 app/.wrangler/
