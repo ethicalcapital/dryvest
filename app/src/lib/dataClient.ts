@@ -212,8 +212,11 @@ export async function loadDataset(
   try {
     return await loadDatasetFromApi(version, options?.fallbackVersion);
   } catch (error) {
-    console.warn('Failed to load dataset from API, attempting legacy bundle', error);
-    return loadDatasetFromStatic(version, options);
+    if (options?.basePath) {
+      console.warn('Dataset API failed, falling back to legacy bundle', error);
+      return loadDatasetFromStatic(version, options);
+    }
+    throw new DatasetError('Failed to load dataset from API', error);
   }
 }
 

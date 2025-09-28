@@ -149,6 +149,20 @@ export default {
     }
 
     const assets = env.ASSETS as Fetcher;
-    return assets.fetch(request);
+    let response = await assets.fetch(request);
+
+    if (
+      response.status === 404 &&
+      request.method === 'GET' &&
+      request.headers.get('accept')?.includes('text/html')
+    ) {
+      const url = new URL(request.url);
+      if (!url.pathname.startsWith('/client/')) {
+        url.pathname = '/client/index.html';
+        response = await assets.fetch(new Request(url.toString(), request));
+      }
+    }
+
+    return response;
   },
 };
