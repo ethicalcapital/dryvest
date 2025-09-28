@@ -1,6 +1,9 @@
 name = "dryvest"
 compatibility_date = "2024-11-12"
 
+pages_build_output_dir = "app/dist"
+pages_functions_dir = "functions"
+
 [assets]
 directory = "app/dist"
 
