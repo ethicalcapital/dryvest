@@ -111,6 +111,9 @@ const SUPPORTED_TEMPLATE_IDS = [
   'tmpl_foundation_investment_committee_update',
   'tmpl_public_board_resolution',
   'tmpl_public_meeting_brief',
+  'tmpl_policy_duty_of_care_clause',
+  'tmpl_policy_duty_of_loyalty_clause',
+  'tmpl_policy_beneficiary_consultation_clause',
 ];
 
 function App() {

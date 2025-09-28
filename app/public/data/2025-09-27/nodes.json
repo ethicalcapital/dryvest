@@ -4048,6 +4048,105 @@
       "markdownPath": "content/policy_framework.md"
     },
     {
+      "id": "tmpl_policy_duty_of_care_clause",
+      "type": "template_snippet",
+      "title": "Policy clause: duty of care",
+      "markdown": "\"The Manager must use reasonable care and prudent judgment when managing the assets of the institution. This duty of prudence requires the systematic and explicit inclusion of financially material Environmental, Social, and Governance (ESG) factors into all investment analysis and investment decision-making processes, consistent with the investment time horizons of the beneficiaries.\"",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff"
+        ]
+      },
+      "citations": [
+        "src_cfa_asset_manager_code",
+        "src_pri_fiduciary_duty_21st"
+      ]
+    },
+    {
+      "id": "tmpl_policy_duty_of_loyalty_clause",
+      "type": "template_snippet",
+      "title": "Policy clause: duty of loyalty",
+      "markdown": "\"The Manager must place the interests of the institution's beneficiaries before their own interests at all times. This duty of loyalty requires the Manager to evaluate both product-based and conduct-based risks within the portfolio and to act on undiversifiable systemic threats—such as climate change and biodiversity loss—that can impair long-term economic performance and, consequently, beneficiary outcomes.\"",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff"
+        ]
+      },
+      "citations": [
+        "src_pri_fiduciary_duty_21st",
+        "src_oecd_governance_principles"
+      ]
+    },
+    {
+      "id": "tmpl_policy_beneficiary_consultation_clause",
+      "type": "template_snippet",
+      "title": "Policy clause: beneficiary consultation",
+      "markdown": "\"The Manager will establish and maintain a formal process to surface and document the sustainability-related preferences of the institution's beneficiaries. Those preferences will inform investment analysis, stewardship priorities, and reporting—regardless of whether the preferences are deemed financially material in the short term—and the Manager will provide periodic updates describing how they were incorporated.\"",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "stakeholders"
+        ]
+      },
+      "citations": [
+        "src_pri_fiduciary_duty_21st"
+      ]
+    },
+    {
+      "id": "kp_policy_define_esg_risk",
+      "type": "key_point",
+      "title": "ESG risk blends conduct failures and systemic shocks",
+      "body": "Product exclusions flag direct links to contested revenue, while conduct screens surface legal, regulatory, and reputational breaches. Systemic risks—climate transition, biodiversity collapse, social unrest—propagate through markets even when a portfolio is diversified. Policy must capture both layers so trustees can evidence duty of care and loyalty in a single narrative.",
+      "citations": [
+        "src_pri_fiduciary_duty_21st",
+        "src_cfa_asset_manager_code",
+        "src_coso_erm"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff"
+        ]
+      },
+      "tags": [
+        "esg",
+        "risk_management"
+      ]
+    },
+    {
       "id": "kp_policy_modern_fiduciary_mandate",
       "type": "key_point",
       "title": "Modern fiduciary duty treats material ESG as mandatory",

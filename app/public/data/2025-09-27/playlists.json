@@ -2990,6 +2990,9 @@
       },
       "items": [
         {
+          "ref": "kp_policy_define_esg_risk"
+        },
+        {
           "ref": "kp_policy_modern_fiduciary_mandate"
         },
         {
@@ -3056,6 +3059,36 @@
         },
         {
           "ref": "step_policy_coso_gap_assessment"
+        }
+      ]
+    },
+    {
+      "id": "templates_policy_clauses",
+      "kind": "templates",
+      "title": "Policy Clauses: Duty and Beneficiary Process",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "tmpl_policy_duty_of_care_clause"
+        },
+        {
+          "ref": "tmpl_policy_duty_of_loyalty_clause"
+        },
+        {
+          "ref": "tmpl_policy_beneficiary_consultation_clause"
         }
       ]
     }
