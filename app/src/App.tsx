@@ -677,7 +677,7 @@ function App() {
             motivationOptions={motivationOptions}
             selectedDocs={selectedDocs}
             toggleDoc={toggleDoc}
-            onePagers={onePagers}
+            modelDocuments={onePagers}
           />
           {quickContextReady
             ? renderPreviewAndActions('stack', exportData)
@@ -721,7 +721,7 @@ function App() {
             motivationOptions={motivationOptions}
             selectedDocs={selectedDocs}
             toggleDoc={toggleDoc}
-            onePagers={onePagers}
+            modelDocuments={onePagers}
           />
           {quickContextReady ? (
             <>
@@ -749,7 +749,7 @@ function App() {
             motivationOptions={motivationOptions}
             selectedDocs={selectedDocs}
             toggleDoc={toggleDoc}
-            onePagers={onePagers}
+            modelDocuments={onePagers}
           />
           {quickContextReady
             ? (

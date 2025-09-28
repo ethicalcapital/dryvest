@@ -2444,6 +2444,27 @@
       "markdownPath": "content/performance_reality_check.md"
     },
     {
+      "id": "one_pager_divestment_exposure_assessment",
+      "type": "one_pager",
+      "title": "Model Document: Divestment Exposure Assessment",
+      "description": "Step-by-step template for documenting conduct risk, tracking error, and policy motions.",
+      "markdownPath": "content/model_divestment_exposure_assessment.md",
+      "targets": {
+        "identity": [
+          "corporate_pension",
+          "public_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff"
+        ]
+      }
+    },
+    {
       "id": "opener_central_bank_base",
       "type": "opener",
       "text": "Official institutions can clarify mandate limits, apply best-efforts exclusions, and provide transparent rationales and constraints.",

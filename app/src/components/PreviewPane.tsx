@@ -224,7 +224,7 @@ export function PreviewPane({
       ) : null}
 
       {selectedOnePagers.length ? (
-        <Section title="Attachments" anchor="attachments">
+        <Section title="Model Documents" anchor="attachments">
           <div className="space-y-3">
             {selectedOnePagers.map(doc => (
               <article

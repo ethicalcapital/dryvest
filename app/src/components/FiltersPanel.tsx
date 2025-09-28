@@ -13,7 +13,7 @@ import {
   Globe,
   ChevronDown,
 } from 'lucide-react';
-import { OnePagerGallery } from './OnePagerGallery';
+import { ModelDocumentGallery } from './ModelDocumentGallery';
 import clsx from 'clsx';
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import type { Dataset } from '../lib/schema';
@@ -296,13 +296,13 @@ export function FiltersPanel({
 
       <StepCard
         step={4}
-        title="Attach one-pagers (optional)"
-        helper="Drop in supporting documents to hand over after the meeting."
+        title="Add model documents"
+        helper="Select the templates you want to send with the brief."
         open={expandedSteps.attachments}
         onToggle={() => toggleStep('attachments')}
       >
-        <OnePagerGallery
-          onePagers={onePagers}
+        <ModelDocumentGallery
+          modelDocuments={onePagers}
           selectedDocs={selectedDocs}
           toggleDoc={toggleDoc}
         />

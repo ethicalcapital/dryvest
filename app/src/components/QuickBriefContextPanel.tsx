@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect, type CSSProperties } from 'react';
 import type { Dataset, Node } from '../lib/schema';
 import type { BriefParams } from '../hooks/useBriefParams';
 import { formatTaxonomyValue } from '../lib/format';
-import { OnePagerGallery } from './OnePagerGallery';
+import { ModelDocumentGallery } from './ModelDocumentGallery';
 
 interface MotivationOption {
   value: string;
@@ -120,7 +120,7 @@ interface QuickBriefContextPanelProps {
   motivationOptions: MotivationOption[];
   selectedDocs: string[];
   toggleDoc: (id: string, include?: boolean) => void;
-  onePagers: Extract<Node, { type: 'one_pager' }>[];
+  modelDocuments: Extract<Node, { type: 'one_pager' }>[];
 }
 
 export function QuickBriefContextPanel({
@@ -130,7 +130,7 @@ export function QuickBriefContextPanel({
   motivationOptions,
   selectedDocs,
   toggleDoc,
-  onePagers,
+  modelDocuments,
 }: QuickBriefContextPanelProps) {
   const identities = useMemo(() => {
     const values = dataset.schema.taxonomies?.identity ?? [];
@@ -405,14 +405,14 @@ export function QuickBriefContextPanel({
         )}
       </StepSection>
 
-      {onePagers.length > 0 ? (
+      {modelDocuments.length > 0 ? (
         <StepSection
-          title="Add supporting attachments"
+          title="Add model documents"
           step="4"
-          helper="Drop in relevant one-pagers to send after the meeting."
+          helper="Attach the templates you want people to leave with."
         >
-          <OnePagerGallery
-            onePagers={onePagers}
+          <ModelDocumentGallery
+            modelDocuments={modelDocuments}
             selectedDocs={selectedDocs}
             toggleDoc={toggleDoc}
           />
