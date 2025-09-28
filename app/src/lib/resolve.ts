@@ -1,25 +1,68 @@
 import type { Dataset, Playlist, Targets, BriefContext, Node } from './schema';
 
-const targetKeys: (keyof BriefContext)[] = [
-  'identity',
-  'audience',
-  'venue',
-  'level',
-  'motivation',
-];
+interface TargetEvaluation {
+  matches: boolean;
+  score: number;
+}
+
+function evaluateTargets(
+  targets: Targets | undefined,
+  context: BriefContext
+): TargetEvaluation {
+  if (!targets) {
+    return { matches: true, score: 0 };
+  }
+
+  let score = 0;
+
+  const requireMatch = (key: keyof Targets) => {
+    const targetValues = targets[key];
+    if (!targetValues) {
+      return true;
+    }
+    const contextValue = context[key as keyof BriefContext];
+    if (!contextValue) {
+      return false;
+    }
+    if (!targetValues.includes(contextValue)) {
+      return false;
+    }
+    score += 1;
+    return true;
+  };
+
+  if (!requireMatch('identity')) return { matches: false, score: 0 };
+  if (!requireMatch('audience')) return { matches: false, score: 0 };
+  if (!requireMatch('venue')) return { matches: false, score: 0 };
+  if (!requireMatch('level')) return { matches: false, score: 0 };
+
+  const targetMotivations = targets.motivation;
+  if (targetMotivations && targetMotivations.length) {
+    const primary = context.motivation;
+    const secondary = context.motivationSecondary;
+
+    let matched = false;
+    if (primary && targetMotivations.includes(primary)) {
+      matched = true;
+      score += 2;
+    }
+    if (secondary && targetMotivations.includes(secondary)) {
+      matched = true;
+      score += 1;
+    }
+    if (!matched) {
+      return { matches: false, score: 0 };
+    }
+  }
+
+  return { matches: true, score };
+}
 
 export function matchesTargets(
   targets: Targets | undefined,
   context: BriefContext
 ): boolean {
-  if (!targets) return true;
-  return targetKeys.every(key => {
-    const targetValues = targets[key as keyof typeof targets];
-    if (!targetValues) return true;
-    const contextValue = context[key];
-    if (!contextValue) return false;
-    return targetValues.includes(contextValue);
-  });
+  return evaluateTargets(targets, context).matches;
 }
 
 export function selectPlaylistByKind(
@@ -34,16 +77,11 @@ export function selectPlaylistByKind(
   let bestScore = -1;
 
   for (const playlist of candidates) {
-    if (!matchesTargets(playlist.targets, context)) continue;
-    const score = playlist.targets
-      ? Object.values(playlist.targets).reduce(
-          (acc, values) => acc + (values ? 1 : 0),
-          0
-        )
-      : 0;
-    if (score > bestScore) {
+    const evaluation = evaluateTargets(playlist.targets, context);
+    if (!evaluation.matches) continue;
+    if (evaluation.score > bestScore) {
       best = playlist;
-      bestScore = score;
+      bestScore = evaluation.score;
     }
   }
 
