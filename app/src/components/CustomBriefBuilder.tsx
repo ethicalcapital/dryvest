@@ -23,6 +23,7 @@ export function CustomBriefBuilder({
   const identitySelectId = useId();
   const audienceSelectId = useId();
   const venueSelectId = useId();
+  const motivationSelectId = useId();
   // Get all available key points for current context
   const availableKeyPoints = useMemo(() => {
     return getKeyPointsForContext(dataset, context).sort((a, b) =>
@@ -191,6 +192,49 @@ export function CustomBriefBuilder({
               <option value="board_presentation">Board Presentation</option>
               <option value="public_testimony">Public Testimony</option>
               <option value="city_council">City Council</option>
+            </select>
+          </div>
+
+          {/* Motivation */}
+          <div>
+            <label
+              className="block text-sm font-medium text-slate-700 mb-2"
+              htmlFor={motivationSelectId}
+            >
+              Motivation
+            </label>
+            <select
+              id={motivationSelectId}
+              value={context.motivation || ''}
+              onChange={e =>
+                onContextChange({
+                  ...context,
+                  motivation: e.target.value || undefined,
+                })
+              }
+              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
+              style={{
+                borderColor: 'var(--border-gray)',
+              }}
+              onFocus={e => {
+                e.target.style.borderColor = 'var(--ecic-purple)';
+                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
+              }}
+              onBlur={e => {
+                e.target.style.borderColor = 'var(--border-gray)';
+                e.target.style.boxShadow = 'none';
+              }}
+            >
+              <option value="">Select...</option>
+              {(
+                dataset.schema.taxonomies?.motivation?.length
+                  ? dataset.schema.taxonomies.motivation
+                  : ['regulatory_drivers', 'internal_leadership', 'external_stakeholders']
+              ).map(value => (
+                <option key={value} value={value}>
+                  {value.replace(/[_-]/g, ' ')}
+                </option>
+              ))}
             </select>
           </div>
 

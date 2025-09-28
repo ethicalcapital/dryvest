@@ -11,6 +11,7 @@ const PARAM_KEYS: (keyof BriefParams)[] = [
   'audience',
   'venue',
   'level',
+  'motivation',
   'playlist',
 ];
 

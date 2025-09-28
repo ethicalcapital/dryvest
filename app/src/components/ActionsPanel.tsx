@@ -192,10 +192,32 @@ export function ActionsPanel({
               <Layers size={14} /> Export Anki deck
             </button>
           </div>
-          <p className="text-xs text-slate-500">
-            Identity: <span className="font-medium text-slate-600">{params.identity}</span> · Audience:{' '}
-            <span className="font-medium text-slate-600">{params.audience}</span> · Attachments:{' '}
-            <span className="font-medium text-slate-600">{selectedDocs.length}</span>
+          <p className="text-xs text-slate-500 space-x-1">
+            <span>
+              Identity:{' '}
+              <span className="font-medium text-slate-600">{params.identity}</span>
+            </span>
+            <span>·</span>
+            <span>
+              Audience:{' '}
+              <span className="font-medium text-slate-600">{params.audience}</span>
+            </span>
+            {params.motivation ? (
+              <>
+                <span>·</span>
+                <span>
+                  Motivation:{' '}
+                  <span className="font-medium text-slate-600">
+                    {params.motivation.replace(/[_-]/g, ' ')}
+                  </span>
+                </span>
+              </>
+            ) : null}
+            <span>·</span>
+            <span>
+              Attachments:{' '}
+              <span className="font-medium text-slate-600">{selectedDocs.length}</span>
+            </span>
           </p>
         </div>
         {(markdownStatus === 'success' || flashcardStatus === 'success') && !downloadError ? (

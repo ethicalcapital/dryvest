@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import clsx from 'clsx';
 import { CheckCircle2, Circle, Clock3 } from 'lucide-react';
 import './App.css';
 import { useDataset } from './hooks/useDataset';
@@ -44,7 +45,23 @@ const FALLBACK_DEFAULTS: BriefParams = {
   audience: 'family_friends',
   venue: 'one_on_one',
   level: 'technical',
+  motivation: 'regulatory_drivers',
   playlist: DEFAULT_PLAYLIST_ID,
+};
+
+const MOTIVATION_COPY: Record<string, { label: string; helper: string }> = {
+  regulatory_drivers: {
+    label: 'Regulatory Drivers',
+    helper: 'Compliance-first framing: legal risk, fiduciary duty, reporting controls.',
+  },
+  internal_leadership: {
+    label: 'Internal Leadership',
+    helper: 'Mission-first case building: donors, board values, program alignment.',
+  },
+  external_stakeholders: {
+    label: 'External Stakeholders',
+    helper: 'Campaign pressure & coalition momentum: community wins and reinvestment.',
+  },
 };
 
 function ensureAllowed(value: string | undefined, allowed?: string[]) {
@@ -108,6 +125,7 @@ function App() {
     base.audience = ensureAllowed(base.audience, taxonomies.audience);
     base.venue = ensureAllowed(base.venue, taxonomies.venue);
     base.level = ensureAllowed(base.level, taxonomies.level);
+    base.motivation = ensureAllowed(base.motivation, taxonomies.motivation);
     base.playlist = FALLBACK_DEFAULTS.playlist;
 
     return base;
@@ -142,10 +160,18 @@ function App() {
       identity: params.identity,
       audience: params.audience,
       venue: params.venue,
+      motivation: params.motivation,
       level: params.level,
     });
     hasTrackedOpen.current = true;
-  }, [dataset, params.identity, params.audience, params.level, params.venue]);
+  }, [
+    dataset,
+    params.identity,
+    params.audience,
+    params.level,
+    params.venue,
+    params.motivation,
+  ]);
 
   useEffect(() => {
     if (!dataset) return;
@@ -154,6 +180,7 @@ function App() {
       identity: params.identity,
       audience: params.audience,
       venue: params.venue,
+      motivation: params.motivation,
       level: params.level,
       playlist: params.playlist,
       directness,
@@ -163,6 +190,7 @@ function App() {
     params.identity,
     params.audience,
     params.level,
+    params.motivation,
     params.venue,
     params.playlist,
     directness,
@@ -185,6 +213,7 @@ function App() {
     maybeCorrect('audience', schema.taxonomies?.audience);
     maybeCorrect('venue', schema.taxonomies?.venue);
     maybeCorrect('level', schema.taxonomies?.level);
+    maybeCorrect('motivation', schema.taxonomies?.motivation);
 
     if (params.playlist && !playlistById[params.playlist]) {
       corrections.playlist = FALLBACK_DEFAULTS.playlist;
@@ -203,13 +232,21 @@ function App() {
             identity: params.identity,
             audience: params.audience,
             venue: params.venue,
+            motivation: params.motivation,
             level: 'technical',
           }
         : {
             ...customContext,
             level: 'technical',
           },
-    [briefMode, params.identity, params.audience, params.venue, customContext]
+    [
+      briefMode,
+      params.identity,
+      params.audience,
+      params.venue,
+      params.motivation,
+      customContext,
+    ]
   );
 
   useEffect(() => {
@@ -218,6 +255,7 @@ function App() {
       context.identity ?? '',
       context.audience ?? '',
       context.venue ?? '',
+      context.motivation ?? '',
       context.level ?? '',
     ]);
     if (signature && signature !== lastContextSignatureRef.current) {
@@ -255,6 +293,24 @@ function App() {
             !!node && node.type === 'one_pager'
         ),
     [dataset, selectedDocs]
+  );
+
+  const availableMotivations = useMemo(() => {
+    const values = dataset?.schema?.taxonomies?.motivation;
+    if (values && values.length) return values;
+    return Object.keys(MOTIVATION_COPY);
+  }, [dataset]);
+
+  const motivationOptions = useMemo(
+    () =>
+      availableMotivations.map(value => ({
+        value,
+        label: MOTIVATION_COPY[value]?.label ?? formatTaxonomyValue(value),
+        helper:
+          MOTIVATION_COPY[value]?.helper ??
+          'Tailor the narrative to match your campaign driver.',
+      })),
+    [availableMotivations]
   );
 
   const isQuickMode = briefMode === 'quick';
@@ -327,6 +383,9 @@ function App() {
               : null,
             customContext.venue
               ? `Venue: ${formatTaxonomyValue(customContext.venue)}`
+              : null,
+            customContext.motivation
+              ? `Motivation: ${formatTaxonomyValue(customContext.motivation)}`
               : null,
           ].filter(Boolean);
 
@@ -579,6 +638,7 @@ function App() {
         audience: params.audience,
         venue: params.venue,
         level: params.level,
+        motivation: params.motivation,
         playlistId: keyPointPlaylist?.id ?? DEFAULT_PLAYLIST_ID,
         datasetVersion: dataset?.version ?? DATASET_VERSION,
       },
@@ -614,6 +674,7 @@ function App() {
       params.audience,
       params.venue,
       params.level,
+      params.motivation,
       dataset?.version,
       keyPointPlaylist?.id,
     ]
@@ -980,6 +1041,46 @@ function App() {
                     />
 
                     <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
+                      <div className="mb-3">
+                        <h4 className="font-heading font-semibold text-slate-900">
+                          Primary driver
+                        </h4>
+                        <p className="text-sm text-slate-600">
+                          Choose the motivation guiding this brief so Dryvest surfaces the right
+                          strategy and outcomes.
+                        </p>
+                      </div>
+                      <div className="space-y-2">
+                        {motivationOptions.map(option => {
+                          const active = params.motivation === option.value;
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => setParams({ motivation: option.value })}
+                              className={clsx(
+                                'w-full rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+                                active
+                                  ? 'border-ecic-purple/70 bg-ecic-purple/10 text-ecic-purple shadow-sm'
+                                  : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
+                              )}
+                              style={{
+                                '--tw-ring-color': 'var(--ecic-purple)',
+                              } as CSSProperties}
+                            >
+                              <div className="font-heading text-sm font-semibold">
+                                {option.label}
+                              </div>
+                              <p className="mt-1 text-xs text-slate-600">
+                                {option.helper}
+                              </p>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
                       <div className="flex items-center justify-between mb-3">
                         <div>
                           <h4 className="font-heading font-semibold text-slate-900">
@@ -988,6 +1089,18 @@ function App() {
                           <p className="text-sm text-slate-600">
                             {selectedScenario.description}
                           </p>
+                          {params.motivation ? (
+                            <p className="mt-2 text-xs text-ecic-purple">
+                              Primary driver:{' '}
+                              <span className="font-semibold">
+                                {
+                                  motivationOptions.find(
+                                    option => option.value === params.motivation
+                                  )?.label || formatTaxonomyValue(params.motivation)
+                                }
+                              </span>
+                            </p>
+                          ) : null}
                         </div>
                       </div>
                       <button
