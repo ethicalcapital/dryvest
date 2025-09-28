@@ -933,85 +933,44 @@ function App() {
       <PalestineStatement />
 
       <main className="flex-1">
-        <section className="relative overflow-hidden bg-brand-gradient text-white">
-          <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/30" aria-hidden="true" />
-          <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
-            <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] items-center">
-              <div className="space-y-6">
-                <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-heading uppercase tracking-wide text-white/80">
-                  v.0.0.2
-                </p>
-                <div className="space-y-3">
-                  <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white">
+        <div className="mx-auto flex h-full w-full max-w-6xl flex-col px-6 py-8 lg:py-10">
+          <div className="grid flex-1 gap-8 lg:grid-cols-[320px,1fr]">
+            <aside className="flex flex-col justify-between space-y-6">
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-heading uppercase tracking-[0.2em] text-white/70">
+                    v.0.0.2
+                  </p>
+                  <h1 className="text-3xl font-heading font-bold text-white">
                     Make divestment so boring it happens
                   </h1>
-                  <p className="text-lg text-white/85">
-                    Dryvest is your divestment briefing deck. Pick the room you&rsquo;re walking into and it assembles the talking points, steps, and sources that match their policy playbook.
+                  <p className="text-sm text-white/70">
+                    Dryvest is your divestment briefing slide: choose the room, we stage the talking points.
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 text-sm text-white/80">
-                  <a
-                    href="mailto:hello@ethicic.com?subject=Dryvest%20clarification"
-                    className="inline-flex items-center gap-1 underline decoration-white/40 underline-offset-4 hover:text-white"
-                  >
-                    Ask for clarification
-                  </a>
-                </div>
+
+                <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  {
-                    label: 'Drop into the seat',
-                    copy: 'Choose the institution and whose sign-off you need. Dryvest mirrors their governance language.',
-                  },
-                  {
-                    label: 'Pull the ready slides',
-                    copy: 'Talking points, steps, templates, and attachments line up like a deck. Hit export when it feels right.',
-                  },
-                  {
-                    label: 'Stay citation-tight',
-                    copy: 'Every sentence ties back to the dataset. No invented data, no mystery sources.',
-                  },
-                  {
-                    label: 'Walk the room live',
-                    copy: 'Reveal the content once the context is locked so the briefing stays on script.',
-                  },
-                ].map(item => (
-                  <div
-                    key={item.label}
-                    className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm"
-                  >
-                    <p className="text-[11px] font-heading font-semibold uppercase tracking-wide text-white/70">
-                      {item.label}
-                    </p>
-                    <p className="mt-2 text-sm text-white/90">{item.copy}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+              <a
+                href="mailto:hello@ethicic.com?subject=Dryvest%20clarification"
+                className="text-xs uppercase tracking-[0.3em] text-white/50 hover:text-white"
+              >
+                Ask for clarification
+              </a>
+            </aside>
 
-        <section className="relative -mt-14 pb-12">
-          <div className="mx-auto w-full max-w-6xl px-6">
-            <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
-          </div>
-        </section>
-
-        <section className="pb-16">
-          <div className="mx-auto w-full max-w-6xl px-6">
-            <div className="min-h-[320px] rounded-[32px] bg-white shadow-2xl ring-1 ring-slate-200">
-              <div className="p-6 sm:p-10">
+            <section className="min-h-[420px] rounded-[32px] bg-white shadow-2xl ring-1 ring-slate-200">
+              <div className="flex h-full flex-col p-6 sm:p-8">
                 {workspaceContent ?? (
-                  <div className="flex h-[260px] items-center justify-center text-base text-slate-400">
-                    Pick a workspace above. Dryvest will stage the slides for you.
+                  <div className="flex h-full items-center justify-center text-sm text-slate-400">
+                    Pick a workspace to build the briefing slide.
                   </div>
                 )}
               </div>
-            </div>
+            </section>
           </div>
-        </section>
+        </div>
       </main>
 
       <Footer />
