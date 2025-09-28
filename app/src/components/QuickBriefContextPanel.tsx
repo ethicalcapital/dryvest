@@ -139,12 +139,32 @@ export function QuickBriefContextPanel({
     return [...ordered, ...leftovers];
   }, [dataset.schema.taxonomies?.identity]);
 
+  const referencedAudiences = useMemo(() => {
+    const set = new Set<string>();
+    dataset.nodes.forEach(node => {
+      node.targets?.audience?.forEach(value => set.add(value));
+    });
+    dataset.playlists.forEach(playlist => {
+      playlist.targets?.audience?.forEach(value => set.add(value));
+    });
+    return set;
+  }, [dataset.nodes, dataset.playlists]);
+
   const audiences = useMemo(() => {
     const values = dataset.schema.taxonomies?.audience ?? [];
     const ordered = AUDIENCE_ORDER.filter(value => values.includes(value));
     const leftovers = values.filter(value => !AUDIENCE_ORDER.includes(value));
-    return [...ordered, ...leftovers];
-  }, [dataset.schema.taxonomies?.audience]);
+    const combined = [...ordered, ...leftovers];
+    if (!referencedAudiences.size) {
+      return combined;
+    }
+    const filtered = combined.filter(value => referencedAudiences.has(value));
+    if (filtered.length) {
+      return filtered;
+    }
+    const fallback = ['boards', 'fiduciary', 'consultants', 'staff'];
+    return combined.filter(value => fallback.includes(value));
+  }, [dataset.schema.taxonomies?.audience, referencedAudiences]);
   const motivations = useMemo(() => {
     const allowed = dataset.schema.taxonomies?.motivation;
     const order = allowed && allowed.length ? allowed : motivationOptions.map(opt => opt.value);

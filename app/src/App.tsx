@@ -397,6 +397,11 @@ function App() {
     customContext.identity && customContext.audience
   );
   const exportsReady = selectedOnePagers.length > 0;
+  const quickPrimarySelections = Boolean(
+    params.identity && params.audience && params.motivation
+  );
+  const quickContextReady =
+    briefMode !== 'quick' ? true : contextTouched && quickPrimarySelections;
 
   const sessionSteps = useMemo(
     () => {
@@ -779,6 +784,7 @@ function App() {
 
   useEffect(() => {
     if (!dataset) return;
+    if (briefMode === 'quick' && !quickContextReady) return;
     trackEvent('brief_built', {
       version: dataset.version,
       key_points: keyPointNodes.length,
@@ -793,6 +799,8 @@ function App() {
     nextStepNodes.length,
     selectedOnePagers.length,
     sourceNodes.length,
+    briefMode,
+    quickContextReady,
   ]);
 
   if (loading && !dataset) {
@@ -1082,24 +1090,42 @@ function App() {
                   />
                 )}
 
-                <PreviewPane
-                  guide={guide}
-                  keyPoints={keyPointNodes}
-                  nextSteps={nextStepNodes}
-                  sources={sourceNodes}
-                  policyAlignment={policyAlignment}
-                  venueSnippet={venueSnippet}
-                  templates={templateSnippets}
-                  selectedOnePagers={selectedOnePagers}
-                  sourceLookup={sourceLookup}
-                />
+                {quickContextReady ? (
+                  <>
+                    <PreviewPane
+                      guide={guide}
+                      keyPoints={keyPointNodes}
+                      nextSteps={nextStepNodes}
+                      sources={sourceNodes}
+                      policyAlignment={policyAlignment}
+                      venueSnippet={venueSnippet}
+                      templates={templateSnippets}
+                      selectedOnePagers={selectedOnePagers}
+                      sourceLookup={sourceLookup}
+                    />
 
-                <ActionsPanel
-                  params={params}
-                  selectedDocs={selectedDocs}
-                  exportData={exportData}
-                  tone="technical"
-                />
+                    <ActionsPanel
+                      params={params}
+                      selectedDocs={selectedDocs}
+                      exportData={exportData}
+                      tone="technical"
+                    />
+                  </>
+                ) : (
+                  <div className="rounded-xl border border-dashed border-slate-300 bg-white/70 p-6 shadow-sm">
+                    <h3 className="text-sm font-heading font-semibold text-slate-900">
+                      Configure your briefing to unlock recommendations
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600">
+                      Pick the organization type, decision audience, and campaign drivers above. Once the context is locked, Dryvest will surface tailored strategy points and next steps.
+                    </p>
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-xs text-slate-500">
+                      <li>Choose the organization you&rsquo;re targeting.</li>
+                      <li>Select who needs to approve or implement the change.</li>
+                      <li>Rank the primary and optional secondary campaign drivers.</li>
+                    </ul>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="grid gap-6 lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]">
