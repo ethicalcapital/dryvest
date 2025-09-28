@@ -4,12 +4,10 @@ import { GitHubFeedback } from './GitHubFeedback';
 
 interface PreviewPaneProps {
   context: BriefContext;
-  opener?: Extract<Node, { type: 'opener' }>;
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Extract<Node, { type: 'key_point' }>[];
   nextSteps: Extract<Node, { type: 'next_step' }>[];
   sources: SourceRecord[];
-  screeningNode?: Extract<Node, { type: 'policy_statement' }>;
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
   venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
   templates: Extract<Node, { type: 'template_snippet' }>[];
@@ -86,12 +84,10 @@ function renderCitations(
 
 export function PreviewPane({
   context,
-  opener,
   guide,
   keyPoints,
   nextSteps,
   sources,
-  screeningNode,
   policyAlignment,
   venueSnippet,
   templates,
@@ -172,33 +168,6 @@ export function PreviewPane({
               </li>
             ))}
           </ul>
-        </Section>
-      ) : null}
-
-      {opener ? (
-        <Section title="Opening angle" anchor="opener">
-          <p>{opener.text}</p>
-          <GitHubFeedback node={opener} />
-        </Section>
-      ) : null}
-
-
-      {screeningNode ? (
-        <Section title="Investment screening strategy" anchor="screening">
-          {screeningNode.variants?.length ? (
-            <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
-              <ReactMarkdown>
-                {screeningNode.variants.find(
-                  variant => variant.transforms?.tone === context.level
-                )?.body ?? screeningNode.variants[0].body}
-              </ReactMarkdown>
-            </div>
-          ) : screeningNode.body ? (
-            <div className="prose prose-sm max-w-none text-slate-700 prose-a:text-indigo-600">
-              <ReactMarkdown>{screeningNode.body}</ReactMarkdown>
-            </div>
-          ) : null}
-          <GitHubFeedback node={screeningNode} />
         </Section>
       ) : null}
 

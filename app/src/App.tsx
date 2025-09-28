@@ -32,7 +32,6 @@ import {
 import {
   DEFAULT_PLAYLIST_ID,
   DEFAULT_DATASET_VERSION,
-  DEFAULT_VENUE_OPTIONS,
 } from './lib/constants';
 import { DisclaimerGate } from './components/DisclaimerGate';
 import {
@@ -159,7 +158,7 @@ function App() {
       const { touchContext = true } = options;
       if (
         touchContext &&
-        (['identity', 'audience', 'venue', 'motivation'] as (keyof BriefParams)[]).some(key =>
+    (['identity', 'audience', 'motivation'] as (keyof BriefParams)[]).some(key =>
           Object.prototype.hasOwnProperty.call(next, key)
         )
       ) {
@@ -363,15 +362,10 @@ function App() {
   const identityCount = identityOptions.length;
   const audienceCount = audienceOptions.length;
   const motivationCount = availableMotivations.length;
-  const venueCount = DEFAULT_VENUE_OPTIONS.length;
 
   const contextHasSelectableOptions = useMemo(
-    () =>
-      identityCount > 1 ||
-      audienceCount > 1 ||
-      motivationCount > 1 ||
-      venueCount > 1,
-    [identityCount, audienceCount, motivationCount, venueCount]
+    () => identityCount > 1 || audienceCount > 1 || motivationCount > 1,
+    [identityCount, audienceCount, motivationCount]
   );
 
   useEffect(() => {
@@ -429,9 +423,6 @@ function App() {
             params.audience
               ? `Audience: ${formatTaxonomyValue(params.audience)}`
               : null,
-            params.venue
-              ? `Venue: ${formatTaxonomyValue(params.venue)}`
-              : null,
             params.motivation
               ? `Motivation: ${formatTaxonomyValue(params.motivation)}`
               : null,
@@ -444,7 +435,7 @@ function App() {
               title: 'Context ready',
               description: description || 'Custom context captured.',
               helper:
-                'Adjust identity, audience, venue, or motivation to explore alternate governance.',
+                'Adjust identity, audience, or motivation to explore alternate governance.',
             };
           }
 
@@ -454,7 +445,7 @@ function App() {
             description:
               description ? `Defaults → ${description}` : 'Pick options in the left column.',
             helper:
-              'Choose institution, audience, venue, and driver so the brief feels like it belongs.',
+              'Choose institution, audience, and driver so the brief feels like it belongs.',
           };
         }
 
@@ -1050,48 +1041,63 @@ function App() {
 
           {/* Main content grid */}
           {briefMode !== 'fact_check' && (
-            <div
-              ref={briefMode === 'quick' ? quickStartRef : undefined}
-              className={`grid gap-6 ${
-                briefMode === 'quick'
-                  ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
-                  : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
-              }`}
-            >
-              {briefMode === 'quick' && dataset && (
-                <QuickBriefContextPanel
-                  dataset={dataset}
-                  params={params}
-                  onParamChange={setParams}
-                  motivationOptions={motivationOptions}
-                  selectedDocs={selectedDocs}
-                  toggleDoc={toggleDoc}
-                  onePagers={onePagers}
+            briefMode === 'quick' ? (
+              <div ref={quickStartRef} className="space-y-6">
+                {dataset && (
+                  <QuickBriefContextPanel
+                    dataset={dataset}
+                    params={params}
+                    onParamChange={setParams}
+                    motivationOptions={motivationOptions}
+                    selectedDocs={selectedDocs}
+                    toggleDoc={toggleDoc}
+                    onePagers={onePagers}
+                  />
+                )}
+
+                <PreviewPane
+                  context={context}
+                  guide={guide}
+                  keyPoints={keyPointNodes}
+                  nextSteps={nextStepNodes}
+                  sources={sourceNodes}
+                  policyAlignment={policyAlignment}
+                  venueSnippet={venueSnippet}
+                  templates={templateSnippets}
+                  selectedOnePagers={selectedOnePagers}
+                  sourceLookup={sourceLookup}
                 />
-              )}
 
-              <PreviewPane
-                context={context}
-                opener={opener}
-                guide={guide}
-                keyPoints={keyPointNodes}
-                nextSteps={nextStepNodes}
-                sources={sourceNodes}
-                screeningNode={screeningNode}
-                policyAlignment={policyAlignment}
-                venueSnippet={venueSnippet}
-                templates={templateSnippets}
-                selectedOnePagers={selectedOnePagers}
-                sourceLookup={sourceLookup}
-              />
+                <ActionsPanel
+                  params={params}
+                  selectedDocs={selectedDocs}
+                  exportData={exportData}
+                  tone="technical"
+                />
+              </div>
+            ) : (
+              <div className="grid gap-6 lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]">
+                <PreviewPane
+                  context={context}
+                  guide={guide}
+                  keyPoints={keyPointNodes}
+                  nextSteps={nextStepNodes}
+                  sources={sourceNodes}
+                  policyAlignment={policyAlignment}
+                  venueSnippet={venueSnippet}
+                  templates={templateSnippets}
+                  selectedOnePagers={selectedOnePagers}
+                  sourceLookup={sourceLookup}
+                />
 
-              <ActionsPanel
-                params={params}
-                selectedDocs={selectedDocs}
-                exportData={exportData}
-                tone="technical"
-              />
-            </div>
+                <ActionsPanel
+                  params={params}
+                  selectedDocs={selectedDocs}
+                  exportData={exportData}
+                  tone="technical"
+                />
+              </div>
+            )
           )}
         </div>
       </main>

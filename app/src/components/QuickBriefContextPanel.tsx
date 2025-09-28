@@ -4,7 +4,6 @@ import type { Dataset, Node } from '../lib/schema';
 import type { BriefParams } from '../hooks/useBriefParams';
 import { formatTaxonomyValue } from '../lib/format';
 import { OnePagerGallery } from './OnePagerGallery';
-import { DEFAULT_VENUE_OPTIONS } from '../lib/constants';
 
 interface MotivationOption {
   value: string;
@@ -52,8 +51,6 @@ export function QuickBriefContextPanel({
       } satisfies MotivationOption;
     });
   }, [dataset.schema.taxonomies?.motivation, motivationOptions]);
-
-  const venues = DEFAULT_VENUE_OPTIONS;
 
   return (
     <div className="space-y-6">
@@ -108,33 +105,8 @@ export function QuickBriefContextPanel({
       </StepSection>
 
       <StepSection
-        title="Where will this happen?"
-        step="3"
-        helper="Signal the venue so templates and tone cue the right procedure."
-      >
-        <div className="grid grid-cols-1 gap-2">
-          {venues.map(value => {
-            const active = params.venue === value;
-            return (
-              <OptionButton
-                key={value}
-                active={active}
-                label={formatTaxonomyValue(value)}
-                description={
-                  active
-                    ? 'Procedures matched to this venue.'
-                    : 'Switch to stress-test different governance paths.'
-                }
-                onClick={() => onParamChange({ venue: value })}
-              />
-            );
-          })}
-        </div>
-      </StepSection>
-
-      <StepSection
         title="Why will they move?"
-        step="4"
+        step="3"
         helper="Pick the pressure driving this briefing to change the strategy mix."
       >
         <div className="space-y-2">
@@ -168,7 +140,7 @@ export function QuickBriefContextPanel({
       {onePagers.length > 0 ? (
         <StepSection
           title="Add supporting attachments"
-          step="5"
+          step="4"
           helper="Drop in relevant one-pagers to send after the meeting."
         >
           <OnePagerGallery
