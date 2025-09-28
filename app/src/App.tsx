@@ -17,6 +17,11 @@ import { Footer } from './components/Footer';
 import { PalestineStatement } from './components/PalestineStatement';
 import { ScenarioCards, type Scenario } from './components/ScenarioCards';
 import { TemperatureControls } from './components/TemperatureControls';
+import {
+  CampaignIntentPanel,
+  OBJECTIVE_OPTIONS,
+  type CampaignObjective,
+} from './components/CampaignIntentPanel';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import {
@@ -66,6 +71,37 @@ const toNextStepNodes = (nodes: Node[]) =>
       node.type === 'next_step'
   );
 
+function inferSuggestedMode(intent: string, objective: CampaignObjective): BriefMode {
+  const normalized = `${objective} ${intent}`.toLowerCase();
+
+  if (objective === 'audit_programme') return 'fact_check';
+  if (objective === 'expand_coalition') return 'custom';
+  if (objective === 'pressure_escalation') return 'compare';
+  if (objective === 'secure_commitment') return 'quick';
+
+  const keywordMap: Array<{ mode: BriefMode; keywords: string[] }> = [
+    { mode: 'fact_check', keywords: ['fact check', 'citation', 'source', 'audit', 'verify'] },
+    { mode: 'compare', keywords: ['compare', 'benchmark', 'peer', 'precedent', 'institution'] },
+    { mode: 'custom', keywords: ['custom', 'coalition', 'tailor', 'faculty', 'students', 'script'] },
+    { mode: 'quick', keywords: ['quick', 'board', 'trustee', 'meeting', 'brief'] },
+  ];
+
+  for (const entry of keywordMap) {
+    if (entry.keywords.some(keyword => normalized.includes(keyword))) {
+      return entry.mode;
+    }
+  }
+
+  return 'quick';
+}
+
+const truncateText = (value: string, length = 140) => {
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+  if (trimmed.length <= length) return trimmed;
+  return `${trimmed.slice(0, length - 1)}…`;
+};
+
 type StepStatus = 'done' | 'active' | 'pending';
 
 function formatTaxonomyValue(value?: string | null) {
@@ -88,6 +124,22 @@ function App() {
     if (typeof window === 'undefined') return false;
     return window.localStorage.getItem('dryvest:analytics-consent') === 'granted';
   });
+  const [campaignIntent, setCampaignIntent] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    return window.localStorage.getItem('dryvest:campaign-intent') ?? '';
+  });
+  const [campaignObjective, setCampaignObjective] = useState<CampaignObjective>(() => {
+    if (typeof window === 'undefined') return 'secure_commitment';
+    const stored = window.localStorage.getItem('dryvest:campaign-objective');
+    return (stored as CampaignObjective) ?? 'secure_commitment';
+  });
+  const [intentStatus, setIntentStatus] = useState<
+    | {
+        message: string;
+        tone: 'success' | 'warning' | 'info';
+      }
+    | null
+  >(null);
   const quickStartRef = useRef<HTMLDivElement | null>(null);
   const modeStartRef = useRef<number>(Date.now());
   const lastContextSignatureRef = useRef<string>('');
@@ -129,6 +181,18 @@ function App() {
       );
     }
   }, [analyticsConsent]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('dryvest:campaign-intent', campaignIntent);
+    }
+  }, [campaignIntent]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('dryvest:campaign-objective', campaignObjective);
+    }
+  }, [campaignObjective]);
 
   useEffect(() => {
     if (!analyticsConsent || !analyticsToken) return;
@@ -263,6 +327,23 @@ function App() {
   );
   const scenarioReady = Boolean(selectedScenario);
   const exportsReady = selectedOnePagers.length > 0;
+  const recommendedMode = useMemo(
+    () => inferSuggestedMode(campaignIntent, campaignObjective),
+    [campaignIntent, campaignObjective]
+  );
+  const intentInsight = useMemo(() => truncateText(campaignIntent, 100), [campaignIntent]);
+  const objectiveLabel = useMemo(
+    () =>
+      OBJECTIVE_OPTIONS.find(option => option.value === campaignObjective)?.label ??
+      'Strategy in progress',
+    [campaignObjective]
+  );
+  const heroSubtitle = useMemo(() => {
+    if (campaignIntent.trim()) {
+      return `You're focused on ${objectiveLabel.toLowerCase()}. Dryvest will mirror that language across every path.`;
+    }
+    return 'Dryvest turns moral demands into technical language that can be implemented as investment policy.';
+  }, [campaignIntent, objectiveLabel]);
 
   const sessionSteps = useMemo(
     () => {
@@ -366,8 +447,20 @@ function App() {
 
       return [
         {
-          id: 'approach',
+          id: 'voice',
           step: 'Step 1',
+          status: campaignIntent.trim() ? ('done' as StepStatus) : ('active' as StepStatus),
+          title: campaignIntent.trim()
+            ? 'Campaign language captured'
+            : 'Share your campaign voice',
+          description: campaignIntent.trim()
+            ? truncateText(campaignIntent, 120)
+            : 'Describe the scenario in the console so Dryvest mirrors your language across every output.',
+          helper: objectiveLabel,
+        },
+        {
+          id: 'approach',
+          step: 'Step 2',
           status: 'done' as StepStatus,
           title: modeMeta.title,
           description: modeMeta.description,
@@ -375,17 +468,18 @@ function App() {
         },
         {
           id: 'context',
-          step: 'Step 2',
+          step: 'Step 3',
           ...contextMeta,
         },
         {
           id: 'exports',
-          step: 'Step 3',
+          step: 'Step 4',
           ...exportMeta,
         },
       ];
     }, [
       briefMode,
+      campaignIntent,
       customContext.identity,
       customContext.audience,
       customContext.venue,
@@ -394,6 +488,7 @@ function App() {
       scenarioReady,
       selectedOnePagers.length,
       selectedScenario,
+      objectiveLabel,
     ]) as Array<
     {
       id: string;
@@ -700,6 +795,47 @@ function App() {
     });
   };
 
+  const handleCampaignObjectiveChange = (next: CampaignObjective) => {
+    setCampaignObjective(next);
+    trackEvent('campaign_objective_selected', { objective: next });
+  };
+
+  const handleIntentChange = (value: string) => {
+    setCampaignIntent(value);
+    setIntentStatus(null);
+  };
+
+  const handleIntentSubmit = () => {
+    const trimmed = campaignIntent.trim();
+    trackEvent('campaign_intent_saved', {
+      objective: campaignObjective,
+      characters: trimmed.length,
+    });
+    if (trimmed) {
+      setIntentStatus({
+        message: 'Campaign voice pinned across every mode.',
+        tone: 'success',
+      });
+    } else {
+      setIntentStatus({
+        message: 'Cleared campaign focus—Dryvest will fall back to default tone.',
+        tone: 'info',
+      });
+    }
+  };
+
+  const handleApplySuggestedMode = (next: BriefMode) => {
+    if (next === 'quick') {
+      handleQuickStart();
+    } else {
+      handleModeChange(next);
+    }
+    trackEvent('suggested_mode_activated', {
+      mode: next,
+      source: 'campaign_console',
+    });
+  };
+
   const handleDisclaimerAccept = async ({
     analyticsConsent: consent,
     mailingOptIn,
@@ -787,20 +923,18 @@ function App() {
 
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
-          <div className="mb-8">
-            <p
-              className="text-xs uppercase tracking-wide font-heading font-medium"
-              style={{ color: 'var(--ecic-purple)' }}
-            >
-              v.0.0.1
-            </p>
-            <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
-              Dryvest: Make divestment so boring it happens
-            </h1>
-            <div className="mt-3 max-w-4xl space-y-2">
-              <p className="text-slate-600 text-lg">
-                Dryvest turns moral demands into technical language that can be implemented as investment policy.
+          <div className="mb-10 space-y-6">
+            <div className="space-y-2">
+              <p
+                className="text-xs uppercase tracking-wide font-heading font-medium"
+                style={{ color: 'var(--ecic-purple)' }}
+              >
+                v.0.0.1
               </p>
+              <h1 className="text-5xl font-heading font-bold text-slate-900">
+                Dryvest: Make divestment so boring it happens
+              </h1>
+              <p className="max-w-3xl text-slate-600 text-lg">{heroSubtitle}</p>
               <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
                 <span>
                   Dataset version{' '}
@@ -820,104 +954,78 @@ function App() {
                 </a>
               </div>
             </div>
-            <div className="mt-6 rounded-xl border border-indigo-100 bg-white/85 p-6 shadow-sm">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div className="max-w-3xl space-y-2">
-                    <p className="text-sm uppercase tracking-wide font-heading text-indigo-600">
-                      How Dryvest helps
+
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr),minmax(0,1fr)]">
+              <CampaignIntentPanel
+                intent={campaignIntent}
+                onIntentChange={handleIntentChange}
+                objective={campaignObjective}
+                onObjectiveChange={handleCampaignObjectiveChange}
+                onSubmit={handleIntentSubmit}
+                suggestedMode={recommendedMode}
+                onApplySuggestedMode={handleApplySuggestedMode}
+                statusMessage={intentStatus?.message ?? null}
+                statusTone={intentStatus?.tone}
+              />
+
+              <div className="space-y-4">
+                <ModeSelector
+                  mode={briefMode}
+                  onModeChange={handleModeChange}
+                  recommendedMode={recommendedMode}
+                  insight={intentInsight}
+                  onQuickStart={handleQuickStart}
+                />
+
+                <div className="rounded-2xl border border-indigo-100 bg-white/85 p-4 shadow-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-indigo-600">
+                      Session map
                     </p>
-                    <p className="text-sm text-slate-600">
-                      Quick Brief opens automatically so you can drop straight into institutional language.
-                      Switch modes whenever you need deliberate composition, benchmarking comparisons,
-                      or a full documentation audit.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start gap-3 md:items-end">
-                    {isQuickMode ? (
-                      scenarioReady && selectedScenario ? (
-                        <div className="flex w-full max-w-xs flex-col gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-4 py-3 text-left md:text-right">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-indigo-700">
-                            Quick Brief in progress
-                          </span>
-                          <p className="text-sm font-heading font-semibold text-slate-900">
-                            {selectedScenario.title}
-                          </p>
-                          <button
-                            type="button"
-                            onClick={handleQuickStart}
-                            className="inline-flex items-center justify-center rounded-md border border-indigo-300 px-3 py-1.5 text-xs font-medium text-indigo-700 transition hover:border-indigo-400 hover:bg-white"
-                          >
-                            Jump to outputs
-                          </button>
-                        </div>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={handleQuickStart}
-                          className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                          style={{ backgroundColor: 'var(--ecic-purple)' }}
-                        >
-                          Browse Quick Brief scenarios
-                        </button>
-                      )
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={handleQuickStart}
-                        className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                        style={{ backgroundColor: 'var(--ecic-purple)' }}
-                      >
-                        Return to Quick Brief
-                      </button>
-                    )}
                     <span className="text-xs text-slate-500">
                       Educational intelligence – not investment advice.
                     </span>
                   </div>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                  {sessionSteps.map(step => {
-                    const visuals = getStatusVisual(step.status);
-                    return (
-                      <div
-                        key={step.id}
-                        className={`rounded-lg border p-4 transition ${visuals.container}`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div
-                            className={`flex h-9 w-9 items-center justify-center rounded-full ${visuals.iconWrapper}`}
-                          >
-                            {visuals.icon}
-                          </div>
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide">
-                              <span className={visuals.stepClass}>{step.step}</span>
-                              {step.badge ? (
-                                <span className="rounded-full border border-current/40 px-2 py-0.5 text-[10px] font-semibold tracking-wide">
-                                  {step.badge}
-                                </span>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {sessionSteps.map(step => {
+                      const visuals = getStatusVisual(step.status);
+                      return (
+                        <div
+                          key={step.id}
+                          className={`rounded-lg border p-4 transition ${visuals.container}`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <div
+                              className={`flex h-9 w-9 items-center justify-center rounded-full ${visuals.iconWrapper}`}
+                            >
+                              {visuals.icon}
+                            </div>
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide">
+                                <span className={visuals.stepClass}>{step.step}</span>
+                                {step.badge ? (
+                                  <span className="rounded-full border border-current/40 px-2 py-0.5 text-[10px] font-semibold tracking-wide">
+                                    {step.badge}
+                                  </span>
+                                ) : null}
+                              </div>
+                              <h3 className="text-sm font-heading font-semibold text-slate-900">
+                                {step.title}
+                              </h3>
+                              <p className="text-sm text-slate-600">{step.description}</p>
+                              {step.helper ? (
+                                <p className="text-xs text-slate-500">{step.helper}</p>
                               ) : null}
                             </div>
-                            <h3 className="text-sm font-heading font-semibold text-slate-900">
-                              {step.title}
-                            </h3>
-                            <p className="text-sm text-slate-600">{step.description}</p>
-                            {step.helper ? (
-                              <p className="text-xs text-slate-500">{step.helper}</p>
-                            ) : null}
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Mode Selector */}
-          <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
 
           {/* Custom Brief Builder (only in custom mode) */}
           {briefMode === 'custom' && dataset && (
