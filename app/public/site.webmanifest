@@ -1,0 +1,16 @@
+{
+  "name": "Dryvest — Ethical Capital",
+  "short_name": "Dryvest",
+  "description": "Dryvest packages Ethical Capital's research into technical investment screening briefs.",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#ffffff",
+  "theme_color": "#581C87",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

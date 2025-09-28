@@ -46,7 +46,7 @@ const SCENARIOS: Scenario[] = [
       identity: 'individual',
       audience: 'family_friends',
       venue: 'one_on_one',
-      level: 'plain',
+      level: 'technical',
     },
     onePagers: ['sources_family_friends', 'next_steps_family_friends'],
   },
@@ -115,7 +115,7 @@ export function ScenarioCards({ onScenarioSelect }: ScenarioCardsProps) {
       <div className="mt-6 p-4 rounded-lg border border-indigo-100 bg-indigo-50/60">
         <p className="text-sm text-indigo-800">
           <strong>Don't see your situation?</strong> Use Custom Brief mode for
-          full control over identity, audience, venue, and technical level.
+          full control over identity, audience, and venue.
         </p>
       </div>
     </div>

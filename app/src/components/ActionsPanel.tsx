@@ -26,6 +26,7 @@ export function ActionsPanel({
   exportData,
   tone,
 }: ActionsPanelProps) {
+  const toneLabel = tone === 'technical' ? 'Technical briefing' : 'Plain-language briefing';
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>(
     'idle'
   );
@@ -168,7 +169,7 @@ export function ActionsPanel({
               ? 'Copied briefing'
               : copyState === 'error'
                 ? 'Copy failed'
-                : `Copy briefing (${tone})`}
+                : `Copy ${toneLabel}`}
           </button>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <button

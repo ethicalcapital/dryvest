@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dryvestGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581C87" />
+      <stop offset="100%" stop-color="#3B0C65" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#dryvestGradient)" />
+  <path
+    d="M21 16h8.6c7.8 0 13.4 5.9 13.4 16s-5.6 16-13.4 16H21V16z"
+    fill="#F4F2FB"
+  />
+  <path
+    d="M28.2 44L22 28.3h6.1l3.9 10.2 3.9-10.2H42L35.8 44z"
+    fill="#14B8A6"
+  />
+</svg>
