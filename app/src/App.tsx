@@ -1056,7 +1056,6 @@ function App() {
                 )}
 
                 <PreviewPane
-                  context={context}
                   guide={guide}
                   keyPoints={keyPointNodes}
                   nextSteps={nextStepNodes}
@@ -1078,7 +1077,6 @@ function App() {
             ) : (
               <div className="grid gap-6 lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]">
                 <PreviewPane
-                  context={context}
                   guide={guide}
                   keyPoints={keyPointNodes}
                   nextSteps={nextStepNodes}

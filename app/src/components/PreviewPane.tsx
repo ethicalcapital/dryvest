@@ -1,9 +1,8 @@
 import ReactMarkdown from 'react-markdown';
-import type { BriefContext, Node, SourceRecord } from '../lib/schema';
+import type { Node, SourceRecord } from '../lib/schema';
 import { GitHubFeedback } from './GitHubFeedback';
 
 interface PreviewPaneProps {
-  context: BriefContext;
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Extract<Node, { type: 'key_point' }>[];
   nextSteps: Extract<Node, { type: 'next_step' }>[];
@@ -83,7 +82,6 @@ function renderCitations(
 }
 
 export function PreviewPane({
-  context,
   guide,
   keyPoints,
   nextSteps,
