@@ -20,7 +20,12 @@ import { ScenarioCards, type Scenario } from './components/ScenarioCards';
 import { TemperatureControls } from './components/TemperatureControls';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
-import { initAnalytics, trackEvent } from './lib/analytics';
+import {
+  initAnalytics,
+  trackEvent,
+  setAnalyticsConsent as setAnalyticsTrackingConsent,
+} from './lib/analytics';
+import { DEFAULT_PLAYLIST_ID } from './lib/constants';
 import { DisclaimerGate } from './components/DisclaimerGate';
 import {
   matchesTargets,
@@ -32,7 +37,6 @@ import {
 } from './lib/resolve';
 
 const DATASET_VERSION = '2025-09-27';
-const DEFAULT_PLAYLIST_ID = 'brief_key_points_default';
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
 
 const FALLBACK_DEFAULTS: BriefParams = {
@@ -70,6 +74,10 @@ function App() {
   const [briefTone, setBriefTone] = useState<BriefTone>('plain');
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
   const [customContext, setCustomContext] = useState<BriefContext>({});
+  const [analyticsConsent, setAnalyticsConsent] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('dryvest:analytics-consent') === 'granted';
+  });
   const quickStartRef = useRef<HTMLDivElement | null>(null);
 
   // Scenario-based quick brief state
@@ -101,8 +109,19 @@ function App() {
   });
 
   useEffect(() => {
+    setAnalyticsTrackingConsent(analyticsConsent);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(
+        'dryvest:analytics-consent',
+        analyticsConsent ? 'granted' : 'denied'
+      );
+    }
+  }, [analyticsConsent]);
+
+  useEffect(() => {
+    if (!analyticsConsent || !analyticsToken) return;
     initAnalytics({ token: analyticsToken, spa: true });
-  }, []);
+  }, [analyticsConsent, analyticsToken]);
 
   useEffect(() => {
     if (!dataset || hasTrackedOpen.current) return;
@@ -462,7 +481,11 @@ function App() {
       ) : null}
       <Header />
       <PalestineStatement />
-      <BetaDisclaimer />
+      <BetaDisclaimer
+        analyticsConsent={analyticsConsent}
+        datasetVersion={dataset.version}
+        onAnalyticsConsentChange={setAnalyticsConsent}
+      />
 
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
@@ -545,8 +568,12 @@ function App() {
             <ComparisonView dataset={dataset} context={context} />
           )}
 
-          {briefMode === 'fact_check' && (
-            <FactCheckView exportData={exportData} />
+          {briefMode === 'fact_check' && dataset && (
+            <FactCheckView
+              dataset={dataset}
+              context={context}
+              exportData={exportData}
+            />
           )}
 
           {/* Scenario selection - full width */}

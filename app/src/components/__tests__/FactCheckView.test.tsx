@@ -4,7 +4,13 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vite
 
 import { FactCheckView } from '../FactCheckView';
 import type { BriefExportData } from '../../lib/exporters';
-import type { Node } from '../../lib/schema';
+import type {
+  Dataset,
+  Manifest,
+  Node,
+  Playlist,
+  SchemaDocument,
+} from '../../lib/schema';
 import { trackEvent } from '../../lib/analytics';
 
 vi.mock('../../lib/analytics', () => ({
@@ -116,6 +122,83 @@ const exportData: BriefExportData = {
   assertionLookup: { assert_benchmark_grade_exclusions: assertionRecord },
 };
 
+const manifest: Manifest = {
+  version: '2025-09-27',
+  schema: 'schema.json',
+  nodes: 'nodes.json',
+  playlists: 'playlists.json',
+  sources: 'sources.json',
+};
+
+const schemaDoc: SchemaDocument = {
+  version: '2025-09-27',
+  createdAt: '2025-09-27T00:00:00.000Z',
+  taxonomies: {
+    identity: ['endowment'],
+    audience: ['board'],
+    venue: ['board_meeting'],
+    level: ['plain'],
+  },
+};
+
+const playlist: Playlist = {
+  id: 'test-playlist',
+  kind: 'key_points',
+  title: 'Test Key Points',
+  items: [{ ref: 'kp-1' }],
+};
+
+const nextStepsPlaylist: Playlist = {
+  id: 'test-next-steps',
+  kind: 'next_steps',
+  title: 'Test Next Steps',
+  items: [{ ref: 'ns-1' }],
+};
+
+const nodes: Node[] = [
+  exportData.opener!,
+  exportData.guide!,
+  exportData.keyPoints[0],
+  exportData.nextSteps[0],
+  exportData.screeningNode!,
+  exportData.policyAlignment!,
+  exportData.templates[0],
+  exportData.venueSnippet!,
+];
+
+nodes.forEach(node => {
+  if (!node.targets) {
+    node.targets = {
+      identity: ['endowment'],
+      audience: ['board'],
+      venue: ['board_meeting'],
+    };
+  }
+});
+
+const dataset: Dataset = {
+  version: '2025-09-27',
+  manifest,
+  schema: schemaDoc,
+  nodes,
+  playlists: [playlist, nextStepsPlaylist],
+  sources: [baseSource],
+  assertions: [assertionRecord],
+  entities: [],
+  nodeIndex: Object.fromEntries(nodes.map(node => [node.id, node])),
+  sourceIndex: { src_primary: baseSource },
+  assertionIndex: { assert_benchmark_grade_exclusions: assertionRecord },
+  entityIndex: {},
+  playlistById: {
+    'test-playlist': playlist,
+    'test-next-steps': nextStepsPlaylist,
+  },
+  playlistsByKind: {
+    key_points: [playlist],
+    next_steps: [nextStepsPlaylist],
+  },
+};
+
 let originalClipboard: Clipboard | undefined;
 let originalCreateObjectURL: typeof URL.createObjectURL;
 let originalRevokeObjectURL: typeof URL.revokeObjectURL;
@@ -148,29 +231,53 @@ afterEach(() => {
 
 describe('FactCheckView', () => {
   it('renders fact check workspace summary', () => {
-    render(<FactCheckView exportData={exportData} />);
+    render(
+      <FactCheckView
+        dataset={dataset}
+        context={exportData.context}
+        exportData={exportData}
+      />
+    );
 
     expect(screen.getByText(/fact check workspace/i)).toBeInTheDocument();
-    expect(screen.getByText(/key points/i).nextSibling).toHaveTextContent('1');
-    expect(screen.getByText(/next steps/i).nextSibling).toHaveTextContent('1');
-    expect(screen.getByText(/unique sources/i).nextSibling).toHaveTextContent('1');
-    expect(screen.getByText(/assertions linked/i).nextSibling).toHaveTextContent('1');
-    expect(screen.getByText(/fact check package/i)).toBeInTheDocument();
+    expect(screen.getByText(/key points \(active\)/i).nextSibling).toHaveTextContent('1');
+    expect(screen.getByText(/next steps \(active\)/i).nextSibling).toHaveTextContent('1');
+    expect(screen.getByText(/unique sources \(active\)/i).nextSibling).toHaveTextContent('1');
+    expect(screen.getByText(/assertions linked \(active\)/i).nextSibling).toHaveTextContent('1');
+    expect(screen.getByText(/contexts covered/i).nextSibling).toHaveTextContent('1');
+    expect(screen.getByText(/view fact-check output/i)).toBeInTheDocument();
   });
 
   it('copies the report to clipboard and records analytics', async () => {
-    render(<FactCheckView exportData={exportData} />);
+    render(
+      <FactCheckView
+        dataset={dataset}
+        context={exportData.context}
+        exportData={exportData}
+      />
+    );
 
-    await userEvent.click(screen.getByRole('button', { name: /copy fact-check report/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /copy fact-check bundle/i })
+    );
 
     const clipboardMock = navigator.clipboard as unknown as { writeText: ReturnType<typeof vi.fn> };
     expect(clipboardMock.writeText).toHaveBeenCalledTimes(1);
     expect(clipboardMock.writeText.mock.calls[0][0]).toContain('KEY_POINT_1');
-    expect(trackEvent).toHaveBeenCalledWith('copy_clicked', { format: 'fact-check' });
+    expect(trackEvent).toHaveBeenCalledWith('copy_clicked', {
+      format: 'fact-check',
+      contexts: 1,
+    });
   });
 
   it('downloads the report as text and records analytics', async () => {
-    render(<FactCheckView exportData={exportData} />);
+    render(
+      <FactCheckView
+        dataset={dataset}
+        context={exportData.context}
+        exportData={exportData}
+      />
+    );
 
     await userEvent.click(screen.getByRole('button', { name: /download .txt/i }));
 
@@ -179,6 +286,7 @@ describe('FactCheckView', () => {
     expect(trackEvent).toHaveBeenCalledWith('download_clicked', {
       format: 'fact-check',
       datasetVersion: '2025-09-27',
+      contexts: 1,
     });
   });
 });

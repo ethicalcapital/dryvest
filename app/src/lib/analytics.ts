@@ -16,12 +16,17 @@ export interface AnalyticsInitOptions {
 }
 
 let initialized = false;
+let consentGranted = false;
+
+export function setAnalyticsConsent(consent: boolean) {
+  consentGranted = consent;
+}
 
 export function initAnalytics({
   token,
   spa = true,
 }: AnalyticsInitOptions): void {
-  if (!token || initialized) return;
+  if (!token || initialized || !consentGranted) return;
 
   const existing = document.querySelector<HTMLScriptElement>(
     'script[data-cf-beacon]'
@@ -52,6 +57,7 @@ export function trackEvent(
   name: AnalyticsEventName,
   props?: Record<string, unknown>
 ): void {
+  if (!consentGranted) return;
   if (typeof window === 'undefined') return;
   if (!window._cfq) {
     window._cfq = [];
