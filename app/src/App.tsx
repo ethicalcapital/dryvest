@@ -443,9 +443,9 @@ function App() {
             status: 'active' as StepStatus,
             title: 'Select your context',
             description:
-              description ? `Defaults → ${description}` : 'Pick options in the left column.',
+              description ? `Defaults → ${description}` : 'Update the selections above to lock context.',
             helper:
-              'Choose institution, audience, and driver so the brief feels like it belongs.',
+              'Choose institution, audience, and driver so the brief reflects the portfolio in front of you.',
           };
         }
 
@@ -493,7 +493,7 @@ function App() {
             title: 'Prep your exports',
             description:
               'Select attachments, downloads, or copies once your brief feels ready.',
-            helper: 'Use the right rail to add one-pagers or export PDF/Markdown.',
+            helper: 'Use the attachments step or Actions panel to add one-pagers and generate exports.',
           };
 
       return [
