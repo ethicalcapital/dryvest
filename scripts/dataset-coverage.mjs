@@ -6,6 +6,9 @@ import process from 'node:process';
 
 const DEFAULT_DATA_DIR = path.join('app', 'public', 'data');
 const DEFAULT_LOG = path.join('analysis', 'coverage-history.jsonl');
+const DISALLOWED_PAIRS = new Set([
+  'individual::fiduciary',
+]);
 
 function parseArgs(argv) {
   const options = {
@@ -188,6 +191,9 @@ function computeContexts(dataset, indices) {
 
   for (const identity of identities) {
     for (const audience of audiences) {
+      if (DISALLOWED_PAIRS.has(`${identity}::${audience}`)) {
+        continue;
+      }
       let pairHasContent = false;
       const pairContexts = [];
 
