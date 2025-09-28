@@ -151,13 +151,12 @@ export default {
     const assets = env.ASSETS as Fetcher;
     let response = await assets.fetch(request);
 
-    if (
-      response.status === 404 &&
-      request.method === 'GET' &&
-      request.headers.get('accept')?.includes('text/html')
-    ) {
-      const url = new URL(request.url);
-      if (!url.pathname.startsWith('/client/')) {
+    if (response.status === 404 && request.method === 'GET') {
+      const accept = request.headers.get('accept') ?? '';
+      const isHtml = accept.includes('text/html');
+      const isAsset = url.pathname.startsWith('/client/') || url.pathname.startsWith('/dryvest/');
+
+      if (isHtml && !isAsset) {
         url.pathname = '/client/index.html';
         response = await assets.fetch(new Request(url.toString(), request));
       }
