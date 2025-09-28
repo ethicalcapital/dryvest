@@ -2,6 +2,9 @@ import ReactMarkdown from 'react-markdown';
 import type { Node, SourceRecord } from '../lib/schema';
 import { GitHubFeedback } from './GitHubFeedback';
 
+const githubDocUrl = (path: string) =>
+  `https://github.com/ethicalcapital/dryvest/blob/main/${path.replace(/^\//, '')}`;
+
 interface PreviewPaneProps {
   guide?: Extract<Node, { type: 'guide' }>;
   keyPoints: Extract<Node, { type: 'key_point' }>[];
@@ -238,11 +241,11 @@ export function PreviewPane({
                 <div className="mt-3 flex flex-wrap gap-2">
                   <a
                     className="inline-flex items-center rounded-md border border-indigo-600 px-3 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50"
-                    href={`/${doc.markdownPath}`}
+                    href={githubDocUrl(doc.markdownPath)}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Open markdown
+                    View on GitHub
                   </a>
                 </div>
               </article>

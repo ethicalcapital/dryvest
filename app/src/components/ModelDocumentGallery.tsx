@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FileText, Plus } from 'lucide-react';
 import type { Node } from '../lib/schema';
 
@@ -8,6 +8,9 @@ interface ModelDocumentGalleryProps {
   toggleDoc: (id: string, include?: boolean) => void;
 }
 
+const githubDocUrl = (path: string) =>
+  `https://github.com/ethicalcapital/dryvest/blob/main/${path.replace(/^\//, '')}`;
+
 export function ModelDocumentGallery({
   modelDocuments,
   selectedDocs,
@@ -16,13 +19,16 @@ export function ModelDocumentGallery({
   const [showAll, setShowAll] = useState(false);
   const [requestedMore, setRequestedMore] = useState(false);
 
-  // Show only first 3 by default to avoid overwhelming
-  const displayedDocs = showAll ? modelDocuments : modelDocuments.slice(0, 3);
-  const hiddenCount = modelDocuments.length - displayedDocs.length;
+  const sortedDocs = useMemo(
+    () => [...modelDocuments].sort((a, b) => a.title.localeCompare(b.title)),
+    [modelDocuments]
+  );
+
+  const displayedDocs = showAll ? sortedDocs : sortedDocs.slice(0, 3);
+  const hiddenCount = sortedDocs.length - displayedDocs.length;
 
   const handleRequestMore = () => {
     setRequestedMore(true);
-    // This could trigger analytics or a backend request for more content
     setTimeout(() => setShowAll(true), 300);
   };
 
@@ -32,9 +38,7 @@ export function ModelDocumentGallery({
         <h3 className="text-sm font-heading font-semibold uppercase tracking-wide text-slate-500">
           Model Documents ({selectedDocs.length} selected)
         </h3>
-        <div className="text-xs text-slate-400">
-          {modelDocuments.length} available
-        </div>
+        <div className="text-xs text-slate-400">{sortedDocs.length} available</div>
       </div>
 
       <div className="space-y-3">
@@ -48,14 +52,12 @@ export function ModelDocumentGallery({
         ))}
       </div>
 
-      {/* Show More Button */}
       {!showAll && hiddenCount > 0 && (
         <div className="text-center">
           <button
             onClick={handleRequestMore}
             disabled={requestedMore}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg hover:opacity-90 disabled:opacity-50 transition-opacity"
-            style={{ backgroundColor: 'var(--ecic-purple)' }}
+            className="inline-flex items-center gap-2 rounded-lg bg-ecic-purple px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             {requestedMore ? (
               <>Loading...</>
@@ -66,22 +68,21 @@ export function ModelDocumentGallery({
               </>
             )}
           </button>
-          <p className="text-xs text-slate-500 mt-2">
+          <p className="mt-2 text-xs text-slate-500">
             We start with fewer options to keep things focused
           </p>
         </div>
       )}
 
-      {/* Request More Content CTA */}
       {showAll && (
-        <div className="mt-6 p-4 rounded-lg bg-slate-50 border border-slate-200">
+        <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
           <div className="text-center">
-            <FileText size={24} className="mx-auto text-slate-400 mb-2" />
-            <h4 className="font-heading font-medium text-slate-900 mb-1">
+            <FileText size={24} className="mx-auto mb-2 text-slate-400" />
+            <h4 className="mb-1 font-heading font-medium text-slate-900">
               Need something specific?
             </h4>
-            <p className="text-sm text-slate-600 mb-3">
-              We're building more model documents based on what's most useful.
+            <p className="mb-3 text-sm text-slate-600">
+              We're adding more model documents as campaigns share their needs.
             </p>
             <a
               href="mailto:hello@ethicic.com?subject=Dryvest%20model%20document%20request"
@@ -107,52 +108,46 @@ function ModelDocumentCard({
   onToggle: () => void;
 }) {
   return (
-    <label
-      className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-3 text-sm shadow-sm transition-all ${
+    <div
+      className={`rounded-lg border px-3 py-3 text-sm shadow-sm transition ${
         isSelected
-          ? 'text-slate-900'
-          : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300'
+          ? 'border-ecic-purple bg-ecic-purple/5 text-slate-900'
+          : 'border-slate-200 bg-white text-slate-600 hover:border-ecic-purple/40'
       }`}
-      style={{
-        borderColor: isSelected ? 'var(--ecic-purple)' : 'var(--border-gray)',
-        backgroundColor: isSelected ? 'rgba(88, 28, 135, 0.05)' : undefined,
-      }}
     >
-      {/* Custom Checkbox */}
-      <div
-        className={`mt-1 flex-shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center ${
-          isSelected ? 'text-white' : 'border-slate-300'
-        }`}
-        style={{
-          borderColor: isSelected ? 'var(--ecic-purple)' : 'var(--border-gray)',
-          backgroundColor: isSelected ? 'var(--ecic-purple)' : undefined,
-        }}
-      >
-        {isSelected && <span className="text-xs">✓</span>}
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 min-w-0">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <h4 className="font-heading font-medium text-slate-900 leading-tight">
-              {doc.title}
-            </h4>
-            <p className="text-sm text-slate-600 mt-1 leading-relaxed">
-              {doc.description}
-            </p>
-          </div>
-          <FileText size={16} className="ml-2 flex-shrink-0 text-slate-400" />
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex-1">
+          <h4 className="font-heading font-medium text-slate-900 leading-tight">
+            {doc.title}
+          </h4>
+          <p className="mt-1 text-sm leading-relaxed text-slate-600">
+            {doc.description}
+          </p>
         </div>
+        <FileText size={16} className="flex-shrink-0 text-slate-400" />
       </div>
 
-      {/* Hidden input for accessibility */}
-      <input
-        type="checkbox"
-        checked={isSelected}
-        onChange={onToggle}
-        className="sr-only"
-      />
-    </label>
+      <div className="mt-3 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={onToggle}
+          className={`inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs font-medium transition ${
+            isSelected
+              ? 'border-ecic-purple bg-ecic-purple/10 text-ecic-purple'
+              : 'border-slate-200 text-slate-600 hover:border-ecic-purple/40'
+          }`}
+        >
+          {isSelected ? 'Remove from brief' : 'Include in brief'}
+        </button>
+        <a
+          href={githubDocUrl(doc.markdownPath)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-md border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:border-ecic-purple/40 hover:text-ecic-purple"
+        >
+          View on GitHub
+        </a>
+      </div>
+    </div>
   );
 }
