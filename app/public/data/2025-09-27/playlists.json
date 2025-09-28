@@ -2993,6 +2993,9 @@
           "ref": "kp_policy_define_esg_risk"
         },
         {
+          "ref": "kp_policy_conduct_risk_framework"
+        },
+        {
           "ref": "kp_policy_modern_fiduciary_mandate"
         },
         {
@@ -3059,6 +3062,12 @@
         },
         {
           "ref": "step_policy_coso_gap_assessment"
+        },
+        {
+          "ref": "step_policy_conduct_risk_inventory"
+        },
+        {
+          "ref": "step_policy_conduct_reporting_matrix"
         }
       ]
     },
@@ -3089,6 +3098,9 @@
         },
         {
           "ref": "tmpl_policy_beneficiary_consultation_clause"
+        },
+        {
+          "ref": "tmpl_policy_conduct_controls"
         }
       ]
     }

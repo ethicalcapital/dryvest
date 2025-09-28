@@ -2465,6 +2465,132 @@
       }
     },
     {
+      "id": "one_pager_conduct_risk_control_framework",
+      "type": "one_pager",
+      "title": "Model Document: Conduct Risk Control Framework",
+      "description": "Governs how conduct risks are identified, scored, escalated, and reported using COSO, OECD, ICMA, and ISO guardrails.",
+      "markdownPath": "content/model_conduct_risk_framework.md",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff",
+          "compliance"
+        ]
+      }
+    },
+    {
+      "id": "kp_policy_conduct_risk_framework",
+      "type": "key_point",
+      "title": "Conduct risk controls tie screens to COSO accountability",
+      "body": "A conduct-risk program inventories flagged issuers, scores legal and reputational exposure, and routes actions through COSO ERM owners. Using OECD due-diligence loops, ICMA bond checks, and ISO 37002 whistleblowing standards keeps exclusion lists auditable instead of activist improvisation.",
+      "citations": [
+        "src_coso_erm",
+        "src_oecd_rbc_guidance",
+        "src_icma_green_bond_principles",
+        "src_iso_37002_standard"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      },
+      "tags": [
+        "conduct_risk",
+        "erm"
+      ]
+    },
+    {
+      "id": "step_policy_conduct_risk_inventory",
+      "type": "next_step",
+      "text": "Stand up the conduct-risk inventory: flagged issuers, exposure map, COSO scoring matrix, and documented owners.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "staff",
+          "consultants",
+          "fiduciary"
+        ]
+      }
+    },
+    {
+      "id": "step_policy_conduct_reporting_matrix",
+      "type": "next_step",
+      "text": "Publish the master reporting matrix: heatmaps, scenario tables, variance log, override register, and whistleblower summary cadence.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "staff",
+          "fiduciary",
+          "consultants"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_policy_conduct_controls",
+      "type": "template_snippet",
+      "title": "Policy clause: conduct-risk controls",
+      "lines": [
+        "Maintain a conduct-risk inventory covering product screens, conduct triggers, and systemic risk alerts.",
+        "Apply optimisation guardrails (≤25 bps tracking error) and diversification tests when exclusions are executed.",
+        "Document due-diligence procedures aligned with OECD RBC and ICMA principles for each asset class.",
+        "Operate ISO 37002-compliant whistleblowing channels with board-level reporting.",
+        "Report quarterly on heatmaps, override activity, scenario analysis, and remediation status."
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance"
+        ],
+        "audience": [
+          "fiduciary",
+          "consultants",
+          "staff",
+          "compliance"
+        ]
+      },
+      "citations": [
+        "src_coso_erm",
+        "src_oecd_rbc_guidance",
+        "src_icma_green_bond_principles",
+        "src_iso_37002_standard"
+      ]
+    },
+    {
       "id": "opener_central_bank_base",
       "type": "opener",
       "text": "Official institutions can clarify mandate limits, apply best-efforts exclusions, and provide transparent rationales and constraints.",

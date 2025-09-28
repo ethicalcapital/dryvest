@@ -114,6 +114,7 @@ const SUPPORTED_TEMPLATE_IDS = [
   'tmpl_policy_duty_of_care_clause',
   'tmpl_policy_duty_of_loyalty_clause',
   'tmpl_policy_beneficiary_consultation_clause',
+  'tmpl_policy_conduct_controls',
 ];
 
 function App() {
