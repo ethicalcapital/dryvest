@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useMemo, type CSSProperties } from 'react';
+import { useMemo, useState, useEffect, type CSSProperties } from 'react';
 import type { Dataset, Node } from '../lib/schema';
 import type { BriefParams } from '../hooks/useBriefParams';
 import { formatTaxonomyValue } from '../lib/format';
@@ -179,6 +179,71 @@ export function QuickBriefContextPanel({
     });
   }, [dataset.schema.taxonomies?.motivation, motivationOptions]);
 
+  const [collapsed, setCollapsed] = useState({
+    identity: Boolean(params.identity),
+    audience: Boolean(params.audience),
+    motivation: Boolean(params.motivation),
+  });
+
+  useEffect(() => {
+    if (!params.identity) {
+      setCollapsed(prev => ({ ...prev, identity: false }));
+    }
+  }, [params.identity]);
+
+  useEffect(() => {
+    if (!params.audience) {
+      setCollapsed(prev => ({ ...prev, audience: false }));
+    }
+  }, [params.audience]);
+
+  useEffect(() => {
+    if (!params.motivation) {
+      setCollapsed(prev => ({ ...prev, motivation: false }));
+    }
+  }, [params.motivation, params.motivationSecondary]);
+
+  const handleIdentitySelect = (value: string) => {
+    onParamChange({ identity: value });
+    setCollapsed(prev => ({ ...prev, identity: true }));
+  };
+
+  const handleAudienceSelect = (value: string) => {
+    onParamChange({ audience: value });
+    setCollapsed(prev => ({ ...prev, audience: true }));
+  };
+
+  const handlePrimaryMotivationSelect = (value: string) => {
+    const previousPrimary = params.motivation;
+    const updates: Partial<BriefParams> = { motivation: value };
+    if (params.motivationSecondary === value) {
+      updates.motivationSecondary =
+        previousPrimary && previousPrimary !== value
+          ? previousPrimary
+          : undefined;
+    } else if (
+      !params.motivationSecondary &&
+      previousPrimary &&
+      previousPrimary !== value
+    ) {
+      updates.motivationSecondary = previousPrimary;
+    }
+    onParamChange(updates);
+    setCollapsed(prev => ({ ...prev, motivation: true }));
+  };
+
+  const handleSecondaryMotivationToggle = (value: string, active: boolean) => {
+    if (active) {
+      onParamChange({ motivationSecondary: undefined });
+    } else {
+      onParamChange({ motivationSecondary: value });
+    }
+  };
+
+  const reopenSection = (key: keyof typeof collapsed) => {
+    setCollapsed(prev => ({ ...prev, [key]: false }));
+  };
+
   return (
     <div className="space-y-6">
       <StepSection
@@ -186,26 +251,37 @@ export function QuickBriefContextPanel({
         step="1"
         helper="Pick the investor profile so the strategy language fits their governance." 
       >
-        <div className="flex flex-wrap gap-2">
-          {identities.map(value => {
-            const active = params.identity === value;
-            const meta = IDENTITY_COPY[value] ?? {
-              label: formatTaxonomyValue(value),
-              helper: 'Tailor strategy to this investor type.',
-            };
-            return (
-              <OptionButton
-                key={value}
-                active={active}
-                label={meta.label}
-                description={
-                  active ? 'Active context' : meta.helper
-                }
-                onClick={() => onParamChange({ identity: value })}
-              />
-            );
-          })}
-        </div>
+        {collapsed.identity && params.identity ? (
+          <SummaryCard
+            title={
+              (IDENTITY_COPY[params.identity]?.label ??
+                formatTaxonomyValue(params.identity))
+            }
+            helper={IDENTITY_COPY[params.identity]?.helper}
+            onEdit={() => reopenSection('identity')}
+          />
+        ) : (
+          <div className="flex flex-wrap gap-2">
+            {identities.map(value => {
+              const active = params.identity === value;
+              const meta = IDENTITY_COPY[value] ?? {
+                label: formatTaxonomyValue(value),
+                helper: 'Tailor strategy to this investor type.',
+              };
+              return (
+                <OptionButton
+                  key={value}
+                  active={active}
+                  label={meta.label}
+                  description={
+                    active ? 'Active context' : meta.helper
+                  }
+                  onClick={() => handleIdentitySelect(value)}
+                />
+              );
+            })}
+          </div>
+        )}
       </StepSection>
 
       <StepSection
@@ -213,26 +289,37 @@ export function QuickBriefContextPanel({
         step="2"
         helper="Identify the audience whose approval or implementation you need." 
       >
-        <div className="flex flex-wrap gap-2">
-          {audiences.map(value => {
-            const active = params.audience === value;
-            const meta = AUDIENCE_COPY[value] ?? {
-              label: formatTaxonomyValue(value),
-              helper: 'Retarget the brief toward this audience.',
-            };
-            return (
-              <OptionButton
-                key={value}
-                active={active}
-                label={meta.label}
-                description={
-                  active ? 'Active context' : meta.helper
-                }
-                onClick={() => onParamChange({ audience: value })}
-              />
-            );
-          })}
-        </div>
+        {collapsed.audience && params.audience ? (
+          <SummaryCard
+            title={
+              (AUDIENCE_COPY[params.audience]?.label ??
+                formatTaxonomyValue(params.audience))
+            }
+            helper={AUDIENCE_COPY[params.audience]?.helper}
+            onEdit={() => reopenSection('audience')}
+          />
+        ) : (
+          <div className="flex flex-wrap gap-2">
+            {audiences.map(value => {
+              const active = params.audience === value;
+              const meta = AUDIENCE_COPY[value] ?? {
+                label: formatTaxonomyValue(value),
+                helper: 'Retarget the brief toward this audience.',
+              };
+              return (
+                <OptionButton
+                  key={value}
+                  active={active}
+                  label={meta.label}
+                  description={
+                    active ? 'Active context' : meta.helper
+                  }
+                  onClick={() => handleAudienceSelect(value)}
+                />
+              );
+            })}
+          </div>
+        )}
       </StepSection>
 
       <StepSection
@@ -240,87 +327,82 @@ export function QuickBriefContextPanel({
         step="3"
         helper="Rank the campaign pressures so Dryvest can weight the briefing appropriately."
       >
-        <div className="space-y-4">
-          <div>
-            <p className="text-xs font-heading uppercase tracking-wide text-slate-500 mb-2">
-              Most important driver
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {motivations.map(option => {
-                const active = params.motivation === option.value;
-                return (
-                  <OptionButton
-                    key={`primary-${option.value}`}
-                    active={active}
-                    label={option.label}
-                    description={active ? 'Primary driver' : option.helper}
-                    onClick={() => {
-                      const previousPrimary = params.motivation;
-                      const updates: Partial<BriefParams> = { motivation: option.value };
-                      if (params.motivationSecondary === option.value) {
-                        updates.motivationSecondary =
-                          previousPrimary && previousPrimary !== option.value
-                            ? previousPrimary
-                            : undefined;
-                      } else if (
-                        !params.motivationSecondary &&
-                        previousPrimary &&
-                        previousPrimary !== option.value
-                      ) {
-                        updates.motivationSecondary = previousPrimary;
-                      }
-                      onParamChange(updates);
-                    }}
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-2 flex items-center justify-between">
-              <p className="text-xs font-heading uppercase tracking-wide text-slate-500">
-                Second-most important (optional)
+        {collapsed.motivation && params.motivation ? (
+          <SummaryCard
+            title={formatTaxonomyValue(params.motivation)}
+            helper="Campaign drivers locked"
+            lines={[
+              `Primary: ${formatTaxonomyValue(params.motivation)}`,
+              `Secondary: ${
+                params.motivationSecondary
+                  ? formatTaxonomyValue(params.motivationSecondary)
+                  : 'None selected'
+              }`,
+            ]}
+            onEdit={() => reopenSection('motivation')}
+          />
+        ) : (
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-heading uppercase tracking-wide text-slate-500 mb-2">
+                Most important driver
               </p>
-              {params.motivationSecondary ? (
-                <button
-                  type="button"
-                  onClick={() => onParamChange({ motivationSecondary: undefined })}
-                  className="text-xs font-medium text-ecic-teal hover:underline"
-                >
-                  Clear selection
-                </button>
-              ) : null}
+              <div className="flex flex-wrap gap-2">
+                {motivations.map(option => {
+                  const active = params.motivation === option.value;
+                  return (
+                    <OptionButton
+                      key={`primary-${option.value}`}
+                      active={active}
+                      label={option.label}
+                      description={active ? 'Primary driver' : option.helper}
+                      onClick={() => handlePrimaryMotivationSelect(option.value)}
+                    />
+                  );
+                })}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {motivations.map(option => {
-                const isPrimary = params.motivation === option.value;
-                const active = params.motivationSecondary === option.value;
-                return (
-                  <OptionButton
-                    key={`secondary-${option.value}`}
-                    active={active}
-                    intent="secondary"
-                    disabled={isPrimary}
-                    label={option.label}
-                    description={
-                      isPrimary
-                        ? 'Already set as primary'
-                        : active
-                          ? 'Secondary driver'
-                          : option.helper
-                    }
-                    onClick={() => {
-                      onParamChange({
-                        motivationSecondary: active ? undefined : option.value,
-                      });
-                    }}
-                  />
-                );
-              })}
+
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <p className="text-xs font-heading uppercase tracking-wide text-slate-500">
+                  Second-most important (optional)
+                </p>
+                {params.motivationSecondary ? (
+                  <button
+                    type="button"
+                    onClick={() => onParamChange({ motivationSecondary: undefined })}
+                    className="text-xs font-medium text-ecic-purple hover:underline"
+                  >
+                    Clear selection
+                  </button>
+                ) : null}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {motivations.map(option => {
+                  const isPrimary = params.motivation === option.value;
+                  const active = params.motivationSecondary === option.value;
+                  return (
+                    <OptionButton
+                      key={`secondary-${option.value}`}
+                      active={active}
+                      disabled={isPrimary}
+                      label={option.label}
+                      description={
+                        isPrimary
+                          ? 'Already set as primary'
+                          : active
+                            ? 'Secondary driver'
+                            : option.helper
+                      }
+                      onClick={() => handleSecondaryMotivationToggle(option.value, active)}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </StepSection>
 
       {onePagers.length > 0 ? (
@@ -340,13 +422,44 @@ export function QuickBriefContextPanel({
   );
 }
 
+interface SummaryCardProps {
+  title: string;
+  helper?: string;
+  lines?: string[];
+  onEdit: () => void;
+}
+
+function SummaryCard({ title, helper, lines, onEdit }: SummaryCardProps) {
+  return (
+    <div className="flex items-start justify-between gap-3 rounded-lg border border-ecic-purple/40 bg-white px-4 py-3">
+      <div>
+        <p className="text-sm font-heading font-semibold text-slate-900">{title}</p>
+        {helper ? <p className="text-xs text-slate-500">{helper}</p> : null}
+        {lines && lines.length ? (
+          <ul className="mt-2 space-y-1 text-xs text-slate-600">
+            {lines.map((line, index) => (
+              <li key={index}>{line}</li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+      <button
+        type="button"
+        onClick={onEdit}
+        className="text-xs font-medium text-ecic-purple hover:underline"
+      >
+        Change
+      </button>
+    </div>
+  );
+}
+
 interface OptionButtonProps {
   active: boolean;
   label: string;
   description: string;
   onClick: () => void;
   disabled?: boolean;
-  intent?: 'primary' | 'secondary';
 }
 
 function OptionButton({
@@ -355,13 +468,7 @@ function OptionButton({
   description,
   onClick,
   disabled = false,
-  intent = 'primary',
 }: OptionButtonProps) {
-  const activeClasses =
-    intent === 'secondary'
-      ? 'border-ecic-teal bg-ecic-teal/10 text-ecic-teal shadow-sm'
-      : 'border-ecic-purple bg-ecic-purple/10 text-ecic-purple shadow-sm';
-  const ringColor = intent === 'secondary' ? 'var(--ecic-teal)' : 'var(--ecic-purple)';
   return (
     <button
       type="button"
@@ -372,10 +479,10 @@ function OptionButton({
         disabled
           ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
           : active
-            ? activeClasses
+            ? 'border-ecic-purple bg-ecic-purple/10 text-ecic-purple shadow-sm'
             : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
       )}
-      style={{ '--tw-ring-color': ringColor } as CSSProperties}
+      style={{ '--tw-ring-color': 'var(--ecic-purple)' } as CSSProperties}
     >
       <div className="font-heading text-sm font-semibold">{label}</div>
       <p className="mt-1 text-xs text-slate-600">{description}</p>
