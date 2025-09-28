@@ -1110,6 +1110,9 @@
       "text": "Share your own experience reviewing accounts and choosing screened funds.",
       "targets": {
         "identity": [
+          "individual"
+        ],
+        "audience": [
           "family_friends"
         ]
       }
@@ -1120,6 +1123,9 @@
       "text": "Offer to walk through their brokerage or retirement platform to locate values-aligned options.",
       "targets": {
         "identity": [
+          "individual"
+        ],
+        "audience": [
           "family_friends"
         ]
       }
@@ -1130,6 +1136,9 @@
       "text": "Encourage them to revisit the conversation after they\u2019ve tried a small allocation shift.",
       "targets": {
         "identity": [
+          "individual"
+        ],
+        "audience": [
           "family_friends"
         ]
       }
