@@ -6,6 +6,7 @@ export const TargetsSchema = z
     audience: z.array(z.string()).min(1).optional(),
     venue: z.array(z.string()).min(1).optional(),
     level: z.array(z.string()).min(1).optional(),
+    motivation: z.array(z.string()).min(1).optional(),
   })
   .strict();
 
@@ -158,13 +159,14 @@ export const SchemaDocumentSchema = z.object({
   version: z.string(),
   createdAt: z.string(),
   taxonomies: z
-    .object({
-      identity: z.array(z.string()).optional(),
-      audience: z.array(z.string()).optional(),
-      venue: z.array(z.string()).optional(),
-      level: z.array(z.string()).optional(),
-    })
-    .optional(),
+  .object({
+    identity: z.array(z.string()).optional(),
+    audience: z.array(z.string()).optional(),
+    venue: z.array(z.string()).optional(),
+    level: z.array(z.string()).optional(),
+    motivation: z.array(z.string()).optional(),
+  })
+  .optional(),
 });
 
 export type SchemaDocument = z.infer<typeof SchemaDocumentSchema>;
@@ -261,6 +263,7 @@ export const BriefContextSchema = z
     audience: z.string().optional(),
     venue: z.string().optional(),
     level: z.string().optional(),
+    motivation: z.string().optional(),
   })
   .strict();
 

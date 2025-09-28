@@ -27,6 +27,11 @@
     "level": [
       "plain",
       "technical"
+    ],
+    "motivation": [
+      "regulatory_drivers",
+      "internal_leadership",
+      "external_stakeholders"
     ]
   }
 }

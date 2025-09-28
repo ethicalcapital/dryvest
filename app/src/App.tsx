@@ -470,7 +470,7 @@ function App() {
 
   const sourceLookup = dataset?.sourceIndex ?? {};
 
-  const screeningNode =
+  const screeningCandidate =
     dataset?.nodeIndex['policy_screening_knowledge']?.type ===
     'policy_statement'
       ? (dataset.nodeIndex['policy_screening_knowledge'] as Extract<
@@ -478,13 +478,22 @@ function App() {
           { type: 'policy_statement' }
         >)
       : undefined;
+  const screeningNode =
+    screeningCandidate && matchesTargets(screeningCandidate.targets, context)
+      ? screeningCandidate
+      : undefined;
 
-  const policyAlignment =
+  const policyAlignmentCandidate =
     dataset?.nodeIndex['policy_alignment']?.type === 'policy_statement'
       ? (dataset.nodeIndex['policy_alignment'] as Extract<
           Node,
           { type: 'policy_statement' }
         >)
+      : undefined;
+  const policyAlignment =
+    policyAlignmentCandidate &&
+    matchesTargets(policyAlignmentCandidate.targets, context)
+      ? policyAlignmentCandidate
       : undefined;
 
   const sourceNodes = useMemo(() => {

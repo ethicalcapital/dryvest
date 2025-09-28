@@ -2,6 +2,2013 @@
   "version": "2025-09-27",
   "playlists": [
     {
+      "id": "counters_pension_boards",
+      "kind": "counters",
+      "title": "Counters: Pension Boards",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_exclusions-violate-fiduciary-duty"
+        },
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_the-board-doesn-t-have-authority-to-make-investment-decisions"
+        },
+        {
+          "ref": "ctr_this-politicizes-our-investment-process"
+        },
+        {
+          "ref": "ctr_we-need-engagement-not-divestment"
+        }
+      ]
+    },
+    {
+      "id": "counters_pension_staff",
+      "kind": "counters",
+      "title": "Counters: Pension Staff",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
+        },
+        {
+          "ref": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain"
+        },
+        {
+          "ref": "ctr_our-index-funds-can-t-accommodate-exclusions"
+        },
+        {
+          "ref": "ctr_our-investment-consultant-manager-won-t-implement-this"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        },
+        {
+          "ref": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start"
+        }
+      ]
+    },
+    {
+      "id": "counters_pension_consultants",
+      "kind": "counters",
+      "title": "Counters: Pension Consultants",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        },
+        {
+          "ref": "ctr_exclusions-reduce-diversification-too-much"
+        },
+        {
+          "ref": "ctr_our-index-funds-can-t-accommodate-exclusions"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        },
+        {
+          "ref": "ctr_divestment-is-ineffective-someone-else-just-buys-the-shares"
+        }
+      ]
+    },
+    {
+      "id": "counters_mission_boards",
+      "kind": "counters",
+      "title": "Counters: Mission Boards",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_this-will-damage-our-relationship-with-jewish-donors-stakeholders"
+        },
+        {
+          "ref": "ctr_this-is-antisemitic-we-can-t-single-out-israel"
+        },
+        {
+          "ref": "ctr_this-sets-dangerous-precedent-for-future-exclusions"
+        },
+        {
+          "ref": "ctr_our-endowment-foundation-documents-prohibit-political-positions"
+        },
+        {
+          "ref": "ctr_we-lack-precedent-from-peer-institutions"
+        },
+        {
+          "ref": "ctr_this-distracts-from-our-core-mission"
+        }
+      ]
+    },
+    {
+      "id": "counters_mission_staff",
+      "kind": "counters",
+      "title": "Counters: Mission Staff",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
+        },
+        {
+          "ref": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        },
+        {
+          "ref": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start"
+        },
+        {
+          "ref": "ctr_how-do-you-know-these-activist-lists-aren-t-biased"
+        },
+        {
+          "ref": "ctr_we-need-engagement-not-divestment"
+        }
+      ]
+    },
+    {
+      "id": "counters_mission_consultants",
+      "kind": "counters",
+      "title": "Counters: Mission Consultants",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        },
+        {
+          "ref": "ctr_exclusions-violate-fiduciary-duty"
+        },
+        {
+          "ref": "ctr_exclusions-reduce-diversification-too-much"
+        },
+        {
+          "ref": "ctr_we-lack-precedent-from-peer-institutions"
+        }
+      ]
+    },
+    {
+      "id": "counters_government_boards",
+      "kind": "counters",
+      "title": "Counters: Government Boards",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_what-about-china-saudi-arabia-other-countries"
+        },
+        {
+          "ref": "ctr_this-politicizes-our-investment-process"
+        },
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        }
+      ]
+    },
+    {
+      "id": "counters_government_staff",
+      "kind": "counters",
+      "title": "Counters: Government Staff",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
+        },
+        {
+          "ref": "ctr_how-do-we-define-settlement-involvement"
+        },
+        {
+          "ref": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain"
+        },
+        {
+          "ref": "ctr_our-index-funds-can-t-accommodate-exclusions"
+        },
+        {
+          "ref": "ctr_settlement-products-are-a-tiny-portion-of-these-companies-revenues"
+        }
+      ]
+    },
+    {
+      "id": "counters_government_consultants",
+      "kind": "counters",
+      "title": "Counters: Government Consultants",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_exclusions-violate-fiduciary-duty"
+        },
+        {
+          "ref": "ctr_un-databases-are-politically-motivated-and-unreliable"
+        },
+        {
+          "ref": "ctr_we-lack-precedent-from-peer-institutions"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        }
+      ]
+    },
+    {
+      "id": "counters_sovereign_boards",
+      "kind": "counters",
+      "title": "Counters: Sovereign Boards",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_this-politicizes-our-investment-process"
+        },
+        {
+          "ref": "ctr_what-about-china-saudi-arabia-other-countries"
+        },
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        },
+        {
+          "ref": "ctr_exclusions-violate-fiduciary-duty"
+        }
+      ]
+    },
+    {
+      "id": "counters_sovereign_staff",
+      "kind": "counters",
+      "title": "Counters: Sovereign Staff",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_we-need-engagement-not-divestment"
+        },
+        {
+          "ref": "ctr_settlement-products-are-a-tiny-portion-of-these-companies-revenues"
+        },
+        {
+          "ref": "ctr_how-do-we-define-settlement-involvement"
+        },
+        {
+          "ref": "ctr_un-databases-are-politically-motivated-and-unreliable"
+        },
+        {
+          "ref": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain"
+        }
+      ]
+    },
+    {
+      "id": "counters_sovereign_consultants",
+      "kind": "counters",
+      "title": "Counters: Sovereign Consultants",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_bds-is-illegal-in-our-state"
+        },
+        {
+          "ref": "ctr_exclusions-reduce-diversification-too-much"
+        },
+        {
+          "ref": "ctr_our-index-funds-can-t-accommodate-exclusions"
+        },
+        {
+          "ref": "ctr_un-databases-are-politically-motivated-and-unreliable"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        }
+      ]
+    },
+    {
+      "id": "counters_insurance_boards",
+      "kind": "counters",
+      "title": "Counters: Insurance Boards",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        },
+        {
+          "ref": "ctr_exclusions-violate-fiduciary-duty"
+        },
+        {
+          "ref": "ctr_this-creates-legal-liability-litigation-risk"
+        },
+        {
+          "ref": "ctr_exclusions-reduce-diversification-too-much"
+        },
+        {
+          "ref": "ctr_israeli-companies-provide-essential-technology-services"
+        }
+      ]
+    },
+    {
+      "id": "counters_insurance_staff",
+      "kind": "counters",
+      "title": "Counters: Insurance Staff",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_we-don-t-have-the-expertise-resources-to-evaluate-these-companies"
+        },
+        {
+          "ref": "ctr_settlement-products-are-a-tiny-portion-of-these-companies-revenues"
+        },
+        {
+          "ref": "ctr_this-requires-ongoing-monitoring-we-can-t-maintain"
+        },
+        {
+          "ref": "ctr_our-index-funds-can-t-accommodate-exclusions"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        },
+        {
+          "ref": "ctr_how-do-you-know-these-activist-lists-aren-t-biased"
+        }
+      ]
+    },
+    {
+      "id": "counters_insurance_consultants",
+      "kind": "counters",
+      "title": "Counters: Insurance Consultants",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "ctr_divestment-will-significantly-hurt-performance-and-beneficiaries"
+        },
+        {
+          "ref": "ctr_exclusions-reduce-diversification-too-much"
+        },
+        {
+          "ref": "ctr_our-index-funds-can-t-accommodate-exclusions"
+        },
+        {
+          "ref": "ctr_msci-or-sustainability-ratings-are-more-credible-than-activist-data"
+        },
+        {
+          "ref": "ctr_this-sounds-expensive-or-complicated-where-do-i-even-start"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_pension_boards",
+      "kind": "next_steps",
+      "title": "Next steps: Pension Boards",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_adopt-written-conduct-criteria-and-escalation-pr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_pension_staff",
+      "kind": "next_steps",
+      "title": "Next steps: Pension Staff",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_pension_consultants",
+      "kind": "next_steps",
+      "title": "Next steps: Pension Consultants",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_mission_boards",
+      "kind": "next_steps",
+      "title": "Next steps: Mission Boards",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_adopt-written-conduct-criteria-and-escalation-pr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_mission_staff",
+      "kind": "next_steps",
+      "title": "Next steps: Mission Staff",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_mission_consultants",
+      "kind": "next_steps",
+      "title": "Next steps: Mission Consultants",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_government_boards",
+      "kind": "next_steps",
+      "title": "Next steps: Government Boards",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_adopt-written-conduct-criteria-and-escalation-pr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_government_staff",
+      "kind": "next_steps",
+      "title": "Next steps: Government Staff",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_government_consultants",
+      "kind": "next_steps",
+      "title": "Next steps: Government Consultants",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_sovereign_boards",
+      "kind": "next_steps",
+      "title": "Next steps: Sovereign Boards",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_adopt-written-conduct-criteria-and-escalation-pr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_sovereign_staff",
+      "kind": "next_steps",
+      "title": "Next steps: Sovereign Staff",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_sovereign_consultants",
+      "kind": "next_steps",
+      "title": "Next steps: Sovereign Consultants",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_insurance_boards",
+      "kind": "next_steps",
+      "title": "Next steps: Insurance Boards",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_adopt-written-conduct-criteria-and-escalation-pr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_insurance_staff",
+      "kind": "next_steps",
+      "title": "Next steps: Insurance Staff",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_publish-a-public-exclusions-list-with-brief-rati"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_insurance_consultants",
+      "kind": "next_steps",
+      "title": "Next steps: Insurance Consultants",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_request-current-holdings-exposure-report-from-ma"
+        },
+        {
+          "ref": "step_mandate-tracking-error-and-factor-exposure-contr"
+        },
+        {
+          "ref": "step_schedule-an-annual-review-and-public-update"
+        }
+      ]
+    },
+    {
+      "id": "key_points_pension_boards",
+      "kind": "key_points",
+      "title": "Key points: Pension Boards",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_public_pension_peer-funds-already-run-conduct-screens"
+        },
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_pension_staff",
+      "kind": "key_points",
+      "title": "Key points: Pension Staff",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_public_pension_peer-funds-already-run-conduct-screens"
+        },
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_pension_consultants",
+      "kind": "key_points",
+      "title": "Key points: Pension Consultants",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_public_pension_peer-funds-already-run-conduct-screens"
+        },
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_mission_boards",
+      "kind": "key_points",
+      "title": "Key points: Mission Boards",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_internal_leadership",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_mission_trust",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_mission_staff",
+      "kind": "key_points",
+      "title": "Key points: Mission Staff",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_internal_leadership",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_mission_trust",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_mission_consultants",
+      "kind": "key_points",
+      "title": "Key points: Mission Consultants",
+      "targets": {
+        "identity": [
+          "endowment",
+          "foundation"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_internal_leadership",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_mission_trust",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_government_boards",
+      "kind": "key_points",
+      "title": "Key points: Government Boards",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_government_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_government_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_government_staff",
+      "kind": "key_points",
+      "title": "Key points: Government Staff",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_government_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_government_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_government_consultants",
+      "kind": "key_points",
+      "title": "Key points: Government Consultants",
+      "targets": {
+        "identity": [
+          "government"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_government_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_government_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_sovereign_boards",
+      "kind": "key_points",
+      "title": "Key points: Sovereign Boards",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_central_bank_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_sovereign_staff",
+      "kind": "key_points",
+      "title": "Key points: Sovereign Staff",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_central_bank_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_sovereign_consultants",
+      "kind": "key_points",
+      "title": "Key points: Sovereign Consultants",
+      "targets": {
+        "identity": [
+          "central_bank",
+          "swf"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_central_bank_report-exclusions-like-any-other-governance-control"
+        },
+        {
+          "ref": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_insurance_boards",
+      "kind": "key_points",
+      "title": "Key points: Insurance Boards",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "boards"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance"
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_insurance_staff",
+      "kind": "key_points",
+      "title": "Key points: Insurance Staff",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "staff"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance"
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "key_points_insurance_consultants",
+      "kind": "key_points",
+      "title": "Key points: Insurance Consultants",
+      "targets": {
+        "identity": [
+          "insurance"
+        ],
+        "audience": [
+          "consultants"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance"
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "id": "brief_key_points_default",
       "kind": "key_points",
       "title": "Key points",
@@ -10,13 +2017,85 @@
           "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss"
         },
         {
-          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance"
-        },
-        {
-          "ref": "kp_tracking-error-and-factor-neutrality"
-        },
-        {
           "ref": "kp_fiduciary-duty-and-values-alignment"
+        },
+        {
+          "ref": "kp_outcome_identity_alignment"
+        },
+        {
+          "ref": "kp_strategy_regulatory_drivers",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_internal_leadership",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_strategy_external_stakeholders",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_professional-exclusions-maintain-benchmark-like-performance",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership",
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_tracking-error-and-factor-neutrality",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers",
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_specialized-intelligence-catches-what-esg-ratings-miss",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_regulatory_confidence",
+          "conditions": {
+            "motivation": [
+              "regulatory_drivers"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_mission_trust",
+          "conditions": {
+            "motivation": [
+              "internal_leadership"
+            ]
+          }
+        },
+        {
+          "ref": "kp_outcome_stakeholder_momentum",
+          "conditions": {
+            "motivation": [
+              "external_stakeholders"
+            ]
+          }
         },
         {
           "ref": "kp_individual_start-with-your-own-accounts"
@@ -26,33 +2105,6 @@
         },
         {
           "ref": "kp_individual_use-the-screened-options-your-custodian-already-offers"
-        },
-        {
-          "ref": "kp_public_pension_consultants-can-document-explicit-guardrails"
-        },
-        {
-          "ref": "kp_public_pension_specialized-intelligence-catches-what-esg-ratings-miss"
-        },
-        {
-          "ref": "kp_public_pension_peer-funds-already-run-conduct-screens"
-        },
-        {
-          "ref": "kp_government_use-approved-issuer-lists-to-stay-compliant"
-        },
-        {
-          "ref": "kp_government_report-exclusions-like-any-other-governance-control"
-        },
-        {
-          "ref": "kp_government_link-divestment-to-credit-and-liquidity-management"
-        },
-        {
-          "ref": "kp_central_bank_use-approved-issuer-lists-to-stay-compliant"
-        },
-        {
-          "ref": "kp_central_bank_report-exclusions-like-any-other-governance-control"
-        },
-        {
-          "ref": "kp_central_bank_link-divestment-to-credit-and-liquidity-management"
         }
       ]
     },

@@ -5,6 +5,7 @@ const targetKeys: (keyof BriefContext)[] = [
   'audience',
   'venue',
   'level',
+  'motivation',
 ];
 
 export function matchesTargets(
@@ -108,7 +109,7 @@ export function resolveOpener(dataset: Dataset, context: BriefContext) {
       bestScore = score;
     }
   }
-  return best;
+  return bestScore > 0 ? best : undefined;
 }
 
 export function resolveGuide(dataset: Dataset, context: BriefContext) {
