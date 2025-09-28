@@ -1,211 +1,148 @@
+import clsx from 'clsx';
+import type { CSSProperties } from 'react';
 import { Zap, Wrench, BarChart3, ClipboardList } from 'lucide-react';
 
 export type BriefMode = 'quick' | 'custom' | 'compare' | 'fact_check';
 
 interface ModeSelectorProps {
-  mode: BriefMode;
+  mode: BriefMode | null;
   onModeChange: (mode: BriefMode) => void;
 }
 
+const MODE_OPTIONS: Array<{
+  id: BriefMode;
+  icon: JSX.Element;
+  title: string;
+  eyebrow: string;
+  description: string;
+  bullets: string[];
+}> = [
+  {
+    id: 'quick',
+    icon: <Zap size={20} />,
+    title: 'Quick Brief',
+    eyebrow: 'Institution-specific language in minutes',
+    description:
+      'Feed the room a ready-to-implement narrative that matches their policies, governance cadence, and reporting playbook.',
+    bullets: [
+      'Auto-curated key points, next steps, and sources.',
+      'Context-aware templates that sound like internal memos.',
+      'Perfect for rapid-response meetings and stakeholder updates.',
+    ],
+  },
+  {
+    id: 'custom',
+    icon: <Wrench size={20} />,
+    title: 'Custom Builder',
+    eyebrow: 'Craft deliberate, campaign-ready strategy',
+    description:
+      'Handpick every key point, template, and attachment to build a bespoke brief for your coalition or executive sponsor.',
+    bullets: [
+      'Full control over tone, sequence, and supporting evidence.',
+      'Mix and match audiences to prototype escalation paths.',
+      'Ideal for campaign memos, board decks, and investor FAQs.',
+    ],
+  },
+  {
+    id: 'compare',
+    icon: <BarChart3 size={20} />,
+    title: 'Compare Institutions',
+    eyebrow: 'Benchmark how different investors respond',
+    description:
+      'Study the playbooks of pensions, endowments, insurers, and more so you can tailor pressure, sequencing, and asks.',
+    bullets: [
+      'See which governance gates matter for each identity.',
+      'Surface shared blockers and differentiators across audiences.',
+      'Use insights to brief multi-institution coalitions.',
+    ],
+  },
+  {
+    id: 'fact_check',
+    icon: <ClipboardList size={20} />,
+    title: 'Fact Check Workspace',
+    eyebrow: 'Audit every claim before you launch',
+    description:
+      'Turn the dataset into a diligence room: verify citations, export parser-friendly references, and prep release-ready notes.',
+    bullets: [
+      'Generate source packs and markdown dossiers in one click.',
+      'Track assertion coverage and outstanding gaps.',
+      'Perfect for legal review, press kits, and board responses.',
+    ],
+  },
+];
+
 export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white/80 p-6 shadow-sm mb-6">
-      <h2 className="text-lg font-heading font-semibold text-slate-900 mb-3">
-        Choose Your Approach
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Quick Brief */}
-        <button
-          onClick={() => onModeChange('quick')}
-          className={`p-4 rounded-lg border-2 text-left transition-all ${
-            mode === 'quick'
-              ? 'bg-indigo-50 text-indigo-900'
-              : 'border-slate-200 bg-white hover:bg-indigo-50'
-          }`}
-          style={{
-            borderColor:
-              mode === 'quick' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor:
-              mode === 'quick' ? 'rgba(88, 28, 135, 0.05)' : undefined,
-          }}
-        >
-          <div className="flex items-start gap-3">
-            <div
-              className={`p-2 rounded-lg ${
-                mode === 'quick' ? 'text-white' : 'bg-slate-100 text-slate-600'
-              }`}
-              style={{
-                backgroundColor:
-                  mode === 'quick' ? 'var(--ecic-purple)' : undefined,
-              }}
-            >
-              <Zap size={20} />
-            </div>
-            <div>
-              <h3 className="font-heading font-semibold mb-1 flex items-center gap-2">
-                Quick Brief
-                <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
-                    mode === 'quick'
-                      ? 'bg-white text-indigo-700'
-                      : 'bg-indigo-50 text-indigo-700'
-                  }`}
-                >
-                  Default
-                </span>
-              </h3>
-              <p className="text-sm text-slate-600">
-                Understand where your proposal will land with your specific institution type.
-                Get the context that makes the difference between yes and no.
-              </p>
-              <div className="mt-2 text-xs text-slate-500">
-                ✓ Institution-specific • ✓ Context-aware • ✓ Ready to use
-              </div>
-            </div>
-          </div>
-        </button>
-
-        {/* Custom Brief */}
-        <button
-          onClick={() => onModeChange('custom')}
-          className={`p-4 rounded-lg border-2 text-left transition-all ${
-            mode === 'custom'
-              ? 'bg-indigo-50 text-indigo-900'
-              : 'border-slate-200 bg-white hover:bg-indigo-50'
-          }`}
-          style={{
-            borderColor:
-              mode === 'custom' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor:
-              mode === 'custom' ? 'rgba(88, 28, 135, 0.05)' : undefined,
-          }}
-        >
-          <div className="flex items-start gap-3">
-            <div
-              className={`p-2 rounded-lg ${
-                mode === 'custom' ? 'text-white' : 'bg-slate-100 text-slate-600'
-              }`}
-              style={{
-                backgroundColor:
-                  mode === 'custom' ? 'var(--ecic-purple)' : undefined,
-              }}
-            >
-              <Wrench size={20} />
-            </div>
-            <div>
-              <h3 className="font-heading font-semibold mb-1">Custom Brief</h3>
-              <p className="text-sm text-slate-600">
-                Build detailed strategy documents for your specific situation.
-                Use policy language that makes change feel inevitable, not optional.
-              </p>
-              <div className="mt-2 text-xs text-slate-500">
-                ✓ Technical language • ✓ Custom mix • ✓ Strategy-focused
-              </div>
-            </div>
-          </div>
-        </button>
-
-        {/* Compare Mode */}
-        <button
-          onClick={() => onModeChange('compare')}
-          className={`p-4 rounded-lg border-2 text-left transition-all ${
-            mode === 'compare'
-              ? 'bg-indigo-50 text-indigo-900'
-              : 'border-slate-200 bg-white hover:bg-indigo-50'
-          }`}
-          style={{
-            borderColor:
-              mode === 'compare' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor:
-              mode === 'compare' ? 'rgba(88, 28, 135, 0.05)' : undefined,
-          }}
-        >
-          <div className="flex items-start gap-3">
-            <div
-              className={`p-2 rounded-lg ${
-                mode === 'compare'
-                  ? 'text-white'
-                  : 'bg-slate-100 text-slate-600'
-              }`}
-              style={{
-                backgroundColor:
-                  mode === 'compare' ? 'var(--ecic-purple)' : undefined,
-              }}
-            >
-              <BarChart3 size={20} />
-            </div>
-            <div>
-              <h3 className="font-heading font-semibold mb-1">
-                Compare Institutions
-              </h3>
-              <p className="text-sm text-slate-600">
-                See how different institutions routinely handle these policies.
-                Learn which bureaucratic processes work where.
-              </p>
-              <div className="mt-2 text-xs text-slate-500">
-                ✓ Standard procedures • ✓ Institution patterns • ✓ Proven processes
-              </div>
-            </div>
-          </div>
-        </button>
-
-        {/* Fact Check */}
-        <button
-          onClick={() => onModeChange('fact_check')}
-          className={`p-4 rounded-lg border-2 text-left transition-all ${
-            mode === 'fact_check'
-              ? 'bg-indigo-50 text-indigo-900'
-              : 'border-slate-200 bg-white hover:bg-indigo-50'
-          }`}
-          style={{
-            borderColor:
-              mode === 'fact_check' ? 'var(--ecic-purple)' : 'var(--border-gray)',
-            backgroundColor:
-              mode === 'fact_check' ? 'rgba(88, 28, 135, 0.05)' : undefined,
-          }}
-        >
-          <div className="flex items-start gap-3">
-            <div
-              className={`p-2 rounded-lg ${
-                mode === 'fact_check'
-                  ? 'text-white'
-                  : 'bg-slate-100 text-slate-600'
-              }`}
-              style={{
-                backgroundColor:
-                  mode === 'fact_check' ? 'var(--ecic-purple)' : undefined,
-              }}
-            >
-              <ClipboardList size={20} />
-            </div>
-            <div>
-              <h3 className="font-heading font-semibold mb-1">Fact Check</h3>
-              <p className="text-sm text-slate-600">
-                Export a fully-attributed briefing digest. Audit every claim,
-                citation, template, and attachment before you circulate material.
-              </p>
-              <div className="mt-2 text-xs text-slate-500">
-                ✓ Exhaustive references • ✓ QA checklist • ✓ Parser-friendly syntax
-              </div>
-            </div>
-          </div>
-        </button>
-      </div>
-
-      {/* Educational reminder */}
-      <div
-        className="mt-4 p-3 rounded-lg border"
-        style={{
-          backgroundColor: 'rgba(245, 158, 11, 0.05)',
-          borderColor: 'var(--ecic-amber)',
-        }}
-      >
-        <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
-          <strong>Bureaucratic beats dramatic.</strong> This intelligence helps you
-          frame moral demands as routine policy implementation.
-          Use for campaign strategy, not investment advice.
+    <section className="mb-8 rounded-2xl border border-indigo-100 bg-white/85 p-8 shadow-sm">
+      <header className="max-w-3xl space-y-2 mb-6">
+        <p className="text-xs font-heading uppercase tracking-wide text-indigo-600">
+          Choose your workspace
         </p>
+        <h2 className="text-2xl font-heading font-semibold text-slate-900">
+          Tell Dryvest how to support this sprint
+        </h2>
+        <p className="text-sm text-slate-600">
+          Every mode uses the same institutional intelligence; the difference is how much curation you want to do yourself.
+          Pick the workspace that matches your moment and we&rsquo;ll shape the experience around it.
+        </p>
+      </header>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {MODE_OPTIONS.map(option => {
+          const selected = mode === option.id;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => onModeChange(option.id)}
+              className={clsx(
+                'text-left rounded-xl border px-5 py-4 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+                selected
+                  ? 'border-ecic-purple bg-ecic-purple/10 text-slate-900 shadow-sm'
+                  : 'border-slate-200 bg-white text-slate-700 hover:border-ecic-purple/40'
+              )}
+              style={{ '--tw-ring-color': 'var(--ecic-purple)' } as CSSProperties}
+            >
+              <div className="flex items-start gap-3">
+                <div
+                  className={clsx(
+                    'flex h-10 w-10 items-center justify-center rounded-lg',
+                    selected ? 'bg-ecic-purple text-white' : 'bg-slate-100 text-slate-600'
+                  )}
+                >
+                  {option.icon}
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <p className="text-xs font-heading uppercase tracking-wide text-indigo-600">
+                      {option.eyebrow}
+                    </p>
+                    {selected ? (
+                      <span className="rounded-full bg-ecic-purple/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ecic-purple">
+                        Selected
+                      </span>
+                    ) : null}
+                  </div>
+                  <h3 className="text-lg font-heading font-semibold text-slate-900">
+                    {option.title}
+                  </h3>
+                  <p className="text-sm text-slate-600">{option.description}</p>
+                  <ul className="list-disc pl-4 text-xs text-slate-500 space-y-1">
+                    {option.bullets.map((bullet, index) => (
+                      <li key={index}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </button>
+          );
+        })}
       </div>
-    </div>
+
+      <p className="mt-6 text-xs text-slate-500">
+        Dryvest operationalises solidarity. Each workspace keeps outputs educational-only,
+        balances policy realism with campaign energy, and never invents data we can&rsquo;t cite.
+      </p>
+    </section>
   );
 }

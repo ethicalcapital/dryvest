@@ -5,7 +5,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { CheckCircle2, Circle, Clock3 } from 'lucide-react';
 import './App.css';
 import { useDataset } from './hooks/useDataset';
 import { useBriefParams } from './hooks/useBriefParams';
@@ -92,8 +91,6 @@ const toNextStepNodes = (nodes: Node[]) =>
       node.type === 'next_step'
   );
 
-type StepStatus = 'done' | 'active' | 'pending';
-
 const SUPPORTED_TEMPLATE_IDS = [
   'tmpl_model_resolution',
   'tmpl_government_policy',
@@ -114,7 +111,7 @@ const SUPPORTED_TEMPLATE_IDS = [
 
 function App() {
   // New state for dual-mode interface
-  const [briefMode, setBriefMode] = useState<BriefMode>('quick');
+  const [briefMode, setBriefMode] = useState<BriefMode | null>(null);
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
   const [customContext, setCustomContext] = useState<BriefContext>({});
   const [analyticsConsent, setAnalyticsConsent] = useState<boolean>(() => {
@@ -571,34 +568,7 @@ function App() {
     }
   >;
 
-  const getStatusVisual = (status: StepStatus) => {
-    switch (status) {
-      case 'done':
-        return {
-          container: 'border-emerald-200 bg-emerald-50/70',
-          iconWrapper: 'bg-emerald-100 text-emerald-600',
-          stepClass: 'text-emerald-700',
-          icon: <CheckCircle2 className="h-5 w-5" />,
-        };
-      case 'active':
-        return {
-          container: 'border-indigo-200 bg-indigo-50/70',
-          iconWrapper: 'bg-indigo-100 text-indigo-600',
-          stepClass: 'text-indigo-700',
-          icon: <Clock3 className="h-5 w-5" />,
-        };
-      default:
-        return {
-          container: 'border-slate-200 bg-white',
-          iconWrapper: 'bg-slate-100 text-slate-500',
-          stepClass: 'text-slate-600',
-          icon: <Circle className="h-5 w-5" />,
-        };
-    }
-  };
-
-
-  const keyPointPlaylist = useMemo(() => {
+const keyPointPlaylist = useMemo(() => {
     if (!dataset) return undefined;
     if (params.playlist && dataset.playlistById[params.playlist]) {
       return dataset.playlistById[params.playlist];
@@ -829,20 +799,19 @@ function App() {
   const handleModeChange = (nextMode: BriefMode) => {
     if (nextMode === briefMode) return;
     const now = Date.now();
-    const elapsed = now - modeStartRef.current;
-    if (elapsed > 0) {
-      trackEvent('time_in_mode', { mode: briefMode, milliseconds: elapsed });
+    if (briefMode) {
+      const elapsed = now - modeStartRef.current;
+      if (elapsed > 0) {
+        trackEvent('time_in_mode', { mode: briefMode, milliseconds: elapsed });
+      }
     }
     modeStartRef.current = now;
     trackEvent('mode_selected', { mode: nextMode });
     setBriefMode(nextMode);
-  };
-
-  const handleQuickStart = () => {
-    handleModeChange('quick');
-    window.requestAnimationFrame(() => {
-      quickStartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    if (nextMode !== 'custom') {
+      setCustomKeyPoints([]);
+      setCustomContext({});
+    }
   };
 
   const handleCustomContextChange = (next: BriefContext) => {
@@ -980,71 +949,6 @@ function App() {
                 </a>
               </div>
             </div>
-            <div className="mt-6 rounded-xl border border-indigo-100 bg-white/85 p-6 shadow-sm">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div className="max-w-3xl space-y-2">
-                    <p className="text-sm uppercase tracking-wide font-heading text-indigo-600">
-                      How Dryvest helps
-                    </p>
-                    <p className="text-sm text-slate-600">
-                      Quick Brief opens automatically so you can drop straight into institutional language.
-                      Switch modes whenever you need deliberate composition, benchmarking comparisons,
-                      or a full documentation audit.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start gap-3 md:items-end">
-                    <button
-                      type="button"
-                      onClick={handleQuickStart}
-                      className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                      style={{ backgroundColor: 'var(--ecic-purple)' }}
-                    >
-                      {isQuickMode ? 'Jump to outputs' : 'Return to Quick Brief'}
-                    </button>
-                    <span className="text-xs text-slate-500">
-                      Educational intelligence – not investment advice.
-                    </span>
-                  </div>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                  {sessionSteps.map(step => {
-                    const visuals = getStatusVisual(step.status);
-                    return (
-                      <div
-                        key={step.id}
-                        className={`rounded-lg border p-4 transition ${visuals.container}`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div
-                            className={`flex h-9 w-9 items-center justify-center rounded-full ${visuals.iconWrapper}`}
-                          >
-                            {visuals.icon}
-                          </div>
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide">
-                              <span className={visuals.stepClass}>{step.step}</span>
-                              {step.badge ? (
-                                <span className="rounded-full border border-current/40 px-2 py-0.5 text-[10px] font-semibold tracking-wide">
-                                  {step.badge}
-                                </span>
-                              ) : null}
-                            </div>
-                            <h3 className="text-sm font-heading font-semibold text-slate-900">
-                              {step.title}
-                            </h3>
-                            <p className="text-sm text-slate-600">{step.description}</p>
-                            {step.helper ? (
-                              <p className="text-xs text-slate-500">{step.helper}</p>
-                            ) : null}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Mode Selector */}
@@ -1075,7 +979,7 @@ function App() {
           )}
 
           {/* Main content grid */}
-          {briefMode !== 'fact_check' && (
+          {briefMode && briefMode !== 'fact_check' && (
             briefMode === 'quick' ? (
               <div ref={quickStartRef} className="space-y-6">
                 {dataset && (
