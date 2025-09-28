@@ -25,7 +25,7 @@ import {
   trackEvent,
   setAnalyticsConsent as setAnalyticsTrackingConsent,
 } from './lib/analytics';
-import { DEFAULT_PLAYLIST_ID } from './lib/constants';
+import { DEFAULT_PLAYLIST_ID, DEFAULT_DATASET_VERSION } from './lib/constants';
 import { DisclaimerGate } from './components/DisclaimerGate';
 import {
   matchesTargets,
@@ -36,7 +36,7 @@ import {
   selectPlaylistByKind,
 } from './lib/resolve';
 
-const DATASET_VERSION = '2025-09-27';
+const DATASET_VERSION = DEFAULT_DATASET_VERSION;
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
 
 const FALLBACK_DEFAULTS: BriefParams = {
