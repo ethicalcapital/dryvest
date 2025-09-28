@@ -12,6 +12,10 @@ import {
 } from './functions/api/preferences';
 import { onRequest as handleFactCheck, onRequestOptions as handleFactCheckOptions } from './functions/api/fact-check';
 import { onRequest as handlePdf } from './functions/api/generate-pdf';
+import {
+  onRequest as handleDataset,
+  onRequestOptions as handleDatasetOptions,
+} from './functions/api/dataset';
 
 interface Fetcher {
   fetch(request: Request): Promise<Response>;
@@ -60,6 +64,16 @@ const routes: Route[] = [
     pattern: /^\/api\/preferences$/,
     methods: ['OPTIONS'],
     handler: handlePreferencesOptions,
+  },
+  {
+    pattern: /^\/api\/dataset$/,
+    methods: ['GET'],
+    handler: handleDataset,
+  },
+  {
+    pattern: /^\/api\/dataset$/,
+    methods: ['OPTIONS'],
+    handler: handleDatasetOptions,
   },
   {
     pattern: /^\/api\/fact-check$/,

@@ -18,6 +18,12 @@ binding = "HOOKS"
 id = "caf4e19f1388423fade84340c27a929c"
 preview_id = "caf4e19f1388423fade84340c27a929c"
 
+[[d1_databases]]
+binding = "DRYVEST_DB"
+database_name = "dryvest"
+# Replace with the production database ID after provisioning
+database_id = "00000000-0000-0000-0000-000000000000"
+
 [durable_objects]
 bindings = [
   { name = "DRYVEST_ANALYTICS", class_name = "DryvestAnalyticsDO" }

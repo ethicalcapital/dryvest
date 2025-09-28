@@ -7,20 +7,21 @@ import {
   SourcesDocumentSchema,
   AssertionsDocumentSchema,
   EntitiesDocumentSchema,
+  DatasetResponseSchema,
 } from './schema';
 import type {
   Dataset,
   Manifest,
   SchemaDocument,
   SourceRecord,
-  SourcesDocument,
   AssertionRecord,
-  AssertionsDocument,
   EntityProfile,
-  EntitiesDocument,
+  Node,
+  Playlist,
 } from './schema';
 
-const DATA_BASE_PATH = '/data';
+const DATASET_ENDPOINT = '/api/dataset';
+const LEGACY_DATA_BASE_PATH = '/data';
 
 class DatasetError extends Error {
   constructor(message: string, cause?: unknown) {
@@ -66,45 +67,30 @@ function indexPlaylists(
   }
 }
 
-function buildDataset(
+function buildDatasetFromPayloads(
+  datasetVersion: string,
   manifest: Manifest,
   schemaDoc: SchemaDocument,
-  nodesDoc: z.infer<typeof NodesDocumentSchema>,
-  playlistsDoc: z.infer<typeof PlaylistsDocumentSchema>,
-  sourcesDoc?: SourcesDocument,
-  assertionsDoc?: AssertionsDocument,
-  entitiesDoc?: EntitiesDocument
+  nodePayloads: Node[],
+  playlistPayloads: Playlist[],
+  sources: SourceRecord[],
+  assertions: AssertionRecord[],
+  entities: EntityProfile[]
 ): Dataset {
-  indexPlaylists(nodesDoc.version, manifest.version, schemaDoc);
-  const filteredNodes = nodesDoc.nodes.filter(node => node.type !== 'source');
+  const manifestVersion = manifest.version ?? datasetVersion;
+  manifest.version = manifestVersion;
+  indexPlaylists(datasetVersion, manifestVersion, schemaDoc);
 
-  const sources: SourceRecord[] = sourcesDoc
-    ? sourcesDoc.sources
-    : nodesDoc.nodes
-        .filter(node => node.type === 'source')
-        .map(node => ({
-          id: node.id,
-          label: (node as any).label,
-          url: (node as any).url,
-          citationText: (node as any).citationText,
-        }));
-
-  const assertions: AssertionRecord[] = assertionsDoc
-    ? assertionsDoc.assertions
-    : [];
-
-  const entities: EntityProfile[] = entitiesDoc
-    ? entitiesDoc.entities
-    : [];
+  const filteredNodes = nodePayloads.filter(node => node.type !== 'source');
 
   const nodeIndex = Object.fromEntries(
     filteredNodes.map(node => [node.id, node])
   );
   const playlistById = Object.fromEntries(
-    playlistsDoc.playlists.map(playlist => [playlist.id, playlist])
+    playlistPayloads.map(playlist => [playlist.id, playlist])
   );
-  const playlistsByKind = playlistsDoc.playlists.reduce<
-    Record<string, typeof playlistsDoc.playlists>
+  const playlistsByKind = playlistPayloads.reduce<
+    Record<string, typeof playlistPayloads>
   >((acc, playlist) => {
     if (!acc[playlist.kind]) {
       acc[playlist.kind] = [];
@@ -114,11 +100,11 @@ function buildDataset(
   }, {});
 
   return {
-    version: manifest.version,
+    version: datasetVersion,
     manifest,
     schema: schemaDoc,
     nodes: filteredNodes,
-    playlists: playlistsDoc.playlists,
+    playlists: playlistPayloads,
     sources,
     assertions,
     entities,
@@ -131,11 +117,36 @@ function buildDataset(
   };
 }
 
-export async function loadDataset(
+async function loadDatasetFromApi(
+  version: string,
+  fallbackVersion?: string
+): Promise<Dataset> {
+  const datasetUrl = `${DATASET_ENDPOINT}?version=${encodeURIComponent(version)}`;
+  try {
+    const doc = await fetchJson(datasetUrl, DatasetResponseSchema);
+    return buildDatasetFromPayloads(
+      doc.version,
+      doc.manifest,
+      doc.schema,
+      doc.nodes,
+      doc.playlists,
+      doc.sources,
+      doc.assertions,
+      doc.entities
+    );
+  } catch (error) {
+    if (fallbackVersion && fallbackVersion !== version) {
+      return loadDatasetFromApi(fallbackVersion);
+    }
+    throw error;
+  }
+}
+
+async function loadDatasetFromStatic(
   version: string,
   options?: { basePath?: string; fallbackVersion?: string }
 ): Promise<Dataset> {
-  const basePath = options?.basePath ?? DATA_BASE_PATH;
+  const basePath = options?.basePath ?? LEGACY_DATA_BASE_PATH;
   const manifestUrl = `${basePath}/${version}/manifest.json`;
   let manifest: Manifest;
 
@@ -144,7 +155,7 @@ export async function loadDataset(
   } catch (error) {
     const fallback = options?.fallbackVersion;
     if (fallback && fallback !== version) {
-      return loadDataset(fallback, options);
+      return loadDatasetFromStatic(fallback, options);
     }
     throw error;
   }
@@ -163,44 +174,46 @@ export async function loadDataset(
     ? `${basePath}/${version}/${manifest.entities}`
     : undefined;
 
-  try {
-    const [
-      schemaDoc,
-      nodesDoc,
-      playlistsDoc,
-      sourcesDoc,
-      assertionsDoc,
-      entitiesDoc,
-    ] =
-      await Promise.all([
-        fetchJson(schemaUrl, SchemaDocumentSchema),
-        fetchJson(nodesUrl, NodesDocumentSchema),
-        fetchJson(playlistsUrl, PlaylistsDocumentSchema),
-        sourcesUrl
-          ? fetchJson(sourcesUrl, SourcesDocumentSchema)
-          : Promise.resolve(undefined),
-        assertionsUrl
-          ? fetchJson(assertionsUrl, AssertionsDocumentSchema)
-          : Promise.resolve(undefined),
-        entitiesUrl
-          ? fetchJson(entitiesUrl, EntitiesDocumentSchema)
-          : Promise.resolve(undefined),
-      ]);
+  const [schemaDoc, nodesDoc, playlistsDoc, sourcesDoc, assertionsDoc, entitiesDoc] =
+    await Promise.all([
+      fetchJson(schemaUrl, SchemaDocumentSchema),
+      fetchJson(nodesUrl, NodesDocumentSchema),
+      fetchJson(playlistsUrl, PlaylistsDocumentSchema),
+      sourcesUrl
+        ? fetchJson(sourcesUrl, SourcesDocumentSchema)
+        : Promise.resolve(undefined),
+      assertionsUrl
+        ? fetchJson(assertionsUrl, AssertionsDocumentSchema)
+        : Promise.resolve(undefined),
+      entitiesUrl
+        ? fetchJson(entitiesUrl, EntitiesDocumentSchema)
+        : Promise.resolve(undefined),
+    ]);
 
-    return buildDataset(
-      manifest,
-      schemaDoc,
-      nodesDoc,
-      playlistsDoc,
-      sourcesDoc,
-      assertionsDoc,
-      entitiesDoc
-    );
+  const datasetVersion = manifest.version ?? version;
+  manifest.version = datasetVersion;
+
+  return buildDatasetFromPayloads(
+    datasetVersion,
+    manifest,
+    schemaDoc,
+    nodesDoc.nodes,
+    playlistsDoc.playlists,
+    sourcesDoc?.sources ?? [],
+    assertionsDoc?.assertions ?? [],
+    entitiesDoc?.entities ?? []
+  );
+}
+
+export async function loadDataset(
+  version: string,
+  options?: { basePath?: string; fallbackVersion?: string }
+): Promise<Dataset> {
+  try {
+    return await loadDatasetFromApi(version, options?.fallbackVersion);
   } catch (error) {
-    if (manifest.fallbackVersion && manifest.fallbackVersion !== version) {
-      return loadDataset(manifest.fallbackVersion, options);
-    }
-    throw error;
+    console.warn('Failed to load dataset from API, attempting legacy bundle', error);
+    return loadDatasetFromStatic(version, options);
   }
 }
 

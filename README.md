@@ -1,6 +1,6 @@
 # Dryvest
 
-Dryvest is Ethical Capital’s educational briefing tool that turns divestment demands into implementation-ready talking points and policy language. This repository hosts the React/Tailwind frontend, Cloudflare Pages/Workers infrastructure, and the static dataset consumed by the app (`public/data/<version>`).
+Dryvest is Ethical Capital’s educational briefing tool that turns divestment demands into implementation-ready talking points and policy language. This repository hosts the React/Tailwind frontend, Cloudflare Pages/Workers infrastructure, and the content dataset that now lives primarily in a Cloudflare D1 database (a static JSON snapshot under `public/data/<version>` is still kept for compatibility/dev seeding).
 
 > **Educational Use Only** – Dryvest and all related exports are strategic intelligence for organizing. They are not investment, legal, or tax advice.
 
@@ -41,7 +41,8 @@ Prerequisites:
 ├── functions/api/         # Cloudflare Pages Functions
 │   ├── contact.ts         # Stores contact submissions in KV and relays to LACRM
 │   └── generate-pdf.ts    # PDF export proxy (Typst service)
-├── public/data/<version>/ # App dataset (manifest, nodes, playlists, sources, assertions, entity profiles)
+├── database/              # D1 schema + seed SQL
+├── public/data/<version>/ # Legacy dataset snapshot (used to seed D1 / dev fallback)
 ├── wrangler.toml          # Cloudflare project config (KV binding `HOOKS`)
 └── README.md
 ```
@@ -53,15 +54,46 @@ Key frontend paths:
 
 ### Dataset Layout
 
-Each dataset version under `public/data/<version>/` includes:
+The running application pulls content from a D1 database via `GET /api/dataset?version=<id>`. For local development or cold starts you can still inspect the legacy JSON bundle under `public/data/<version>/`, which contains:
 
-- `manifest.json` – lists file pointers (nodes, playlists, sources, assertions, entities).
-- `nodes.json` – normalized content nodes (no embedded sources).
-- `playlists.json` – target-aware playlists that drive selection.
-- `sources.json` – catalog of citation records (APA text, tags).
+- `manifest.json` – file pointers mirroring the original static loader.
+- `nodes.json` – normalized content nodes.
+- `playlists.json` – target-aware playlists.
+- `sources.json` – citation catalog.
 - `assertions.json` – reusable statements with evidence links.
-- `entities.json` – profile metadata for each identity (constraints, stakeholders, citations).
-- `schema.json` – taxonomies used to validate available values.
+- `entities.json` – institutional profile metadata.
+- `schema.json` – taxonomy definitions.
+
+These files are the source of truth for the seed SQL that populates D1.
+
+## Cloudflare D1 dataset
+
+The UI now queries D1 instead of bundling the dataset into the frontend. To provision or refresh the database:
+
+1. **Create the database** (one-time per environment):
+   ```bash
+   npx wrangler d1 create dryvest
+   ```
+   Update `wrangler.toml` with the returned `database_id` (replace the placeholder `00000000-0000-0000-0000-000000000000`).
+
+2. **Apply the schema**:
+   ```bash
+   npx wrangler d1 execute dryvest --file database/schema.sql
+   ```
+
+3. **Seed the current dataset**:
+   ```bash
+   npx wrangler d1 execute dryvest --file database/seed-2025-09-27.sql
+   ```
+   For local mode add `--local`. The seed file is generated from the legacy JSON bundle.
+
+4. **Refreshing content**: after editing the JSON bundle under `public/data/<version>/`, regenerate the seed SQL via
+   ```bash
+   node scripts/generate-d1-seed.js 2025-09-27
+   ```
+   and re-run step 3. The script writes to `database/seed-<version>.sql`.
+
+5. **API shape**: `GET /api/dataset?version=<id>` returns `{ version, manifest, schema, nodes, playlists, sources, assertions, entities }`. The frontend falls back to the legacy JSON bundle only if the API call fails (e.g., D1 not seeded during local dev).
 
 ## Cloudflare Workers & KV
 

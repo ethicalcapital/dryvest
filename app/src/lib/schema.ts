@@ -240,6 +240,19 @@ export const EntitiesDocumentSchema = z.object({
 
 export type EntitiesDocument = z.infer<typeof EntitiesDocumentSchema>;
 
+export const DatasetResponseSchema = z.object({
+  version: z.string(),
+  manifest: ManifestSchema,
+  schema: SchemaDocumentSchema,
+  nodes: z.array(NodeSchema),
+  playlists: z.array(PlaylistSchema),
+  sources: z.array(SourceRecordSchema),
+  assertions: z.array(AssertionRecordSchema),
+  entities: z.array(EntityProfileSchema),
+});
+
+export type DatasetResponse = z.infer<typeof DatasetResponseSchema>;
+
 export interface Dataset {
   version: string;
   manifest: Manifest;
