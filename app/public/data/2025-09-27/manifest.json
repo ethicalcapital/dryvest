@@ -3,7 +3,6 @@
   "schema": "schema.json",
   "nodes": "nodes.json",
   "playlists": "playlists.json",
-  "source": "content/bds_pack.json",
   "sources": "sources.json",
   "assertions": "assertions.json",
   "entities": "entities.json"

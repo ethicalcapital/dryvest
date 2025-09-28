@@ -12,9 +12,6 @@
         ],
         "audience": [
           "boards"
-        ],
-        "venue": [
-          "committee_hearing"
         ]
       },
       "items": [
@@ -528,9 +525,6 @@
         ],
         "audience": [
           "boards"
-        ],
-        "venue": [
-          "committee_hearing"
         ]
       },
       "items": [
@@ -2963,90 +2957,6 @@
         },
         {
           "ref": "src_what-i-d-tell-your-cio-about-divestment"
-        }
-      ]
-    },
-    {
-      "id": "key_points_policy_scaffold",
-      "kind": "key_points",
-      "title": "Key points: Policy guardrail ladder",
-      "targets": {
-        "identity": [
-          "public_pension"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "motivation": [
-          "regulatory_drivers"
-        ],
-        "venue": [
-          "full_board_meeting"
-        ]
-      },
-      "items": [
-        {
-          "ref": "kp_spectrum_tier1_monitoring"
-        },
-        {
-          "ref": "kp_spectrum_tier2_stewardship"
-        },
-        {
-          "ref": "kp_spectrum_tier3_targeted_screen"
-        },
-        {
-          "ref": "kp_spectrum_tier4_thematic_positive"
-        },
-        {
-          "ref": "kp_spectrum_tier5_full_divestment"
-        },
-        {
-          "ref": "kp_spectrum_tier6_impact_reinvestment"
-        },
-        {
-          "ref": "kp_spectrum_tier7_mission_partnerships"
-        },
-        {
-          "ref": "kp_spectrum_decision_triggers"
-        },
-        {
-          "ref": "kp_spectrum_portfolio_integration"
-        }
-      ]
-    },
-    {
-      "id": "next_steps_policy_scaffold",
-      "kind": "next_steps",
-      "title": "Next steps: Policy guardrail ladder",
-      "targets": {
-        "identity": [
-          "public_pension"
-        ],
-        "audience": [
-          "boards"
-        ],
-        "motivation": [
-          "regulatory_drivers"
-        ],
-        "venue": [
-          "full_board_meeting"
-        ]
-      },
-      "items": [
-        {
-          "ref": "step_spectrum_map_current_tier"
-        },
-        {
-          "ref": "step_spectrum_build_data_stack"
-        },
-        {
-          "ref": "step_spectrum_define_escalation"
-        },
-        {
-          "ref": "step_spectrum_customize_benchmark"
-        },
-        {
-          "ref": "step_spectrum_publish_integrated_report"
         }
       ]
     }

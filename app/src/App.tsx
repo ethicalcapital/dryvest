@@ -16,8 +16,6 @@ import { FactCheckView } from './components/FactCheckView';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { PalestineStatement } from './components/PalestineStatement';
-import { ScenarioCards, type Scenario } from './components/ScenarioCards';
-import { TemperatureControls } from './components/TemperatureControls';
 import { useSelectionParam } from './hooks/useSelectionParam';
 import type { BriefExportData } from './lib/exporters';
 import {
@@ -127,10 +125,6 @@ function App() {
   const modeStartRef = useRef<number>(Date.now());
   const lastContextSignatureRef = useRef<string>('');
 
-  // Scenario-based quick brief state
-  const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
-  const [directness, setDirectness] = useState<'diplomatic' | 'direct'>('diplomatic');
-
   const defaults = useMemo<BriefParams>(() => {
     if (!dataset?.schema?.taxonomies) {
       return FALLBACK_DEFAULTS;
@@ -141,7 +135,6 @@ function App() {
 
     base.identity = ensureAllowed(base.identity, taxonomies.identity);
     base.audience = ensureAllowed(base.audience, taxonomies.audience);
-    base.venue = ensureAllowed(base.venue, taxonomies.venue);
     base.level = ensureAllowed(base.level, taxonomies.level);
     base.motivation = ensureAllowed(base.motivation, taxonomies.motivation);
     base.playlist = FALLBACK_DEFAULTS.playlist;
@@ -201,7 +194,6 @@ function App() {
       motivation: params.motivation,
       level: params.level,
       playlist: params.playlist,
-      directness,
     });
   }, [
     dataset,
@@ -211,7 +203,6 @@ function App() {
     params.motivation,
     params.venue,
     params.playlist,
-    directness,
   ]);
 
   useEffect(() => {
@@ -229,7 +220,6 @@ function App() {
 
     maybeCorrect('identity', schema.taxonomies?.identity);
     maybeCorrect('audience', schema.taxonomies?.audience);
-    maybeCorrect('venue', schema.taxonomies?.venue);
     maybeCorrect('level', schema.taxonomies?.level);
     maybeCorrect('motivation', schema.taxonomies?.motivation);
 
@@ -297,7 +287,7 @@ function App() {
 
   const onePagerIds = useMemo(() => onePagers.map(doc => doc.id), [onePagers]);
 
-  const [selectedDocs, , setSelectedDocs] = useSelectionParam('docs', {
+  const [selectedDocs] = useSelectionParam('docs', {
     allowed: onePagerIds,
     defaults: [],
   });
@@ -333,9 +323,8 @@ function App() {
 
   const isQuickMode = briefMode === 'quick';
   const customContextReady = Boolean(
-    customContext.identity && customContext.audience && customContext.venue
+    customContext.identity && customContext.audience
   );
-  const scenarioReady = Boolean(selectedScenario);
   const exportsReady = selectedOnePagers.length > 0;
 
   const sessionSteps = useMemo(
@@ -375,19 +364,23 @@ function App() {
 
       const contextMeta = (() => {
         if (isQuickMode) {
-          if (scenarioReady && selectedScenario) {
-            return {
-              status: 'done' as StepStatus,
-              title: 'Scenario locked in',
-              description: selectedScenario.title,
-              helper: selectedScenario.description,
-            };
-          }
+          const parts = [
+            params.identity
+              ? `Identity: ${formatTaxonomyValue(params.identity)}`
+              : null,
+            params.audience
+              ? `Audience: ${formatTaxonomyValue(params.audience)}`
+              : null,
+            params.motivation
+              ? `Motivation: ${formatTaxonomyValue(params.motivation)}`
+              : null,
+          ].filter(Boolean);
+
           return {
-            status: 'active' as StepStatus,
-            title: 'Pick your scenario',
-            description: 'Choose the institution journey that matches your campaign.',
-            helper: 'Scenarios tune tone, attachments, and implementation detail.',
+            status: 'done' as StepStatus,
+            title: 'Quick brief context locked',
+            description: parts.join(' • ') || 'Default context active.',
+            helper: 'Adjust identity, audience, or motivation to tune implementation.',
           };
         }
 
@@ -398,9 +391,6 @@ function App() {
               : null,
             customContext.audience
               ? `Audience: ${formatTaxonomyValue(customContext.audience)}`
-              : null,
-            customContext.venue
-              ? `Venue: ${formatTaxonomyValue(customContext.venue)}`
               : null,
             customContext.motivation
               ? `Motivation: ${formatTaxonomyValue(customContext.motivation)}`
@@ -419,7 +409,7 @@ function App() {
           status: 'active' as StepStatus,
           title: 'Set your context',
           description:
-            'Add identity, audience, and venue so outputs reference the right process.',
+            'Add identity and audience so outputs reference the right process.',
           helper: 'Dryvest uses these details to lock in tone and procedural steps.',
         };
       })();
@@ -465,12 +455,13 @@ function App() {
       briefMode,
       customContext.identity,
       customContext.audience,
-      customContext.venue,
+      customContext.motivation,
       exportsReady,
       isQuickMode,
-      scenarioReady,
+      params.identity,
+      params.audience,
+      params.motivation,
       selectedOnePagers.length,
-      selectedScenario,
     ]) as Array<
     {
       id: string;
@@ -752,18 +743,6 @@ function App() {
     });
   };
 
-  const handleScenarioSelect = (scenario: Scenario) => {
-    setSelectedScenario(scenario);
-    // Set the context from the scenario
-    setParams({ ...scenario.context, level: 'technical' });
-    // Auto-select the scenario's one-pagers
-    setSelectedDocs(scenario.onePagers);
-    trackEvent('scenario_selected', {
-      scenarioId: scenario.id,
-      identity: scenario.context.identity,
-    });
-  };
-
   const handleCustomContextChange = (next: BriefContext) => {
     setCustomContext(next);
     trackEvent('params_changed', {
@@ -771,14 +750,6 @@ function App() {
       audience: next.audience,
       venue: next.venue,
       source: 'custom_builder',
-    });
-  };
-
-  const handleDirectnessChange = (next: 'diplomatic' | 'direct') => {
-    setDirectness(next);
-    trackEvent('params_changed', {
-      directness: next,
-      mode: briefMode,
     });
   };
 
@@ -916,43 +887,14 @@ function App() {
                     </p>
                   </div>
                   <div className="flex flex-col items-start gap-3 md:items-end">
-                    {isQuickMode ? (
-                      scenarioReady && selectedScenario ? (
-                        <div className="flex w-full max-w-xs flex-col gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-4 py-3 text-left md:text-right">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-indigo-700">
-                            Quick Brief in progress
-                          </span>
-                          <p className="text-sm font-heading font-semibold text-slate-900">
-                            {selectedScenario.title}
-                          </p>
-                          <button
-                            type="button"
-                            onClick={handleQuickStart}
-                            className="inline-flex items-center justify-center rounded-md border border-indigo-300 px-3 py-1.5 text-xs font-medium text-indigo-700 transition hover:border-indigo-400 hover:bg-white"
-                          >
-                            Jump to outputs
-                          </button>
-                        </div>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={handleQuickStart}
-                          className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                          style={{ backgroundColor: 'var(--ecic-purple)' }}
-                        >
-                          Browse Quick Brief scenarios
-                        </button>
-                      )
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={handleQuickStart}
-                        className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
-                        style={{ backgroundColor: 'var(--ecic-purple)' }}
-                      >
-                        Return to Quick Brief
-                      </button>
-                    )}
+                    <button
+                      type="button"
+                      onClick={handleQuickStart}
+                      className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-heading font-semibold text-white shadow-sm transition"
+                      style={{ backgroundColor: 'var(--ecic-purple)' }}
+                    >
+                      {isQuickMode ? 'Jump to outputs' : 'Return to Quick Brief'}
+                    </button>
                     <span className="text-xs text-slate-500">
                       Educational intelligence – not investment advice.
                     </span>
@@ -1025,135 +967,83 @@ function App() {
             />
           )}
 
-          {/* Scenario selection - full width */}
-          {briefMode === 'quick' && !selectedScenario && (
-              <div className="max-w-4xl mx-auto">
-                <ScenarioCards onScenarioSelect={handleScenarioSelect} />
-              </div>
-            )}
-
-            {/* Main content grid - only show when scenario is selected or not in quick mode */}
-            {briefMode !== 'fact_check' &&
-              (briefMode !== 'quick' || selectedScenario) && (
-              <div
-                ref={briefMode === 'quick' ? quickStartRef : undefined}
-                className={`grid gap-6 ${
-                  briefMode === 'quick'
-                    ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
-                    : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
-                }`}
-              >
-                {/* Quick Brief Flow - Temperature controls and scenario info */}
-                {briefMode === 'quick' && selectedScenario && (
-                  <div className="space-y-6">
-                    <TemperatureControls
-                      directness={directness}
-                      onDirectnessChange={handleDirectnessChange}
-                      levelDescription="Technical language"
-                    />
-
-                    <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
-                      <div className="mb-3">
-                        <h4 className="font-heading font-semibold text-slate-900">
-                          Primary driver
-                        </h4>
-                        <p className="text-sm text-slate-600">
-                          Choose the motivation guiding this brief so Dryvest surfaces the right
-                          strategy and outcomes.
-                        </p>
-                      </div>
-                      <div className="space-y-2">
-                        {motivationOptions.map(option => {
-                          const active = params.motivation === option.value;
-                          return (
-                            <button
-                              key={option.value}
-                              type="button"
-                              onClick={() => setParams({ motivation: option.value })}
-                              className={clsx(
-                                'w-full rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                                active
-                                  ? 'border-ecic-purple/70 bg-ecic-purple/10 text-ecic-purple shadow-sm'
-                                  : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
-                              )}
-                              style={{
-                                '--tw-ring-color': 'var(--ecic-purple)',
-                              } as CSSProperties}
-                            >
-                              <div className="font-heading text-sm font-semibold">
-                                {option.label}
-                              </div>
-                              <p className="mt-1 text-xs text-slate-600">
-                                {option.helper}
-                              </p>
-                            </button>
-                          );
-                        })}
-                      </div>
+          {/* Main content grid */}
+          {briefMode !== 'fact_check' && (
+            <div
+              ref={briefMode === 'quick' ? quickStartRef : undefined}
+              className={`grid gap-6 ${
+                briefMode === 'quick'
+                  ? 'lg:grid-cols-[280px,1fr,260px] xl:grid-cols-[320px,1fr,280px]'
+                  : 'lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]'
+              }`}
+            >
+              {briefMode === 'quick' && (
+                <div className="space-y-6">
+                  <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
+                    <div className="mb-3">
+                      <h4 className="font-heading font-semibold text-slate-900">
+                        Primary driver
+                      </h4>
+                      <p className="text-sm text-slate-600">
+                        Choose the motivation guiding this brief so Dryvest surfaces the right
+                        strategy and outcomes.
+                      </p>
                     </div>
-
-                    <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
-                      <div className="flex items-center justify-between mb-3">
-                        <div>
-                          <h4 className="font-heading font-semibold text-slate-900">
-                            {selectedScenario.title}
-                          </h4>
-                          <p className="text-sm text-slate-600">
-                            {selectedScenario.description}
-                          </p>
-                          {params.motivation ? (
-                            <p className="mt-2 text-xs text-ecic-purple">
-                              Primary driver:{' '}
-                              <span className="font-semibold">
-                                {
-                                  motivationOptions.find(
-                                    option => option.value === params.motivation
-                                  )?.label || formatTaxonomyValue(params.motivation)
-                                }
-                              </span>
+                    <div className="space-y-2">
+                      {motivationOptions.map(option => {
+                        const active = params.motivation === option.value;
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => setParams({ motivation: option.value })}
+                            className={clsx(
+                              'w-full rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+                              active
+                                ? 'border-ecic-purple/70 bg-ecic-purple/10 text-ecic-purple shadow-sm'
+                                : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
+                            )}
+                            style={{
+                              '--tw-ring-color': 'var(--ecic-purple)',
+                            } as CSSProperties}
+                          >
+                            <div className="font-heading text-sm font-semibold">
+                              {option.label}
+                            </div>
+                            <p className="mt-1 text-xs text-slate-600">
+                              {option.helper}
                             </p>
-                          ) : null}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setSelectedScenario(null)}
-                        className="text-sm text-indigo-600 hover:text-indigo-800 underline"
-                      >
-                        ← Choose different scenario
-                      </button>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
-                )}
-
-              {/* Only show preview when scenario is selected in quick mode, or always in other modes */}
-              {(briefMode !== 'quick' || selectedScenario) && (
-                <PreviewPane
-                  context={context}
-                  opener={opener}
-                  guide={guide}
-                  keyPoints={keyPointNodes}
-                  nextSteps={nextStepNodes}
-                  sources={sourceNodes}
-                  screeningNode={screeningNode}
-                  policyAlignment={policyAlignment}
-                  venueSnippet={venueSnippet}
-                  templates={templateSnippets}
-                  selectedOnePagers={selectedOnePagers}
-                  sourceLookup={sourceLookup}
-                />
+                </div>
               )}
 
-              {/* Only show actions when scenario is selected in quick mode, or always in other modes */}
-              {(briefMode !== 'quick' || selectedScenario) && (
-                <ActionsPanel
-                  params={params}
-                  selectedDocs={selectedDocs}
-                  exportData={exportData}
-                  tone="technical"
-                />
-              )}
+              <PreviewPane
+                context={context}
+                opener={opener}
+                guide={guide}
+                keyPoints={keyPointNodes}
+                nextSteps={nextStepNodes}
+                sources={sourceNodes}
+                screeningNode={screeningNode}
+                policyAlignment={policyAlignment}
+                venueSnippet={venueSnippet}
+                templates={templateSnippets}
+                selectedOnePagers={selectedOnePagers}
+                sourceLookup={sourceLookup}
+              />
+
+              <ActionsPanel
+                params={params}
+                selectedDocs={selectedDocs}
+                exportData={exportData}
+                tone="technical"
+              />
             </div>
-            )}
+          )}
         </div>
       </main>
 

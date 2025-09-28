@@ -176,13 +176,12 @@ const coverageExpectations: CoverageExpectation[] = [
     minimum: { keyPoints: 3, nextSteps: 2, counters: 1, templates: 1 },
   },
   {
-    name: 'Public pension board – regulatory drivers (committee hearing)',
+    name: 'Public pension board – regulatory drivers',
     context: {
       identity: 'public_pension',
       audience: 'boards',
       motivation: 'regulatory_drivers',
       level: 'technical',
-      venue: 'committee_hearing',
     },
     minimum: { keyPoints: 6, nextSteps: 1, counters: 2, templates: 1 },
   },
@@ -195,17 +194,6 @@ const coverageExpectations: CoverageExpectation[] = [
       level: 'technical',
     },
     minimum: { keyPoints: 4, nextSteps: 2, counters: 1, templates: 1 },
-  },
-  {
-    name: 'Policy scaffold scenario – public pension board',
-    context: {
-      identity: 'public_pension',
-      audience: 'boards',
-      motivation: 'regulatory_drivers',
-      level: 'technical',
-      venue: 'full_board_meeting',
-    },
-    minimum: { keyPoints: 4, nextSteps: 0, counters: 0, templates: 1 },
   },
 ];
 
@@ -227,30 +215,6 @@ const comparisonExpectations: ContextComparison[] = [
         audience: 'boards',
         motivation: 'regulatory_drivers',
         level: 'technical',
-        venue: 'committee_hearing',
-      },
-    },
-    maxJaccard: 0.4,
-  },
-  {
-    lhs: {
-      name: 'Public pension board (committee hearing)',
-      context: {
-        identity: 'public_pension',
-        audience: 'boards',
-        motivation: 'regulatory_drivers',
-        level: 'technical',
-        venue: 'committee_hearing',
-      },
-    },
-    rhs: {
-      name: 'Policy scaffold board (full board meeting)',
-      context: {
-        identity: 'public_pension',
-        audience: 'boards',
-        motivation: 'regulatory_drivers',
-        level: 'technical',
-        venue: 'full_board_meeting',
       },
     },
     maxJaccard: 0.4,
@@ -323,30 +287,6 @@ describe('Snapshot coverage for signature contexts', () => {
         audience: 'boards',
         motivation: 'internal_leadership',
         level: 'plain',
-      })
-    ).toMatchSnapshot();
-  });
-
-  it('Public pension board (committee hearing) key points snapshot', () => {
-    expect(
-      getKeyPointIds({
-        identity: 'public_pension',
-        audience: 'boards',
-        motivation: 'regulatory_drivers',
-        level: 'technical',
-        venue: 'committee_hearing',
-      })
-    ).toMatchSnapshot();
-  });
-
-  it('Policy scaffold board key points snapshot', () => {
-    expect(
-      getKeyPointIds({
-        identity: 'public_pension',
-        audience: 'boards',
-        motivation: 'regulatory_drivers',
-        level: 'technical',
-        venue: 'full_board_meeting',
       })
     ).toMatchSnapshot();
   });

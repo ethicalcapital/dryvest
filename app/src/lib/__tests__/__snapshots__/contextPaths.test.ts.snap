@@ -10,24 +10,3 @@ exports[`Snapshot coverage for signature contexts > Foundation board key points 
   "kp_strategy_internal_leadership",
 ]
 `;
-
-exports[`Snapshot coverage for signature contexts > Policy scaffold board key points snapshot 1`] = `
-[
-  "kp_spectrum_portfolio_integration",
-  "kp_spectrum_tier1_monitoring",
-  "kp_spectrum_tier2_stewardship",
-  "kp_spectrum_tier3_targeted_screen",
-]
-`;
-
-exports[`Snapshot coverage for signature contexts > Public pension board (committee hearing) key points snapshot 1`] = `
-[
-  "kp_outcome_regulatory_confidence",
-  "kp_professional-exclusions-maintain-benchmark-like-performance",
-  "kp_public_anti_esg_compliance",
-  "kp_public_fiduciary_exclusive_purpose",
-  "kp_public_procedural_prudence",
-  "kp_public_transparency_requirements",
-  "kp_strategy_regulatory_drivers",
-]
-`;

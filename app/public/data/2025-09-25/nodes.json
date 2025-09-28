@@ -13,9 +13,6 @@
       "targets": {
         "identity": [
           "individual"
-        ],
-        "venue": [
-          "one_on_one"
         ]
       }
     },
@@ -46,9 +43,6 @@
       "targets": {
         "identity": [
           "public_pension"
-        ],
-        "venue": [
-          "town_meeting"
         ]
       }
     },
@@ -79,9 +73,6 @@
       "targets": {
         "identity": [
           "endowment"
-        ],
-        "venue": [
-          "school_board"
         ]
       }
     },
@@ -132,9 +123,6 @@
       "targets": {
         "identity": [
           "government"
-        ],
-        "venue": [
-          "city_council"
         ]
       }
     },
@@ -717,12 +705,7 @@
       "lines": [
         "Open with shared goals; invite concerns before proposing solutions.",
         "Offer the brief and one or two sources relevant to their role."
-      ],
-      "targets": {
-        "venue": [
-          "one_on_one"
-        ]
-      }
+      ]
     },
     {
       "id": "venue_notes_small_group",
@@ -731,12 +714,7 @@
       "lines": [
         "Clarify decision rights and next steps.",
         "Use the Identity Guide to align constraints and responsibilities."
-      ],
-      "targets": {
-        "venue": [
-          "small_group"
-        ]
-      }
+      ]
     },
     {
       "id": "venue_notes_committee_hearing",
@@ -745,12 +723,7 @@
       "lines": [
         "Keep to concrete asks; cite Policy Alignment and criteria.",
         "Respect time limits; reference the full brief for details."
-      ],
-      "targets": {
-        "venue": [
-          "committee_hearing"
-        ]
-      }
+      ]
     },
     {
       "id": "venue_notes_full_board_meeting",
@@ -759,12 +732,7 @@
       "lines": [
         "Summarize the Recommended Approach and reporting cadence.",
         "Be crisp on \u2018why now\u2019 and what changes operationally."
-      ],
-      "targets": {
-        "venue": [
-          "full_board_meeting"
-        ]
-      }
+      ]
     },
     {
       "id": "venue_notes_public_testimony",
@@ -773,12 +741,7 @@
       "lines": [
         "Time-limited: focus on 2\u20133 key points and one specific ask.",
         "Bring printed one-pagers; avoid acronyms; cite one authoritative source."
-      ],
-      "targets": {
-        "venue": [
-          "public_testimony"
-        ]
-      }
+      ]
     },
     {
       "id": "venue_notes_written_memo",
@@ -787,12 +750,7 @@
       "lines": [
         "Include the Model Resolution if applicable.",
         "Attach the Policy Alignment and relevant source links."
-      ],
-      "targets": {
-        "venue": [
-          "written_memo"
-        ]
-      }
+      ]
     },
     {
       "id": "src_naacp-v-claiborne-hardware-458-u-s-886",
