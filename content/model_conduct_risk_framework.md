@@ -47,6 +47,14 @@ Use this template to translate global governance and stewardship standards into 
 - Align with ISO 37002: multiple channels, independent investigation workflow, anti-retaliation measures, anonymous tracking.
 - Document intake-to-resolution timeline targets and reporting expectations to the audit/risk committee.
 
+### 3.4 Strategy & Objective-Setting
+
+- **Risk appetite for complicity** – amend the IPS and risk policy to declare zero tolerance for direct or indirect involvement in severe international crimes (war crimes, crimes against humanity, genocide).
+- **Evidence-based exclusion criteria** – anchor screens in credible sources (UN settlement database, OECD National Contact Points, NGO reports) and keep the sourcing appendix updated.
+- **Heightened human-rights due diligence (hHRDD)** – for companies operating in conflict-affected and high-risk areas, require a formal hHRDD package detailing salient risks, leverage, and remediation pathways.
+- **Risk-response documentation** – record the chosen COSO risk response (avoid, reduce, share, accept) with legal, financial, and reputational analysis to leave an audit trail.
+- **Justification memo** – for each decision to remain invested, detail the engagement plan, leverage, timelines, and expected outcomes.
+
 ## 4. Monitoring & Reporting
 
 Create a master reporting matrix that synchronises internal dashboards and committee materials.
@@ -59,6 +67,8 @@ Create a master reporting matrix that synchronises internal dashboards and commi
 | Whistleblower summary | Volume, case status, remediation | Compliance | Semi-annual |
 | Public transparency deck | Policy triggers, actions taken, engagement/escalation status | Communications + CIO | Annual |
 
+Add an **automatic trigger table** for external events (ICJ/ICC rulings, new UN reports, sanctions, escalations in violence) that forces a portfolio-wide hHRDD refresh.
+
 ## 5. Response & Escalation Protocol
 
 - Build a trigger matrix (product, conduct, systemic) that defines mandatory actions (analytics refresh, consultant memo, engagement escalation, divestment vote).
@@ -70,6 +80,7 @@ Create a master reporting matrix that synchronises internal dashboards and commi
 - **Investment Policy Statement**: reference conduct criteria, TE budget, override clause, reporting cadence.
 - **Committee charters**: specify conduct risk duties for investment, audit/risk, governance, and compensation committees.
 - **Beneficiary consultation**: describe how stakeholder preferences inform conduct-risk prioritisation and how feedback loops are maintained.
+- **Transparency & justification**: set expectations for proactive beneficiary and stakeholder reporting, including explanations when the institution chooses to stay invested and engage rather than divest.
 
 ## Appendices
 
