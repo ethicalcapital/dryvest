@@ -21,52 +21,44 @@ const MODE_OPTIONS: Array<{
     id: 'quick',
     icon: <Zap size={20} />,
     title: 'Quick Brief',
-    eyebrow: 'Institution-specific language in minutes',
-    description:
-      'Feed the room a ready-to-implement narrative that matches their policies, governance cadence, and reporting playbook.',
+    eyebrow: 'Fast start',
+    description: 'You choose the institution and audience—Dryvest fills in the brief.',
     bullets: [
-      'Auto-curated key points, next steps, and sources.',
-      'Context-aware templates that sound like internal memos.',
-      'Perfect for rapid-response meetings and stakeholder updates.',
+      'Picks the talking points, next steps, and citations for you.',
+      'Exports copy that fits board packets and email updates.',
     ],
   },
   {
     id: 'custom',
     icon: <Wrench size={20} />,
     title: 'Custom Builder',
-    eyebrow: 'Craft deliberate, campaign-ready strategy',
-    description:
-      'Handpick every key point, template, and attachment to build a bespoke brief for your coalition or executive sponsor.',
+    eyebrow: 'Full control',
+    description: 'Pull in every point, template, and attachment yourself.',
     bullets: [
-      'Full control over tone, sequence, and supporting evidence.',
-      'Mix and match audiences to prototype escalation paths.',
-      'Ideal for campaign memos, board decks, and investor FAQs.',
+      'Build longer memos, slide outlines, or campaign plans.',
+      'Mix audiences and tones without losing citations.',
     ],
   },
   {
     id: 'compare',
     icon: <BarChart3 size={20} />,
     title: 'Compare Institutions',
-    eyebrow: 'Benchmark how different investors respond',
-    description:
-      'Study the playbooks of pensions, endowments, insurers, and more so you can tailor pressure, sequencing, and asks.',
+    eyebrow: 'Know the room',
+    description: 'See how pensions, endowments, insurers, and others differ before you walk in.',
     bullets: [
-      'See which governance gates matter for each identity.',
-      'Surface shared blockers and differentiators across audiences.',
-      'Use insights to brief multi-institution coalitions.',
+      'Highlights shared blockers and unique requirements.',
+      'Helps you sequence asks across multiple investors.',
     ],
   },
   {
     id: 'fact_check',
     icon: <ClipboardList size={20} />,
     title: 'Fact Check Workspace',
-    eyebrow: 'Audit every claim before you launch',
-    description:
-      'Turn the dataset into a diligence room: verify citations, export parser-friendly references, and prep release-ready notes.',
+    eyebrow: 'Check the receipts',
+    description: 'Confirm every claim and bundle the sources before you publish.',
     bullets: [
-      'Generate source packs and markdown dossiers in one click.',
-      'Track assertion coverage and outstanding gaps.',
-      'Perfect for legal review, press kits, and board responses.',
+      'Packages citations and source files into take-home packs.',
+      'Shows which assertions still need proof.',
     ],
   },
 ];
@@ -82,8 +74,7 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
           Tell Dryvest how to support this sprint
         </h2>
         <p className="text-sm text-slate-600">
-          Every mode uses the same institutional intelligence; the difference is how much curation you want to do yourself.
-          Pick the workspace that matches your moment and we&rsquo;ll shape the experience around it.
+          Each workspace uses the same dataset. The only difference is how much of the brief Dryvest assembles for you.
         </p>
       </header>
 
@@ -140,8 +131,7 @@ export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
       </div>
 
       <p className="mt-6 text-xs text-slate-500">
-        Dryvest operationalises solidarity. Each workspace keeps outputs educational-only,
-        balances policy realism with campaign energy, and never invents data we can&rsquo;t cite.
+        Dryvest stays educational only. It never invents data and every output ties back to the cited dataset.
       </p>
     </section>
   );

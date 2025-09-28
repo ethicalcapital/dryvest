@@ -937,14 +937,17 @@ function App() {
               className="text-xs uppercase tracking-wide font-heading font-medium"
               style={{ color: 'var(--ecic-purple)' }}
             >
-              v.0.0.1
+              v.0.0.2
             </p>
             <h1 className="text-5xl font-heading font-bold text-slate-900 mb-2">
               Dryvest: Make divestment so boring it happens
             </h1>
             <div className="mt-3 max-w-4xl space-y-2">
               <p className="text-slate-600 text-lg">
-                Dryvest turns moral demands into technical language that can be implemented as investment policy.
+                Dryvest translates moral demands into language investment committees can sign.
+              </p>
+              <p className="text-slate-500 text-sm">
+                Start by choosing a workspace. Dryvest uses the same dataset everywhere—it just changes how much of the brief we assemble for you.
               </p>
               <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
                 <span>
