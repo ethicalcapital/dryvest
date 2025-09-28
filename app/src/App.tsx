@@ -52,13 +52,13 @@ const DATASET_VERSION = DEFAULT_DATASET_VERSION;
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
 
 const FALLBACK_DEFAULTS: BriefParams = {
-  identity: 'individual',
-  audience: 'family_friends',
-  venue: 'one_on_one',
+  identity: undefined,
+  audience: undefined,
+  venue: undefined,
   level: 'technical',
-  motivation: 'regulatory_drivers',
+  motivation: undefined,
   motivationSecondary: undefined,
-  playlist: DEFAULT_PLAYLIST_ID,
+  playlist: undefined,
 };
 
 const MOTIVATION_COPY: Record<string, { label: string; helper: string }> = {
@@ -77,9 +77,9 @@ const MOTIVATION_COPY: Record<string, { label: string; helper: string }> = {
 };
 
 function ensureAllowed(value: string | undefined, allowed?: string[]) {
+  if (!value) return undefined;
   if (!allowed || !allowed.length) return value;
-  if (value && allowed.includes(value)) return value;
-  return allowed[0];
+  return allowed.includes(value) ? value : undefined;
 }
 
 const toKeyPointNodes = (nodes: Node[]) =>
@@ -139,15 +139,10 @@ function App() {
     }
 
     const { taxonomies } = dataset.schema;
-    const base: BriefParams = { ...FALLBACK_DEFAULTS };
-
-    base.identity = ensureAllowed(base.identity, taxonomies.identity);
-    base.audience = ensureAllowed(base.audience, taxonomies.audience);
-    base.level = ensureAllowed(base.level, taxonomies.level);
-    base.motivation = ensureAllowed(base.motivation, taxonomies.motivation);
-    base.playlist = FALLBACK_DEFAULTS.playlist;
-
-    return base;
+    return {
+      ...FALLBACK_DEFAULTS,
+      level: ensureAllowed(FALLBACK_DEFAULTS.level, taxonomies.level),
+    };
   }, [dataset]);
 
   const [params, applyParams] = useBriefParams(defaults);
@@ -236,18 +231,17 @@ function App() {
     const corrections: Partial<BriefParams> = {};
     const { schema, playlistById } = dataset;
 
-    const maybeCorrect = (key: keyof BriefContext, allowed?: string[]) => {
+    const maybeUnsetIfInvalid = (key: keyof BriefContext, allowed?: string[]) => {
       const current = params[key];
-      const next = ensureAllowed(current, allowed);
-      if (next && next !== current) {
-        corrections[key] = next;
-      }
+      if (!current) return;
+      if (!allowed || allowed.includes(current)) return;
+      corrections[key] = undefined;
     };
 
-    maybeCorrect('identity', schema.taxonomies?.identity);
-    maybeCorrect('audience', schema.taxonomies?.audience);
-    maybeCorrect('level', schema.taxonomies?.level);
-    maybeCorrect('motivation', schema.taxonomies?.motivation);
+    maybeUnsetIfInvalid('identity', schema.taxonomies?.identity);
+    maybeUnsetIfInvalid('audience', schema.taxonomies?.audience);
+    maybeUnsetIfInvalid('level', schema.taxonomies?.level);
+    maybeUnsetIfInvalid('motivation', schema.taxonomies?.motivation);
     if (params.motivationSecondary && schema.taxonomies?.motivation) {
       if (!schema.taxonomies.motivation.includes(params.motivationSecondary)) {
         corrections.motivationSecondary = undefined;
@@ -261,7 +255,7 @@ function App() {
     }
 
     if (params.playlist && !playlistById[params.playlist]) {
-      corrections.playlist = FALLBACK_DEFAULTS.playlist;
+      corrections.playlist = undefined;
     }
 
     if (Object.keys(corrections).length) {
