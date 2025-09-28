@@ -4,6 +4,7 @@ compatibility_date = "2024-11-12"
 
 [assets]
 directory = "app/dist"
+binding = "ASSETS"
 
 [build]
 command = "npm --prefix app install && ln -sfn app/node_modules node_modules && npm --prefix app run build"
