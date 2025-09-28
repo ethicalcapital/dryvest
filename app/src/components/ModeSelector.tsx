@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { Zap, Wrench, BarChart3, ClipboardList } from 'lucide-react';
 
 export type BriefMode = 'quick' | 'custom' | 'compare' | 'fact_check';
@@ -11,7 +11,7 @@ interface ModeSelectorProps {
 
 const MODE_OPTIONS: Array<{
   id: BriefMode;
-  icon: JSX.Element;
+  icon: ReactNode;
   title: string;
   eyebrow: string;
   description: string;
