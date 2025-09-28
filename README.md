@@ -1,185 +1,222 @@
 # Dryvest
 
-Dryvest is Ethical Capital’s educational briefing tool that turns divestment demands into implementation-ready talking points and policy language. This repository hosts the React/Tailwind frontend, Cloudflare Pages/Workers infrastructure, and the content dataset that now lives primarily in a Cloudflare D1 database (a static JSON snapshot under `public/data/<version>` is still kept for compatibility/dev seeding).
+Dryvest is Ethical Capital’s educational briefing platform. The project turns divestment demands into implementation-ready talking points, policy clauses, and evidentiary packets that campaigners can take straight into trustee, pension, or investment committee rooms.
 
-> **Educational Use Only** – Dryvest and all related exports are strategic intelligence for organizing. They are not investment, legal, or tax advice.
+> **Educational Use Only** – Dryvest outputs are strategic intelligence for organizing. They are not investment, legal, or tax advice.
 
-## Quick Start
+---
 
+## Repository at a Glance
+
+### 1. Scripts & Tooling
+
+- `scripts/generate-prototype-data.mjs` – pulls the latest dataset snapshot (`app/public/data/<version>/`), strips markdown front matter, and emits the consolidated `src/data.js` bundle used by the prototype UI (docs, key points, facts, next steps, trailheads).
+- `scripts/dataset-coverage.mjs` – quick coverage diagnostic; reports percentage of identity × audience × motivation contexts that have actionable content (key points, next steps, counters).
+- `scripts/export-dataset-csv.js` – optional CSV exporter for spreadsheet reviews (writes to `exports/`, which is gitignored).
+
+### 2. Frontend Applications
+
+#### 2.1 Legacy App – `app/`
+
+The production React/Tailwind application that ships to Cloudflare Pages. It now reads from the Cloudflare D1 database at runtime but still keeps a JSON bundle under `public/data/<version>/` for seeding and offline development.
+
+Key paths:
+- `app/src/App.tsx` – layout + mode switching (Quick, Custom, Compare, Fact Check).
+- `functions/api/` – Cloudflare Pages Functions (contact form, PDF proxy, dataset endpoint).
+- `database/` – D1 schema and seed SQL.
+
+#### 2.2 Prototype UI – `prototypes/streamlined-ui/dryvest-ui/`
+
+A Vite/React experiment that exposes the dataset more interactively. This is the environment we hand to new collaborators and GPT-style agents when we want fast iteration on flows.
+
+Structure:
+- `src/App.jsx` – top-level router (`/brief`, `/explore`, `/library`, `/output`).
+- `src/pages/` – route components:
+  - `Landing.jsx`
+  - `Wizard.jsx` (Quick Brief)
+  - `Output.jsx` (annotated brief)
+  - `Explore` deck (`FactCheck.jsx`)
+  - `Library.jsx` (documents & citations)
+- `src/components/` – consent modal, bottom stepper.
+- `src/utils/` – consent persistence, analytics stub, download helper.
+- `src/data.js` – **auto-generated** by `scripts/generate-prototype-data.mjs`. Contains:
+  - `DOCS`, `KEY_POINTS`, `NEXT_STEPS`, `FACTS`
+  - `TRAILHEADS` – curated scenario bundles (policy guardrails, conduct risk framework, divestment exposure, identity alignment)
+- `package.json`, `vite.config.js`, `styles.css` – standard Vite setup.
+
+---
+
+## Developer Quickstart
+
+### Prototype UI (recommended for dataset exploration)
 ```bash
-# install deps
-cd app
+# install dependencies
+cd prototypes/streamlined-ui/dryvest-ui/
 npm install
 
-# run locally with Vite dev server
+# pull the current dataset snapshot and generate src/data.js
+cd ../..
+node scripts/generate-prototype-data.mjs
+
+# run the Vite dev server
+cd prototypes/streamlined-ui/dryvest-ui/
 npm run dev
-
-# type/lint/test
-npm run type-check
-npm run lint
-npm run test
-
-# production build (tsc + vite build)
-npm run build
+# open http://localhost:5173
 ```
 
-Prerequisites:
-- Node.js 20+
-- npm 10+
-- Cloudflare Wrangler CLI if you want to deploy or tail workers (`npm install -g wrangler`).
-
-## Project Structure
-
-```
-.
-├── app/                   # React frontend
-│   ├── public/            # Static assets + dataset bundles
-│   ├── src/               # Components, hooks, lib modules
-│   ├── src/components/ContactForm.tsx      # Follow-up form in actions rail
-│   ├── src/components/FactCheckView.tsx    # Fact-check export mode
-│   └── src/lib/factCheck.ts                # Generates fact-check reports
-├── functions/api/         # Cloudflare Pages Functions
-│   ├── contact.ts         # Stores contact submissions in KV and relays to LACRM
-│   └── generate-pdf.ts    # PDF export proxy (Typst service)
-├── database/              # D1 schema + seed SQL
-├── public/data/<version>/ # Legacy dataset snapshot (used to seed D1 / dev fallback)
-├── wrangler.toml          # Cloudflare project config (KV binding `HOOKS`)
-└── README.md
+### Production App (Cloudflare Pages)
+```bash
+cd app
+npm install
+npm run dev       # local Vite dev server
+npm run build     # tsc -b && vite build
 ```
 
-Key frontend paths:
-- `src/App.tsx` – top-level layout, mode switching (Quick/Custom/Compare/Fact Check).
-- `src/components/ActionsPanel.tsx` – PDF/Markdown/Anki exports + contact form.
-- `src/components/PreviewPane.tsx` – renders scripting content with APA citations.
+Prerequisites: Node.js 20+, npm 10+, optional Cloudflare Wrangler CLI for D1 work.
 
-### Dataset Layout
+---
 
-The running application pulls content from a D1 database via `GET /api/dataset?version=<id>`. For local development or cold starts you can still inspect the legacy JSON bundle under `public/data/<version>/`, which contains:
+## Dataset Flow
 
-- `manifest.json` – file pointers mirroring the original static loader.
-- `nodes.json` – normalized content nodes.
-- `playlists.json` – target-aware playlists.
-- `sources.json` – citation catalog.
-- `assertions.json` – reusable statements with evidence links.
-- `entities.json` – institutional profile metadata.
-- `schema.json` – taxonomy definitions.
+```mermaid
+graph TD
+  subgraph Raw Snapshot
+    A[JSON nodes/playlists/sources]
+  end
+  A --> B(generate-prototype-data.mjs)
+  B --> C[DOCS]
+  B --> D[KEY_POINTS]
+  B --> E[FACTS]
+  B --> F[NEXT_STEPS]
+  B --> G[TRAILHEADS]
+  C & D & E & F & G --> H[/src/data.js/]
+  H --> I[/brief wizard summary]
+  H --> J[/output annotated brief]
+  H --> K[/explore deck]
+  H --> L[/library previews]
+```
 
-These files are the source of truth for the seed SQL that populates D1.
+- **DOCS** – model documents (markdown stripped of front matter) with context metadata (orgs, drivers, audiences).
+- **KEY_POINTS** – argumentative statements with markdown copy, tags, citations.
+- **FACTS** – evidence excerpts with citation URLs.
+- **NEXT_STEPS** – actionable follow-ups tailored to org/audience/driver combos.
+- **TRAILHEADS** – curated “start here” bundles linking points → docs → steps → evidence. Used by `/explore` to give users guided paths.
 
-## Cloudflare D1 dataset
+---
 
-The UI now queries D1 instead of bundling the dataset into the frontend. To provision or refresh the database:
+## UI Route Reference (Prototype)
 
-1. **Create the database** (one-time per environment):
+### `/brief` – Quick Brief Flow
+**Structure**
+- Bottom-pinned stepper (4 steps): organization → audiences → drivers → summary.
+- Autoadvance when a single-choice field (org, primary driver) is selected.
+
+**Behaviour**
+- Summary previews recommended documents (scored via contexts).
+- Messaging explains that documents are auto-attached after brief generation.
+
+### `/output` – Annotated Brief
+**Sections**
+1. Context recap (identity, audience, drivers).
+2. “Why this resonates for your org” – curated notes.
+3. Meeting guidance (how to steer the conversation).
+4. Tailored talking points (renders `KEY_POINTS` markdown).
+5. Central ask & supporting documents (from `DOCS`).
+6. Next moves (from `NEXT_STEPS`).
+7. Evidence to cite (from `FACTS`).
+8. Markdown export (download + copy buttons).
+
+### `/explore` – Dataset Explorer
+**Trailheads**
+- Pills for Policy Guardrails, Conduct Risk Controls, Divestment Exposure, Identity Alignment.
+- Selecting a trailhead sets filters, jumps to the relevant card, and shows the scenario’s ordered steps (point/doc/step/fact).
+
+**Filters & Navigation**
+- Dropdowns for org, driver, audience (`Any` defaults).
+- Search across title/body/support.
+- Toggle between `Key Points` and `Evidence` views.
+- Previous/Next buttons cycle through the filtered list with counter (e.g., “2 of 14”).
+
+### `/library` – Documents & Evidence
+- Tab buttons switch between “Model Documents” and “Facts & Citations”.
+- Search + tag filters.
+- Preview modal renders markdown with `react-markdown` + `remark-gfm` and offers download.
+- Multi-select actions: bulk download (docs) or bulk copy (facts).
+
+### `/` – Landing Page
+- Hero copy, educational disclaimer, CTA buttons (Get Started, Explore, Browse Library).
+- Featured model docs (first three from `DOCS`) with summaries and quick download links.
+
+---
+
+## Consent & Analytics
+
+Before any data loads, the prototype prompts for explicit consent:
+1. **Anonymous analytics** toggle (off by default).
+2. **Educational disclaimer** (must acknowledge to continue).
+3. **Optional email** opt-in for community updates.
+
+Selections are stored in `localStorage` via `src/utils/consent.js`. `src/utils/analytics.js` currently just logs events when analytics are permitted; you can swap this stub for a real analytics hook if needed.
+
+---
+
+## Dataset Diagnostics & QA
+
+- `node scripts/dataset-coverage.mjs` → prints overall coverage and highlights identity/audience/motivation gaps.
+- `node scripts/generate-prototype-data.mjs` → regenerates `src/data.js` after editing JSON or D1.
+- (Planned) QA scorer: vector similarity + LLM critique for generated briefs (hooks are ready but not yet wired into CI).
+
+Current coverage snapshot (2025-09-27): **91.5 %** of contexts have actionable content; remaining gaps are mostly individual/technical and sovereign wealth fund fiduciary combinations.
+
+---
+
+## Cloudflare D1 Notes (Production App)
+
+1. Create the database:
    ```bash
    npx wrangler d1 create dryvest
+   # update wrangler.toml with the returned database_id
    ```
-   Update `wrangler.toml` with the returned `database_id` (replace the placeholder `00000000-0000-0000-0000-000000000000`).
 
-2. **Apply the schema**:
+2. Apply schema:
    ```bash
    npx wrangler d1 execute dryvest --file database/schema.sql
    ```
 
-3. **Seed the current dataset**:
+3. Seed data:
    ```bash
    npx wrangler d1 execute dryvest --file database/seed-2025-09-27.sql
    ```
-   For local mode add `--local`. The seed file is generated from the legacy JSON bundle.
 
-4. **Refreshing content**: after editing the JSON bundle under `public/data/<version>/`, regenerate the seed SQL via
-   ```bash
-   node scripts/generate-d1-seed.js 2025-09-27
-   ```
-   and re-run step 3. The script writes to `database/seed-<version>.sql`.
+4. Refresh workflow:
+   - Edit JSON snapshot under `public/data/<version>/`.
+   - Generate new seed SQL: `node scripts/generate-d1-seed.js <version>`.
+   - Re-run step 3.
 
-5. **API shape**: `GET /api/dataset?version=<id>` returns `{ version, manifest, schema, nodes, playlists, sources, assertions, entities }`. The frontend falls back to the legacy JSON bundle only if the API call fails (e.g., D1 not seeded during local dev).
+The production worker exposes `GET /api/dataset?version=<id>` returning `{ version, manifest, schema, nodes, playlists, sources, assertions, entities }`. The legacy JSON bundle is only used when the API is unreachable (e.g., local dev without D1).
 
-### Spreadsheet-friendly exports
+---
 
-If teammates need to audit the content in a spreadsheet, use the helper script to flatten the dataset into CSV files:
+## Deployment (Production App)
 
-```bash
-# default version 2025-09-27, reads from app/public/data/…
-node scripts/export-dataset-csv.js
-
-# specify a version
-node scripts/export-dataset-csv.js --version 2025-09-27
-
-# or hit a running API (e.g., wrangler pages dev)
-node scripts/export-dataset-csv.js --api http://localhost:8788/api/dataset
-```
-
-CSV files are written to `exports/` (ignored by git). Each CSV has columns expanded into plain English—targets, assertions, evidence, etc.—so the data can be opened directly in Excel/Sheets.
-
-## Cloudflare Workers & KV
-
-- `functions/api/contact.ts` accepts POST JSON `{ name?, email?, message, newsletterOptIn?, meta? }`, stores it in the `HOOKS` KV namespace (production + preview binding `caf4e19f1388423fade84340c27a929c`), and POSTs to `env.LACRM_WEBHOOK_URL` if configured.
-- `functions/api/generate-pdf.ts` proxies markdown payloads to the Typst export service. Configure `TYPST_EXPORT_TOKEN`, `HOOK_TYPST_EXPORT_URL`, and `ALLOWED_ORIGINS` in Cloudflare project settings.
-
-To test workers locally, use `npx wrangler pages dev app/dist --kv=HOOKS=<namespace>` after building the frontend.
-
-## Testing
-
-We use [Vitest](https://vitest.dev/) with Testing Library for React components and Workers.
-
-```bash
-npm run test            # one-off run
-npm run test:watch      # watch mode
-npm run type-check      # ts --noEmit
-npm run lint            # eslint
-```
-
-Notable tests:
-- `src/components/__tests__/ContactForm.test.tsx` – payload validation, success/error flows.
-- `src/components/__tests__/FactCheckView.test.tsx` – copy/download and analytics tracking.
-- `functions/api/__tests__/contact.test.ts` – KV persistence and webhook relay behavior.
-
-## Deployment
-
-1. Build the frontend (`npm run build`), which writes to `app/dist/`.
-2. Deploy via Cloudflare Pages (see CI pipeline or run `npx wrangler pages deploy app/dist --project-name <project>`).
-3. Ensure the following environment variables are set in Cloudflare:
+1. Build frontend: `cd app && npm run build` (writes to `app/dist/`).
+2. Deploy to Cloudflare Pages (CI or `npx wrangler pages deploy app/dist`).
+3. Configure environment variables:
    - `TYPST_EXPORT_TOKEN`
    - `HOOK_TYPST_EXPORT_URL`
    - `ALLOWED_ORIGINS`
-   - `LACRM_WEBHOOK_URL` (optional)
-4. KV namespace `HOOKS` (ID `caf4e19f1388423fade84340c27a929c`) must exist and be bound to the project.
+   - `LACRM_WEBHOOK_URL` (optional contact form relay)
+4. Bind KV namespace `HOOKS` (ID `caf4e19f1388423fade84340c27a929c`).
 
-## Roadmap
+---
 
-The next phases focus on data normalization, ingestion, and reviewer tooling:
+## Open TODOs
 
-1. **Schema Normalization**
-   - Extract reusable assertions into `assertions.json` with confidence metadata.
-   - Move sources into `sources.json` with structured fields (publisher, date, APA citation).
-   - Add `qa` status to nodes for editorial tracking.
-
-2. **Third-Party List Ingestion**
-   - Define a canonical format for external exclusion lists (`lists/<provider>.json`).
-   - Build a CLI to ingest CSV/JSON feeds (AFSC, MSCI, public funds) and link entries to assertions.
-
-3. **Reviewer Workflow**
-   - Enhance Fact Check view with filters (`unreviewed`, `missing citation`, etc.).
-   - Add email notifications or dashboard summarizing new submissions from the contact form.
-
-4. **Validation & Tooling**
-   - Introduce JSON Schema validation for dataset bundles.
-   - Add smoke tests for PDF/Markdown export integrity (assert references appear in output).
-   - Implement integration tests that run the full export pipeline in CI.
-
-5. **UX Enhancements**
-   - Optional: inline follow-up contact submission confirmation via modal/toast.
-   - Improve analytics dashboards for download/copy/contact events.
-   - Reintroduce a presentation tone control that works across quick/custom flows without duplicating temperature controls.
-
-If you’re interested in contributing, please open an issue or reach out via the contact form inside the app. For internal collaborators, keep dataset edits in sync with `public/data/<version>/` and coordinate version bumps in `src/App.tsx` (`DATASET_VERSION`).
+- Add a reusable “policy-first” scaffold so activists can start with abstract guardrails before plugging in conflict-specific data (template snippet + quick-brief playlist).
+- Create a dedicated node set for “institutional readiness questions” prompting stakeholders to define thresholds, escalation, and sign-off requirements.
+- Add a “Degrees of Freedom Audit” checklist/model doc to map the operational latitude of target investment teams (statutory limits, mandate constraints, approvals).
+- Integrate the QA scorer (deterministic + LLM critique) into the build pipeline and expose summaries in the UI.
 
 ---
 
 For questions or access requests, contact Ethical Capital at [hello@ethicic.com](mailto:hello@ethicic.com).
-## Open TODOs
-
-- Add a reusable "policy-first" scaffold in the dataset so activists can start with abstract guardrails before targeting a specific conflict (e.g., a template snippet + quick-brief playlist that walks through “define conduct criteria → approve override clause → map escalation triggers”). That gives them language to ask, “under what circumstances would we divest?” before they drop in the Palestine-specific data.
-- Consider a dedicated node set for “institutional readiness questions” (one per identity/audience) that prompt stakeholders to declare whether divestment is ever acceptable, what thresholds apply, and who must sign off. Those can live alongside the spectrum tiers and surface in Quick Mode as pre-work.
-- Add a "Degrees of Freedom Audit" checklist/model document so advocates can map the operational latitude of the target investment team (statutory limits, mandate constraints, approval thresholds) before making the central ask; surface it as part of the post-brief guidance and central ask presentation.
