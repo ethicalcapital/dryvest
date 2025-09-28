@@ -11,7 +11,6 @@ import { ModeSelector, type BriefMode } from './components/ModeSelector';
 import { CustomBriefBuilder } from './components/CustomBriefBuilder';
 import { ComparisonView } from './components/ComparisonView';
 import { FactCheckView } from './components/FactCheckView';
-import type { BriefTone } from './components/ToneToggle';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BetaDisclaimer } from './components/BetaDisclaimer';
@@ -43,7 +42,7 @@ const FALLBACK_DEFAULTS: BriefParams = {
   identity: 'individual',
   audience: 'family_friends',
   venue: 'one_on_one',
-  level: 'plain',
+  level: 'technical',
   playlist: DEFAULT_PLAYLIST_ID,
 };
 
@@ -71,7 +70,6 @@ function App() {
 
   // New state for dual-mode interface
   const [briefMode, setBriefMode] = useState<BriefMode>('quick');
-  const [briefTone, setBriefTone] = useState<BriefTone>('plain');
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
   const [customContext, setCustomContext] = useState<BriefContext>({});
   const [analyticsConsent, setAnalyticsConsent] = useState<boolean>(() => {
@@ -189,20 +187,13 @@ function App() {
             identity: params.identity,
             audience: params.audience,
             venue: params.venue,
-            level: briefTone, // Use briefTone instead of params.level
+            level: 'technical',
           }
         : {
             ...customContext,
-            level: briefTone, // Always use briefTone for level
+            level: 'technical',
           },
-    [
-      briefMode,
-      params.identity,
-      params.audience,
-      params.venue,
-      briefTone,
-      customContext,
-    ]
+    [briefMode, params.identity, params.audience, params.venue, customContext]
   );
 
   const onePagers = useMemo(
@@ -460,11 +451,10 @@ function App() {
   const handleScenarioSelect = (scenario: Scenario) => {
     setSelectedScenario(scenario);
     // Set the context from the scenario
-    setParams(scenario.context);
+    setParams({ ...scenario.context, level: 'technical' });
     // Auto-select the scenario's one-pagers
     setSelectedDocs(scenario.onePagers);
-    // Set appropriate tone
-    setBriefTone(scenario.context.level as BriefTone);
+    // Keep tone fixed to technical
   };
 
   const handleDisclaimerAccept = () => {
@@ -598,10 +588,9 @@ function App() {
                 {briefMode === 'quick' && selectedScenario && (
                   <div className="space-y-6">
                     <TemperatureControls
-                      complexity={briefTone}
                       directness={directness}
-                      onComplexityChange={setBriefTone}
                       onDirectnessChange={setDirectness}
+                      levelDescription="Technical language"
                     />
 
                     <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm">
@@ -649,7 +638,7 @@ function App() {
                   params={params}
                   selectedDocs={selectedDocs}
                   exportData={exportData}
-                  tone={briefTone}
+                  tone="technical"
                 />
               )}
             </div>

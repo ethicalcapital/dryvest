@@ -22,7 +22,6 @@ export function CustomBriefBuilder({
   const identitySelectId = useId();
   const audienceSelectId = useId();
   const venueSelectId = useId();
-  const levelSelectId = useId();
   // Get all available key points for current context
   const availableKeyPoints = useMemo(() => {
     return getKeyPointsForContext(dataset, context).sort((a, b) =>
@@ -175,41 +174,6 @@ export function CustomBriefBuilder({
             </select>
           </div>
 
-          {/* Level */}
-          <div>
-            <label
-              className="block text-sm font-medium text-slate-700 mb-2"
-              htmlFor={levelSelectId}
-            >
-              Level
-            </label>
-            <select
-              id={levelSelectId}
-              value={context.level || ''}
-              onChange={e =>
-                onContextChange({
-                  ...context,
-                  level: e.target.value || undefined,
-                })
-              }
-              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
-              style={{
-                borderColor: 'var(--border-gray)',
-              }}
-              onFocus={e => {
-                e.target.style.borderColor = 'var(--ecic-purple)';
-                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
-              }}
-              onBlur={e => {
-                e.target.style.borderColor = 'var(--border-gray)';
-                e.target.style.boxShadow = 'none';
-              }}
-            >
-              <option value="">Select...</option>
-              <option value="plain">Plain Language</option>
-              <option value="technical">Technical</option>
-            </select>
-          </div>
         </div>
       </div>
 

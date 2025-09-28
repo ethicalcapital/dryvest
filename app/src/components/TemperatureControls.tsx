@@ -1,12 +1,9 @@
 import { Thermometer, ChevronLeft, ChevronRight } from 'lucide-react';
 
-export type TemperatureAxis = 'complexity' | 'directness';
-
 interface TemperatureControlsProps {
-  complexity: 'plain' | 'technical';
   directness: 'diplomatic' | 'direct';
-  onComplexityChange: (value: 'plain' | 'technical') => void;
   onDirectnessChange: (value: 'diplomatic' | 'direct') => void;
+  levelDescription?: string;
 }
 
 function TemperatureSlider({
@@ -65,33 +62,22 @@ function TemperatureSlider({
 }
 
 export function TemperatureControls({
-  complexity,
   directness,
-  onComplexityChange,
   onDirectnessChange,
+  levelDescription = 'Technical language',
 }: TemperatureControlsProps) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white/80 p-6 shadow-sm">
       <div className="mb-4">
         <h3 className="text-base font-heading font-semibold text-slate-900 mb-2">
-          Adjust the tone
+          Adjust the delivery
         </h3>
         <p className="text-sm text-slate-600">
-          Too hot? Too cold? Fine-tune the messaging for your specific situation.
+          Keep the brief grounded in disciplined governance language while choosing how direct you want to sound.
         </p>
       </div>
 
       <div className="space-y-6">
-        <TemperatureSlider
-          label="Language complexity"
-          leftLabel="Plain language"
-          rightLabel="Technical terms"
-          leftValue="plain"
-          rightValue="technical"
-          currentValue={complexity}
-          onChange={onComplexityChange}
-        />
-
         <TemperatureSlider
           label="Approach style"
           leftLabel="Diplomatic"
@@ -105,7 +91,7 @@ export function TemperatureControls({
 
       <div className="mt-4 p-3 rounded-lg bg-amber-50 border border-amber-200">
         <p className="text-xs text-amber-800">
-          <strong>Current tone:</strong> {complexity === 'plain' ? 'Plain' : 'Technical'} language, {directness === 'diplomatic' ? 'diplomatic' : 'direct'} approach
+          <strong>Current tone:</strong> {levelDescription}, {directness === 'diplomatic' ? 'diplomatic' : 'direct'} approach
         </p>
       </div>
     </div>

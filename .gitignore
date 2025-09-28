@@ -1,5 +1,10 @@
 # Node artifacts
 app/node_modules/
+node_modules/
+
+app/dist/
+app/.wrangler/
+.wrangler/
 app/dist/
 app/.wrangler/
 
