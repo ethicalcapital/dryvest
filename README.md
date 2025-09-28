@@ -182,4 +182,4 @@ For questions or access requests, contact Ethical Capital at [hello@ethicic.com]
 
 - Add a reusable "policy-first" scaffold in the dataset so activists can start with abstract guardrails before targeting a specific conflict (e.g., a template snippet + quick-brief playlist that walks through “define conduct criteria → approve override clause → map escalation triggers”). That gives them language to ask, “under what circumstances would we divest?” before they drop in the Palestine-specific data.
 - Consider a dedicated node set for “institutional readiness questions” (one per identity/audience) that prompt stakeholders to declare whether divestment is ever acceptable, what thresholds apply, and who must sign off. Those can live alongside the spectrum tiers and surface in Quick Mode as pre-work.
-
+- Add a "Degrees of Freedom Audit" checklist/model document so advocates can map the operational latitude of the target investment team (statutory limits, mandate constraints, approval thresholds) before making the central ask; surface it as part of the post-brief guidance and central ask presentation.
