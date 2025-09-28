@@ -392,7 +392,6 @@ function App() {
   const customContextReady = Boolean(
     customContext.identity && customContext.audience && customContext.motivation
   );
-  const exportsReady = selectedOnePagers.length > 0;
   const quickPrimarySelections = Boolean(
     params.identity && params.audience && params.motivation
   );
@@ -435,10 +434,12 @@ function App() {
     </div>
   );
 
-  const renderPreviewAndActions = (layout: 'stack' | 'grid' = 'grid') => {
+  const renderPreviewAndActions = (
+    layout: 'stack' | 'grid' = 'grid',
+    data: BriefExportData
+  ) => {
     const preview = (
       <PreviewPane
-        context={context}
         guide={guide}
         keyPoints={keyPointNodes}
         nextSteps={nextStepNodes}
@@ -455,7 +456,7 @@ function App() {
       <ActionsPanel
         params={params}
         selectedDocs={selectedDocs}
-        exportData={exportData}
+        exportData={data}
         tone="technical"
       />
     );
@@ -476,116 +477,6 @@ function App() {
       </div>
     );
   };
-
-  const workspaceContent = (() => {
-    if (!dataset) return null;
-
-    if (!briefMode) {
-      return renderContextGate(
-        'Select a workspace to begin',
-        'Dryvest adapts to the job you need to tackle. Pick a mode above to unlock the right dataset view for this session.',
-        modeSelectionSteps
-      );
-    }
-
-    switch (briefMode) {
-      case 'quick':
-        return (
-          <div ref={quickStartRef} className="space-y-6">
-            <QuickBriefContextPanel
-              dataset={dataset}
-              params={params}
-              onParamChange={setParams}
-              motivationOptions={motivationOptions}
-              selectedDocs={selectedDocs}
-              toggleDoc={toggleDoc}
-              onePagers={onePagers}
-            />
-            {quickContextReady
-              ? renderPreviewAndActions('stack')
-              : renderContextGate(
-                  'Configure your briefing to unlock recommendations',
-                  'Dial in the investor, decision audience, and campaign drivers above. Once the context is set, Dryvest will surface tailored strategy language and exports.',
-                  quickChecklist
-                )}
-          </div>
-        );
-      case 'custom':
-        return (
-          <div className="space-y-6">
-            <CustomBriefBuilder
-              dataset={dataset}
-              context={customContext}
-              onContextChange={handleCustomContextChange}
-              selectedKeyPoints={customKeyPoints}
-              onKeyPointsChange={setCustomKeyPoints}
-            />
-            {customContextReady
-              ? renderPreviewAndActions('grid')
-              : renderContextGate(
-                  'Set your context to curate a custom brief',
-                  'Fill in the organization, audience, and drivers in the builder controls above before selecting key points.',
-                  customChecklist
-                )}
-          </div>
-        );
-      case 'compare':
-        return (
-          <div className="space-y-6">
-            <QuickBriefContextPanel
-              dataset={dataset}
-              params={params}
-              onParamChange={setParams}
-              motivationOptions={motivationOptions}
-              selectedDocs={selectedDocs}
-              toggleDoc={toggleDoc}
-              onePagers={onePagers}
-            />
-            {quickContextReady ? (
-              <>
-                <ComparisonView dataset={dataset} context={context} />
-                {renderPreviewAndActions('grid')}
-              </>
-            ) : (
-              renderContextGate(
-                'Lock your context to compare institutions',
-                'Adjust the selections above so we know which investor journey to benchmark. Dryvest will then surface patterns and exports tailored to that identity.',
-                quickChecklist
-              )
-            )}
-          </div>
-        );
-      case 'fact_check':
-        return (
-          <div className="space-y-6">
-            <QuickBriefContextPanel
-              dataset={dataset}
-              params={params}
-              onParamChange={setParams}
-              motivationOptions={motivationOptions}
-              selectedDocs={selectedDocs}
-              toggleDoc={toggleDoc}
-              onePagers={onePagers}
-            />
-            {quickContextReady
-              ? (
-                  <FactCheckView
-                    dataset={dataset}
-                    context={context}
-                    exportData={exportData}
-                  />
-                )
-              : renderContextGate(
-                  'Lock your context before running fact check',
-                  'Set the investor, audience, and drivers so Dryvest can pull the correct citations and assertions for verification.',
-                  quickChecklist
-                )}
-          </div>
-        );
-      default:
-        return null;
-    }
-  })();
 
   const keyPointPlaylist = useMemo(() => {
     if (!dataset) return undefined;
@@ -770,6 +661,121 @@ function App() {
       keyPointPlaylist?.id,
     ]
   );
+
+  const renderWorkspaceContent = () => {
+    if (!dataset) return null;
+
+    if (!briefMode) {
+      return renderContextGate(
+        'Select a workspace to begin',
+        'Dryvest adapts to the job you need to tackle. Pick a mode above to unlock the right dataset view for this session.',
+        modeSelectionSteps
+      );
+    }
+
+    if (briefMode === 'quick') {
+      return (
+        <div ref={quickStartRef} className="space-y-6">
+          <QuickBriefContextPanel
+            dataset={dataset}
+            params={params}
+            onParamChange={setParams}
+            motivationOptions={motivationOptions}
+            selectedDocs={selectedDocs}
+            toggleDoc={toggleDoc}
+            onePagers={onePagers}
+          />
+          {quickContextReady
+            ? renderPreviewAndActions('stack', exportData)
+            : renderContextGate(
+                'Configure your briefing to unlock recommendations',
+                'Dial in the investor, decision audience, and campaign drivers above. Once the context is set, Dryvest will surface tailored strategy language and exports.',
+                quickChecklist
+              )}
+        </div>
+      );
+    }
+
+    if (briefMode === 'custom') {
+      return (
+        <div className="space-y-6">
+          <CustomBriefBuilder
+            dataset={dataset}
+            context={customContext}
+            onContextChange={handleCustomContextChange}
+            selectedKeyPoints={customKeyPoints}
+            onKeyPointsChange={setCustomKeyPoints}
+          />
+          {customContextReady
+            ? renderPreviewAndActions('grid', exportData)
+            : renderContextGate(
+                'Set your context to curate a custom brief',
+                'Fill in the organization, audience, and drivers in the builder controls above before selecting key points.',
+                customChecklist
+              )}
+        </div>
+      );
+    }
+
+    if (briefMode === 'compare') {
+      return (
+        <div className="space-y-6">
+          <QuickBriefContextPanel
+            dataset={dataset}
+            params={params}
+            onParamChange={setParams}
+            motivationOptions={motivationOptions}
+            selectedDocs={selectedDocs}
+            toggleDoc={toggleDoc}
+            onePagers={onePagers}
+          />
+          {quickContextReady ? (
+            <>
+              <ComparisonView dataset={dataset} context={context} />
+              {renderPreviewAndActions('grid', exportData)}
+            </>
+          ) : (
+            renderContextGate(
+              'Lock your context to compare institutions',
+              'Adjust the selections above so we know which investor journey to benchmark. Dryvest will then surface patterns and exports tailored to that identity.',
+              quickChecklist
+            )
+          )}
+        </div>
+      );
+    }
+
+    if (briefMode === 'fact_check') {
+      return (
+        <div className="space-y-6">
+          <QuickBriefContextPanel
+            dataset={dataset}
+            params={params}
+            onParamChange={setParams}
+            motivationOptions={motivationOptions}
+            selectedDocs={selectedDocs}
+            toggleDoc={toggleDoc}
+            onePagers={onePagers}
+          />
+          {quickContextReady
+            ? (
+                <FactCheckView
+                  dataset={dataset}
+                  context={context}
+                  exportData={exportData}
+                />
+              )
+            : renderContextGate(
+                'Lock your context before running fact check',
+                'Set the investor, audience, and drivers so Dryvest can pull the correct citations and assertions for verification.',
+                quickChecklist
+              )}
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   useEffect(() => {
     if (!dataset) return;
@@ -973,7 +979,7 @@ function App() {
           {/* Mode Selector */}
           <ModeSelector mode={briefMode} onModeChange={handleModeChange} />
 
-          {workspaceContent}
+          {renderWorkspaceContent()}
         </div>
       </main>
 
