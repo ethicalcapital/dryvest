@@ -168,6 +168,18 @@ Selections are stored in `localStorage` via `src/utils/consent.js`. `src/utils/a
 
 Current coverage snapshot (2025-09-27): **91.5 %** of contexts have actionable content; remaining gaps are mostly individual/technical and sovereign wealth fund fiduciary combinations.
 
+### AutoRAG Search (Cloudflare AI)
+
+The worker exposes a thin proxy around Cloudflare's AutoRAG corpus `autumn-scene-316c`:
+
+```bash
+curl -X POST https://dryvest.ethicic.com/api/autorag \
+  -H 'Content-Type: application/json' \
+  -d '{"query": "policy-first guardrails"}'
+```
+
+This uses the `AI` binding configured in `wrangler.toml` (`env.AI.autorag('autumn-scene-316c').aiSearch`). The route accepts `GET` (with `?query=...`) or `POST` JSON payloads. Responses are returned as `{ query, answer }` straight from the AutoRAG API.
+
 ---
 
 ## Cloudflare D1 Notes (Production App)

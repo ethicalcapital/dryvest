@@ -18,6 +18,9 @@ binding = "HOOKS"
 id = "caf4e19f1388423fade84340c27a929c"
 preview_id = "caf4e19f1388423fade84340c27a929c"
 
+[ai]
+binding = "AI"
+
 [[d1_databases]]
 binding = "DRYVEST_DB"
 database_name = "dryvest"

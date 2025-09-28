@@ -39,6 +39,56 @@ type Route = {
   handler: PagesFunctionHandler;
 };
 
+const handleAutoragSearch: PagesFunctionHandler = async ({ request, env }) => {
+  try {
+    const aiBinding = (env as Record<string, any>).AI;
+    if (!aiBinding || typeof aiBinding.autorag !== 'function') {
+      return new Response(
+        JSON.stringify({ error: 'AI binding not configured on this worker.' }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    let query = '';
+    if (request.method === 'POST') {
+      const json = await request.json().catch(() => null);
+      query = typeof json?.query === 'string' ? json.query.trim() : '';
+    } else {
+      const url = new URL(request.url);
+      query = url.searchParams.get('query')?.trim() ?? '';
+    }
+
+    if (!query) {
+      return new Response(
+        JSON.stringify({ error: 'Provide a query string.' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    const rag = aiBinding.autorag('autumn-scene-316c');
+    const answer = await rag.aiSearch({ query });
+
+    return new Response(JSON.stringify({ query, answer }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: (error as Error).message ?? 'Unknown error' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+};
+
 const routes: Route[] = [
   {
     pattern: /^\/api\/events(?:\/.*)?$/,
@@ -99,6 +149,24 @@ const routes: Route[] = [
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }),
+  },
+  {
+    pattern: /^\/api\/autorag$/,
+    methods: ['GET', 'POST'],
+    handler: handleAutoragSearch,
+  },
+  {
+    pattern: /^\/api\/autorag$/,
+    methods: ['OPTIONS'],
+    handler: async () =>
+      new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',
         },
       }),
