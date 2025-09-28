@@ -153,7 +153,11 @@ export default {
 
     if (assetUrl.pathname.startsWith('/assets/')) {
       assetUrl.pathname = `/client${assetUrl.pathname}`;
-    } else if (assetUrl.pathname === '/favicon.svg' || assetUrl.pathname === '/site.webmanifest') {
+    } else if (
+      assetUrl.pathname === '/favicon.svg' ||
+      assetUrl.pathname === '/site.webmanifest' ||
+      assetUrl.pathname === '/ecic-logo.svg'
+    ) {
       assetUrl.pathname = `/client${assetUrl.pathname}`;
     }
 
