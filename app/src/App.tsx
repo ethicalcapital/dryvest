@@ -961,9 +961,7 @@ function App() {
                   •
                 </span>
                 <a
-                  href="https://github.com/ethicalcapital/dryvest/issues/new?labels=question"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:hello@ethicic.com?subject=Dryvest%20clarification"
                   className="hover:underline"
                   style={{ color: 'var(--ecic-teal)' }}
                 >

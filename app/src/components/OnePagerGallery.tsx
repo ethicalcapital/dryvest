@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, ExternalLink, Plus } from 'lucide-react';
+import { FileText, Plus } from 'lucide-react';
 import type { Node } from '../lib/schema';
 
 interface OnePagerGalleryProps {
@@ -84,13 +84,11 @@ export function OnePagerGallery({
               We're building more one-pagers based on what's most useful.
             </p>
             <a
-              href="https://github.com/ethicalcapital/dryvest/issues/new?labels=content-request&template=content_request.md"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:hello@ethicic.com?subject=Dryvest%20one-pager%20request"
               className="inline-flex items-center gap-2 text-sm font-medium hover:underline"
               style={{ color: 'var(--ecic-teal)' }}
             >
-              Request a topic <ExternalLink size={12} />
+              Request a topic
             </a>
           </div>
         </div>

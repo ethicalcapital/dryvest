@@ -1,25 +1,29 @@
-import { ExternalLink, MessageSquare, Edit } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import type { Node } from '../lib/schema';
 import { trackEvent } from '../lib/analytics';
-import { getGitHubEditLink, getGitHubFeedbackLink } from '../lib/github';
 
-interface GitHubFeedbackProps {
+interface FeedbackProps {
   node: Node;
   size?: 'sm' | 'md';
-  showEdit?: boolean;
   showFeedback?: boolean;
+}
+
+const FEEDBACK_EMAIL = 'hello@ethicic.com';
+
+function buildFeedbackMailto(node: Node): string {
+  const subject = encodeURIComponent(`Dryvest feedback on ${node.id}`);
+  const body = encodeURIComponent(
+    `Node ID: ${node.id}\nType: ${node.type}\n\nFeedback:\n`
+  );
+  return `mailto:${FEEDBACK_EMAIL}?subject=${subject}&body=${body}`;
 }
 
 export function GitHubFeedback({
   node,
   size = 'sm',
-  showEdit = true,
   showFeedback = true,
-}: GitHubFeedbackProps) {
-  const editLink = showEdit ? getGitHubEditLink(node) : null;
-  const feedbackLink = showFeedback ? getGitHubFeedbackLink(node) : null;
-
-  if (!editLink && !feedbackLink) {
+}: FeedbackProps) {
+  if (!showFeedback) {
     return null;
   }
 
@@ -29,47 +33,24 @@ export function GitHubFeedback({
       : 'inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-800 transition-colors';
 
   const iconSize = size === 'sm' ? 12 : 16;
+  const mailto = buildFeedbackMailto(node);
 
   return (
     <div className="flex items-center gap-3 mt-2">
-      {editLink && (
-        <a
-          href={editLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-          title="Edit this content on GitHub"
-          onClick={() =>
-            trackEvent('feedback_link_clicked', {
-              linkType: 'github_edit',
-              nodeId: node.id,
-            })
-          }
-        >
-          <Edit size={iconSize} />
-          Edit
-          <ExternalLink size={iconSize - 2} />
-        </a>
-      )}
-      {feedbackLink && (
-        <a
-          href={feedbackLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-          title="Provide feedback about this content"
-          onClick={() =>
-            trackEvent('feedback_link_clicked', {
-              linkType: 'github_feedback',
-              nodeId: node.id,
-            })
-          }
-        >
-          <MessageSquare size={iconSize} />
-          Feedback
-          <ExternalLink size={iconSize - 2} />
-        </a>
-      )}
+      <a
+        href={mailto}
+        className={linkClass}
+        title="Email feedback about this content"
+        onClick={() =>
+          trackEvent('feedback_link_clicked', {
+            linkType: 'email_feedback',
+            nodeId: node.id,
+          })
+        }
+      >
+        <MessageSquare size={iconSize} />
+        Feedback via email
+      </a>
     </div>
   );
 }

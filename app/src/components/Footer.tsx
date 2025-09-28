@@ -1,4 +1,4 @@
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -55,12 +55,10 @@ export function Footer() {
                 Terms of Use <ExternalLink size={12} />
               </a>
               <a
-                href="https://github.com/ethicalcapital/dryvest"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-sm font-heading text-white/80 hover:text-white transition-colors flex items-center gap-1"
+                href="mailto:hello@ethicic.com?subject=Dryvest%20feedback"
+                className="block text-sm font-heading text-white/80 hover:text-white transition-colors"
               >
-                <Github size={14} /> GitHub
+                Contact Ethical Capital
               </a>
             </div>
           </div>

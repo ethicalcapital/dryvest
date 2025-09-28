@@ -4018,6 +4018,468 @@
           "external_stakeholders"
         ]
       }
+    },
+    {
+      "id": "one_pager_policy_framework",
+      "type": "one_pager",
+      "title": "Integrated Policy Framework",
+      "description": "Board-ready reference for governance, risk, and stewardship controls drawn from global standards.",
+      "markdownPath": "content/policy_framework.md"
+    },
+    {
+      "id": "kp_policy_modern_fiduciary_mandate",
+      "type": "key_point",
+      "title": "Modern fiduciary duty treats material ESG as mandatory",
+      "body": "CFA Institute's Asset Manager Code requires managers to exercise prudent judgment with a reasonable and adequate basis; PRI's Fiduciary Duty in the 21st Century shows that ignoring financially material ESG drivers breaches that standard. Anchoring screens in documented risk factors keeps divestment well inside the duty of care.",
+      "citations": [
+        "src_cfa_asset_manager_code",
+        "src_pri_fiduciary_duty_21st"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "fiduciary_duty",
+        "esg_integration"
+      ]
+    },
+    {
+      "id": "kp_policy_issb_board_oversight",
+      "type": "key_point",
+      "title": "ISSB disclosure makes board oversight auditable",
+      "body": "OECD governance principles define the board's accountability, and IFRS S2 now requires institutions to publish how directors oversee climate and sustainability risk. Sloppy processes become public evidence, so boards need documented competencies, education plans, and committee charters that withstand disclosure.",
+      "citations": [
+        "src_oecd_governance_principles",
+        "src_ifrs_s2"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      },
+      "tags": [
+        "governance",
+        "disclosure"
+      ]
+    },
+    {
+      "id": "kp_policy_coso_erm_conduct",
+      "type": "key_point",
+      "title": "COSO ERM turns conduct risk into a board-controlled system",
+      "body": "COSO's five-component ERM framework links tone at the top, risk appetite, monitoring, and reporting. Using it as the house standard makes conduct screening, internal audits, and escalation policies auditable instead of ad hoc.",
+      "citations": [
+        "src_coso_erm"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "risk_management",
+        "conduct"
+      ]
+    },
+    {
+      "id": "kp_policy_icma_sustainable_bonds",
+      "type": "key_point",
+      "title": "ICMA principles are the floor for sustainable debt diligence",
+      "body": "The ICMA Green, Social, and Sustainability-Linked Bond Principles spell out use-of-proceeds rules, evaluation processes, tracking, and reporting. Mandating alignment plus third-party reviews keeps labelled debt from slipping into greenwashing.",
+      "citations": [
+        "src_icma_green_bond_principles",
+        "src_icma_principles_2025_update"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      },
+      "tags": [
+        "due_diligence",
+        "fixed_income"
+      ]
+    },
+    {
+      "id": "kp_policy_oecd_rbc_due_diligence",
+      "type": "key_point",
+      "title": "OECD due diligence gives investors a universal risk process",
+      "body": "OECD's responsible business conduct guidance lays out a six-step loop for spotting, mitigating, and remediating harms across portfolios and supply chains. Treating it as a standing expectation closes the gap between public equities, credit, and private-market mandates.",
+      "citations": [
+        "src_oecd_rbc_guidance",
+        "src_oecd_rbc_investors"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "due_diligence",
+        "responsible_conduct"
+      ]
+    },
+    {
+      "id": "kp_policy_iso_37002_whistleblowing",
+      "type": "key_point",
+      "title": "ISO 37002 whistleblowing keeps retaliation from burying risk",
+      "body": "ISO 37002 requires trusted intake channels, impartial investigations, and explicit retaliation safeguards. Tying those requirements to stewardship asks lets activists probe whether issuers can surface misconduct tied to harmful conduct.",
+      "citations": [
+        "src_iso_37002_standard",
+        "src_pri_whistleblowing_toolkit"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "external_stakeholders"
+        ]
+      },
+      "tags": [
+        "compliance",
+        "culture"
+      ]
+    },
+    {
+      "id": "kp_policy_master_reporting_matrix",
+      "type": "key_point",
+      "title": "Master reporting matrices stop policy drift",
+      "body": "Pairing IFRS S2 reporting needs with COSO information flows creates a single matrix that schedules heatmaps, scenario tests, variance logs, and override reviews. Committees get an auditable trail proving the IPS is enforced.",
+      "citations": [
+        "src_ifrs_s2",
+        "src_coso_erm"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "reporting",
+        "controls"
+      ]
+    },
+    {
+      "id": "kp_policy_attestation_expectations",
+      "type": "key_point",
+      "title": "Independent assurance is the new baseline for sustainability data",
+      "body": "IFRS S2 pushes comparable climate reporting, and firms like Proskauer warn boards to treat assurance like the financial audit cycle. Annual external attestation on climate metrics and controls keeps disclosures credible with beneficiaries and regulators.",
+      "citations": [
+        "src_ifrs_s2",
+        "src_proskauer_issb_attestation"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "assurance",
+        "reporting"
+      ]
+    },
+    {
+      "id": "kp_policy_escalation_triggers",
+      "type": "key_point",
+      "title": "Documented escalation triggers turn stewardship into leverage",
+      "body": "PRI guidance, Glass Lewis, and leading managers like UBP all require engagement milestones and consequences. When timelines, voting actions, and divestment triggers are written into policy, staff can escalate without waiting for ad hoc approvals.",
+      "citations": [
+        "src_pri_engagement_voting_practices",
+        "src_glasslewis_engagement_101",
+        "src_ubp_engagement_escalation"
+      ],
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "external_stakeholders",
+          "regulatory_drivers"
+        ]
+      },
+      "tags": [
+        "stewardship",
+        "escalation"
+      ]
+    },
+    {
+      "id": "step_policy_variance_controls",
+      "type": "next_step",
+      "text": "Stand up an IPS variance log and override register with board sign-off and quarterly review.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_policy_master_reporting_matrix",
+      "type": "next_step",
+      "text": "Build a master reporting matrix that calendars heatmaps, scenario tests, variance reviews, and ISSB-aligned disclosures.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_policy_whistleblowing_gap_review",
+      "type": "next_step",
+      "text": "Audit whistleblowing controls against ISO 37002 and publish remediation timelines for any gaps.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "step_policy_coso_gap_assessment",
+      "type": "next_step",
+      "text": "Run a COSO ERM maturity assessment that maps conduct-risk ownership, reporting cadence, and escalation routes.",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "staff",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
+    },
+    {
+      "id": "tmpl_policy_first_scaffold",
+      "type": "template_snippet",
+      "title": "Policy-first divestment scaffold",
+      "markdown": "- **Define formal guardrails.** Amend the IPS with conduct criteria, risk-appetite statements, variance logs, and an override clause so leadership cannot ignore breaches.\n- **Wire the reporting loop.** Stand up a COSO-aligned reporting matrix that feeds boards heatmaps, scenario tests, and engagement status alongside draft ISSB disclosures.\n- **Codify escalation.** Document engagement milestones, voting actions, and divestment triggers tied to whistleblower protections so staff can escalate without improvising.",
+      "targets": {
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ]
+      }
     }
   ]
 }

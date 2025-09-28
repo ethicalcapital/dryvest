@@ -2959,6 +2959,105 @@
           "ref": "src_what-i-d-tell-your-cio-about-divestment"
         }
       ]
+    },
+    {
+      "id": "key_points_policy_first_scaffold",
+      "kind": "key_points",
+      "title": "Key Points: Policy-First Scaffold",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "fiduciary",
+          "consultants"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers",
+          "internal_leadership"
+        ]
+      },
+      "items": [
+        {
+          "ref": "kp_policy_modern_fiduciary_mandate"
+        },
+        {
+          "ref": "kp_policy_issb_board_oversight"
+        },
+        {
+          "ref": "kp_policy_coso_erm_conduct"
+        },
+        {
+          "ref": "kp_policy_master_reporting_matrix"
+        },
+        {
+          "ref": "kp_policy_attestation_expectations"
+        },
+        {
+          "ref": "kp_policy_oecd_rbc_due_diligence"
+        },
+        {
+          "ref": "kp_policy_icma_sustainable_bonds"
+        },
+        {
+          "ref": "kp_policy_iso_37002_whistleblowing"
+        },
+        {
+          "ref": "kp_policy_escalation_triggers"
+        }
+      ]
+    },
+    {
+      "id": "next_steps_policy_first_scaffold",
+      "kind": "next_steps",
+      "title": "Next Steps: Policy-First Scaffold",
+      "targets": {
+        "identity": [
+          "public_pension",
+          "corporate_pension",
+          "endowment",
+          "foundation",
+          "insurance",
+          "central_bank",
+          "government",
+          "swf"
+        ],
+        "audience": [
+          "boards",
+          "staff"
+        ],
+        "level": [
+          "technical"
+        ],
+        "motivation": [
+          "regulatory_drivers"
+        ]
+      },
+      "items": [
+        {
+          "ref": "step_policy_variance_controls"
+        },
+        {
+          "ref": "step_policy_master_reporting_matrix"
+        },
+        {
+          "ref": "step_policy_whistleblowing_gap_review"
+        },
+        {
+          "ref": "step_policy_coso_gap_assessment"
+        }
+      ]
     }
   ]
 }
