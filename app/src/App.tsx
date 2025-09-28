@@ -43,6 +43,10 @@ import {
 } from './lib/resolve';
 import { formatTaxonomyValue } from './lib/format';
 import { QuickBriefContextPanel } from './components/QuickBriefContextPanel';
+import {
+  safeLocalStorageGet,
+  safeLocalStorageSet,
+} from './lib/storage';
 
 const DATASET_VERSION = DEFAULT_DATASET_VERSION;
 const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
@@ -114,18 +118,16 @@ function App() {
   const [briefMode, setBriefMode] = useState<BriefMode | null>(null);
   const [customKeyPoints, setCustomKeyPoints] = useState<string[]>([]);
   const [customContext, setCustomContext] = useState<BriefContext>({});
-  const [analyticsConsent, setAnalyticsConsent] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return window.localStorage.getItem('dryvest:analytics-consent') === 'granted';
-  });
+  const [analyticsConsent, setAnalyticsConsent] = useState<boolean>(() =>
+    safeLocalStorageGet('dryvest:analytics-consent') === 'granted'
+  );
   const quickStartRef = useRef<HTMLDivElement | null>(null);
   const modeStartRef = useRef<number>(Date.now());
   const lastContextSignatureRef = useRef<string>('');
 
-  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return window.localStorage.getItem('dryvest:disclaimer-accepted') === 'true';
-  });
+  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(
+    () => safeLocalStorageGet('dryvest:disclaimer-accepted') === 'true'
+  );
 
   const { dataset, error, loading } = useDataset(DATASET_VERSION, {
     enabled: hasAcceptedDisclaimer,
@@ -173,12 +175,10 @@ function App() {
   useEffect(() => {
     if (!hasAcceptedDisclaimer) return;
     setAnalyticsTrackingConsent(analyticsConsent);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(
-        'dryvest:analytics-consent',
-        analyticsConsent ? 'granted' : 'denied'
-      );
-    }
+    safeLocalStorageSet(
+      'dryvest:analytics-consent',
+      analyticsConsent ? 'granted' : 'denied'
+    );
   }, [analyticsConsent, hasAcceptedDisclaimer]);
 
   useEffect(() => {
@@ -859,9 +859,7 @@ function App() {
     email?: string;
   }) => {
     setHasAcceptedDisclaimer(true);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('dryvest:disclaimer-accepted', 'true');
-    }
+    safeLocalStorageSet('dryvest:disclaimer-accepted', 'true');
 
     setAnalyticsConsent(consent);
 
@@ -896,20 +894,15 @@ function App() {
       trackEvent('mailing_opt_in', { optedIn: true });
     }
 
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(
-        'dryvest:analytics-consent',
-        consent ? 'granted' : 'denied'
-      );
-      window.localStorage.setItem(
-        'dryvest:mailing-opt-in',
-        mailingOptIn ? 'true' : 'false'
-      );
-      window.localStorage.setItem(
-        'dryvest:mailing-email',
-        mailingOptIn && normalizedEmail ? normalizedEmail : ''
-      );
-    }
+    safeLocalStorageSet(
+      'dryvest:analytics-consent',
+      consent ? 'granted' : 'denied'
+    );
+    safeLocalStorageSet('dryvest:mailing-opt-in', mailingOptIn ? 'true' : 'false');
+    safeLocalStorageSet(
+      'dryvest:mailing-email',
+      mailingOptIn && normalizedEmail ? normalizedEmail : ''
+    );
 
     if (mailingOptIn && normalizedEmail) {
       const subject = encodeURIComponent('Dryvest mailing list opt-in');

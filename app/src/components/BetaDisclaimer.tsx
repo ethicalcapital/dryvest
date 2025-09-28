@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { X, AlertTriangle } from 'lucide-react';
 import { trackEvent } from '../lib/analytics';
+import {
+  safeLocalStorageGet,
+  safeLocalStorageSet,
+} from '../lib/storage';
 
 interface BetaDisclaimerProps {
   analyticsConsent: boolean;
@@ -14,8 +18,7 @@ const STORAGE_KEYS = {
 };
 
 const readBoolean = (key: string, fallback = false) => {
-  if (typeof window === 'undefined') return fallback;
-  const value = window.localStorage.getItem(key);
+  const value = safeLocalStorageGet(key);
   if (value === null) return fallback;
   return value === 'true' || value === 'granted';
 };
@@ -77,12 +80,10 @@ export function BetaDisclaimer({
         'Preference stored locally. We will retry syncing later.';
       ok = false;
     } finally {
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(
-          STORAGE_KEYS.analytics,
-          consent ? 'granted' : 'denied'
-        );
-      }
+      safeLocalStorageSet(
+        STORAGE_KEYS.analytics,
+        consent ? 'granted' : 'denied'
+      );
       setStoredConsent(consent);
       onAnalyticsConsentChange(consent);
       trackEvent('analytics_consent_changed', { consent });
@@ -102,9 +103,7 @@ export function BetaDisclaimer({
   };
 
   const handleDismiss = () => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEYS.dismissed, 'true');
-    }
+    safeLocalStorageSet(STORAGE_KEYS.dismissed, 'true');
     setIsDismissed(true);
   };
 
