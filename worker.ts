@@ -171,6 +171,85 @@ const routes: Route[] = [
         },
       }),
   },
+  {
+    pattern: /^\/api\/autorag\/bucket$/,
+    methods: ['GET'],
+    handler: async ({ request, env }) => {
+      const r2 = (env as Record<string, unknown>).DRYVEST_R2 as any;
+      if (!r2) {
+        return new Response(JSON.stringify({ error: 'R2 binding DRYVEST_R2 not configured.' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+
+      const url = new URL(request.url);
+      const key = url.searchParams.get('key');
+      try {
+        if (!key) {
+          const cursor = url.searchParams.get('cursor') || undefined;
+          const limitParam = url.searchParams.get('limit');
+          const limit = limitParam ? Number(limitParam) : undefined;
+          const listing = await r2.list({ cursor, limit });
+          return new Response(
+            JSON.stringify({
+              objects: listing.objects.map((obj) => ({
+                key: obj.key,
+                size: obj.size,
+                uploaded: obj.uploaded,
+                etag: obj.httpEtag,
+                contentType: obj.httpMetadata?.contentType ?? null,
+              })),
+              truncated: listing.truncated,
+              cursor: listing.cursor ?? null,
+            }),
+            {
+              status: 200,
+              headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+            }
+          );
+        }
+
+        const object = await r2.get(key, { rangeHeader: request.headers.get('Range') ?? undefined });
+        if (!object) {
+          return new Response(JSON.stringify({ error: 'Object not found', key }), {
+            status: 404,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          });
+        }
+
+        const body = await object.text();
+        return new Response(body, {
+          status: 200,
+          headers: {
+            'Content-Type': object.httpMetadata?.contentType ?? 'text/plain; charset=utf-8',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+      } catch (error) {
+        return new Response(
+          JSON.stringify({ error: (error as Error).message ?? 'Unknown error', key }),
+          {
+            status: 500,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+    },
+  },
+  {
+    pattern: /^\/api\/autorag\/bucket$/,
+    methods: ['OPTIONS'],
+    handler: async () =>
+      new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }),
+  },
 ];
 
 const runPagesFunction = async (
