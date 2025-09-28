@@ -14,7 +14,6 @@ import { ComparisonView } from './components/ComparisonView';
 import { FactCheckView } from './components/FactCheckView';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { BetaDisclaimer } from './components/BetaDisclaimer';
 import { PalestineStatement } from './components/PalestineStatement';
 import { ScenarioCards, type Scenario } from './components/ScenarioCards';
 import { TemperatureControls } from './components/TemperatureControls';
@@ -701,25 +700,90 @@ function App() {
     });
   };
 
-  const handleDisclaimerAccept = () => {
+  const handleDisclaimerAccept = async ({
+    analyticsConsent: consent,
+    mailingOptIn,
+    email,
+  }: {
+    analyticsConsent: boolean;
+    mailingOptIn: boolean;
+    email?: string;
+  }) => {
     setHasAcceptedDisclaimer(true);
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('dryvest:disclaimer-accepted', 'true');
+    }
+
+    setAnalyticsConsent(consent);
+
+    const normalizedEmail = email?.trim();
+
+    try {
+      await fetch('/api/preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          analyticsConsent: consent,
+          mailingOptIn,
+          email: mailingOptIn ? normalizedEmail : undefined,
+          meta: {
+            datasetVersion: dataset?.version,
+            pathname:
+              typeof window !== 'undefined'
+                ? window.location.pathname
+                : undefined,
+            source: 'disclaimer_gate',
+          },
+        }),
+      });
+    } catch (error) {
+      console.error('Failed to persist initial preferences', error);
+    }
+
+    trackEvent('analytics_consent_changed', { consent });
+    if (mailingOptIn) {
+      trackEvent('mailing_opt_in', { optedIn: true });
+    }
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(
+        'dryvest:analytics-consent',
+        consent ? 'granted' : 'denied'
+      );
+      window.localStorage.setItem(
+        'dryvest:mailing-opt-in',
+        mailingOptIn ? 'true' : 'false'
+      );
+      window.localStorage.setItem(
+        'dryvest:mailing-email',
+        mailingOptIn && normalizedEmail ? normalizedEmail : ''
+      );
+    }
+
+    if (mailingOptIn && normalizedEmail) {
+      const subject = encodeURIComponent('Dryvest mailing list opt-in');
+      const body = encodeURIComponent(
+        `Please add ${normalizedEmail} to the Dryvest updates mailing list.`
+      );
+      const link = `mailto:hello@ethicic.com?subject=${subject}&body=${body}`;
+      if (typeof window !== 'undefined') {
+        window.open(link, '_blank', 'noopener,noreferrer');
+      }
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-brand-light text-slate-900">
       {!hasAcceptedDisclaimer ? (
-        <DisclaimerGate onAccept={handleDisclaimerAccept} />
+        <DisclaimerGate
+          onAccept={handleDisclaimerAccept}
+          defaultAnalyticsConsent={analyticsConsent}
+        />
       ) : null}
       <Header />
       <PalestineStatement />
-      <BetaDisclaimer
-        analyticsConsent={analyticsConsent}
-        datasetVersion={dataset.version}
-        onAnalyticsConsentChange={setAnalyticsConsent}
-      />
 
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10">
