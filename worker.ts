@@ -149,7 +149,15 @@ export default {
     }
 
     const assets = env.ASSETS as Fetcher;
-    let response = await assets.fetch(request);
+    const assetUrl = new URL(request.url);
+
+    if (assetUrl.pathname.startsWith('/assets/')) {
+      assetUrl.pathname = `/client${assetUrl.pathname}`;
+    } else if (assetUrl.pathname === '/favicon.svg' || assetUrl.pathname === '/site.webmanifest') {
+      assetUrl.pathname = `/client${assetUrl.pathname}`;
+    }
+
+    let response = await assets.fetch(new Request(assetUrl.toString(), request));
 
     if (response.status === 404 && request.method === 'GET') {
       const accept = request.headers.get('accept') ?? '';
