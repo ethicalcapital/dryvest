@@ -11,6 +11,84 @@ interface MotivationOption {
   helper: string;
 }
 
+const IDENTITY_COPY: Record<string, { label: string; helper: string }> = {
+  individual: {
+    label: 'Individual Portfolio',
+    helper: 'Personal or family-managed capital.',
+  },
+  swf: {
+    label: 'Sovereign Wealth Fund',
+    helper: 'State-owned investment authority.',
+  },
+  public_pension: {
+    label: 'Public Pension Plan',
+    helper: 'Municipal or state retirement system.',
+  },
+  corporate_pension: {
+    label: 'Corporate Pension Plan',
+    helper: 'Employer-sponsored retirement fund.',
+  },
+  endowment: {
+    label: 'University or Cultural Endowment',
+    helper: 'Endowment board or investment office.',
+  },
+  foundation: {
+    label: 'Foundation / Philanthropy',
+    helper: 'Private or community foundation assets.',
+  },
+  insurance: {
+    label: 'Insurance Company',
+    helper: 'General account with ALM oversight.',
+  },
+  central_bank: {
+    label: 'Central Bank / Monetary Authority',
+    helper: 'Reserve management and policy teams.',
+  },
+  government: {
+    label: 'Government Treasury',
+    helper: 'Public finance or treasury office.',
+  },
+};
+
+const AUDIENCE_COPY: Record<string, { label: string; helper: string }> = {
+  fiduciary: {
+    label: 'Fiduciary Committee',
+    helper: 'Voting body with fiduciary authority.',
+  },
+  boards: {
+    label: 'Board of Directors / Trustees',
+    helper: 'Governing board for oversight and sign-off.',
+  },
+  staff: {
+    label: 'Investment Staff',
+    helper: 'Day-to-day implementation team.',
+  },
+  consultants: {
+    label: 'External Consultant',
+    helper: 'Advisor drafting official recommendations.',
+  },
+  stakeholders: {
+    label: 'Stakeholder Coalition',
+    helper: 'Community, labor, or coalition partners.',
+  },
+  colleagues: {
+    label: 'Internal Colleagues',
+    helper: 'Cross-functional peers you align with.',
+  },
+  regulated: {
+    label: 'Regulators / Oversight',
+    helper: 'Compliance or supervisory audience.',
+  },
+  individuals: {
+    label: 'Executive Sponsor',
+    helper: 'CIO, CFO, or equivalent decision-maker.',
+  },
+  family_friends: {
+    label: 'Personal Network',
+    helper: 'Use when tailoring for individual advocates.',
+  },
+};
+
 interface QuickBriefContextPanelProps {
   dataset: Dataset;
   params: BriefParams;
@@ -55,22 +133,24 @@ export function QuickBriefContextPanel({
   return (
     <div className="space-y-6">
       <StepSection
-        title="Which institution are you speaking for?"
+        title="Which type of organization are you hoping to influence?"
         step="1"
-        helper="Choose the investor type you need to brief."
+        helper="Pick the investor profile so the strategy language fits their governance." 
       >
-        <div className="space-y-2">
+        <div className="flex flex-wrap gap-2">
           {identities.map(value => {
             const active = params.identity === value;
+            const meta = IDENTITY_COPY[value] ?? {
+              label: formatTaxonomyValue(value),
+              helper: 'Tailor strategy to this investor type.',
+            };
             return (
               <OptionButton
                 key={value}
                 active={active}
-                label={formatTaxonomyValue(value)}
+                label={meta.label}
                 description={
-                  active
-                    ? 'Active context'
-                    : 'Set brief to this institution'
+                  active ? 'Active context' : meta.helper
                 }
                 onClick={() => onParamChange({ identity: value })}
               />
@@ -82,20 +162,22 @@ export function QuickBriefContextPanel({
       <StepSection
         title="Who has to say yes?"
         step="2"
-        helper="Who has to approve or implement the decision?"
+        helper="Identify the audience whose approval or implementation you need." 
       >
-        <div className="space-y-2">
+        <div className="flex flex-wrap gap-2">
           {audiences.map(value => {
             const active = params.audience === value;
+            const meta = AUDIENCE_COPY[value] ?? {
+              label: formatTaxonomyValue(value),
+              helper: 'Retarget the brief toward this audience.',
+            };
             return (
               <OptionButton
                 key={value}
                 active={active}
-                label={formatTaxonomyValue(value)}
+                label={meta.label}
                 description={
-                  active
-                    ? 'Active context'
-                    : 'Switch briefing to this audience'
+                  active ? 'Active context' : meta.helper
                 }
                 onClick={() => onParamChange({ audience: value })}
               />
@@ -109,29 +191,17 @@ export function QuickBriefContextPanel({
         step="3"
         helper="Pick the pressure driving this briefing to change the strategy mix."
       >
-        <div className="space-y-2">
+        <div className="flex flex-wrap gap-2">
           {motivations.map(option => {
             const active = params.motivation === option.value;
             return (
-              <button
+              <OptionButton
                 key={option.value}
-                type="button"
+                active={active}
+                label={option.label}
+                description={active ? 'Active driver' : option.helper}
                 onClick={() => onParamChange({ motivation: option.value })}
-                className={clsx(
-                  'w-full rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                  active
-                    ? 'border-ecic-purple/70 bg-ecic-purple/10 text-ecic-purple shadow-sm'
-                    : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
-                )}
-                style={{
-                  '--tw-ring-color': 'var(--ecic-purple)',
-                } as CSSProperties}
-              >
-                <div className="font-heading text-sm font-semibold">
-                  {option.label}
-                </div>
-                <p className="mt-1 text-xs text-slate-600">{option.helper}</p>
-              </button>
+              />
             );
           })}
         </div>
@@ -167,7 +237,7 @@ function OptionButton({ active, label, description, onClick }: OptionButtonProps
       type="button"
       onClick={onClick}
       className={clsx(
-        'w-full rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+        'w-full sm:w-auto flex-1 min-w-[200px] rounded-lg border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
         active
           ? 'border-ecic-purple bg-ecic-purple/10 text-ecic-purple shadow-sm'
           : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200'
