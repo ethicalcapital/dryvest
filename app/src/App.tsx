@@ -699,7 +699,7 @@ function App() {
         <div className="space-y-6">
           <CustomBriefBuilder
             dataset={dataset}
-            context={customContext}
+            context={context}
             onContextChange={handleCustomContextChange}
             selectedKeyPoints={customKeyPoints}
             onKeyPointsChange={setCustomKeyPoints}
