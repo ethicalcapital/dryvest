@@ -76,6 +76,9 @@ export function BetaDisclaimer({
     }
 
     setIsSaving(true);
+    const normalizedEmail = mailingOptIn ? mailingEmail.trim() : undefined;
+    let resultTone: 'success' | 'warning' = 'success';
+    let resultMessage = 'Preferences saved. Thank you for helping us improve.';
     try {
       const response = await fetch('/api/preferences', {
         method: 'POST',
@@ -85,7 +88,7 @@ export function BetaDisclaimer({
         body: JSON.stringify({
           analyticsConsent: analyticsOptIn,
           mailingOptIn,
-          email: mailingOptIn ? mailingEmail.trim() : undefined,
+          email: normalizedEmail,
           meta: {
             datasetVersion,
             pathname:
@@ -99,7 +102,11 @@ export function BetaDisclaimer({
       if (!response.ok) {
         throw new Error(`Failed to persist preferences: ${response.status}`);
       }
-
+    } catch (error) {
+      console.error('Failed to persist preferences', error);
+      resultTone = 'warning';
+      resultMessage = 'Saved locally. We will retry syncing preferences later.';
+    } finally {
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(
           STORAGE_KEYS.analytics,
@@ -111,23 +118,18 @@ export function BetaDisclaimer({
         );
         window.localStorage.setItem(
           STORAGE_KEYS.mailingEmail,
-          mailingEmail.trim()
+          normalizedEmail ?? ''
         );
       }
 
       onAnalyticsConsentChange(analyticsOptIn);
 
-      if (mailingLink) {
+      if (mailingOptIn && mailingLink) {
         window.open(mailingLink, '_blank', 'noopener,noreferrer');
       }
 
-      setStatusTone('success');
-      setStatusMessage('Preferences saved. Thank you for helping us improve.');
-    } catch (error) {
-      console.error('Failed to persist preferences', error);
-      setStatusTone('warning');
-      setStatusMessage('We could not save your preferences. Please try again later.');
-    } finally {
+      setStatusTone(resultTone);
+      setStatusMessage(resultMessage);
       setIsSaving(false);
     }
   };
@@ -161,7 +163,8 @@ export function BetaDisclaimer({
                 never investment advice.
               </p>
               <div className="rounded-lg border border-amber-200 bg-white/70 p-4">
-                <div className="flex flex-col gap-3">
+                <p className="font-medium text-slate-800">By continuing, you confirm:</p>
+                <div className="mt-3 flex flex-col gap-3">
                   <label className="flex items-start gap-3 text-sm text-amber-800">
                     <input
                       type="checkbox"
@@ -170,7 +173,7 @@ export function BetaDisclaimer({
                       className="mt-1 h-4 w-4 rounded border-amber-400 text-amber-600 focus:ring-amber-500"
                     />
                     <span>
-                      Yes, you can collect anonymized usage analytics to refine Dryvest.
+                      Dryvest may collect anonymized usage analytics to improve the tool.
                     </span>
                   </label>
                   <div className="space-y-2">
@@ -181,9 +184,7 @@ export function BetaDisclaimer({
                         onChange={event => setMailingOptIn(event.target.checked)}
                         className="mt-1 h-4 w-4 rounded border-amber-400 text-amber-600 focus:ring-amber-500"
                       />
-                      <span>
-                        Keep me on the Dryvest update list.
-                      </span>
+                      <span>You would like Ethical Capital Dryvest release notes by email.</span>
                     </label>
                     {mailingOptIn ? (
                       <div className="pl-7">
