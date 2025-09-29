@@ -37,6 +37,10 @@ export function BetaDisclaimer({
   const [storedConsent, setStoredConsent] = useState<boolean>(() =>
     analyticsConsent || readBoolean(STORAGE_KEYS.analytics)
   );
+  const [mailingEmail, setMailingEmail] = useState('');
+  const [mailingStatus, setMailingStatus] = useState<'idle' | 'saving' | 'success' | 'error'>(
+    'idle'
+  );
 
   useEffect(() => {
     setStoredConsent(analyticsConsent);
@@ -107,8 +111,55 @@ export function BetaDisclaimer({
     setIsDismissed(true);
   };
 
-  const releaseNotesHref =
-    'mailto:hello@ethicic.com?subject=Dryvest%20release%20notes&body=Please%20add%20me%20to%20Dryvest%20release%20updates.';
+  const handleMailingSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const email = mailingEmail.trim();
+    if (!email) {
+      setStatusTone('warning');
+      setStatusMessage('Enter a valid email so we can send release notes.');
+      return;
+    }
+
+    setMailingStatus('saving');
+    setStatusMessage(null);
+
+    try {
+      const response = await fetch('/api/preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          analyticsConsent: storedConsent,
+          mailingOptIn: true,
+          email,
+          meta: {
+            datasetVersion,
+            source: 'beta_disclaimer',
+            pathname:
+              typeof window !== 'undefined' ? window.location.pathname : undefined,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to persist mailing preference: ${response.status}`);
+      }
+
+      setMailingStatus('success');
+      setMailingEmail('');
+      setStatusTone('success');
+      setStatusMessage('Release notes opt-in confirmed. Watch your inbox for updates.');
+      trackEvent('mailing_opt_in', { source: 'beta_banner', datasetVersion });
+      window.setTimeout(() => setMailingStatus('idle'), 3000);
+    } catch (error) {
+      console.error('Failed to opt in to release notes', error);
+      setMailingStatus('error');
+      setStatusTone('warning');
+      setStatusMessage('We could not add you yet. Please retry or email hello@ethicic.com.');
+      window.setTimeout(() => setMailingStatus('idle'), 4000);
+    }
+  };
 
   return (
     <div className="w-full border-b border-amber-200 bg-amber-50">
@@ -153,12 +204,36 @@ export function BetaDisclaimer({
                       ? 'Saving…'
                       : 'Keep analytics off'}
                   </button>
-                  <a
-                    href={releaseNotesHref}
-                    className="inline-flex items-center rounded-md border border-amber-200 px-3 py-2 text-sm font-semibold text-amber-700 transition hover:bg-amber-100"
+                  <form
+                    onSubmit={handleMailingSubmit}
+                    className="flex flex-col gap-2 sm:flex-row sm:items-center"
                   >
-                    Get release notes
-                  </a>
+                    <label className="sr-only" htmlFor="release-notes-email">
+                      Email for release notes
+                    </label>
+                    <input
+                      id="release-notes-email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      value={mailingEmail}
+                      onChange={event => setMailingEmail(event.target.value)}
+                      placeholder="you@example.com"
+                      className="w-full rounded-md border border-amber-200 bg-white px-3 py-2 text-sm text-amber-900 shadow-sm focus:border-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      disabled={mailingStatus === 'saving'}
+                      className="inline-flex items-center rounded-md border border-amber-200 px-3 py-2 text-sm font-semibold text-amber-700 transition hover:bg-amber-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      {mailingStatus === 'saving'
+                        ? 'Joining…'
+                        : mailingStatus === 'success'
+                          ? 'Added!'
+                          : 'Get release notes'}
+                    </button>
+                  </form>
                   <button
                     onClick={handleDismiss}
                     className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-amber-700 transition hover:bg-amber-100"

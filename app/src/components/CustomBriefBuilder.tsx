@@ -22,7 +22,6 @@ export function CustomBriefBuilder({
 }: CustomBriefBuilderProps) {
   const identitySelectId = useId();
   const audienceSelectId = useId();
-  const venueSelectId = useId();
   const motivationSelectId = useId();
   // Get all available key points for current context
   const availableKeyPoints = useMemo(() => {
@@ -74,7 +73,7 @@ export function CustomBriefBuilder({
           Your Context
         </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="space-y-4">
           {/* Identity */}
           <div>
             <label
@@ -153,45 +152,6 @@ export function CustomBriefBuilder({
               <option value="family_friends">Family & Friends</option>
               <option value="colleagues">Colleagues</option>
               <option value="stakeholders">Stakeholders</option>
-            </select>
-          </div>
-
-          {/* Venue */}
-          <div>
-            <label
-              className="block text-sm font-medium text-slate-700 mb-2"
-              htmlFor={venueSelectId}
-            >
-              Venue
-            </label>
-            <select
-              id={venueSelectId}
-              value={context.venue || ''}
-              onChange={e =>
-                onContextChange({
-                  ...context,
-                  venue: e.target.value || undefined,
-                })
-              }
-              className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1"
-              style={{
-                borderColor: 'var(--border-gray)',
-              }}
-              onFocus={e => {
-                e.target.style.borderColor = 'var(--ecic-purple)';
-                e.target.style.boxShadow = '0 0 0 1px var(--ecic-purple)';
-              }}
-              onBlur={e => {
-                e.target.style.borderColor = 'var(--border-gray)';
-                e.target.style.boxShadow = 'none';
-              }}
-            >
-              <option value="">Select...</option>
-              <option value="one_on_one">One-on-One</option>
-              <option value="committee_meeting">Committee Meeting</option>
-              <option value="board_presentation">Board Presentation</option>
-              <option value="public_testimony">Public Testimony</option>
-              <option value="city_council">City Council</option>
             </select>
           </div>
 

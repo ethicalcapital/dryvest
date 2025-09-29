@@ -10,7 +10,6 @@ export interface BriefParams extends BriefContext {
 const PARAM_KEYS: (keyof BriefParams)[] = [
   'identity',
   'audience',
-  'venue',
   'level',
   'motivation',
   'motivationSecondary',

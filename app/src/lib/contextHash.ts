@@ -6,7 +6,6 @@ export async function hashContext(context: BriefContext): Promise<string> {
   const canonical = [
     context.identity ?? '',
     context.audience ?? '',
-    context.venue ?? '',
     context.level ?? '',
   ].join('|');
 

@@ -18,10 +18,7 @@ export const filterNodesByType = <T extends Node['type']>(
 ): Array<TypedNode<T>> =>
   nodes.filter((node): node is TypedNode<T> => node.type === type);
 
-export const collectTargetValues = (
-  dataset: Dataset,
-  key: 'audience' | 'venue'
-) => {
+export const collectAudiencesByIdentity = (dataset: Dataset) => {
   const map = new Map<string, Set<string | undefined>>();
   dataset.nodes.forEach(node => {
     const identities = node.targets?.identity;
@@ -30,9 +27,9 @@ export const collectTargetValues = (
       if (!map.has(identity)) {
         map.set(identity, new Set());
       }
-      const values = node.targets?.[key];
-      if (values?.length) {
-        values.forEach(value => map.get(identity)?.add(value));
+      const audiences = node.targets?.audience;
+      if (audiences?.length) {
+        audiences.forEach(value => map.get(identity)?.add(value));
       } else {
         map.get(identity)?.add(undefined);
       }
@@ -120,13 +117,6 @@ export const buildExportForContext = (
       matchesTargets(node.targets, context)
   );
 
-  const venueSnippet = dataset.nodes.find(
-    (node): node is TypedNode<'template_snippet'> =>
-      node.type === 'template_snippet' &&
-      Boolean(context.venue && node.targets?.venue?.includes(context.venue)) &&
-      Boolean(node.lines?.length)
-  );
-
   const sources = gatherSourcesForContext(
     dataset,
     context,
@@ -139,7 +129,6 @@ export const buildExportForContext = (
     meta: {
       identity: context.identity,
       audience: context.audience,
-      venue: context.venue,
       level: context.level,
       playlistId: playlist?.id ?? DEFAULT_PLAYLIST_ID,
       datasetVersion: dataset.version,
@@ -152,7 +141,6 @@ export const buildExportForContext = (
     screeningNode,
     policyAlignment,
     templates: templateSnippets,
-    venueSnippet,
     selectedOnePagers: [],
     sources,
     sourceLookup: dataset.sourceIndex,
@@ -176,7 +164,6 @@ export const contextKey = (value: BriefContext) =>
   [
     value.identity ?? 'n/a',
     value.audience ?? 'n/a',
-    value.venue ?? 'n/a',
     value.level ?? 'n/a',
   ].join('|');
 
@@ -186,29 +173,23 @@ export const enumerateContexts = (
 ): BriefContext[] => {
   const identities = dataset.schema?.taxonomies?.identity ?? [];
   const levels = dataset.schema?.taxonomies?.level ?? ['plain', 'technical'];
-  const audiencesByIdentity = collectTargetValues(dataset, 'audience');
-  const venuesByIdentity = collectTargetValues(dataset, 'venue');
+  const audiencesByIdentity = collectAudiencesByIdentity(dataset);
 
   const contexts: BriefContext[] = [];
   const seen = new Set<string>();
 
   identities.forEach(identity => {
     const audienceSet = audiencesByIdentity.get(identity);
-    const venueSet = venuesByIdentity.get(identity);
     const audiences = audienceSet && audienceSet.size ? Array.from(audienceSet) : [undefined];
-    const venues = venueSet && venueSet.size ? Array.from(venueSet) : [undefined];
 
     levels.forEach(level => {
       audiences.forEach(audience => {
-        venues.forEach(venue => {
-          const candidate: BriefContext = { identity, level };
-          if (audience) candidate.audience = audience;
-          if (venue) candidate.venue = venue;
-          const key = contextKey(candidate);
-          if (seen.has(key)) return;
-          seen.add(key);
-          contexts.push(candidate);
-        });
+        const candidate: BriefContext = { identity, level };
+        if (audience) candidate.audience = audience;
+        const key = contextKey(candidate);
+        if (seen.has(key)) return;
+        seen.add(key);
+        contexts.push(candidate);
       });
     });
   });

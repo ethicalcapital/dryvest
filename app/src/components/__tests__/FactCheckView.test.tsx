@@ -40,7 +40,6 @@ const exportData: BriefExportData = {
   meta: {
     identity: 'endowment',
     audience: 'board',
-    venue: 'board_meeting',
     level: 'plain',
     playlistId: 'test-playlist',
     datasetVersion: '2025-09-27',
@@ -48,7 +47,6 @@ const exportData: BriefExportData = {
   context: {
     identity: 'endowment',
     audience: 'board',
-    venue: 'board_meeting',
     level: 'plain',
   },
   opener: buildNode({
@@ -101,12 +99,6 @@ const exportData: BriefExportData = {
       lines: ['Sharing Dryvest benchmarking pack…'],
     }),
   ],
-  venueSnippet: buildNode({
-    id: 'venue-1',
-    type: 'template_snippet',
-    title: 'Board cues',
-    lines: ['Lead with audit committee precedent.'],
-  }),
   selectedOnePagers: [
     buildNode({
       id: 'doc-1',
@@ -136,7 +128,6 @@ const schemaDoc: SchemaDocument = {
   taxonomies: {
     identity: ['endowment'],
     audience: ['board'],
-    venue: ['board_meeting'],
     level: ['plain'],
   },
 };
@@ -163,7 +154,6 @@ const nodes: Node[] = [
   exportData.screeningNode!,
   exportData.policyAlignment!,
   exportData.templates[0],
-  exportData.venueSnippet!,
 ];
 
 nodes.forEach(node => {
@@ -171,7 +161,6 @@ nodes.forEach(node => {
     node.targets = {
       identity: ['endowment'],
       audience: ['board'],
-      venue: ['board_meeting'],
     };
   }
 });

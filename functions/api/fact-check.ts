@@ -14,7 +14,6 @@ export const onRequest: PagesFunction = async ({ request }) => {
   const version = url.searchParams.get('version') ?? DEFAULT_DATASET_VERSION;
   const identity = url.searchParams.get('identity') ?? undefined;
   const audience = url.searchParams.get('audience') ?? undefined;
-  const venue = url.searchParams.get('venue') ?? undefined;
   const level = url.searchParams.get('level') ?? undefined;
 
   try {
@@ -24,7 +23,6 @@ export const onRequest: PagesFunction = async ({ request }) => {
     const contexts = determineContexts(dataset, {
       identity,
       audience,
-      venue,
       level,
     });
 
@@ -73,7 +71,6 @@ const determineContexts = (
       level: params.level ?? dataset.schema?.taxonomies?.level?.[0] ?? 'plain',
     };
     if (params.audience) context.audience = params.audience;
-    if (params.venue) context.venue = params.venue;
     return [context];
   }
 

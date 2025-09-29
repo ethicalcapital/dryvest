@@ -3,7 +3,6 @@ import type { BriefContext } from './schema';
 interface PDFExportData {
   title: string;
   content: string;
-  venue: string;
   decisionMaker: string;
   context: BriefContext;
 }
@@ -25,7 +24,6 @@ export async function exportToPDF(data: PDFExportData): Promise<void> {
       body: JSON.stringify({
         title: data.title || 'Investment Brief',
         content: data.content || '',
-        venue: data.venue || 'Investment Committee',
         decisionMaker: data.decisionMaker || 'Board of Trustees',
         context: data.context,
       }),
@@ -158,10 +156,6 @@ export function generateTitle(context: BriefContext): string {
     parts.push(
       context.identity.charAt(0).toUpperCase() + context.identity.slice(1)
     );
-  }
-
-  if (context.venue) {
-    parts.push(context.venue.replace('_', ' '));
   }
 
   parts.push('Investment Brief');

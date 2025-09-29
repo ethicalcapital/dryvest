@@ -11,7 +11,6 @@ export type BriefTone = 'plain' | 'technical';
 export interface BriefExportMeta {
   identity?: string;
   audience?: string;
-  venue?: string;
   level?: string;
   motivation?: string;
   motivationSecondary?: string;
@@ -29,7 +28,6 @@ export interface BriefExportData {
   screeningNode?: Extract<Node, { type: 'policy_statement' }>;
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
   templates: Array<Extract<Node, { type: 'template_snippet' }>>;
-  venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
   selectedOnePagers: Array<Extract<Node, { type: 'one_pager' }>>;
   sources: SourceRecord[];
   sourceLookup: Record<string, SourceRecord>;
@@ -93,8 +91,11 @@ export function buildMarkdown(data: BriefExportData, tone: BriefTone): string {
   // Tufte-style title page
   lines.push('# Investment Brief');
   lines.push('');
-  lines.push(`**Prepared for:** ${meta.audience ?? 'Investment Decision-Makers'}`);
-  lines.push(`**Context:** ${meta.identity ?? 'Institutional Investor'} • ${meta.venue ?? 'Strategic Review'}`);
+  lines.push(`**Prepared for:** ${meta.audience ? formatTaxonomyValue(meta.audience) : 'Investment Decision-Makers'}`);
+  const identityLabel = meta.identity
+    ? formatTaxonomyValue(meta.identity)
+    : 'Institutional Investor';
+  lines.push(`**Context:** ${identityLabel}`);
   lines.push(`**Analysis:** ${tone === 'technical' ? 'Technical Assessment' : 'Executive Summary'}`);
   const driverSummary = [
     meta.motivation ? `Primary driver: ${formatTaxonomyValue(meta.motivation)}` : null,

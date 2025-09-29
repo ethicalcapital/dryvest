@@ -16,7 +16,6 @@ type FetchMock = ReturnType<typeof vi.fn>;
 const baseParams: BriefParams = {
   identity: 'endowment',
   audience: 'investment_committee',
-  venue: 'board_meeting',
   level: 'plain',
   playlist: 'default',
 };

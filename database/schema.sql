@@ -67,8 +67,6 @@ SELECT
   (SELECT group_concat(value, '; ')
      FROM json_each(nodes.payload, '$.targets.audience')) AS targets_audience,
   (SELECT group_concat(value, '; ')
-     FROM json_each(nodes.payload, '$.targets.venue')) AS targets_venue,
-  (SELECT group_concat(value, '; ')
      FROM json_each(nodes.payload, '$.targets.level')) AS targets_level,
   (SELECT group_concat(value, '; ')
      FROM json_each(nodes.payload, '$.targets.motivation')) AS targets_motivation

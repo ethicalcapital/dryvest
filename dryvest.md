@@ -3,7 +3,7 @@ Short answer: model everything as addressable nodes with IDs, conditions, and pl
 Core changes
  1. Normalize into nodes
  • Every unit becomes a node: opener, guide, key_point, counter, source, one_pager, next_step, policy_statement, template_snippet.
- • Common envelope: id, type, slug, text|markdown, citations[], targets{identity[], venue[], audience[], level[]}, conditions{}, version, status, provenance, related[].
+ • Common envelope: id, type, slug, text|markdown, citations[], targets{identity[], audience[], level[]}, conditions{}, version, status, provenance, related[].
  2. Playlists over per-audience maps
  • Replace *_by_entity and*_sets with ordered playlists that just reference node IDs with optional per-item overrides.
  • Example playlists: brief_key_points, fiduciary_counters, regulated_sources.
@@ -19,7 +19,7 @@ Core changes
  6. Sources as first-class nodes
  • Normalize sources/further_reading into source nodes with id, label, url, citation_text, accessed_at, jurisdiction.
  7. Conditions instead of forks
- • Use conditions for simple logic: {if_identity: ["public_pension"], not_venue: ["hearing"], min_level: "technical"}.
+ • Use conditions for simple logic: {if_identity: ["public_pension"], min_level: "technical"}.
  8. Transforms
  • Add optional transforms hints to guide rendering: {"tone":"plain|technical","length":"short|long","list_style":"bullets|numbers"}.
 
@@ -31,7 +31,6 @@ Suggested top-level document
   "taxonomies": {
     "identity": ["individual","public_pension","endowment","government"],
     "audience": ["family_friends","fiduciary","regulated"],
-    "venue": ["one_to_one","small_group","committee_hearing"]
   },
   "nodes": [ /*array of typed nodes, examples below*/ ],
   "playlists": [
@@ -57,7 +56,7 @@ Node examples
   "type": "opener",
   "slug": "opener-generic",
   "text": "We can align savings with shared values without sacrificing rigor.",
-  "targets": { "identity": ["*"], "venue": ["*"], "audience": ["*"] },
+  "targets": { "identity": ["*"], "audience": ["*"] },
   "transforms": { "tone": "plain" },
   "provenance": { "source_urls": [], "review_status": "approved" },
   "lifecycle": { "created_at": "2025-09-25", "updated_at": "2025-09-25" }
@@ -126,7 +125,7 @@ Mapping from your current fields
  • one_pagers → one_pager nodes with markdown and attachments[] if needed.
  • key_points, key_points_by_entity → key_point nodes; audience/identity via targets; order via playlists.
  • screening_knowledge → policy_statement or template_snippet nodes with variants.
- • venue_notes → template_snippet nodes with targets.venue.
+ • venue_notes → template_snippet nodes (deprecated; prefer audience-level cues).
  • counters, counter_sets → counter nodes + audience playlists.
  • model_resolution, government_policy_snippet → template_snippet nodes.
  • next_steps, next_steps_by_entity → next_step nodes + playlists per identity.
@@ -135,7 +134,7 @@ Mapping from your current fields
  • cio_note, cio_links → template_snippet and source nodes tagged identity:["cio"].
 
 Output assembly
- • Given {identity, venue, audience, level}, select:
+ • Given {identity, audience, level}, select:
  • one opener where targets match, else fallback.
  • one guide matching identity (render sections).
  • playlist brief_key_points_default filtered by targets.
@@ -175,7 +174,7 @@ Stack
 
 Routing & state
  • Single route with query params as the source of truth:
-/dryvestment?identity=public_pension&audience=fiduciary&venue=hearing&level=plain&playlist=brief_key_points_default
+/dryvestment?identity=public_pension&audience=fiduciary&level=plain&playlist=brief_key_points_default
  • All UI controls write to the URL. Deep links are copyable. No hidden state.
 
 Data loading
@@ -257,7 +256,7 @@ Provider
 
 What to log (events)
  • app_opened
- • params_changed (identity, audience, venue, level, playlist)
+ • params_changed (identity, audience, level, playlist)
  • brief_built (render_time_ms, node_counts, one_pagers_count)
  • copy_clicked
  • download_clicked (format)
@@ -271,7 +270,7 @@ What to log (events)
 
 Common properties
  • version, session_id (random UUID v4), referrer, ua_device
- • identity, audience, venue, level, playlist
+ • identity, audience, level, playlist
  • selected_one_pagers[]
  • node_ids_rendered[] (key_points/counters/sources)
  • doc_length_chars, render_time_ms
@@ -293,7 +292,7 @@ type EventName =
 
 type Common = {
   version: string; session_id: string; url: string;
-  identity?: string; audience?: string; venue?: string;
+  identity?: string; audience?: string;
   level?: "plain"|"technical"; playlist?: string;
 };
 
@@ -317,7 +316,7 @@ Hook points:
 send("app_opened");
 
 // When controls change (and URL updates)
-send("params_changed", { identity, audience, venue, level, playlist });
+send("params_changed", { identity, audience, level, playlist });
 
 // After assembling brief
 send("brief_built", {

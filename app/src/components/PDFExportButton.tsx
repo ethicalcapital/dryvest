@@ -36,7 +36,6 @@ export function PDFExportButton({
       await exportToPDF({
         title,
         content: markdown,
-        venue: context.venue ?? 'Strategic Briefing',
         decisionMaker: context.audience ?? 'Decision Makers',
         context,
       });

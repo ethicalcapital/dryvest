@@ -11,7 +11,6 @@ interface PreviewPaneProps {
   nextSteps: Extract<Node, { type: 'next_step' }>[];
   sources: SourceRecord[];
   policyAlignment?: Extract<Node, { type: 'policy_statement' }>;
-  venueSnippet?: Extract<Node, { type: 'template_snippet' }>;
   templates: Extract<Node, { type: 'template_snippet' }>[];
   selectedOnePagers: Extract<Node, { type: 'one_pager' }>[];
   sourceLookup: Record<string, SourceRecord>;
@@ -90,7 +89,6 @@ export function PreviewPane({
   nextSteps,
   sources,
   policyAlignment,
-  venueSnippet,
   templates,
   selectedOnePagers,
   sourceLookup,
@@ -183,16 +181,6 @@ export function PreviewPane({
           ) : null}
           {renderCitations(policyAlignment.citations, sourceLookup)}
           <GitHubFeedback node={policyAlignment} />
-        </Section>
-      ) : null}
-
-      {venueSnippet ? (
-        <Section title="Venue cues" anchor="venue">
-          <ul className="list-disc space-y-2 pl-5 text-sm text-slate-700">
-            {venueSnippet.lines?.map((line, index) => (
-              <li key={index}>{line}</li>
-            ))}
-          </ul>
         </Section>
       ) : null}
 

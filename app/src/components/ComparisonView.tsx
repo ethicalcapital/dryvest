@@ -566,19 +566,11 @@ export function ComparisonView({ dataset, context }: ComparisonViewProps) {
                               </div>
                             )}
 
-                            {(item.targets?.audience || item.targets?.venue) && (
+                            {item.targets?.audience && (
                               <div className="text-xs text-slate-500 pt-2 border-t border-slate-100">
-                                {item.targets.audience && (
-                                  <span>
-                                    Audience:{' '}
-                                    {item.targets.audience.join(', ')}{' '}
-                                  </span>
-                                )}
-                                {item.targets.venue && (
-                                  <span>
-                                    Venue: {item.targets.venue.join(', ')}
-                                  </span>
-                                )}
+                                <span>
+                                  Audience: {item.targets.audience.join(', ')}{' '}
+                                </span>
                               </div>
                             )}
 

@@ -182,7 +182,7 @@ export function FactCheckView({ dataset, context, exportData }: FactCheckViewPro
             <p className="text-sm text-slate-600 max-w-3xl">
               This export flattens every context-aware briefing—assertions, policy language,
               templates, and citations—into parser-friendly text. Use it to spot gaps,
-              compare outputs by audience or venue, and capture corrections for the next dataset build.
+              compare outputs by audience type, and capture corrections for the next dataset build.
             </p>
             <dl className="mt-3 grid gap-3 sm:grid-cols-3 text-xs text-slate-500">
               <div>
@@ -259,7 +259,7 @@ export function FactCheckView({ dataset, context, exportData }: FactCheckViewPro
                   {entry.isActive ? 'Active context' : 'Context'}
                 </p>
                 <h3 className="text-lg font-heading font-semibold text-slate-900">
-                  {formatLabel(entry.context.identity)} · {formatLabel(entry.context.audience)} · {formatLabel(entry.context.venue)} · {formatLabel(entry.context.level)}
+                  {formatLabel(entry.context.identity)} · {formatLabel(entry.context.audience)} · {formatLabel(entry.context.level)}
                 </h3>
                 <dl className="mt-3 grid gap-3 text-xs text-slate-500 sm:grid-cols-3">
                   <div>

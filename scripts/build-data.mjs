@@ -103,17 +103,13 @@ const main = async () => {
     Object.entries(data.identity_openers).forEach(([identity, entries]) => {
       Object.entries(entries).forEach(([contextKey, text]) => {
         const isGeneric = contextKey === 'generic';
-        const normalizedVenue = camelToSlug(contextKey);
-        const nodeId = `opener_${identity}_${isGeneric ? 'base' : normalizedVenue}`;
-        const targets = { identity: [identity] };
-        if (!isGeneric) {
-          targets.venue = [normalizedVenue];
-        }
+        const normalizedContext = camelToSlug(contextKey);
+        const nodeId = `opener_${identity}_${isGeneric ? 'base' : normalizedContext}`;
         addNode({
           id: nodeId,
           type: 'opener',
           text,
-          targets,
+          targets: { identity: [identity] },
         });
       });
     });
@@ -237,18 +233,6 @@ const main = async () => {
       type: 'policy_statement',
       title: 'Screening intelligence',
       variants,
-    });
-  }
-
-  if (data.venue_notes) {
-    Object.entries(data.venue_notes).forEach(([venue, notes]) => {
-      addNode({
-        id: `venue_notes_${camelToSlug(venue)}`,
-        type: 'template_snippet',
-        title: 'Venue cues',
-        lines: notes,
-        targets: { venue: [camelToSlug(venue)] },
-      });
     });
   }
 

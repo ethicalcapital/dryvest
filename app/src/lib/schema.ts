@@ -4,7 +4,6 @@ export const TargetsSchema = z
   .object({
     identity: z.array(z.string()).min(1).optional(),
     audience: z.array(z.string()).min(1).optional(),
-    venue: z.array(z.string()).min(1).optional(),
     level: z.array(z.string()).min(1).optional(),
     motivation: z.array(z.string()).min(1).optional(),
   })
@@ -162,7 +161,6 @@ export const SchemaDocumentSchema = z.object({
   .object({
     identity: z.array(z.string()).optional(),
     audience: z.array(z.string()).optional(),
-    venue: z.array(z.string()).optional(),
     level: z.array(z.string()).optional(),
     motivation: z.array(z.string()).optional(),
   })
@@ -274,7 +272,6 @@ export const BriefContextSchema = z
   .object({
     identity: z.string().optional(),
     audience: z.string().optional(),
-    venue: z.string().optional(),
     level: z.string().optional(),
     motivation: z.string().optional(),
     motivationSecondary: z.string().optional(),

@@ -99,7 +99,6 @@ const buildRows = dataset => {
     tags: joinList(node.tags),
     targets_identity: joinList(node.targets?.identity),
     targets_audience: joinList(node.targets?.audience),
-    targets_venue: joinList(node.targets?.venue),
     targets_level: joinList(node.targets?.level),
     targets_motivation: joinList(node.targets?.motivation),
   }));
@@ -169,7 +168,6 @@ const buildRows = dataset => {
         { key: 'tags', label: 'Tags' },
         { key: 'targets_identity', label: 'Targets: Identity' },
         { key: 'targets_audience', label: 'Targets: Audience' },
-        { key: 'targets_venue', label: 'Targets: Venue' },
         { key: 'targets_level', label: 'Targets: Level' },
         { key: 'targets_motivation', label: 'Targets: Motivation' },
       ],

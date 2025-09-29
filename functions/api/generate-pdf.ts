@@ -7,12 +7,10 @@ interface Env {
 interface PDFRequest {
   title: string;
   content: string;
-  venue: string;
   decisionMaker: string;
   context: {
     identity?: string;
     audience?: string;
-    venue?: string;
     level?: string;
   };
 }

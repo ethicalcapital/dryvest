@@ -81,7 +81,6 @@ export function buildFactCheckReport(data: BriefExportData): string {
   lines.push('CONTEXT:');
   lines.push(`  IDENTITY: ${context.identity ?? 'n/a'}`);
   lines.push(`  AUDIENCE: ${context.audience ?? 'n/a'}`);
-  lines.push(`  VENUE: ${context.venue ?? 'n/a'}`);
   lines.push(`  LEVEL: ${context.level ?? 'n/a'}`);
   lines.push('SUMMARY:');
   lines.push(`  KEY_POINTS: ${keyPoints.length}`);
@@ -167,14 +166,6 @@ export function buildFactCheckReport(data: BriefExportData): string {
       });
     }
     appendCitations(lines, '  CITATIONS', data.policyAlignment.citations, sourceLookup);
-    lines.push('');
-  }
-
-  if (data.venueSnippet?.lines?.length) {
-    lines.push('VENUE_CUES:');
-    data.venueSnippet.lines.forEach((line: string, idx: number) => {
-      lines.push(`  - CUE_${idx + 1}: ${line.trim()}`);
-    });
     lines.push('');
   }
 

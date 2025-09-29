@@ -64,7 +64,7 @@ function evaluateTargets(targets, context) {
 
   let score = 0;
 
-  const keys = ['identity', 'audience', 'venue', 'level'];
+  const keys = ['identity', 'audience', 'level'];
   for (const key of keys) {
     const options = targets[key];
     if (!options || !options.length) {

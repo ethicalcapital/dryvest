@@ -33,7 +33,6 @@ function evaluateTargets(
 
   if (!requireMatch('identity')) return { matches: false, score: 0 };
   if (!requireMatch('audience')) return { matches: false, score: 0 };
-  if (!requireMatch('venue')) return { matches: false, score: 0 };
   if (!requireMatch('level')) return { matches: false, score: 0 };
 
   const targetMotivations = targets.motivation;
@@ -152,9 +151,6 @@ export function resolveOpener(dataset: Dataset, context: BriefContext) {
       opener.targets?.identity?.includes(context.identity)
     ) {
       score += 2;
-    }
-    if (context.venue && opener.targets?.venue?.includes(context.venue)) {
-      score += 1;
     }
     if (score > bestScore) {
       best = opener;

@@ -46,7 +46,6 @@ export function ContactForm({
       meta: {
         identity: params.identity,
         audience: params.audience,
-        venue: params.venue,
         tone,
         datasetVersion,
         attachments: attachmentCount,

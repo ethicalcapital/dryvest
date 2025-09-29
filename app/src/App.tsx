@@ -54,7 +54,6 @@ const analyticsToken = import.meta.env.VITE_CF_ANALYTICS_TOKEN;
 const FALLBACK_DEFAULTS: BriefParams = {
   identity: undefined,
   audience: undefined,
-  venue: undefined,
   level: 'technical',
   motivation: undefined,
   motivationSecondary: undefined,
@@ -192,7 +191,6 @@ function App() {
       version: dataset.version,
       identity: params.identity,
       audience: params.audience,
-      venue: params.venue,
       motivation: params.motivation,
       level: params.level,
     });
@@ -203,7 +201,6 @@ function App() {
     params.identity,
     params.audience,
     params.level,
-    params.venue,
     params.motivation,
   ]);
 
@@ -213,7 +210,6 @@ function App() {
       version: dataset.version,
       identity: params.identity,
       audience: params.audience,
-      venue: params.venue,
       motivation: params.motivation,
       motivation_secondary: params.motivationSecondary,
       level: params.level,
@@ -226,7 +222,6 @@ function App() {
     params.audience,
     params.level,
     params.motivation,
-    params.venue,
     params.playlist,
   ]);
 
@@ -279,7 +274,6 @@ function App() {
     return {
       identity: params.identity,
       audience: params.audience,
-      venue: params.venue,
       motivation: params.motivation,
       motivationSecondary: params.motivationSecondary,
       level: 'technical',
@@ -289,7 +283,6 @@ function App() {
     customContext,
     params.identity,
     params.audience,
-    params.venue,
     params.motivation,
     params.motivationSecondary,
   ]);
@@ -300,7 +293,6 @@ function App() {
     const signature = JSON.stringify([
       context.identity ?? '',
       context.audience ?? '',
-      context.venue ?? '',
       context.motivation ?? '',
       context.motivationSecondary ?? '',
       context.level ?? '',
@@ -310,14 +302,12 @@ function App() {
       trackEvent('context_finalized', {
         identity: context.identity,
         audience: context.audience,
-        venue: context.venue,
       });
     }
   }, [
     hasAcceptedDisclaimer,
     context.identity,
     context.audience,
-    context.venue,
     context.level,
     context.motivation,
     context.motivationSecondary,
@@ -443,7 +433,6 @@ function App() {
         nextSteps={nextStepNodes}
         sources={sourceNodes}
         policyAlignment={policyAlignment}
-        venueSnippet={venueSnippet}
         templates={templateSnippets}
         selectedOnePagers={selectedOnePagers}
         sourceLookup={sourceLookup}
@@ -599,22 +588,11 @@ function App() {
     [dataset, context]
   );
 
-  const venueSnippet = dataset?.nodes.find(
-    (node): node is Extract<Node, { type: 'template_snippet' }> =>
-      node.type === 'template_snippet' &&
-      !!context.venue &&
-      !!node.targets?.venue?.includes(context.venue) &&
-      Boolean(node.lines?.length)
-  );
-
-  const activeVenueSnippet = venueSnippet;
-
   const exportData = useMemo<BriefExportData>(
     () => ({
       meta: {
         identity: params.identity,
         audience: params.audience,
-        venue: params.venue,
         level: params.level,
         motivation: params.motivation,
         motivationSecondary: params.motivationSecondary,
@@ -629,7 +607,6 @@ function App() {
       screeningNode,
       policyAlignment,
       templates: templateSnippets,
-      venueSnippet: activeVenueSnippet,
       selectedOnePagers,
       sources: sourceNodes,
       sourceLookup,
@@ -645,13 +622,11 @@ function App() {
       screeningNode,
       policyAlignment,
       templateSnippets,
-      activeVenueSnippet,
       selectedOnePagers,
       sourceNodes,
       sourceLookup,
       params.identity,
       params.audience,
-      params.venue,
       params.level,
       params.motivation,
       params.motivationSecondary,
@@ -819,7 +794,6 @@ function App() {
     trackEvent('params_changed', {
       identity: next.identity,
       audience: next.audience,
-      venue: next.venue,
       source: 'custom_builder',
     });
   };
