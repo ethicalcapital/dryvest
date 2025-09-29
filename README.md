@@ -180,6 +180,28 @@ curl -X POST https://dryvest.ethicic.com/api/autorag \
 
 This uses the `AI` binding configured in `wrangler.toml` (`env.AI.autorag('autumn-scene-316c').aiSearch`). The route accepts `GET` (with `?query=...`) or `POST` JSON payloads. Responses are returned as `{ query, answer }` straight from the AutoRAG API.
 
+To audit or enrich the corpus you can hit the backing R2 bucket (bound as `DRYVEST_R2`) through the same worker:
+
+```bash
+# list the first 50 objects
+curl 'https://dryvest.ethicic.com/api/autorag/bucket?limit=50'
+
+# fetch a specific object (returns the stored raw text/HTML)
+curl 'https://dryvest.ethicic.com/api/autorag/bucket?key=<object-key>'
+```
+
+Once you have the raw content, convert it to clean markdown using Cloudflare Workers AI’s markdown conversion model:
+
+```js
+const result = await env.AI.fetch('cf/markdown-conversion', {
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ textContent: rawDocument, includeMetadata: true })
+});
+const { markdown } = await result.json();
+```
+
+Enriching each document with front matter (title, source URL, recommended use, tone) before re-ingesting makes it easier for AutoRAG and collaborating agents to surface the “house view” confidently.
+
 ---
 
 ## Cloudflare D1 Notes (Production App)
