@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { DOCS, FACTS } from "../data.js";
@@ -42,6 +42,13 @@ export default function Library({ initialTab="docs" }) {
   const [selected, setSelected] = useState([]); // for docs & facts multi-select
   const [tagFilter, setTagFilter] = useState([]);
   const [previewDoc, setPreviewDoc] = useState(null);
+  const [uploadFiles, setUploadFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [uploadMessage, setUploadMessage] = useState(null);
+  const [convertCursor, setConvertCursor] = useState(null);
+  const [convertStatus, setConvertStatus] = useState(null);
+  const [converting, setConverting] = useState(false);
+  const fileInputRef = useRef(null);
 
   const docsTags = useMemo(() => Array.from(new Set(DOCS.flatMap(d => d.tags))).sort(), []);
   const factTags = useMemo(() => Array.from(new Set(FACTS.flatMap(f => f.tags))).sort(), []);
@@ -91,6 +98,73 @@ export default function Library({ initialTab="docs" }) {
 
   const tags = tab==="docs" ? docsTags : factTags;
 
+  const onFileChange = (event) => {
+    const files = Array.from(event.target.files ?? []);
+    setUploadFiles(files);
+    setUploadMessage(null);
+  };
+
+  const handleUpload = async () => {
+    if (!uploadFiles.length) {
+      setUploadMessage({ kind: "warning", text: "Choose one or more files first." });
+      return;
+    }
+    setUploading(true);
+    setUploadMessage(null);
+    try {
+      const form = new FormData();
+      uploadFiles.forEach((file) => form.append('files', file));
+      const response = await fetch('/api/autorag/upload', {
+        method: 'POST',
+        body: form,
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result?.error || 'Upload failed');
+      }
+      const count = Array.isArray(result?.uploaded) ? result.uploaded.length : 0;
+      setUploadMessage({
+        kind: 'success',
+        text: count
+          ? `Uploaded ${count} file${count === 1 ? '' : 's'} to the research corpus.`
+          : 'Upload succeeded.',
+      });
+      setUploadFiles([]);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error) {
+      setUploadMessage({ kind: 'warning', text: error instanceof Error ? error.message : 'Upload failed.' });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleConvert = async () => {
+    setConverting(true);
+    setConvertStatus(null);
+    try {
+      const payload = convertCursor ? { limit: 20, cursor: convertCursor } : { limit: 20 };
+      const response = await fetch('/api/autorag/convert', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result?.error || 'Conversion request failed');
+      }
+      setConvertStatus(result);
+      setConvertCursor(result?.nextCursor ?? null);
+    } catch (error) {
+      setConvertStatus({ error: error instanceof Error ? error.message : 'Conversion failed.' });
+    } finally {
+      setConverting(false);
+    }
+  };
+
   return (
     <>
     <div className="card">
@@ -109,6 +183,42 @@ export default function Library({ initialTab="docs" }) {
           selected={tagFilter}
           onToggle={(t)=> setTagFilter(prev => prev.includes(t)? prev.filter(x=>x!==t) : [...prev,t])}
         />
+      </div>
+
+      <div className="section upload-panel">
+        <h2 style={{marginBottom:6}}>Upload new research</h2>
+        <p className="helper">Drop PDFs or DOCX files to add them to the AutoRAG corpus. After uploading, run the conversion to produce cleaned markdown.</p>
+        <div className="upload-controls">
+          <input ref={fileInputRef} type="file" multiple onChange={onFileChange} aria-label="Choose research files" />
+          <div className="upload-actions">
+            <button className="btn primary" onClick={handleUpload} disabled={uploading}>
+              {uploading ? 'Uploading…' : uploadFiles.length ? `Upload ${uploadFiles.length} file${uploadFiles.length === 1 ? '' : 's'}` : 'Upload files'}
+            </button>
+            <button className="btn secondary" onClick={handleConvert} disabled={converting}>
+              {converting ? 'Converting…' : 'Convert to markdown'}
+            </button>
+          </div>
+        </div>
+        <div className="meta" aria-live="polite">
+          {uploadMessage && (
+            <div className={uploadMessage.kind === 'success' ? 'status success' : 'status warning'}>
+              {uploadMessage.text}
+            </div>
+          )}
+          {convertStatus && (
+            <div className={convertStatus.error ? 'status warning' : 'status info'}>
+              {convertStatus.error
+                ? convertStatus.error
+                : `Processed ${convertStatus.processed ?? 0} file${(convertStatus.processed ?? 0) === 1 ? '' : 's'}.`}
+              {convertStatus?.nextCursor && !convertStatus.error && (
+                <span> Next cursor available—run convert again to continue.</span>
+              )}
+              {!convertStatus?.nextCursor && !convertStatus?.error && (
+                <span> No further cursor returned.</span>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {tab==="docs" ? (

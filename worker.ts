@@ -466,6 +466,89 @@ const routes: Route[] = [
       }),
   },
   {
+    pattern: /^\/api\/autorag\/upload$/,
+    methods: ['POST'],
+    handler: async ({ request, env }) => {
+      const bucket = (env as Record<string, unknown>).DRYVEST_R2 as R2Bucket | undefined;
+      if (!bucket) {
+        return new Response(
+          JSON.stringify({ error: 'R2 binding DRYVEST_R2 not configured.' }),
+          {
+            status: 500,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+
+      const contentType = request.headers.get('content-type') ?? '';
+      if (!contentType.includes('multipart/form-data')) {
+        return new Response(
+          JSON.stringify({ error: 'Upload must be multipart/form-data with one or more files.' }),
+          {
+            status: 400,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+
+      const form = await request.formData();
+      const entries = form.getAll('files');
+      const uploads: Array<{ name: string; key: string; size: number }> = [];
+
+      if (!entries.length) {
+        return new Response(
+          JSON.stringify({ error: 'No files provided.' }),
+          {
+            status: 400,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+
+      for (const entry of entries) {
+        if (!(entry instanceof File)) {
+          continue;
+        }
+
+        const safeName = entry.name
+          ? entry.name.replace(/[^a-zA-Z0-9._-]/g, '_')
+          : 'upload';
+        const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const key = `originals/${stamp}-${safeName}`;
+
+        const arrayBuffer = await entry.arrayBuffer();
+        await bucket.put(key, arrayBuffer, {
+          httpMetadata: {
+            contentType: entry.type || 'application/octet-stream',
+          },
+        });
+
+        uploads.push({ name: entry.name, key, size: entry.size });
+      }
+
+      return new Response(
+        JSON.stringify({ uploaded: uploads }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        }
+      );
+    },
+  },
+  {
+    pattern: /^\/api\/autorag\/upload$/,
+    methods: ['OPTIONS'],
+    handler: async () =>
+      new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }),
+  },
+  {
     pattern: /^\/api\/autorag\/convert$/,
     methods: ['POST'],
     handler: async ({ request, env }) => {
