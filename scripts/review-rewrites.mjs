@@ -176,7 +176,7 @@ async function main() {
       continue;
     }
 
-    if (cmd === 'a') {
+    if (cmd === 'a' || cmd === 'y') {
       entry.approved_text = entry.plain_draft || entry.approved_text;
       index = Math.min(index + 1, rows.length - 1);
       continue;

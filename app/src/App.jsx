@@ -22,6 +22,7 @@ function TopNav({ onOpenSearch }) {
         <nav className="mainnav" aria-label="Primary">
           <NavLink to="/brief" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Build Brief</NavLink>
           <NavLink to="/explore" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Explore</NavLink>
+          <NavLink to="/facts" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Facts & Citations</NavLink>
           <NavLink to="/library" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Library</NavLink>
         </nav>
         <div className="cta-area">

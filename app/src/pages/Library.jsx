@@ -503,20 +503,31 @@ export default function Library({ initialTab="facts" }) {
               {factsToRender.map(f => (
                 <div key={f.id} className="list-row fact-row" id={`fact-${f.id}`}>
                   <div className="fact-content">
-                    <div><strong>{f.claim}</strong></div>
-                    <div className="meta" style={{marginTop:4}}>{f.support}</div>
-                    <div className="fact-citations">
-                      {f.citations.map((c,i) => (
-                        <div key={i} className="meta">
-                          • <a href={c.url} target="_blank" rel="noopener noreferrer">{c.title}</a>
-                        </div>
-                      ))}
+                    <div style={{display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:12, marginBottom:8}}>
+                      <div style={{fontSize:"15px", lineHeight:"1.4"}}><strong>{f.claim}</strong></div>
+                      <code style={{fontSize:"9px", color:"#999", backgroundColor:"#f8f8f8", padding:"1px 4px", borderRadius:"2px", flexShrink:0}}>{f.id}</code>
                     </div>
-                    {f.tags?.length ? (
-                      <div style={{marginTop:6, display:"flex", gap:6, flexWrap:"wrap"}}>
-                        {f.tags.map(t => <span key={t} className="tag">{t}</span>)}
-                      </div>
-                    ) : null}
+                    <div style={{fontSize:"13px", color:"#666", lineHeight:"1.4", marginBottom:8}}>{f.support}</div>
+                    <div style={{display:"flex", alignItems:"center", gap:8, flexWrap:"wrap", fontSize:"11px", color:"#888"}}>
+                      {f.tags?.length ? (
+                        <>
+                          {f.tags.map(t => <span key={t} className="tag" style={{fontSize:"10px"}}>{t}</span>)}
+                          <span style={{color:"#ddd"}}>•</span>
+                        </>
+                      ) : null}
+                      <details style={{cursor:"pointer"}}>
+                        <summary style={{display:"inline", listStyle:"none"}}>
+                          📚 {f.citations.length} source{f.citations.length !== 1 ? 's' : ''}
+                        </summary>
+                        <div style={{marginTop:6, paddingLeft:12, borderLeft:"2px solid #eee", fontSize:"11px"}}>
+                          {f.citations.map((c,i) => (
+                            <div key={i} style={{marginBottom:3}}>
+                              • <a href={c.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#666"}}>{c.title}</a>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    </div>
                     <ClarifyButton
                       mode="fact"
                       text={`Claim: ${f.claim}\nSupport: ${f.support}\n${f.citations.slice(0, 3).map((c, idx) => `Source ${idx + 1}: ${c.title}${c.url ? ` (${c.url})` : ''}`).join('\n')}`}
