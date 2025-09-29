@@ -38,3 +38,6 @@ bindings = [
 [[migrations]]
 tag = "2025-09-28-analytics"
 new_classes = ["DryvestAnalyticsDO"]
+
+[browser]
+binding = "BROWSER"

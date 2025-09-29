@@ -38,11 +38,18 @@ body {
   display: flex; align-items: center; gap: 16px; justify-content: space-between;
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
+.brand-labels { display: flex; flex-direction: column; gap: 2px; }
 .badge {
   background: linear-gradient(90deg, var(--brand), var(--brand-2));
   color: #10131a; font-weight: 800; font-size: 12px; padding: 4px 8px; border-radius: 999px;
 }
 .brand-name { font-weight: 700; letter-spacing: 0.4px; opacity: .9; }
+.brand-tagline {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
 .mainnav { display: flex; gap: 10px; }
 .navlink {
@@ -116,6 +123,12 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 4px 8px; border-radius: 999px; font-size: 12px; color: #c8d3eb;
   background: #1a2240; border: 1px solid #263567;
+  cursor: pointer;
+}
+.tag.selected {
+  border-color: var(--brand);
+  background: rgba(20, 184, 166, 0.16);
+  color: #9df5ea;
 }
 
 .footer {
@@ -371,6 +384,202 @@ label.checkbox { display: inline-flex; align-items: center; gap: 8px; cursor: po
   margin-top: 10px;
   display: grid;
   gap: 6px;
+}
+
+.methodology-callout {
+  margin-top: 16px;
+  border: 1px solid #2a3764;
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(16, 26, 50, 0.9);
+  display: grid;
+  gap: 10px;
+}
+
+.methodology-callout ul {
+  margin: 0 0 0 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.methodology-callout code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(15, 23, 43, 0.7);
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid #243155;
+}
+
+.infinite-sentinel {
+  width: 100%;
+  height: 1px;
+}
+
+.load-more {
+  margin-top: 12px;
+}
+
+.list-end {
+  margin-top: 12px;
+}
+
+.fact-row {
+  grid-template-columns: 1fr auto;
+  align-items: flex-start;
+}
+
+.fact-content {
+  display: grid;
+  gap: 6px;
+}
+
+.fact-citations {
+  margin-top: 6px;
+  display: grid;
+  gap: 4px;
+}
+
+.fact-citations a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.fact-citations a:hover {
+  color: var(--brand);
+}
+
+.clarify-block {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.clarify-result {
+  border: 1px solid #1f2a4a;
+  background: rgba(15, 23, 43, 0.85);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.highlight-focus {
+  animation: focusPulse 2s ease-out;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.5);
+}
+
+@keyframes focusPulse {
+  0% {
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0);
+  }
+}
+
+/* ===== Research backlog ===== */
+.wanted-list {
+  display: grid;
+  gap: 18px;
+}
+
+.wanted-header {
+  display: grid;
+  gap: 4px;
+}
+
+.wanted-grid {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 900px) {
+  .wanted-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.wanted-card {
+  border: 1px solid #1b2647;
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(15, 23, 43, 0.85);
+  display: grid;
+  gap: 12px;
+}
+
+.wanted-card h3 {
+  margin: 0;
+}
+
+.wanted-card-header {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.wanted-section ul {
+  margin: 8px 0 0 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.wanted-section .tag-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.wanted-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pill-open {
+  background: rgba(34, 197, 94, 0.14);
+  color: #34d399;
+}
+
+.pill-progress {
+  background: rgba(250, 204, 21, 0.14);
+  color: #facc15;
+}
+
+.pill-done {
+  background: rgba(125, 211, 252, 0.14);
+  color: #7dd3fc;
+}
+
+.pill-priority {
+  background: rgba(120, 113, 198, 0.14);
+  color: #c4b5fd;
+}
+
+.pill-priority.high {
+  background: rgba(248, 113, 113, 0.18);
+  color: #f87171;
+}
+
+.pill-priority.medium {
+  background: rgba(250, 204, 21, 0.18);
+  color: #facc15;
+}
+
+.pill-priority.low {
+  background: rgba(34, 197, 94, 0.18);
+  color: #34d399;
 }
 
 /* ===== NEW: Output annotations ===== */

@@ -219,6 +219,8 @@ Fields you can override on the request payload:
 
 Every manifest row includes the source key, SHA-256 checksum, markdown byte length, and any AI issues. Enrich the resulting markdown with front matter (title, source URL, who should use it, tone) before re-ingesting so AutoRAG and collaborating agents can surface the “house view” confidently.
 
+> ⚠️ **Browser binding required.** The upload/conversion workflow now archives suspect source links through Cloudflare’s Browser Rendering API. Make sure the Worker deployment defines a `BROWSER` binding in `wrangler.toml`. When running inside Pages (which doesn’t expose Browser), the archival step is skipped gracefully, but the heuristic warning will still show in the UI.
+
 Each generated markdown file now starts with YAML front matter:
 
 ```yaml
@@ -313,6 +315,9 @@ The production worker exposes `GET /api/dataset?version=<id>` returning `{ versi
 - Create a dedicated node set for “institutional readiness questions” prompting stakeholders to define thresholds, escalation, and sign-off requirements.
 - Add a “Degrees of Freedom Audit” checklist/model doc to map the operational latitude of target investment teams (statutory limits, mandate constraints, approvals).
 - Integrate the QA scorer (deterministic + LLM critique) into the build pipeline and expose summaries in the UI.
+- Near-term product lifts (pre next major rev): add a brief handoff guide (“you generated it, now what?”), tiered ask framing, fiduciary-risk translation snippets, and visible dataset timestamps so activists have immediate campaign scaffolding out of the box.
+- Add an on-demand AI “clarify this” button so folks can get translation/plain-English help when output feels too technical.
+- Next-version candidate: in-app community annotations/corrections (commenting/flagging with moderation) so organizers can keep evidence fresh without leaving the tool.
 
 ---
 

@@ -21,6 +21,11 @@ interface Fetcher {
   fetch(request: Request): Promise<Response>;
 }
 
+interface KVNamespace {
+  get(key: string): Promise<string | null>;
+  put(key: string, value: string): Promise<void>;
+}
+
 export { DryvestAnalyticsDO };
 
 type PagesFunctionHandler<Env = unknown> = (context: {
@@ -369,6 +374,22 @@ If uncertain about any category, return an empty array.`;
   };
 };
 
+const detectSecondaryMemo = (markdown: string) => {
+  const hasSourcesHeader = /##\s+Sources/i.test(markdown);
+  const bulletMatches = markdown.match(/(?:^|\n)[-*]\s+\[[^\]]+\]\([^\)]+\)/g);
+  const bulletCount = bulletMatches ? bulletMatches.length : 0;
+  const wordCount = markdown.trim().split(/\s+/).length;
+  if (hasSourcesHeader && bulletCount >= 20 && wordCount >= 1500) {
+    return {
+      suspected: true,
+      reason: `Detected ${bulletCount} sources and ${wordCount} words under a Sources section—likely a secondary synthesis.`,
+      sourceLines: (markdown.split(/\n##/)[0] ?? markdown).split('\n')
+        .filter((line) => line.startsWith('-') || line.startsWith('*')),
+    };
+  }
+  return { suspected: false, reason: '', sourceLines: [] };
+};
+
 const routes: Route[] = [
   {
     pattern: /^\/api\/events(?:\/.*)?$/,
@@ -465,12 +486,13 @@ const routes: Route[] = [
 
       const url = new URL(request.url);
       const key = url.searchParams.get('key');
+      const prefix = url.searchParams.get('prefix') || undefined;
       try {
         if (!key) {
           const cursor = url.searchParams.get('cursor') || undefined;
           const limitParam = url.searchParams.get('limit');
           const limit = limitParam ? Number(limitParam) : undefined;
-          const listing = await r2.list({ cursor, limit });
+          const listing = await r2.list({ cursor, limit, prefix });
           return new Response(
             JSON.stringify({
               objects: listing.objects.map((obj) => ({
@@ -536,6 +558,8 @@ const routes: Route[] = [
     handler: async ({ request, env }) => {
       const bucket = (env as Record<string, unknown>).DRYVEST_R2 as R2Bucket | undefined;
       const ai = (env as Record<string, any>).AI;
+      const kv = (env as Record<string, any>).HOOKS as KVNamespace | undefined;
+      const browser = (env as Record<string, any>).BROWSER as any | undefined;
       if (!bucket) {
         return new Response(
           JSON.stringify({ error: 'R2 binding DRYVEST_R2 not configured.' }),
@@ -594,6 +618,24 @@ const routes: Route[] = [
         const key = `originals/${stamp}-${safeName}`;
 
         const arrayBuffer = await entry.arrayBuffer();
+        const sha256 = await sha256Hex(arrayBuffer);
+
+        if (kv) {
+          const kvKey = `autorag:hash:${sha256}`;
+          const existingKey = await kv.get(kvKey);
+          if (existingKey) {
+            uploads.push({
+              name: entry.name,
+              key,
+              size: entry.size,
+              duplicate: true,
+              existingKey,
+            });
+            continue;
+          }
+          await kv.put(kvKey, key);
+        }
+
         await bucket.put(key, arrayBuffer, {
           httpMetadata: {
             contentType: entry.type || 'application/octet-stream',
@@ -601,11 +643,50 @@ const routes: Route[] = [
         });
 
         let alignment;
+        let suspectedSecondary = false;
+        let secondaryReason = '';
+        let archivedSources: string[] | undefined;
+
         if (ai) {
           const conversion = await runMarkdownConversion(ai, arrayBuffer, entry.name || key);
           const markdown = conversion.markdown ? cleanMarkdown(conversion.markdown) : '';
           if (markdown) {
             alignment = await runAlignmentAnalysis(ai, markdown);
+            const secondaryCheck = detectSecondaryMemo(markdown);
+            if (secondaryCheck.suspected) {
+              suspectedSecondary = true;
+              secondaryReason = secondaryCheck.reason;
+              if (browser && typeof browser.newContext === 'function' && secondaryCheck.sourceLines.length) {
+                archivedSources = [];
+                const urls: string[] = [];
+                secondaryCheck.sourceLines.forEach((line) => {
+                  const match = line.match(/\((https?:[^)]+)\)/);
+                  if (match && urls.length < 5) {
+                    urls.push(match[1]);
+                  }
+                });
+                if (urls.length) {
+                  const context = await browser.newContext();
+                  for (const [idx, urlValue] of urls.entries()) {
+                    try {
+                      const page = await context.newPage();
+                      await page.goto(urlValue, { waitUntil: 'networkidle' });
+                      const html = await page.content();
+                      const referenceKey = `references/${stamp}-${safeName}-${idx}.html`;
+                      await bucket.put(referenceKey, html, {
+                        httpMetadata: { contentType: 'text/html; charset=utf-8' },
+                      });
+                      archivedSources.push(referenceKey);
+                    } catch (error) {
+                      // ignore individual fetch errors
+                    }
+                  }
+                  await context.close();
+                } else if (!browser || typeof browser.newContext !== 'function') {
+                  secondaryReason += ' (Browser archival unavailable in this environment.)';
+                }
+              }
+            }
           } else {
             alignment = {
               summary: '',
@@ -617,7 +698,15 @@ const routes: Route[] = [
           }
         }
 
-        uploads.push({ name: entry.name, key, size: entry.size, alignment });
+        uploads.push({
+          name: entry.name,
+          key,
+          size: entry.size,
+          alignment,
+          suspectedSecondary,
+          secondaryReason,
+          archivedSources,
+        });
       }
 
       return new Response(
@@ -795,6 +884,115 @@ const routes: Route[] = [
   },
   {
     pattern: /^\/api\/autorag\/convert$/,
+    methods: ['OPTIONS'],
+    handler: async () =>
+      new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }),
+  },
+  {
+    pattern: /^\/api\/clarify$/,
+    methods: ['POST'],
+    handler: async ({ request, env }) => {
+      const ai = (env as Record<string, any>).AI;
+      if (!ai) {
+        return new Response(
+          JSON.stringify({ error: 'AI binding not configured.' }),
+          {
+            status: 503,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+
+      let payload: { text?: string; mode?: string };
+      try {
+        payload = (await request.json()) as { text?: string; mode?: string };
+      } catch (error) {
+        return new Response(JSON.stringify({ error: 'Invalid JSON payload.' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+
+      const text = (payload.text ?? '').trim();
+      if (!text) {
+        return new Response(JSON.stringify({ error: 'Text is required.' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+      if (text.length > 4000) {
+        return new Response(JSON.stringify({ error: 'Text too long; limit to 4,000 characters.' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      }
+
+      const mode = typeof payload.mode === 'string' ? payload.mode : 'generic';
+      const purpose = mode === 'fact'
+        ? 'Summarize the claim and support in 2-3 plain language sentences and suggest one action organisers can take.'
+        : mode === 'doc'
+          ? 'Summarize the document into 3 actionable next steps for a divestment campaign.'
+          : 'Clarify this excerpt in accessible language and surface one recommended action.';
+
+      const prompt = `You are helping divestment campaigners understand investment research.\n${purpose}\n\nContent:\n${text}`;
+
+      try {
+        const response = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+          messages: [
+            { role: 'system', content: 'You translate investment research into clear activist guidance.' },
+            { role: 'user', content: prompt },
+          ],
+          max_output_tokens: 400,
+        });
+
+        let summary = '';
+        if (typeof response === 'string') {
+          summary = response;
+        } else if (response && typeof response === 'object') {
+          if ('response' in response && typeof (response as any).response === 'string') {
+            summary = (response as any).response;
+          } else if ('result' in response && typeof (response as any).result === 'string') {
+            summary = (response as any).result;
+          } else if ('output_text' in response && typeof (response as any).output_text === 'string') {
+            summary = (response as any).output_text;
+          } else if ('outputs' in response && Array.isArray((response as any).outputs)) {
+            const outputs = (response as any).outputs;
+            const segments = outputs
+              .flatMap((o: any) => (o?.content ?? []) as any[])
+              .map((segment: any) => segment?.text ?? '')
+              .filter(Boolean);
+            summary = segments.join('');
+          }
+        }
+
+        if (!summary) {
+          summary = 'No summary available.';
+        }
+
+        return new Response(JSON.stringify({ summary }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        });
+      } catch (error) {
+        return new Response(
+          JSON.stringify({ error: (error as Error).message ?? 'Clarify failed.' }),
+          {
+            status: 500,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+    },
+  },
+  {
+    pattern: /^\/api\/clarify$/,
     methods: ['OPTIONS'],
     handler: async () =>
       new Response(null, {

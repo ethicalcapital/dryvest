@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getConsent, setConsent } from "../utils/consent.js";
+import { track } from "../utils/analytics.js";
 
 export default function ConsentGate({ onClose }) {
   const [stage, setStage] = useState(1);
@@ -13,11 +14,39 @@ export default function ConsentGate({ onClose }) {
   const next = () => setStage((s) => Math.min(3, s + 1));
   const back = () => setStage((s) => Math.max(1, s - 1));
 
-  const finish = () => {
+  const finish = async () => {
     const final = { ...state, accepted: true };
     setConsent(final);
+
+    const email = typeof final.email === 'string' ? final.email.trim() : '';
+
+    const payload = {
+      analyticsConsent: Boolean(final.analytics),
+      mailingOptIn: Boolean(final.emailOptIn && email),
+      email: final.emailOptIn && email ? email : undefined,
+      meta: {
+        source: 'consent_gate',
+      },
+    };
+
+    try {
+      await fetch('/api/preferences', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      track('preferences_submit', {
+        analytics: payload.analyticsConsent,
+        mailingOptIn: payload.mailingOptIn,
+      });
+    } catch (error) {
+      console.warn('[preferences] failed to persist', error);
+    }
+
     onClose?.();
   };
+
+  const emailValid = !state.emailOptIn || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim());
 
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-label="Consent">
@@ -39,7 +68,7 @@ export default function ConsentGate({ onClose }) {
             </label>
             <div className="row" style={{marginTop:12}}>
               <button className="btn secondary" onClick={next}>Continue</button>
-              <button className="btn ghost" onClick={finish}>Skip &amp; start</button>
+              <button className="btn ghost" onClick={() => { void finish(); }}>Skip &amp; start</button>
             </div>
           </>
         )}
@@ -87,7 +116,13 @@ export default function ConsentGate({ onClose }) {
             </div>
             <div className="row" style={{marginTop:12}}>
               <button className="btn secondary" onClick={back}>Back</button>
-              <button className="btn primary" onClick={finish}>Start</button>
+              <button
+                className="btn primary"
+                onClick={emailValid ? () => { void finish(); } : undefined}
+                disabled={!emailValid}
+              >
+                {emailValid ? 'Start' : 'Enter a valid email or uncheck subscribe'}
+              </button>
             </div>
           </>
         )}

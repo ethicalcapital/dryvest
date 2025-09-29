@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
@@ -93,6 +94,7 @@ export default function FactCheck({ initialType = "points" }) {
   const [index, setIndex] = useState(0);
   const [activeTrailheadId, setActiveTrailheadId] = useState(null);
   const [pendingTargetId, setPendingTargetId] = useState(null);
+  const location = useLocation();
 
   const lookups = useMemo(
     () => ({
@@ -124,6 +126,29 @@ export default function FactCheck({ initialType = "points" }) {
     }
     setPendingTargetId(null);
   }, [entries, pendingTargetId]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const typeParam = params.get('type');
+    const idParam = params.get('id');
+    const trailParam = params.get('trail');
+
+    if (typeParam && TYPE_OPTIONS.some((opt) => opt.id === typeParam)) {
+      setType(typeParam);
+    }
+
+    if (trailParam) {
+      const trail = TRAILHEADS.find((t) => t.id === trailParam);
+      if (trail) {
+        applyTrailhead(trail);
+        return;
+      }
+    }
+
+    if (idParam) {
+      setPendingTargetId(idParam);
+    }
+  }, [location.search]);
 
   const handleTypeChange = (next) => {
     setType(next);
