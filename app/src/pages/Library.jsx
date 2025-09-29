@@ -45,6 +45,7 @@ export default function Library({ initialTab="docs" }) {
   const [uploadFiles, setUploadFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [uploadMessage, setUploadMessage] = useState(null);
+  const [uploadResults, setUploadResults] = useState([]);
   const [convertCursor, setConvertCursor] = useState(null);
   const [convertStatus, setConvertStatus] = useState(null);
   const [converting, setConverting] = useState(false);
@@ -129,6 +130,11 @@ export default function Library({ initialTab="docs" }) {
           ? `Uploaded ${count} file${count === 1 ? '' : 's'} to the research corpus.`
           : 'Upload succeeded.',
       });
+      if (Array.isArray(result?.uploaded)) {
+        setUploadResults(result.uploaded);
+      } else {
+        setUploadResults([]);
+      }
       setUploadFiles([]);
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
@@ -219,6 +225,39 @@ export default function Library({ initialTab="docs" }) {
             </div>
           )}
         </div>
+        {uploadResults.length > 0 && (
+          <div className="upload-results">
+            <h3>Draft alignment</h3>
+            <div className="meta">We won’t add this to the dataset until the next release, but here’s how it might map today.</div>
+            <div className="list" style={{ marginTop: 12 }}>
+              {uploadResults.map((item, idx) => (
+                <div key={idx} className="card" style={{ background: '#101a32', border: '1px solid #1b294d' }}>
+                  <strong>{item.name}</strong>
+                  <div className="meta">Stored at: <span className="kbd">{item.key}</span></div>
+                  {item.alignment ? (
+                    <div className="upload-alignment">
+                      {item.alignment.summary && <p>{item.alignment.summary}</p>}
+                      <div className="meta">
+                        {item.alignment.identities?.length ? (
+                          <span>Identities: {item.alignment.identities.join(', ')}</span>
+                        ) : null}
+                        {item.alignment.audiences?.length ? (
+                          <span> · Audiences: {item.alignment.audiences.join(', ')}</span>
+                        ) : null}
+                        {item.alignment.motivations?.length ? (
+                          <span> · Drivers: {item.alignment.motivations.join(', ')}</span>
+                        ) : null}
+                      </div>
+                      <p className="meta" style={{ marginTop: 6 }}>{item.alignment.notes}</p>
+                    </div>
+                  ) : (
+                    <p className="meta">AI alignment unavailable for this upload.</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {tab==="docs" ? (

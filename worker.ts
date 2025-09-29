@@ -304,6 +304,71 @@ const runStructuredSummary = async (ai: any, markdown: string) => {
   }
 };
 
+const runAlignmentAnalysis = async (ai: any, markdown: string) => {
+  const schema = {
+    type: 'object',
+    properties: {
+      summary: { type: 'string' },
+      identities: { type: 'array', items: { type: 'string' } },
+      audiences: { type: 'array', items: { type: 'string' } },
+      motivations: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+    required: ['summary', 'notes'],
+  };
+
+  const guidance = `You help align research papers with Dryvest's dataset.
+Return JSON with:
+- summary: 2-3 sentence neutral synopsis (max 120 words).
+- identities: optional array of Dryvest identity tags (corporate_pension, public_pension, endowment, foundation, insurance, swf, government, central_bank, individual).
+- audiences: optional array of Dryvest audience tags (boards, fiduciary, consultants, staff, stakeholders, regulated, colleagues, family_friends, individuals).
+- motivations: optional array of campaign drivers (regulatory_drivers, internal_leadership, external_stakeholders).
+- notes: short advisory on how the paper supports our institutional change workflow (guardrails, policy draft, operational plan, analytics, stakeholder pressure, etc.).
+If uncertain about any category, return an empty array.`;
+
+  try {
+    const response = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+      messages: [
+        { role: 'system', content: guidance },
+        { role: 'user', content: `Document:\n---\n${markdown}\n---` },
+      ],
+      max_output_tokens: 1024,
+      response_format: { type: 'json_schema', json_schema: schema },
+    });
+
+    if (response && typeof response === 'object') {
+      if ('response' in response && typeof (response as any).response === 'string') {
+        return JSON.parse((response as any).response);
+      }
+      if ('result' in response && typeof (response as any).result === 'string') {
+        return JSON.parse((response as any).result);
+      }
+      if ('output_text' in response && typeof (response as any).output_text === 'string') {
+        return JSON.parse((response as any).output_text);
+      }
+      if ('json' in response && typeof (response as any).json === 'object') {
+        return (response as any).json;
+      }
+    }
+  } catch (error) {
+    return {
+      summary: '',
+      identities: [],
+      audiences: [],
+      motivations: [],
+      notes: (error as Error).message ?? 'Alignment analysis failed.',
+    };
+  }
+
+  return {
+    summary: '',
+    identities: [],
+    audiences: [],
+    motivations: [],
+    notes: 'No AI response.',
+  };
+};
+
 const routes: Route[] = [
   {
     pattern: /^\/api\/events(?:\/.*)?$/,
@@ -470,6 +535,7 @@ const routes: Route[] = [
     methods: ['POST'],
     handler: async ({ request, env }) => {
       const bucket = (env as Record<string, unknown>).DRYVEST_R2 as R2Bucket | undefined;
+      const ai = (env as Record<string, any>).AI;
       if (!bucket) {
         return new Response(
           JSON.stringify({ error: 'R2 binding DRYVEST_R2 not configured.' }),
@@ -493,7 +559,18 @@ const routes: Route[] = [
 
       const form = await request.formData();
       const entries = form.getAll('files');
-      const uploads: Array<{ name: string; key: string; size: number }> = [];
+      const uploads: Array<{
+        name: string;
+        key: string;
+        size: number;
+        alignment?: {
+          summary: string;
+          identities: string[];
+          audiences: string[];
+          motivations: string[];
+          notes: string;
+        };
+      }> = [];
 
       if (!entries.length) {
         return new Response(
@@ -523,7 +600,24 @@ const routes: Route[] = [
           },
         });
 
-        uploads.push({ name: entry.name, key, size: entry.size });
+        let alignment;
+        if (ai) {
+          const conversion = await runMarkdownConversion(ai, arrayBuffer, entry.name || key);
+          const markdown = conversion.markdown ? cleanMarkdown(conversion.markdown) : '';
+          if (markdown) {
+            alignment = await runAlignmentAnalysis(ai, markdown);
+          } else {
+            alignment = {
+              summary: '',
+              identities: [],
+              audiences: [],
+              motivations: [],
+              notes: conversion.error ?? 'No markdown available for analysis.',
+            };
+          }
+        }
+
+        uploads.push({ name: entry.name, key, size: entry.size, alignment });
       }
 
       return new Response(
