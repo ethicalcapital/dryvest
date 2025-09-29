@@ -21,6 +21,10 @@ preview_id = "caf4e19f1388423fade84340c27a929c"
 [ai]
 binding = "AI"
 
+[[r2_buckets]]
+binding = "DRYVEST_R2"
+bucket_name = "dryvest"
+
 [[d1_databases]]
 binding = "DRYVEST_DB"
 database_name = "dryvest"
