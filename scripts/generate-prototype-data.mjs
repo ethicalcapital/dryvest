@@ -343,7 +343,7 @@ async function main() {
     `export const FACTS = ${JSON.stringify(facts, null, 2)};\n`
   ].join('');
 
-  const outputPath = path.join(repoRoot, 'prototypes', 'streamlined-ui', 'dryvest-ui', 'src', 'data.js');
+  const outputPath = path.join(repoRoot, 'app', 'src', 'data.js');
   await fs.writeFile(outputPath, content, 'utf8');
   console.log(`Wrote ${docs.length} docs and ${facts.length} facts to ${outputPath}`);
 }

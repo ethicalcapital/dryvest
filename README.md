@@ -10,68 +10,51 @@ Dryvest is Ethical Capital’s educational briefing platform. The project turns 
 
 ## Repository at a Glance
 
-### 1. Scripts & Tooling
+### 1. Application – `app/`
 
-- `scripts/generate-prototype-data.mjs` – pulls the latest dataset snapshot (`app/public/data/<version>/`), strips markdown front matter, and emits the consolidated `src/data.js` bundle used by the prototype UI (docs, key points, facts, next steps, trailheads).
+The streamlined Vite + React application that now powers production. It consumes the same dataset as the classic build but renders a faster, audience-first workflow.
+
+- `src/App.jsx` – top-level routing (`/brief`, `/explore`, `/library`, `/output`).
+- `src/pages/` – route-specific views (Wizard, Output, Landing, Fact Check, Library).
+- `src/components/` – reusable controls (consent gate, bottom stepper, cards).
+- `src/utils/` – consent persistence, analytics stub, download helper.
+- `src/data.js` – **auto-generated** content bundle (docs, key points, next steps, facts, trailheads). Regenerate with `node scripts/generate-prototype-data.mjs`.
+- `public/data/<version>/` – canonical JSON dataset (nodes/playlists/sources/assertions/entities) served by the worker when D1 is unavailable.
+
+### 2. Legacy Archive – `legacy/app-classic/`
+
+The TypeScript/Tailwind version that previously shipped to Cloudflare Pages. It remains checked in for reference (tests, Tailwind config, PDF helpers) but is no longer deployed. Run it only if you need to study prior behavior.
+
+### 3. Scripts & Tooling
+
+- `scripts/generate-prototype-data.mjs` – pulls the latest dataset snapshot from `app/public/data/<version>/`, strips markdown front matter, and emits `app/src/data.js` (docs, key points, facts, next steps, trailheads).
 - `scripts/dataset-coverage.mjs` – quick coverage diagnostic; reports percentage of identity × audience × motivation contexts that have actionable content (key points, next steps, counters).
 - `scripts/export-dataset-csv.js` – optional CSV exporter for spreadsheet reviews (writes to `exports/`, which is gitignored).
-
-### 2. Frontend Applications
-
-#### 2.1 Legacy App – `app/`
-
-The production React/Tailwind application that ships to Cloudflare Pages. It now reads from the Cloudflare D1 database at runtime but still keeps a JSON bundle under `public/data/<version>/` for seeding and offline development.
-
-Key paths:
-- `app/src/App.tsx` – layout + mode switching (Quick, Custom, Compare, Fact Check).
-- `functions/api/` – Cloudflare Pages Functions (contact form, PDF proxy, dataset endpoint).
-- `database/` – D1 schema and seed SQL.
-
-#### 2.2 Prototype UI – `prototypes/streamlined-ui/dryvest-ui/`
-
-A Vite/React experiment that exposes the dataset more interactively. This is the environment we hand to new collaborators and GPT-style agents when we want fast iteration on flows.
-
-Structure:
-- `src/App.jsx` – top-level router (`/brief`, `/explore`, `/library`, `/output`).
-- `src/pages/` – route components:
-  - `Landing.jsx`
-  - `Wizard.jsx` (Quick Brief)
-  - `Output.jsx` (annotated brief)
-  - `Explore` deck (`FactCheck.jsx`)
-  - `Library.jsx` (documents & citations)
-- `src/components/` – consent modal, bottom stepper.
-- `src/utils/` – consent persistence, analytics stub, download helper.
-- `src/data.js` – **auto-generated** by `scripts/generate-prototype-data.mjs`. Contains:
-  - `DOCS`, `KEY_POINTS`, `NEXT_STEPS`, `FACTS`
-  - `TRAILHEADS` – curated scenario bundles (policy guardrails, conduct risk framework, divestment exposure, identity alignment)
-- `package.json`, `vite.config.js`, `styles.css` – standard Vite setup.
 
 ---
 
 ## Developer Quickstart
 
-### Prototype UI (recommended for dataset exploration)
-```bash
-# install dependencies
-cd prototypes/streamlined-ui/dryvest-ui/
-npm install
-
-# pull the current dataset snapshot and generate src/data.js
-cd ../..
-node scripts/generate-prototype-data.mjs
-
-# run the Vite dev server
-cd prototypes/streamlined-ui/dryvest-ui/
-npm run dev
-# open http://localhost:5173
-```
-
-### Production App (Cloudflare Pages)
+### Primary App (React + Vite)
 ```bash
 cd app
 npm install
-npm run dev       # local Vite dev server
-npm run build     # tsc -b && vite build
+cd ..
+node scripts/generate-prototype-data.mjs   # refresh app/src/data.js
+cd app
+npm run dev       # local Vite dev server (http://localhost:5173)
+```
+
+Optional production build:
+```bash
+npm run build
+```
+
+### Legacy App (archived)
+```bash
+cd legacy/app-classic
+npm install
+npm run dev
 ```
 
 Prerequisites: Node.js 20+, npm 10+, optional Cloudflare Wrangler CLI for D1 work.
@@ -106,7 +89,7 @@ graph TD
 
 ---
 
-## UI Route Reference (Prototype)
+## UI Route Reference
 
 ### `/brief` – Quick Brief Flow
 **Structure**
@@ -153,7 +136,7 @@ graph TD
 
 ## Consent & Analytics
 
-Before any data loads, the prototype prompts for explicit consent:
+Before any data loads, the app prompts for explicit consent:
 1. **Anonymous analytics** toggle (off by default).
 2. **Educational disclaimer** (must acknowledge to continue).
 3. **Release notes opt-in** – inline email field that POSTs to `/api/preferences` so Cloudflare KV can track request provenance.
@@ -303,6 +286,7 @@ The production worker exposes `GET /api/dataset?version=<id>` returning `{ versi
 ### 0.0.3 — 2025-09-29
 - Dropped venue-matching requirements across the React app, dataset helpers, and D1/CSV views; briefs now resolve purely on identity, audience, and motivation while venue tags remain available for future surfacing.
 - Restored the production beta banner’s release-note opt-in to a proper POST against `/api/preferences`, keeping analytics consent privacy-first while capturing email provenance in KV.
+- Promoted the streamlined React/Vite UI into `app/` and archived the TypeScript/Tailwind build under `legacy/app-classic/`.
 - Updated docs and tooling to reflect the new context model and AutoRAG markdown pipeline (front matter + manifest logging).
 
 ---
