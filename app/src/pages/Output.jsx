@@ -17,6 +17,25 @@ const ALL_ORGS = ORGANIZATIONS.map((o) => o.id);
 const ALL_DRIVERS = DRIVERS.map((d) => d.id);
 const ALL_AUDIENCES = AUDIENCES.map((a) => a.id);
 
+const DOC_PLAYBOOK = {
+  fiduciary_playbook: {
+    stage: "Set guardrails",
+    action: "Open with prudence and fiduciary duty language. Use this as the board cover memo.",
+  },
+  policy_framework: {
+    stage: "Draft the policy",
+    action: "Give trustees a motion-ready clause with override handling and reporting cadence.",
+  },
+  conduct_risk_control_framework: {
+    stage: "Operationalise the policy",
+    action: "Show staff how they will monitor exposures, log exceptions, and report uptakes.",
+  },
+  divestment_exposure_assessment: {
+    stage: "Quantify the impact",
+    action: "Arm consultants with the tracking-error workbook and variance narrative.",
+  },
+};
+
 const ORG_NOTES = {
   corp: {
     why: "ERISA framing, prudence, and reporting controls resonate with corporate pension fiduciaries.",
@@ -87,9 +106,17 @@ function pickTop(items, state, limit = 3, fallbackPool = []) {
 }
 
 function pickCentralDocs(state) {
-  const chosen = DOCS.filter((d) => state.docs.includes(d.id));
+  const requested = Array.isArray(state.docs) ? state.docs : [];
+  const chosen = DOCS.filter((d) => requested.includes(d.id));
   if (chosen.length) return chosen;
   return pickTop(DOCS, state, 3, DOCS);
+}
+
+function describeDoc(doc) {
+  return DOC_PLAYBOOK[doc.id] ?? {
+    stage: "Reference pack",
+    action: doc.summary,
+  };
 }
 
 function describeMatches(item, state) {
@@ -146,7 +173,10 @@ ${actionSteps.length
 ## Central Ask
 ${centralDocs.length
     ? centralDocs
-        .map((d) => `- ${d.title}: ${d.summary}\n  - Why now: ${describeMatches(d, state)}`)
+        .map((doc) => {
+          const meta = describeDoc(doc);
+          return `- ${meta.stage}: ${meta.action}\n  - Why now: ${describeMatches(doc, state)}`;
+        })
         .join("\n")
     : '- Add supportive model documents from the Dryvest library.'}
 
@@ -190,8 +220,9 @@ export default function Output() {
       <div className="callout">
         <h4>Context recap</h4>
         <div className="meta">
-          <strong>Org:</strong> {state.org} · <strong>Audience:</strong> {state.audiences.join(", ") || "—"} · <strong>Drivers:</strong> {state.primary || "—"}
-          {state.secondary ? `, ${state.secondary}` : ""}
+          <strong>Org:</strong> {ORG_NAMES[state.org] ?? state.org} ·{' '}
+          <strong>Audience:</strong> {state.audiences.map((a) => AUDIENCE_NAMES[a] ?? a).join(", ") || "—"} ·{' '}
+          <strong>Drivers:</strong> {[state.primary, state.secondary].filter(Boolean).map((d) => DRIVER_NAMES[d] ?? d).join(", ") || "—"}
         </div>
       </div>
 
@@ -237,12 +268,16 @@ export default function Output() {
         <h4>Central ask &amp; supporting documents</h4>
         {centralDocs.length ? (
           <ul>
-            {centralDocs.map((doc) => (
-              <li key={doc.id}>
-                <strong>{doc.title}</strong> — {doc.summary}
-                <div className="meta">{describeMatches(doc, state)}</div>
-              </li>
-            ))}
+            {centralDocs.map((doc) => {
+              const meta = describeDoc(doc);
+              return (
+                <li key={doc.id}>
+                  <strong>{meta.stage}</strong>
+                  <div>{meta.action}</div>
+                  <div className="meta">{describeMatches(doc, state)}</div>
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <p className="meta">Add model documents from the Library to reinforce your ask.</p>

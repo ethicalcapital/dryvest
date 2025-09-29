@@ -3,26 +3,34 @@ import { useNavigate } from "react-router-dom";
 import { ORGANIZATIONS, AUDIENCES, DRIVERS, DOCS } from "../data.js";
 import { downloadString } from "../utils/download.js";
 import ConsentGate from "../components/ConsentGate.jsx";
-import BottomStepper from "../components/BottomStepper.jsx";
 import { getConsent } from "../utils/consent.js";
 import { track } from "../utils/analytics.js";
 
-function ModeMini({ mode, onChange }) {
-  const modes = [
-    { id: "quick", name: "QuickSieve (recommended)" },
-    { id: "custom", name: "Custom Builder" },
-    { id: "compare", name: "Compare" },
-    { id: "facts", name: "Fact Check" }
-  ];
+const MODES = [
+  { id: "quick", name: "QuickSieve (recommended)" },
+  { id: "custom", name: "Custom Builder" },
+  { id: "compare", name: "Compare" },
+  { id: "facts", name: "Fact Check" }
+];
+
+const ALL_ORGS = ORGANIZATIONS.map((o) => o.id);
+const ALL_DRIVERS = DRIVERS.map((d) => d.id);
+const ALL_AUDIENCES = AUDIENCES.map((a) => a.id);
+
+function ModeMini({ mode, onChange, onClose }) {
   return (
-    <div className="card section">
-      <h2>Mode</h2>
+    <div className="card section mode-panel">
+      <div className="mode-panel-header">
+        <h2>Choose a workspace</h2>
+        <button className="btn ghost" onClick={onClose}>Close</button>
+      </div>
       <div className="grid cols-2">
-        {modes.map(m => (
-          <button key={m.id}
-            onClick={()=>onChange(m.id)}
-            className={`option ${mode===m.id?"selected":""}`}
-            aria-pressed={mode===m.id}
+        {MODES.map((m) => (
+          <button
+            key={m.id}
+            onClick={() => onChange(m.id)}
+            className={`option ${mode === m.id ? "selected" : ""}`}
+            aria-pressed={mode === m.id}
           >
             <strong>{m.name}</strong>
           </button>
@@ -35,9 +43,10 @@ function ModeMini({ mode, onChange }) {
 function StepOrg({ value, onChange }) {
   return (
     <div className="section">
-      <h2>Step 1 — Which organization are you influencing?</h2>
+      <h2 className="step-title">Which organization are you influencing?</h2>
+      <p className="helper">Pick the sponsoring entity that ultimately owns the assets.</p>
       <div className="grid cols-3">
-        {ORGANIZATIONS.map(o => (
+        {ORGANIZATIONS.map((o) => (
           <button
             key={o.id}
             onClick={() => onChange(o.id)}
@@ -56,63 +65,85 @@ function StepOrg({ value, onChange }) {
 function StepAudience({ values, onToggle }) {
   return (
     <div className="section">
-      <h2>Step 2 — Who has to say yes?</h2>
-      <div className="grid cols-3">
-        {AUDIENCES.map(a => {
-          const checked = values.includes(a.id);
+      <h2 className="step-title">Who signs off?</h2>
+      <p className="helper">Toggle everyone who has to endorse the change. Multiple selections are fine—this just tunes the talking points.</p>
+      <div className="grid cols-3 audience-grid">
+        {AUDIENCES.map((audience) => {
+          const checked = values.includes(audience.id);
           return (
             <button
-              key={a.id}
-              onClick={() => onToggle(a.id)}
-              className={`option ${checked ? "selected" : ""}`}
+              key={audience.id}
+              className={`option audience ${checked ? "selected" : ""}`}
               aria-pressed={checked}
+              onClick={() => onToggle(audience.id)}
             >
-              <strong>{a.name}</strong>
-              <div className="meta">{a.desc}</div>
+              <span className="audience-indicator" aria-hidden="true">{checked ? "✓" : ""}</span>
+              <div>
+                <strong>{audience.name}</strong>
+                <div className="meta">{audience.desc}</div>
+              </div>
             </button>
           );
         })}
       </div>
-      <p className="meta" style={{marginTop:10}}>Tip: Select multiple if needed.</p>
     </div>
   );
 }
 
-function StepDrivers({ primary, secondary, onSet }) {
+function StepDrivers({ primary, secondary, onPrimary, onSecondarySet, onSecondaryClear }) {
   return (
     <div className="section">
-      <h2>Step 3 — Why will they move?</h2>
-      <div className="grid cols-3">
-        {DRIVERS.map(d => (
-          <div key={d.id} className="card">
-            <strong>{d.name}</strong>
-            <p className="meta" style={{margin:"6px 0 10px"}}>{d.desc}</p>
-            <div style={{display:"flex", gap:10}}>
-              <button
-                className={`btn ${primary===d.id ? "primary":"secondary"}`}
-                onClick={() => onSet({ primary: d.id, secondary })}
-                aria-pressed={primary===d.id}
-              >
-                Primary
-              </button>
-              <button
-                className={`btn ${secondary===d.id ? "primary":"secondary"}`}
-                onClick={() => onSet({ primary, secondary: d.id })}
-                aria-pressed={secondary===d.id}
-              >
-                Secondary
-              </button>
-            </div>
-          </div>
-        ))}
+      <h2 className="step-title">What motivation or pressure will move them?</h2>
+      <p className="helper">Lead with one driver, then optionally layer a supporting pressure to frame the follow-up materials.</p>
+      <div className="grid cols-3 drivers">
+        {DRIVERS.map((driver) => {
+          const isPrimary = primary === driver.id;
+          const isSecondary = secondary === driver.id && !isPrimary;
+          return (
+            <button
+              key={driver.id}
+              className={`driver-card ${isPrimary ? "selected" : ""}`}
+              aria-pressed={isPrimary}
+              onClick={() => onPrimary(driver.id)}
+            >
+              <div className="driver-header">
+                <span className="driver-label">{isPrimary ? "Primary signal" : "Tap to make primary"}</span>
+                {isSecondary && <span className="driver-tag">Supporting</span>}
+              </div>
+              <strong>{driver.name}</strong>
+              <p className="meta">{driver.desc}</p>
+              <div className="driver-actions">
+                {isSecondary ? (
+                  <button
+                    type="button"
+                    className="driver-clear"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onSecondaryClear();
+                    }}
+                  >
+                    Remove supporting pressure
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="driver-secondary"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onSecondarySet(driver.id);
+                    }}
+                  >
+                    {isPrimary ? "Layer supporting pressure" : "Use as supporting pressure"}
+                  </button>
+                )}
+              </div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 }
-
-const ALL_ORGS = ORGANIZATIONS.map((o) => o.id);
-const ALL_DRIVERS = DRIVERS.map((d) => d.id);
-const ALL_AUDIENCES = AUDIENCES.map((a) => a.id);
 
 function scoreDoc(doc, state) {
   const ctx = doc.contexts || {};
@@ -146,35 +177,64 @@ function recommendDocs(state) {
   return DOCS.slice(0, 3);
 }
 
+const DOC_PLAYBOOK = {
+  fiduciary_playbook: {
+    stage: "Set the guardrails",
+    why: "Frames prudence for fiduciaries before the policy discussion.",
+  },
+  policy_framework: {
+    stage: "Draft the policy",
+    why: "Provides the language trustees can vote on immediately.",
+  },
+  conduct_risk_control_framework: {
+    stage: "Show the operational plan",
+    why: "Explains how staff will monitor and report once the policy passes.",
+  },
+  divestment_exposure_assessment: {
+    stage: "Quantify the impact",
+    why: "Gives consultants the analytics pack for tracking error + reporting.",
+  },
+};
+
+function describeDoc(doc) {
+  return DOC_PLAYBOOK[doc.id] ?? {
+    stage: "Reference pack",
+    why: doc.summary,
+  };
+}
+
 function Summary({ state }) {
-  const org = ORGANIZATIONS.find(o => o.id===state.org);
-  const prim = DRIVERS.find(d => d.id===state.primary);
-  const sec = DRIVERS.find(d => d.id===state.secondary);
+  const org = ORGANIZATIONS.find((o) => o.id === state.org);
+  const prim = DRIVERS.find((d) => d.id === state.primary);
+  const sec = DRIVERS.find((d) => d.id === state.secondary);
   const recommendedDocs = recommendDocs(state);
   return (
     <div className="section card">
-      <h2>Summary</h2>
-      <div className="grid cols-2" style={{marginTop:8}}>
+      <h2 className="step-title">Ready to generate</h2>
+      <div className="grid cols-2" style={{ marginTop: 8 }}>
         <div className="card"><strong>Organization</strong><div className="meta">{org?.name}</div></div>
         <div className="card"><strong>Audience</strong><div className="meta">
-          {state.audiences.map(id => (AUDIENCES.find(x=>x.id===id)?.name ?? id)).join(", ") || "—"}
+          {state.audiences.map((id) => (AUDIENCES.find((x) => x.id === id)?.name ?? id)).join(", ") || "—"}
         </div></div>
         <div className="card"><strong>Primary driver</strong><div className="meta">{prim?.name ?? "—"}</div></div>
-        <div className="card"><strong>Secondary driver</strong><div className="meta">{sec?.name ?? "—"}</div></div>
+        <div className="card"><strong>Supporting pressure</strong><div className="meta">{sec?.name ?? "—"}</div></div>
       </div>
       <div className="section">
-        <h3 style={{margin:"12px 0 6px"}}>Model documents coming with your brief</h3>
-        <div className="meta" style={{marginBottom:8}}>We’ll auto-suggest the strongest fits after generation—you can swap them in the Library.</div>
+        <h3 style={{ margin: "12px 0 6px" }}>Model documents we’ll attach</h3>
+        <div className="meta" style={{ marginBottom: 8 }}>Each pack nudges a different decision lever—policy, operations, or measurement.</div>
         <ul className="list">
-          {recommendedDocs.map((doc) => (
-            <li key={doc.id} className="list-row" style={{gridTemplateColumns:"1fr auto"}}>
-              <div>
-                <strong>{doc.title}</strong>
-                <div className="meta">{doc.summary}</div>
-              </div>
-              <button className="btn ghost" onClick={()=>downloadString(`${doc.id}.md`,"text/markdown",doc.body)}>Preview</button>
-            </li>
-          ))}
+          {recommendedDocs.map((doc) => {
+            const meta = describeDoc(doc);
+            return (
+              <li key={doc.id} className="list-row" style={{ gridTemplateColumns: "1fr auto" }}>
+                <div>
+                  <strong>{meta.stage}</strong>
+                  <div className="meta">{meta.why}</div>
+                </div>
+                <button className="btn ghost" onClick={() => downloadString(`${doc.id}.md`, "text/markdown", doc.body)}>Preview</button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
@@ -196,8 +256,8 @@ export default function Wizard() {
   const nav = useNavigate();
 
   useEffect(() => {
-    const c = getConsent();
-    if (!c.accepted) setShowConsent(true);
+    const consent = getConsent();
+    if (!consent.accepted) setShowConsent(true);
   }, []);
 
   useEffect(() => {
@@ -205,7 +265,7 @@ export default function Wizard() {
   }, [mode, step]);
 
   const toggleAudience = (id) =>
-    setAudiences((prev) => prev.includes(id) ? prev.filter(x=>x!==id) : [...prev, id]);
+    setAudiences((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const canNext = useMemo(() => {
     if (step === 1) return Boolean(org);
@@ -225,41 +285,87 @@ export default function Wizard() {
     }
   };
 
-  const onPrev = () => setStep((s) => Math.max(1, s - 1));
+  const onPrev = () => setStep((current) => Math.max(1, current - 1));
 
   return (
     <>
       {showConsent && <ConsentGate onClose={() => setShowConsent(false)} />}
 
-      {showMode && <ModeMini mode={mode} onChange={(m)=>{ setMode(m); setShowMode(false); }} />}
+      {showMode && (
+        <ModeMini
+          mode={mode}
+          onChange={(nextMode) => {
+            setMode(nextMode);
+            setShowMode(false);
+          }}
+          onClose={() => setShowMode(false)}
+        />
+      )}
 
-      <div className="card">
-        {step === 1 && <StepOrg value={org} onChange={(id)=>{
-          setOrg(id);
-          track("org_select",{id});
-          setStep((s) => (s === 1 ? 2 : s));
-        }} />}
-        {step === 2 && <StepAudience values={audiences} onToggle={(id)=>{ toggleAudience(id); track("aud_toggle",{id}); }} />}
-        {step === 3 && <StepDrivers primary={primary} secondary={secondary} onSet={({primary,secondary})=>{
-          setPrimary(primary);
-          setSecondary(secondary);
-          if (primary) {
-            setStep((s) => (s === 3 ? 4 : s));
-          }
-        }} />}
+      <div className="card wizard-card">
+        {step === 1 && (
+          <StepOrg
+            value={org}
+            onChange={(id) => {
+              setOrg(id);
+              track("org_select", { id });
+              setStep((current) => (current === 1 ? 2 : current));
+            }}
+          />
+        )}
+
+        {step === 2 && (
+          <StepAudience
+            values={audiences}
+            onToggle={(id) => {
+              toggleAudience(id);
+              track("aud_toggle", { id });
+            }}
+          />
+        )}
+
+        {step === 3 && (
+          <StepDrivers
+            primary={primary}
+            secondary={secondary}
+            onPrimary={(id) => {
+              setPrimary(id);
+              track("driver_primary", { id });
+              setStep((current) => (current === 3 && id ? 3 : current));
+            }}
+            onSecondarySet={(id) => {
+              if (id === primary) {
+                setSecondary(null);
+                track("driver_secondary_clear", { reason: "matches_primary" });
+                return;
+              }
+              setSecondary(id);
+              track("driver_secondary", { id });
+            }}
+            onSecondaryClear={() => {
+              setSecondary(null);
+              track("driver_secondary_clear", {});
+            }}
+          />
+        )}
+
         {step === 4 && <Summary state={{ org, audiences, primary, secondary, docs: [] }} />}
-      </div>
 
-      <BottomStepper
-        current={step}
-        total={total}
-        onPrev={onPrev}
-        onNext={onNext}
-        nextLabel={step === total ? "Generate brief" : "Next"}
-        canNext={canNext}
-        showChangeMode
-        onChangeMode={()=>setShowMode((s)=>!s)}
-      />
+        <div className="step-controls">
+          <div className="step-meta">
+            Step {step} of {total}
+            <button type="button" className="step-mode" onClick={() => setShowMode((open) => !open)}>
+              Switch mode
+            </button>
+          </div>
+          <div className="step-actions">
+            <button className="btn ghost" onClick={onPrev} disabled={step === 1}>Back</button>
+            <button className={`btn ${canNext ? "primary" : "secondary"}`} onClick={onNext} disabled={!canNext}>
+              {step === total ? "Generate brief" : "Next"}
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

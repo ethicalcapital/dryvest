@@ -235,6 +235,22 @@ ai_issues: ["…"] # only present when the converter surfaces warnings
 
 That metadata makes it easy to audit provenance, diff future runs, or flag documents that still need human cleanup.
 
+#### Uploading new research papers
+
+To push local PDFs or DOCX files into the corpus:
+
+```bash
+# Upload one or more files into originals/<timestamp>-<filename>
+node scripts/autorag-upload.mjs ~/Downloads/paper.pdf
+
+# Then process them into markdown (repeat with returned cursor until null)
+curl -X POST https://dryvest.ethicic.com/api/autorag/convert \
+  -H 'Content-Type: application/json' \
+  -d '{"limit":20}'
+```
+
+The upload script shells out to `npx wrangler r2 object put`, so make sure you are authenticated (`wrangler login`) before running it.
+
 ### Corpus scope & curation
 
 The research bucket should stay laser-focused on divestment work. Keep resources that help people argue for, design, or execute divestment (fiduciary duty analyses, ESG/divestment performance studies, regulatory pressure cases, stakeholder comms, governance scaffolds). Anything outside that remit—generic investing texts or unrelated policy papers—should either be culled or moved to a separate “general references” prefix so it never bleeds into divestment briefs unless explicitly requested.

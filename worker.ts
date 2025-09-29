@@ -757,8 +757,29 @@ const runPagesFunction = async (
 };
 
 export default {
-  async fetch(request: Request, env: Record<string, unknown>, ctx: ExecutionContext): Promise<Response> {
-    const url = new URL(request.url);
+  async fetch(initialRequest: Request, env: Record<string, unknown>, ctx: ExecutionContext): Promise<Response> {
+    let request = initialRequest;
+    let url = new URL(request.url);
+
+    if (url.pathname === '/client' || url.pathname === '/client/') {
+      const redirectUrl = new URL(request.url);
+      redirectUrl.pathname = '/';
+      return Response.redirect(redirectUrl.toString(), 301);
+    }
+
+    if (url.pathname === '/client/index.html') {
+      const redirectUrl = new URL(request.url);
+      redirectUrl.pathname = '/';
+      return Response.redirect(redirectUrl.toString(), 301);
+    }
+
+    if (url.pathname.startsWith('/client/assets/')) {
+      const assetUrl = new URL(request.url);
+      assetUrl.pathname = url.pathname.replace('/client', '') || '/';
+      const assets = env.STATIC_ASSETS as Fetcher;
+      return assets.fetch(new Request(assetUrl.toString(), request));
+    }
+
     const method = request.method.toUpperCase();
 
     for (const route of routes) {
@@ -775,28 +796,15 @@ export default {
     }
 
     const assets = env.STATIC_ASSETS as Fetcher;
-    const assetUrl = new URL(request.url);
-
-    if (assetUrl.pathname.startsWith('/assets/')) {
-      assetUrl.pathname = `/client${assetUrl.pathname}`;
-    } else if (
-      assetUrl.pathname === '/favicon.svg' ||
-      assetUrl.pathname === '/site.webmanifest' ||
-      assetUrl.pathname === '/ecic-logo.svg'
-    ) {
-      assetUrl.pathname = `/client${assetUrl.pathname}`;
-    }
-
-    let response = await assets.fetch(new Request(assetUrl.toString(), request));
+    let response = await assets.fetch(request);
 
     if (response.status === 404 && request.method === 'GET') {
       const accept = request.headers.get('accept') ?? '';
-      const isHtml = accept.includes('text/html');
-      const isAsset = url.pathname.startsWith('/client/') || url.pathname.startsWith('/dryvest/');
-
-      if (isHtml && !isAsset) {
-        url.pathname = '/client/index.html';
-        response = await assets.fetch(new Request(url.toString(), request));
+      const expectsHtml = accept.includes('text/html');
+      if (expectsHtml) {
+        const fallbackUrl = new URL(request.url);
+        fallbackUrl.pathname = '/index.html';
+        response = await assets.fetch(new Request(fallbackUrl.toString(), request));
       }
     }
 

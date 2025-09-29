@@ -166,6 +166,159 @@ label.checkbox { display: inline-flex; align-items: center; gap: 8px; cursor: po
   color: var(--muted);
 }
 
+.step-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.helper {
+  margin: 0 0 16px;
+  display: inline-block;
+}
+
+.wizard-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.step-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #1a2347;
+}
+
+.step-meta {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.step-meta .step-mode {
+  background: transparent;
+  border: 0;
+  color: var(--brand-2);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.step-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.audience-grid .audience {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.audience-indicator {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #27345c;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(35,210,166,0.1);
+}
+
+.audience.selected .audience-indicator {
+  border-color: var(--accent);
+}
+
+.drivers {
+  gap: 16px;
+}
+
+.driver-card {
+  background: #10172b;
+  border: 1px solid #1b2647;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: left;
+  display: grid;
+  gap: 12px;
+}
+
+.driver-card:hover {
+  border-color: #2d3f6a;
+}
+
+.driver-card.selected {
+  border-color: var(--brand);
+  outline: var(--ring);
+}
+
+.driver-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.driver-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.driver-tag {
+  font-size: 11px;
+  background: rgba(124,108,255,0.15);
+  color: var(--brand-2);
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.driver-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.driver-secondary,
+.driver-clear {
+  border: 0;
+  background: rgba(124,108,255,0.12);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.driver-clear {
+  background: rgba(255,107,107,0.15);
+  color: #ff9d9d;
+}
+
+.driver-secondary:hover,
+.driver-clear:hover {
+  opacity: 0.85;
+}
+
+.mode-panel {
+  margin-bottom: 18px;
+}
+
+.mode-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
 /* ===== NEW: Output annotations ===== */
 .annot {
   display: grid; gap: 10px;
