@@ -2,6 +2,7 @@
 app/node_modules/
 node_modules/
 exports/
+references/
 
 app/dist/
 app/.wrangler/

@@ -1,0 +1,70 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { createObjectCsvWriter } from 'csv-writer';
+
+import {
+  FACTS,
+  KEY_POINTS,
+} from '../app/src/data.js';
+
+const OUTPUT_DIR = path.resolve('exports');
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+}
+
+function buildFactRows() {
+  return FACTS.map((fact) => ({
+    type: 'fact',
+    id: fact.id,
+    title: fact.claim,
+    original: fact.support,
+    citations: fact.citations.map((c) => `${c.title}${c.url ? ` (${c.url})` : ''}`).join('\n'),
+    plain_draft: '',
+    approved_text: '',
+    review_notes: '',
+    snapshot_paths: '',
+  }));
+}
+
+function buildPointRows() {
+  return KEY_POINTS.map((point) => ({
+    type: 'key_point',
+    id: point.id,
+    title: point.title,
+    original: point.body,
+    citations: (point.citations || []).join('\n'),
+    plain_draft: '',
+    approved_text: '',
+    review_notes: '',
+    snapshot_paths: '',
+  }));
+}
+
+async function main() {
+  const rows = [...buildFactRows(), ...buildPointRows()];
+  const outputPath = path.join(OUTPUT_DIR, `rewrite-matrix-${new Date().toISOString().slice(0,10)}.csv`);
+
+  const csvWriter = createObjectCsvWriter({
+    path: outputPath,
+    header: [
+      { id: 'type', title: 'type' },
+      { id: 'id', title: 'id' },
+      { id: 'title', title: 'title' },
+      { id: 'original', title: 'original_text' },
+      { id: 'citations', title: 'citations' },
+      { id: 'plain_draft', title: 'plain_draft' },
+      { id: 'approved_text', title: 'approved_text' },
+      { id: 'review_notes', title: 'review_notes' },
+      { id: 'snapshot_paths', title: 'snapshot_paths' },
+    ],
+  });
+
+  await csvWriter.writeRecords(rows);
+  console.log(`Exported ${rows.length} rows to ${outputPath}`);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
