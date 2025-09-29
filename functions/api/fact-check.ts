@@ -1,13 +1,13 @@
-import { DEFAULT_DATASET_VERSION } from '../../app/src/lib/constants';
-import { loadDataset } from '../../app/src/lib/dataClient';
-import type { BriefContext, Dataset } from '../../app/src/lib/schema';
-import { buildFactCheckReport } from '../../app/src/lib/factCheck';
+import { DEFAULT_DATASET_VERSION } from '../../legacy/app-classic/src/lib/constants';
+import { loadDataset } from '../../legacy/app-classic/src/lib/dataClient';
+import type { BriefContext, Dataset } from '../../legacy/app-classic/src/lib/schema';
+import { buildFactCheckReport } from '../../legacy/app-classic/src/lib/factCheck';
 import {
   buildExportForContext,
   contextKey,
   enumerateContexts,
   hasContent,
-} from '../../app/src/lib/factCheckBundle';
+} from '../../legacy/app-classic/src/lib/factCheckBundle';
 
 export const onRequest: PagesFunction = async ({ request }) => {
   const url = new URL(request.url);

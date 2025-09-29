@@ -739,7 +739,7 @@ const runPagesFunction = async (
 ): Promise<Response> => {
   const next = async (input?: Request | string, init?: RequestInit) => {
     const targetRequest = input instanceof Request ? input : new Request(input ?? request, init);
-    const assets = env.ASSETS as Fetcher;
+    const assets = env.STATIC_ASSETS as Fetcher;
     return assets.fetch(targetRequest);
   };
 
@@ -774,7 +774,7 @@ export default {
       });
     }
 
-    const assets = env.ASSETS as Fetcher;
+    const assets = env.STATIC_ASSETS as Fetcher;
     const assetUrl = new URL(request.url);
 
     if (assetUrl.pathname.startsWith('/assets/')) {
