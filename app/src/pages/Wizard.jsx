@@ -13,6 +13,8 @@ const MODES = [
   { id: "facts", name: "Fact Check" }
 ];
 
+const DATASET_VERSION = "2025-09-27";
+
 const ALL_ORGS = ORGANIZATIONS.map((o) => o.id);
 const ALL_DRIVERS = DRIVERS.map((d) => d.id);
 const ALL_AUDIENCES = AUDIENCES.map((a) => a.id);
@@ -237,6 +239,18 @@ function Summary({ state }) {
           })}
         </ul>
       </div>
+      <div className="methodology-callout">
+        <h3>Methodology & provenance</h3>
+        <p className="meta">
+          This brief resolves against dataset version {DATASET_VERSION}. Every node traces to a hashed source in D1 and the AutoRAG corpus; the deduplicated manifest lives at <code>manifests/markdown/latest-dedup.ndjson</code> with SHA-256 fingerprints.
+        </p>
+        <ul>
+          <li>All Quick/Custom outputs cite `src_*` identifiers that map back to the D1 `sources` table.</li>
+          <li>AutoRAG conversions include YAML front matter with `source_key`, `sha256`, and processing timestamps.</li>
+          <li>Need to audit a claim? Pull the matching manifest row or markdown artifact and compare the stored hash against your copy.</li>
+        </ul>
+        <p className="meta">We only publish educational scaffolding—flag corrections via the contact form and we’ll update the corpus in the next release.</p>
+      </div>
     </div>
   );
 }
@@ -254,6 +268,15 @@ export default function Wizard() {
   const [step, setStep] = useState(1);
   const total = 4;
   const nav = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const driverParam = params.get('driver');
+    if (driverParam && DRIVERS.some((d) => d.id === driverParam)) {
+      setPrimary(driverParam);
+      console.debug('[wizard] driver preloaded from query parameter', driverParam);
+    }
+  }, []);
 
   useEffect(() => {
     const consent = getConsent();
