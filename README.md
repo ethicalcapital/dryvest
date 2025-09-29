@@ -2,6 +2,8 @@
 
 Dryvest is Ethical Capital’s educational briefing platform. The project turns divestment demands into implementation-ready talking points, policy clauses, and evidentiary packets that campaigners can take straight into trustee, pension, or investment committee rooms.
 
+**Current release: v0.0.3** – identity/audience/motivation now drive every brief; the venue dimension stays in the dataset for future use but is no longer required to render the UI. The consent banner collects analytics preferences and release-note opt-ins via the `/api/preferences` endpoint instead of a mailto link.
+
 > **Educational Use Only** – Dryvest outputs are strategic intelligence for organizing. They are not investment, legal, or tax advice.
 
 ---
@@ -154,9 +156,9 @@ graph TD
 Before any data loads, the prototype prompts for explicit consent:
 1. **Anonymous analytics** toggle (off by default).
 2. **Educational disclaimer** (must acknowledge to continue).
-3. **Optional email** opt-in for community updates.
+3. **Release notes opt-in** – inline email field that POSTs to `/api/preferences` so Cloudflare KV can track request provenance.
 
-Selections are stored in `localStorage` via `src/utils/consent.js`. `src/utils/analytics.js` currently just logs events when analytics are permitted; you can swap this stub for a real analytics hook if needed.
+Selections are stored in `localStorage` via `src/utils/consent.js`. `src/utils/analytics.js` currently just logs events when analytics are permitted; you can swap this stub for a real analytics hook if needed. The production beta banner mirrors this flow: analytics consent toggles stay local-first, and the release-note form submits through the same preferences endpoint.
 
 ---
 
@@ -166,7 +168,7 @@ Selections are stored in `localStorage` via `src/utils/consent.js`. `src/utils/a
 - `node scripts/generate-prototype-data.mjs` → regenerates `src/data.js` after editing JSON or D1.
 - (Planned) QA scorer: vector similarity + LLM critique for generated briefs (hooks are ready but not yet wired into CI).
 
-Current coverage snapshot (2025-09-27): **91.5 %** of contexts have actionable content; remaining gaps are mostly individual/technical and sovereign wealth fund fiduciary combinations.
+Current coverage snapshot (2025-09-27): **91.5 %** of identity × audience × motivation contexts have actionable content; remaining gaps are mostly individual/technical and sovereign wealth fund fiduciary combinations.
 
 ### AutoRAG Search (Cloudflare AI)
 
@@ -293,6 +295,15 @@ The production worker exposes `GET /api/dataset?version=<id>` returning `{ versi
    - `ALLOWED_ORIGINS`
    - `LACRM_WEBHOOK_URL` (optional contact form relay)
 4. Bind KV namespace `HOOKS` (ID `caf4e19f1388423fade84340c27a929c`).
+
+---
+
+## Changelog
+
+### 0.0.3 — 2025-09-29
+- Dropped venue-matching requirements across the React app, dataset helpers, and D1/CSV views; briefs now resolve purely on identity, audience, and motivation while venue tags remain available for future surfacing.
+- Restored the production beta banner’s release-note opt-in to a proper POST against `/api/preferences`, keeping analytics consent privacy-first while capturing email provenance in KV.
+- Updated docs and tooling to reflect the new context model and AutoRAG markdown pipeline (front matter + manifest logging).
 
 ---
 
