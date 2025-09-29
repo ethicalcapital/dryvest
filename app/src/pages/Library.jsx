@@ -148,7 +148,7 @@ export default function Library({ initialTab="facts" }) {
       setTimeout(() => el.classList.remove('highlight-focus'), 2000);
       setPendingFocus(null);
     }
-  }, [pendingFocus, docsToRender, factsToRender]);
+  }, [pendingFocus, visibleDocs, visibleFacts, docLimit, factLimit]);
 
   const docsToRender = visibleDocs.slice(0, docLimit);
   const factsToRender = visibleFacts.slice(0, factLimit);
