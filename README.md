@@ -195,17 +195,64 @@ curl -X POST https://dryvest.ethicic.com/api/autorag/audit \
   -d '{"limit":50,"outputPrefix":"autorag-audit/manual"}'
 ```
 
-Once you have the raw content, convert it to clean markdown using Cloudflare Workers AI’s markdown conversion model:
+#### Markdown conversion helper
 
-```js
-const result = await env.AI.fetch('cf/markdown-conversion', {
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ textContent: rawDocument, includeMetadata: true })
-});
-const { markdown } = await result.json();
+The worker ships a conversion endpoint that uses `env.AI.toMarkdown`, writes the cleaned output back to R2, and logs an NDJSON manifest per batch. By default it reads from `originals/`, writes markdown to `markdown/`, and stores manifests under `manifests/markdown/`.
+
+```bash
+# Kick off a batch of 20 documents (limit is clamped to 1–20)
+curl -X POST https://dryvest.ethicic.com/api/autorag/convert \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "limit": 20,
+    "manifestPrefix": "manifests/markdown-run2"
+  }'
+
+# Continue processing with the cursor returned above
+curl -X POST https://dryvest.ethicic.com/api/autorag/convert \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "limit": 20,
+    "cursor": "<cursor from previous response>",
+    "manifestPrefix": "manifests/markdown-run2"
+  }'
+
+# Inspect manifests or drill into individual markdown files
+rclone ls dryvest_service:dryvest/manifests/markdown-run2
+rclone cat dryvest_service:dryvest/markdown/Financial\ Shenanigans.md | head
 ```
 
-Enriching each document with front matter (title, source URL, recommended use, tone) before re-ingesting makes it easier for AutoRAG and collaborating agents to surface the “house view” confidently.
+Fields you can override on the request payload:
+
+| Field | Default | Purpose |
+| --- | --- | --- |
+| `sourcePrefix` | `originals/` | Where to read source documents. |
+| `targetPrefix` | `markdown/` | Where cleaned markdown is written. |
+| `manifestPrefix` | `manifests/markdown/` | Where manifests land. |
+| `limit` | `5` | Batch size per invocation (1–20). |
+| `cursor` | _none_ | Continue from a previous list page. |
+
+Every manifest row includes the source key, SHA-256 checksum, markdown byte length, and any AI issues. Enrich the resulting markdown with front matter (title, source URL, who should use it, tone) before re-ingesting so AutoRAG and collaborating agents can surface the “house view” confidently.
+
+Each generated markdown file now starts with YAML front matter:
+
+```yaml
+---
+source_key: "originals/Financial Shenanigans.pdf"
+sha256: "…"
+original_size: 12079293
+uploaded_at: "2025-09-29T01:23:04.744Z"
+processed_at: "2025-09-29T02:59:06.389Z"
+target_key: "markdown/Financial Shenanigans.md"
+ai_issues: ["…"] # only present when the converter surfaces warnings
+---
+```
+
+That metadata makes it easy to audit provenance, diff future runs, or flag documents that still need human cleanup.
+
+### Corpus scope & curation
+
+The research bucket should stay laser-focused on divestment work. Keep resources that help people argue for, design, or execute divestment (fiduciary duty analyses, ESG/divestment performance studies, regulatory pressure cases, stakeholder comms, governance scaffolds). Anything outside that remit—generic investing texts or unrelated policy papers—should either be culled or moved to a separate “general references” prefix so it never bleeds into divestment briefs unless explicitly requested.
 
 ---
 

@@ -95,20 +95,140 @@ const sha256Hex = async (buffer: ArrayBuffer): Promise<string> => {
   return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 };
 
-const runMarkdownConversion = async (ai: any, document: ArrayBuffer) => {
+const normalizePrefix = (prefix: string): string => {
+  if (!prefix) {
+    return '';
+  }
+  return prefix.endsWith('/') ? prefix : `${prefix}/`;
+};
+
+const safeReplaceExtension = (key: string, extension: string): string => {
+  const lastSlash = key.lastIndexOf('/');
+  const basename = lastSlash >= 0 ? key.slice(lastSlash + 1) : key;
+  const dirname = lastSlash >= 0 ? key.slice(0, lastSlash + 1) : '';
+  const dotIndex = basename.lastIndexOf('.');
+  const stem = dotIndex > 0 ? basename.slice(0, dotIndex) : basename;
+  return `${dirname}${stem}${extension}`;
+};
+
+const collapseSpacedUppercase = (value: string): string =>
+  value.replace(/\b([A-Z](?:\s[A-Z]){2,})\b/g, (match) => match.replace(/\s+/g, ''));
+
+const cleanMarkdown = (markdown: string): string => {
+  if (!markdown) {
+    return markdown;
+  }
+
+  const normalized = markdown.replace(/\r\n?/g, '\n');
+  const lines = normalized.split('\n');
+  const cleanedLines: string[] = [];
+  let inCodeBlock = false;
+
+  for (const originalLine of lines) {
+    let line = originalLine;
+
+    if (/^\s*```/.test(line)) {
+      cleanedLines.push(line.trimEnd());
+      inCodeBlock = !inCodeBlock;
+      continue;
+    }
+
+    if (inCodeBlock) {
+      cleanedLines.push(line);
+      continue;
+    }
+
+    let processed = collapseSpacedUppercase(line)
+      .replace(/,\s*(###\s*Page\s+\d+)/g, '\n\n$1');
+
+    if (!/^\s*\|/.test(processed)) {
+      processed = processed.replace(/ {2,}/g, ' ');
+    }
+
+    if (/^\s*,\s*$/.test(processed)) {
+      continue;
+    }
+
+    cleanedLines.push(processed.trimEnd());
+  }
+
+  const cleaned = cleanedLines.join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/\n{2,}(###\s*Page\s+\d+)/g, '\n\n$1')
+    .trim();
+
+  return cleaned.length ? `${cleaned}\n` : cleaned;
+};
+
+const extractMarkdownFromResult = (result: unknown): string | null => {
+  if (!result) {
+    return null;
+  }
+
+  if (Array.isArray(result)) {
+    const first = result[0];
+    if (first && typeof first === 'object') {
+      if ('data' in first && typeof (first as any).data === 'string') {
+        return (first as any).data as string;
+      }
+      if ('markdown' in first && typeof (first as any).markdown === 'string') {
+        return (first as any).markdown as string;
+      }
+    }
+  }
+
+  if (typeof result === 'object') {
+    const maybeDocs = (result as any).documents;
+    if (Array.isArray(maybeDocs) && maybeDocs.length > 0) {
+      const doc = maybeDocs[0];
+      if (doc && typeof doc === 'object') {
+        if ('data' in doc && typeof doc.data === 'string') {
+          return doc.data as string;
+        }
+        if ('markdown' in doc && typeof doc.markdown === 'string') {
+          return doc.markdown as string;
+        }
+      }
+    }
+    if ('markdown' in (result as any) && typeof (result as any).markdown === 'string') {
+      return (result as any).markdown as string;
+    }
+    if ('result' in (result as any) && typeof (result as any).result === 'string') {
+      return (result as any).result as string;
+    }
+  }
+
+  if (typeof result === 'string') {
+    return result;
+  }
+
+  return null;
+};
+
+const runMarkdownConversion = async (ai: any, document: ArrayBuffer, filename: string) => {
   try {
+    if (ai?.toMarkdown && typeof ai.toMarkdown === 'function') {
+      const blob = new Blob([document], { type: 'application/octet-stream' });
+      const result = await ai.toMarkdown([
+        {
+          name: filename,
+          blob,
+        },
+      ]);
+      const markdown = extractMarkdownFromResult(result);
+      if (markdown && markdown.length) {
+        return { markdown };
+      }
+      return { markdown: '', error: 'Markdown conversion returned empty result from toMarkdown.' };
+    }
+
     const uint8 = new Uint8Array(document);
     const response = await ai.run('@cf/markdown-conversion', {
       document: Array.from(uint8),
     });
-    if (response?.markdown) {
-      return { markdown: response.markdown as string };
-    }
-    if (typeof response === 'string') {
-      return { markdown: response };
-    }
-    if (response?.result?.markdown) {
-      return { markdown: response.result.markdown as string };
+    const markdown = extractMarkdownFromResult(response);
+    if (markdown && markdown.length) {
+      return { markdown };
     }
     return { markdown: '', error: 'Markdown conversion returned empty result.' };
   } catch (error) {
@@ -341,6 +461,170 @@ const routes: Route[] = [
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }),
+  },
+  {
+    pattern: /^\/api\/autorag\/convert$/,
+    methods: ['POST'],
+    handler: async ({ request, env }) => {
+      const bucket = (env as Record<string, unknown>).DRYVEST_R2 as R2Bucket | undefined;
+      const ai = (env as Record<string, any>).AI;
+
+      if (!bucket || !ai) {
+        return new Response(
+          JSON.stringify({ error: 'AI or R2 bindings missing. Verify wrangler.toml configuration.' }),
+          {
+            status: 500,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+          }
+        );
+      }
+
+      const body = (await request.json().catch(() => ({}))) as {
+        cursor?: string;
+        limit?: number;
+        sourcePrefix?: string;
+        targetPrefix?: string;
+        manifestPrefix?: string;
+      };
+
+      const limit = Math.min(Math.max(Number(body.limit) || 5, 1), 20);
+      const cursorInput = typeof body.cursor === 'string' ? body.cursor : undefined;
+      const sourcePrefix = normalizePrefix(typeof body.sourcePrefix === 'string' && body.sourcePrefix.length > 0 ? body.sourcePrefix : 'originals');
+      const targetPrefix = normalizePrefix(typeof body.targetPrefix === 'string' && body.targetPrefix.length > 0 ? body.targetPrefix : 'markdown');
+      const manifestPrefix = normalizePrefix(
+        typeof body.manifestPrefix === 'string' && body.manifestPrefix.length > 0 ? body.manifestPrefix : 'manifests/markdown'
+      );
+
+      const listResult = await bucket.list({ cursor: cursorInput, limit, prefix: sourcePrefix });
+      const manifestRecords: Array<Record<string, unknown>> = [];
+
+      for (const obj of listResult.objects) {
+        if (obj.key.endsWith('/')) {
+          continue;
+        }
+
+        const manifestBase: Record<string, unknown> = {
+          sourceKey: obj.key,
+          size: obj.size,
+          uploaded: obj.uploaded,
+          processedAt: new Date().toISOString(),
+        };
+
+        try {
+          const r2Object = await bucket.get(obj.key);
+          if (!r2Object) {
+            manifestRecords.push({ ...manifestBase, status: 'missing', issues: ['Object not found when fetching.'] });
+            continue;
+          }
+
+          const buffer = await r2Object.arrayBuffer();
+          const sha256 = await sha256Hex(buffer);
+          const conversion = await runMarkdownConversion(ai, buffer, obj.key.split('/').pop() ?? obj.key);
+          let markdown = conversion.markdown ?? '';
+          const issues: string[] = [];
+
+          if (conversion.error) {
+            issues.push(conversion.error);
+          }
+
+          if (markdown) {
+            markdown = cleanMarkdown(markdown);
+          }
+
+          if (!markdown) {
+            manifestRecords.push({
+              ...manifestBase,
+              sha256,
+              status: 'skipped',
+              issues: issues.length ? issues : ['Markdown conversion returned empty output.'],
+            });
+            continue;
+          }
+
+          const relativeKey = sourcePrefix ? obj.key.slice(sourcePrefix.length) : obj.key;
+          const sanitizedRelative = safeReplaceExtension(relativeKey, '.md');
+          const targetKey = `${targetPrefix}${sanitizedRelative}`;
+
+          const frontMatterLines = ['---'];
+          frontMatterLines.push(`source_key: ${JSON.stringify(obj.key)}`);
+          frontMatterLines.push(`sha256: ${JSON.stringify(sha256)}`);
+          frontMatterLines.push(`original_size: ${obj.size}`);
+          frontMatterLines.push(`uploaded_at: ${JSON.stringify(obj.uploaded)}`);
+          frontMatterLines.push(`processed_at: ${JSON.stringify(manifestBase.processedAt)}`);
+          frontMatterLines.push(`target_key: ${JSON.stringify(targetKey)}`);
+          if (issues.length) {
+            frontMatterLines.push(`ai_issues: ${JSON.stringify(issues)}`);
+          }
+          frontMatterLines.push('---');
+          frontMatterLines.push('');
+
+          let body = markdown;
+          if (markdown.startsWith('---')) {
+            const closingIndex = markdown.indexOf('\n---', 3);
+            if (closingIndex !== -1) {
+              body = markdown.slice(closingIndex + 4).trimStart();
+            }
+          }
+
+          const finalMarkdown = `${frontMatterLines.join('\n')}${body}`;
+
+          await bucket.put(targetKey, finalMarkdown, {
+            httpMetadata: { contentType: 'text/markdown; charset=utf-8' },
+          });
+
+          const markdownBytes = new TextEncoder().encode(finalMarkdown).length;
+
+          manifestRecords.push({
+            ...manifestBase,
+            sha256,
+            status: 'written',
+            targetKey,
+            markdownBytes,
+            issues: issues.length ? issues : undefined,
+            frontMatter: true,
+          });
+        } catch (error) {
+          manifestRecords.push({
+            ...manifestBase,
+            status: 'error',
+            issues: [(error as Error).message ?? 'Unknown error'],
+          });
+        }
+      }
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const manifestKey = `${manifestPrefix}${timestamp}.ndjson`;
+      const ndjson = manifestRecords.map((record) => JSON.stringify(record)).join('\n');
+
+      await bucket.put(manifestKey, ndjson, {
+        httpMetadata: { contentType: 'application/x-ndjson; charset=utf-8' },
+      });
+
+      return new Response(
+        JSON.stringify({
+          attempted: manifestRecords.length,
+          manifestKey,
+          nextCursor: listResult.truncated ? listResult.cursor : null,
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        }
+      );
+    },
+  },
+  {
+    pattern: /^\/api\/autorag\/convert$/,
+    methods: ['OPTIONS'],
+    handler: async () =>
+      new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',
         },
       }),

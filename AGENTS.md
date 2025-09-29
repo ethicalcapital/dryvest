@@ -65,6 +65,13 @@ Dryvest is an educational investment brief builder developed by Ethical Capital.
 - **Triggers**: Investment-related content, educational disclaimers
 - **Context**: Ensures all content maintains "educational purposes only" framing
 
+### Research & Reporting Agents
+
+#### **`reporting-analyst`**
+- **Usage**: Human-in-the-loop review of AutoRAG corpus outputs, markdown quality control, and synthesis prompts
+- **Triggers**: Corpus audits, metadata enrichment, reporting/insight generation requests
+- **Context**: Ensures converted research stays divestment-focused, captures provenance, and packages findings for stakeholders
+
 ## Project-Specific Routing Rules
 
 ### Technology Stack Detection
