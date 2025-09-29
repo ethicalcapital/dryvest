@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { createObjectCsvWriter } from 'csv-writer';
 
 import {
   FACTS,
@@ -15,6 +14,33 @@ if (!fs.existsSync(REFS_DIR)) fs.mkdirSync(REFS_DIR, { recursive: true });
 
 const today = new Date().toISOString().slice(0, 10);
 const outputPath = path.join(OUTPUT_DIR, `rewrite-matrix-${today}-ai.csv`);
+const jsonPath = path.join(OUTPUT_DIR, `rewrite-matrix-${today}-ai.json`);
+
+const HEADER = [
+  { id: 'type', title: 'type' },
+  { id: 'id', title: 'id' },
+  { id: 'title', title: 'title' },
+  { id: 'original', title: 'original_text' },
+  { id: 'citations', title: 'citations' },
+  { id: 'plain_draft', title: 'plain_draft' },
+  { id: 'approved_text', title: 'approved_text' },
+  { id: 'review_notes', title: 'review_notes' },
+  { id: 'snapshot_paths', title: 'snapshot_paths' },
+];
+
+function escapeCsv(value) {
+  const text = value == null ? '' : String(value);
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+function writeCsv(records, header, outputPath) {
+  const headerLine = header.map((h) => h.title).join(',');
+  const lines = records.map((record) => header
+    .map((h) => escapeCsv(record[h.id]))
+    .join(','));
+  const content = [headerLine, ...lines].join('\n');
+  fs.writeFileSync(outputPath, content, 'utf8');
+}
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -111,22 +137,8 @@ async function main() {
     await sleep(400);
   }
 
-  const writer = createObjectCsvWriter({
-    path: outputPath,
-    header: [
-      { id: 'type', title: 'type' },
-      { id: 'id', title: 'id' },
-      { id: 'title', title: 'title' },
-      { id: 'original', title: 'original_text' },
-      { id: 'citations', title: 'citations' },
-      { id: 'plain_draft', title: 'plain_draft' },
-      { id: 'approved_text', title: 'approved_text' },
-      { id: 'review_notes', title: 'review_notes' },
-      { id: 'snapshot_paths', title: 'snapshot_paths' },
-    ],
-  });
-
-  await writer.writeRecords(rows);
+  writeCsv(rows, HEADER, outputPath);
+  fs.writeFileSync(jsonPath, JSON.stringify(rows, null, 2));
   console.log(`Wrote ${rows.length} rows to ${outputPath}`);
 }
 
