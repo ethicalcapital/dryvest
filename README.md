@@ -188,6 +188,11 @@ curl 'https://dryvest.ethicic.com/api/autorag/bucket?limit=50'
 
 # fetch a specific object (returns the stored raw text/HTML)
 curl 'https://dryvest.ethicic.com/api/autorag/bucket?key=<object-key>'
+
+# run an audit batch (processes up to 50 docs -> NDJSON in R2)
+curl -X POST https://dryvest.ethicic.com/api/autorag/audit \
+  -H 'Content-Type: application/json' \
+  -d '{"limit":50,"outputPrefix":"autorag-audit/manual"}'
 ```
 
 Once you have the raw content, convert it to clean markdown using Cloudflare Workers AI’s markdown conversion model:

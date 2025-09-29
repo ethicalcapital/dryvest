@@ -89,6 +89,101 @@ const handleAutoragSearch: PagesFunctionHandler = async ({ request, env }) => {
   }
 };
 
+const sha256Hex = async (buffer: ArrayBuffer): Promise<string> => {
+  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+};
+
+const runMarkdownConversion = async (ai: any, document: ArrayBuffer) => {
+  try {
+    const uint8 = new Uint8Array(document);
+    const response = await ai.run('@cf/markdown-conversion', {
+      document: Array.from(uint8),
+    });
+    if (response?.markdown) {
+      return { markdown: response.markdown as string };
+    }
+    if (typeof response === 'string') {
+      return { markdown: response };
+    }
+    if (response?.result?.markdown) {
+      return { markdown: response.result.markdown as string };
+    }
+    return { markdown: '', error: 'Markdown conversion returned empty result.' };
+  } catch (error) {
+    return { markdown: '', error: (error as Error).message ?? 'Markdown conversion failed' };
+  }
+};
+
+const runStructuredSummary = async (ai: any, markdown: string) => {
+  const schema = {
+    type: 'object',
+    properties: {
+      summary: { type: 'string' },
+      key_claims: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            claim_text: { type: 'string' },
+            claim_type: { type: 'string' },
+          },
+          required: ['claim_text', 'claim_type'],
+        },
+      },
+    },
+    required: ['summary', 'key_claims'],
+  };
+
+  const prompt = `You are an expert legal and financial analyst. Read the following document and produce JSON with two fields: summary (<=200 words) and key_claims (array of objects with claim_text and claim_type). The JSON must strictly follow the provided schema.\n\nDocument:\n---\n${markdown}\n---`;
+
+  try {
+    const response = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+      messages: [
+        { role: 'system', content: 'You analyze investment policy documents and respond only with JSON.' },
+        { role: 'user', content: prompt },
+      ],
+      max_output_tokens: 1024,
+      response_format: { type: 'json_schema', json_schema: schema },
+    });
+
+    let text: unknown = response;
+    if (typeof response === 'object') {
+      if ('output_text' in response && typeof response.output_text === 'string') {
+        text = response.output_text;
+      } else if ('result' in response && typeof (response as any).result === 'string') {
+        text = (response as any).result;
+      } else if ('response' in response && typeof (response as any).response === 'string') {
+        text = (response as any).response;
+      } else if ('json' in response && typeof (response as any).json === 'object') {
+        text = (response as any).json;
+      } else if ('outputs' in response && Array.isArray((response as any).outputs)) {
+        const outputs = (response as any).outputs;
+        const segments = outputs
+          .flatMap((o: any) => (o?.content ?? []) as any[])
+          .map((segment: any) => segment?.text ?? '')
+          .filter(Boolean);
+        if (segments.length > 0) {
+          text = segments.join('');
+        }
+      }
+    }
+
+    if (typeof text === 'string') {
+      return { json: JSON.parse(text) };
+    }
+
+    if (typeof text === 'object' && text !== null) {
+      return { json: text };
+    }
+
+    return { json: null, error: 'LLM returned unexpected output.' };
+  } catch (error) {
+    return { json: null, error: (error as Error).message ?? 'LLM analysis failed' };
+  }
+};
+
 const routes: Route[] = [
   {
     pattern: /^\/api\/events(?:\/.*)?$/,
@@ -246,6 +341,106 @@ const routes: Route[] = [
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }),
+  },
+  {
+    pattern: /^\/api\/autorag\/audit$/,
+    methods: ['POST'],
+    handler: async ({ request, env }) => {
+      const bucket = (env as Record<string, unknown>).DRYVEST_R2 as R2Bucket | undefined;
+      const ai = (env as Record<string, unknown>).AI as any;
+
+      if (!bucket || !ai) {
+        return new Response(
+          JSON.stringify({ error: 'AI or R2 bindings missing. Verify wrangler.toml configuration.' }),
+          {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      const body = await request.json().catch(() => ({})) as {
+        limit?: number;
+        cursor?: string;
+        outputPrefix?: string;
+      };
+
+      const limit = Math.min(Math.max(Number(body.limit) || 25, 1), 100);
+      const cursorInput = typeof body.cursor === 'string' ? body.cursor : undefined;
+      const outputPrefix = typeof body.outputPrefix === 'string' && body.outputPrefix.length > 0
+        ? body.outputPrefix
+        : 'autorag-audit/results';
+
+      const listResult = await bucket.list({ cursor: cursorInput, limit });
+
+      const results: Array<Record<string, unknown>> = [];
+
+      for (const obj of listResult.objects) {
+        try {
+          const r2Object = await bucket.get(obj.key);
+          if (!r2Object) {
+            results.push({ key: obj.key, error: 'Object not found' });
+            continue;
+          }
+
+          const buffer = await r2Object.arrayBuffer();
+          const sha256 = await sha256Hex(buffer);
+
+          const markdownResult = await runMarkdownConversion(ai, buffer);
+          const markdown = markdownResult.markdown || '';
+
+          const analysisResult = markdown
+            ? await runStructuredSummary(ai, markdown)
+            : { json: null, error: 'No markdown content generated.' };
+
+          results.push({
+            key: obj.key,
+            size: obj.size,
+            uploaded: obj.uploaded,
+            sha256,
+            markdownError: markdownResult.error ?? null,
+            summary: analysisResult.json?.summary ?? null,
+            key_claims: analysisResult.json?.key_claims ?? null,
+            analysisError: analysisResult.error ?? null,
+          });
+        } catch (error) {
+          results.push({ key: obj.key, error: (error as Error).message ?? 'Unknown error' });
+        }
+      }
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const outputKey = `${outputPrefix}/${timestamp}.ndjson`;
+      const ndjson = results.map((record) => JSON.stringify(record)).join('\n');
+
+      await bucket.put(outputKey, ndjson, {
+        httpMetadata: { contentType: 'application/x-ndjson' },
+      });
+
+      return new Response(
+        JSON.stringify({
+          processed: results.length,
+          outputKey,
+          nextCursor: listResult.truncated ? listResult.cursor : null,
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    },
+  },
+  {
+    pattern: /^\/api\/autorag\/audit$/,
+    methods: ['OPTIONS'],
+    handler: async () =>
+      new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',
         },
       }),
