@@ -16,7 +16,7 @@ Use this template to translate global governance and stewardship standards into 
 
 ## 1. Governance & Tone
 
-- **Board mandate** – reference COSO ERM: clearly assign oversight to the risk or investment committee and describe how conduct risk fits within the overall risk appetite statement.
+- **Board mandate** – reference COSO's Enterprise Risk Mangament framework: clearly assign oversight to the risk or investment committee and describe how conduct risk fits within the overall risk appetite statement.
 - **Risk taxonomy** – define product-based screens (e.g., controversial weapons, settlement-linked revenue) and conduct-based triggers (sanctions, human-rights violations, corruption cases).
 - **Escalation ownership** – map who owns detection, evaluation, escalation, decision, and documentation (staff, consultants, counsel, trustees).
 
@@ -32,14 +32,9 @@ Use this template to translate global governance and stewardship standards into 
 
 ### 3.1 Screening & Optimisation Controls
 
-- **Tracking-error guardrail**: specify optimisation tolerance (≤25 bps) and diversification tests.
+- **Tracking-error guardrail**: identify whether these are neccessary and diversification tests.
 - **Implementation workflow**: assign sequencing (freeze buys → phased sell-down → reinvestment), include consultant validation and manager attestations.
-- **Override process**: embed override register with rationale, authoriser, start/end dates.
-
-### 3.2 Due Diligence Standards
-
-- **ICMA sustainable finance principles**: for labelled fixed income holdings, validate use of proceeds, project selection, management of proceeds, reporting.
-- **OECD RBC six-step loop**: apply to private markets and supply-chain risk (policy embedment, identify/assess, cease/mitigate, track, communicate, remediate).
+- **Override process**: embed override register with rationale, authoriser, start/end dates..
 - **Manager questionnaires**: include conduct-risk due diligence questions, escalation triggers, data sources.
 
 ### 3.3 Whistleblowing & Issue Intake
@@ -49,11 +44,13 @@ Use this template to translate global governance and stewardship standards into 
 
 ### 3.4 Strategy & Objective-Setting
 
-- **Risk appetite for complicity** – amend the IPS and risk policy to declare zero tolerance for direct or indirect involvement in severe international crimes (war crimes, crimes against humanity, genocide).
+- **Risk appetite** – amend the IPS and risk policy to declare zero tolerance for direct or indirect involvement in severe international crimes (war crimes, crimes against humanity, genocide).
 - **Evidence-based exclusion criteria** – anchor screens in credible sources (UN settlement database, OECD National Contact Points, NGO reports) and keep the sourcing appendix updated.
 - **Heightened human-rights due diligence (hHRDD)** – for companies operating in conflict-affected and high-risk areas, require a formal hHRDD package detailing salient risks, leverage, and remediation pathways.
 - **Risk-response documentation** – record the chosen COSO risk response (avoid, reduce, share, accept) with legal, financial, and reputational analysis to leave an audit trail.
-- **Justification memo** – for each decision to remain invested, detail the engagement plan, leverage, timelines, and expected outcomes.
+
+
+**Justification memo** – for each decision to remain invested, detail the engagement plan, leverage, timelines, and expected outcomes.
 
 ## 4. Monitoring & Reporting
 
